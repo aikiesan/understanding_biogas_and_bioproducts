@@ -1,0 +1,960 @@
+[
+  {
+    "id": "cana.rota.xilitol_hidrogenacao",
+    "kind": "rota",
+    "nome": "Xilitol por hidrogenação",
+    "resumo": "Xilose do bagaço mais hidrogênio e níquel viram adoçante de alto valor",
+    "anel": 3,
+    "tags": ["alimento", "quimica"],
+    "icone": "Cog",
+    "texto": {
+      "descricao": "O xilitol é vendido a preço muito acima do açúcar e é feito hoje de sabugo de milho e madeira. A xilose do licor C5 do bagaço é a mesma molécula de partida. Por rendimento e maturidade, é a rota mais óbvia para dar destino ao terço da fibra que o 2G desperdiça.",
+      "comoFunciona": "A xilose purificada é hidrogenada sob pressão com catalisador de níquel Raney, e o grupo aldeído é reduzido a álcool, transformando o açúcar em poliol.",
+      "limitacoes": [
+        "O catalisador exige xilose de alta pureza, e purificar licor de bagaço é caro.",
+        "Operar com hidrogênio sob pressão pede infraestrutura que a usina não tem."
+      ]
+    },
+    "rota": {
+      "trl": 7,
+      "statusSP": "inexistente",
+      "notaStatus": "Tecnologia madura no mundo, mas nenhuma planta em São Paulo; o xilitol consumido no Brasil é importado."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "palha_gerada", "palha_recolhivel"],
+    "fontes": ["chandel_bagaco", "doe_top_value", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.rota.xilitol_fermentativo",
+    "kind": "rota",
+    "nome": "Xilitol por fermentação",
+    "resumo": "Leveduras Candida convertem xilose em xilitol sem hidrogênio nem catalisador",
+    "anel": 3,
+    "tags": ["alimento", "quimica"],
+    "icone": "Microscope",
+    "texto": {
+      "descricao": "Leveduras do gênero Candida reduzem xilose a xilitol como parte do próprio metabolismo. Dispensa hidrogênio, pressão e purificação prévia rigorosa, o que combina melhor com um licor sujo de bagaço. É uma das linhas de pesquisa mais antigas do Brasil no aproveitamento da hemicelulose de cana.",
+      "comoFunciona": "A xilose redutase da levedura reduz a xilose usando NADPH; ajustando a oferta de oxigênio, o metabolismo trava antes da etapa seguinte e o xilitol se acumula no meio.",
+      "limitacoes": [
+        "Produtividade volumétrica baixa e recuperação do xilitol do caldo é cara.",
+        "Inibidores do hidrolisado derrubam o rendimento se não houver destoxificação."
+      ]
+    },
+    "rota": {
+      "trl": 5,
+      "statusSP": "inexistente",
+      "notaStatus": "Sem planta comercial. É objeto de pesquisa consolidada em São Paulo, com piloto em escala de laboratório e bancada."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "palha_gerada"],
+    "fontes": ["fapesp_bioen", "chandel_bagaco"]
+  },
+  {
+    "id": "cana.prod.xilitol",
+    "kind": "produto",
+    "nome": "Xilitol",
+    "resumo": "Adoçante de baixo índice glicêmico e anticárie, com preço muito acima do açúcar",
+    "anel": 4,
+    "tags": ["alimento", "quimica"],
+    "icone": "Candy",
+    "texto": {
+      "descricao": "Poliol com doçura parecida com a da sacarose, metabolizado sem insulina e não fermentável pelas bactérias da placa. Usado em gomas, produtos diet e higiene bucal. O preço por tonelada é uma ordem de grandeza maior que o do açúcar comum.",
+      "limitacoes": [
+        "Mercado global limitado em volume: uma planta grande já move o preço."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde", "doe_top_value"]
+  },
+  {
+    "id": "cana.rota.furfural",
+    "kind": "rota",
+    "nome": "Furfural",
+    "resumo": "Ácido e calor desidratam a xilose em furfural, solvente e plataforma química",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Thermometer",
+    "texto": {
+      "descricao": "O furfural é o único químico de plataforma produzido em escala industrial a partir de biomassa e nada mais. Sai da desidratação das pentoses, exatamente as que o bagaço tem de sobra. A produção mundial está concentrada na China e usa sabugo de milho e bagaço.",
+      "comoFunciona": "Em meio ácido a 170-200 °C, a xilose perde três moléculas de água e cicliza em furfural, que é arrastado por vapor para fora do reator antes de degradar.",
+      "limitacoes": [
+        "Rendimento prático fica em 45 a 50% da massa de xilose; o resto vira huminas.",
+        "Processo antigo, com efluente ácido e eficiência energética baixa."
+      ]
+    },
+    "rota": {
+      "trl": 8,
+      "statusSP": "inexistente",
+      "notaStatus": "Tecnologia industrial madura, sem planta em São Paulo; o furfural usado no Brasil é importado."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "palha_gerada", "palha_recolhivel"],
+    "fontes": ["doe_top_value", "chandel_bagaco", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.furfural",
+    "kind": "produto",
+    "nome": "Furfural",
+    "resumo": "Solvente seletivo de refinaria e porta de entrada para resinas furânicas",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "FlaskConical",
+    "texto": {
+      "descricao": "Líquido usado na extração de aromáticos em refinarias, na purificação de óleos lubrificantes e como precursor de álcool furfurílico, resinas e THF. É a única molécula de plataforma da biomassa com mercado internacional consolidado.",
+      "limitacoes": [
+        "Preço oscila com a oferta chinesa, o que dificulta a decisão de investir fora dela."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["doe_top_value"]
+  },
+  {
+    "id": "cana.rota.alcool_furfurilico",
+    "kind": "rota",
+    "nome": "Álcool furfurílico e resinas",
+    "resumo": "Hidrogenação do furfural gera a resina que dá liga aos moldes de fundição",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Cog",
+    "texto": {
+      "descricao": "Mais de dois terços do furfural do mundo viram álcool furfurílico, matéria-prima das resinas furânicas usadas em moldes e machos de fundição. A cadeia segue para tetraidrofurano e metiltetraidrofurano, solventes e aditivo de combustível. É a jusante natural de qualquer planta de furfural.",
+      "comoFunciona": "O furfural é hidrogenado seletivamente sobre catalisador de cobre-cromo, convertendo apenas o grupo aldeído em álcool e preservando o anel furânico.",
+      "limitacoes": [
+        "Depende de furfural competitivo, que São Paulo hoje não produz.",
+        "Catalisadores clássicos usam cromo, com restrição ambiental crescente."
+      ]
+    },
+    "rota": {
+      "trl": 8,
+      "statusSP": "inexistente",
+      "notaStatus": "Cadeia madura no exterior. Sem produção em São Paulo, por não haver furfural local."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco"],
+    "fontes": ["doe_top_value", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.alcool_furfurilico",
+    "kind": "produto",
+    "nome": "Álcool furfurílico",
+    "resumo": "Base de resinas furânicas para fundição e de solventes como o THF",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Droplet",
+    "texto": {
+      "descricao": "Intermediário de resinas termofixas resistentes a calor e corrosão, muito usadas em moldes de fundição e revestimentos anticorrosivos. A siderurgia e a metalurgia paulistas são consumidoras diretas.",
+      "limitacoes": [
+        "Manuseio exige controle: polimeriza sozinho em presença de ácido."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["doe_top_value"]
+  },
+  {
+    "id": "cana.rota.xos",
+    "kind": "rota",
+    "nome": "Xilo-oligossacarídeos",
+    "resumo": "Hidrólise parcial da xilana do bagaço entrega prebiótico ativo em dose baixa",
+    "anel": 3,
+    "tags": ["alimento"],
+    "icone": "Scissors",
+    "texto": {
+      "descricao": "Em vez de quebrar a hemicelulose até xilose, a hidrólise é interrompida em cadeias de duas a sete unidades. Essas cadeias curtas não são digeridas pelo intestino humano e alimentam bifidobactérias. É o prebiótico com maior efeito por grama consumido, o que permite dose baixa e preço alto por quilo.",
+      "comoFunciona": "Autohidrólise com água quente ou xilanases cortam a xilana em oligômeros curtos, que são então separados por membrana dos açúcares simples e dos inibidores.",
+      "limitacoes": [
+        "Purificação por membrana é a maior parte do custo.",
+        "Aprovação regulatória de ingrediente alimentar exige dossiê próprio."
+      ]
+    },
+    "rota": {
+      "trl": 5,
+      "statusSP": "inexistente",
+      "notaStatus": "Produzido comercialmente na Ásia a partir de sabugo de milho. Nenhuma planta a partir de bagaço em São Paulo."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "palha_gerada"],
+    "fontes": ["chandel_bagaco", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.xos",
+    "kind": "produto",
+    "nome": "Prebióticos XOS",
+    "resumo": "Fibra funcional que alimenta bifidobactérias em dose de 1 a 3 g por dia",
+    "anel": 4,
+    "tags": ["alimento"],
+    "icone": "Candy",
+    "texto": {
+      "descricao": "Ingrediente de alimentos funcionais, bebidas e nutrição animal. Age em dose muito menor que inulina ou FOS, o que reduz o custo de formulação.",
+      "limitacoes": [
+        "Mercado brasileiro ainda pequeno e dependente de apelo funcional reconhecido."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.rota.hmf",
+    "kind": "rota",
+    "nome": "HMF",
+    "resumo": "Desidratação da glicose ou frutose gera o hidroximetilfurfural, hub da química furânica",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Thermometer",
+    "texto": {
+      "descricao": "O 5-hidroximetilfurfural é o equivalente C6 do furfural e a porta para poliésteres, solventes e combustíveis furânicos. Sai de hexoses, seja do hidrolisado de celulose, seja direto da sacarose do melaço. A instabilidade da molécula em meio aquoso é o que impede a rota de escalar.",
+      "comoFunciona": "Em meio ácido, a frutose perde três águas e cicliza em HMF; sistemas bifásicos extraem o HMF para um solvente orgânico assim que ele se forma, antes que reidrate em ácido levulínico.",
+      "limitacoes": [
+        "Rendimento cai rápido em meio aquoso concentrado, com formação de huminas.",
+        "Separação do HMF do solvente responde por boa parte do custo."
+      ]
+    },
+    "rota": {
+      "trl": 5,
+      "statusSP": "inexistente",
+      "notaStatus": "Piloto e demonstração no exterior. Nenhuma unidade no Brasil."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "cana_moida_sp"],
+    "fontes": ["doe_top_value", "bozell2010"]
+  },
+  {
+    "id": "cana.prod.hmf",
+    "kind": "produto",
+    "nome": "HMF",
+    "resumo": "Plataforma furânica que leva a FDCA, solventes e combustíveis renováveis",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "FlaskConical",
+    "texto": {
+      "descricao": "Intermediário de alto valor listado entre os principais blocos químicos da biomassa. Praticamente todo seu valor está no que vem depois, especialmente o ácido furanodicarboxílico.",
+      "limitacoes": [
+        "Instável ao calor e à estocagem prolongada, o que complica o transporte."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["doe_top_value", "bozell2010"]
+  },
+  {
+    "id": "cana.rota.fdca",
+    "kind": "rota",
+    "nome": "FDCA e poliéster PEF",
+    "resumo": "Oxidação do HMF dá o ácido que substitui o tereftálico e faz garrafa 100% vegetal",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Cog",
+    "texto": {
+      "descricao": "O ácido 2,5-furanodicarboxílico é o análogo renovável do ácido tereftálico do PET. Polimerizado com etilenoglicol, gera o PEF, um poliéster com barreira a gases muito melhor que a do PET. Seria o primeiro plástico de garrafa totalmente vegetal e com desempenho superior ao fóssil.",
+      "comoFunciona": "O HMF é oxidado nas duas pontas com ar e catalisador metálico até o diácido, que então policondensa com etilenoglicol formando cadeias de poliéster.",
+      "limitacoes": [
+        "Depende de HMF barato, que ainda não existe.",
+        "Reciclagem do PEF exige fluxo separado, porque contamina a reciclagem do PET."
+      ]
+    },
+    "rota": {
+      "trl": 7,
+      "statusSP": "inexistente",
+      "notaStatus": "Primeira planta comercial do mundo entrou em operação nos Países Baixos em 2024, a partir de açúcar de trigo. Nada equivalente no Brasil."
+    },
+    "paramsRelevantes": ["cana_moida_sp"],
+    "fontes": ["bozell2010", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.fdca_pef",
+    "kind": "produto",
+    "nome": "FDCA e PEF",
+    "resumo": "Poliéster vegetal com barreira superior ao PET para garrafa e filme",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Package",
+    "texto": {
+      "descricao": "Resina de embalagem com barreira a oxigênio e gás carbônico várias vezes melhor que a do PET, o que permite embalagem mais fina e maior prazo de validade. Cem por cento de carbono renovável quando o etilenoglicol também vem de cana.",
+      "limitacoes": [
+        "Cadeia de reciclagem ainda não existe em escala."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.rota.acido_levulinico",
+    "kind": "rota",
+    "nome": "Ácido levulínico",
+    "resumo": "Hidrólise ácida severa da celulose entrega um diácido versátil e barato",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "FlaskConical",
+    "texto": {
+      "descricao": "Quando a hidrólise ácida vai além do açúcar, a glicose se reidrata e vira ácido levulínico mais ácido fórmico. Diferente de outras rotas, aqui a degradação é o produto desejado, o que dispensa purificação fina do substrato. Leva a solventes, plastificantes, aditivos de combustível e resinas.",
+      "comoFunciona": "Em ácido diluído a 150-220 °C, a celulose vira glicose, a glicose vira HMF e o HMF se reidrata quebrando em ácido levulínico e ácido fórmico, na proporção de um para um em mol.",
+      "limitacoes": [
+        "Coproduz ácido fórmico e huminas, que precisam de destino próprio.",
+        "As plantas comerciais tentadas na Europa não se sustentaram no mercado."
+      ]
+    },
+    "rota": {
+      "trl": 6,
+      "statusSP": "inexistente",
+      "notaStatus": "Houve tentativa comercial na Europa a partir de biomassa; sem planta no Brasil."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "palha_gerada"],
+    "fontes": ["doe_top_value", "bozell2010"]
+  },
+  {
+    "id": "cana.prod.acido_levulinico",
+    "kind": "produto",
+    "nome": "Ácido levulínico",
+    "resumo": "Bloco químico para solventes, plastificantes e a gama-valerolactona",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Droplet",
+    "texto": {
+      "descricao": "Diácido de plataforma que leva a levulinato de etila, aditivo de diesel, e à gama-valerolactona, solvente verde e precursor de combustível. Consta desde 2004 nas listas de moléculas prioritárias da biomassa.",
+      "limitacoes": [
+        "O mercado atual é pequeno; o valor depende de derivados que ainda não escalaram."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["doe_top_value"]
+  },
+  {
+    "id": "cana.rota.acido_latico",
+    "kind": "rota",
+    "nome": "Fermentação lática",
+    "resumo": "Bactérias convertem 90% do açúcar em ácido lático, o monômero do PLA",
+    "anel": 3,
+    "tags": ["quimica", "alimento"],
+    "icone": "Cylinder",
+    "texto": {
+      "descricao": "Lactobacillus e bactérias afins convertem sacarose ou glicose em ácido lático com rendimento perto de 0,9 kg por kg de açúcar. É a fermentação industrial mais eficiente depois da alcoólica. Serve à indústria de alimentos e, sobretudo, é a porta de entrada do bioplástico PLA.",
+      "comoFunciona": "A bactéria fermenta o açúcar pela via homolática até lactato, e o meio é neutralizado com cal para manter o pH; o ácido é depois recuperado por acidificação, esterificação ou membrana.",
+      "limitacoes": [
+        "A neutralização com cal gera grande volume de gesso como resíduo.",
+        "PLA exige lactato opticamente puro, o que restringe a linhagem e encarece a separação."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "inexistente",
+      "notaStatus": "Tecnologia madura, e há plantas no mundo alimentadas por cana. Em São Paulo não existe produção comercial de ácido lático a partir de cana."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "bagaco_rpr", "incluir_bagaco"],
+    "fontes": ["doe_top_value", "cgee_quimica_verde", "corbion_pla"]
+  },
+  {
+    "id": "cana.prod.acido_latico",
+    "kind": "produto",
+    "nome": "Ácido lático",
+    "resumo": "Acidulante alimentar e monômero de bioplástico, com demanda puxada pelo PLA",
+    "anel": 4,
+    "tags": ["quimica", "alimento"],
+    "icone": "Droplet",
+    "texto": {
+      "descricao": "Usado como acidulante e conservante em alimentos, em higiene e em farmacêutica, e como monômero do poliácido lático. A demanda mundial cresce puxada pelo bioplástico, não pelo uso alimentar.",
+      "limitacoes": [
+        "Grau polímero exige pureza óptica alta, com preço bem acima do grau alimentício."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.rota.pla",
+    "kind": "rota",
+    "nome": "Polimerização em PLA",
+    "resumo": "Ácido lático vira lactídeo e depois o bioplástico compostável mais usado do mundo",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Cog",
+    "texto": {
+      "descricao": "O poliácido lático é o bioplástico de maior volume no mundo, usado em embalagem, copos, fibras têxteis e impressão 3D. É compostável em condição industrial e tem carbono 100% vegetal. As maiores plantas do mundo usam milho e cana como matéria-prima.",
+      "comoFunciona": "Duas moléculas de ácido lático formam o dímero cíclico lactídeo, que é purificado e polimerizado por abertura de anel, gerando cadeias longas de poliéster.",
+      "limitacoes": [
+        "Só composta em usina industrial a 58 °C; em aterro ou no mar se comporta como plástico comum.",
+        "Temperatura de amolecimento baixa limita uso em embalagem quente."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "inexistente",
+      "notaStatus": "Há planta de PLA de cana em operação na Tailândia. O PLA consumido no Brasil é importado; não há unidade em São Paulo."
+    },
+    "paramsRelevantes": ["cana_moida_sp"],
+    "fontes": ["corbion_pla", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.pla",
+    "kind": "produto",
+    "nome": "PLA",
+    "resumo": "Bioplástico compostável para embalagem, fibra e impressão 3D",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Package",
+    "texto": {
+      "descricao": "Poliéster rígido e transparente, com boa processabilidade em injeção e termoformagem. O apelo é a origem vegetal somada à compostabilidade certificada.",
+      "limitacoes": [
+        "Sem coleta de orgânicos e usina de compostagem, a vantagem de fim de vida não se realiza."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["corbion_pla"]
+  },
+  {
+    "id": "cana.rota.phb_sacarose",
+    "kind": "rota",
+    "nome": "PHB por fermentação",
+    "resumo": "Bactérias acumulam bioplástico dentro da célula usando açúcar de cana",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Cylinder",
+    "texto": {
+      "descricao": "Bactérias como a Cupriavidus necator estocam poli-hidroxibutirato como reserva de carbono quando há açúcar de sobra e falta nitrogênio. O polímero se acumula em grânulos que chegam a 80% do peso seco da célula. É biodegradável em solo e em água do mar, diferente do PLA, e São Paulo tem a planta pioneira do Brasil.",
+      "comoFunciona": "Numa primeira fase a bactéria cresce com nutrientes completos; ao limitar nitrogênio ou fósforo mantendo açúcar disponível, ela desvia o carbono para grânulos de PHB, extraídos depois com solvente.",
+      "limitacoes": [
+        "A extração com solvente responde por boa parte do custo e da pegada ambiental.",
+        "O PHB puro é rígido e quebradiço; usos exigem copolímeros como o PHBV."
+      ]
+    },
+    "rota": {
+      "trl": 7,
+      "statusSP": "operando",
+      "notaStatus": "São Paulo tem a única produção nacional de PHB de cana, em escala de demonstração acoplada a usina, com dezenas de toneladas por ano.",
+      "exemplos": [{ "nome": "PHB Industrial (Usina da Pedra)", "municipio": "Serrana" }]
+    },
+    "paramsRelevantes": ["cana_moida_sp"],
+    "fontes": ["phb_industrial", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.rota.pha_culturas_mistas",
+    "kind": "rota",
+    "nome": "PHA por culturas mistas",
+    "resumo": "Consórcios microbianos fazem bioplástico a partir de vinhaça e resíduo, sem esterilizar",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Blend",
+    "texto": {
+      "descricao": "Em vez de uma linhagem pura em meio estéril, usa-se o consórcio microbiano de um reator alimentado com efluente. Ciclos de fartura e fome selecionam as bactérias que acumulam PHA. O substrato deixa de ser açúcar de valor e passa a ser vinhaça ou hidrolisado sujo, o que muda a economia do bioplástico.",
+      "comoFunciona": "O efluente é primeiro acidificado a ácidos orgânicos voláteis; o consórcio é submetido a pulsos de alimentação intercalados com fome, e as células que estocam PHA levam vantagem e dominam o reator.",
+      "limitacoes": [
+        "Composição do polímero varia com o efluente, o que dificulta especificar o produto.",
+        "Produtividade e teor intracelular abaixo dos obtidos por cultura pura."
+      ]
+    },
+    "rota": {
+      "trl": 4,
+      "statusSP": "inexistente",
+      "notaStatus": "Pesquisa e piloto pequeno. Nenhuma unidade em São Paulo usa vinhaça ou hidrolisado para PHA."
+    },
+    "paramsRelevantes": ["vinhaca_disponivel", "etanol_por_cana", "cana_moida_sp"],
+    "fontes": ["fapesp_bioen", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.phb_pha",
+    "kind": "produto",
+    "nome": "PHB e PHA",
+    "resumo": "Bioplástico que degrada em solo e em mar, feito dentro da célula bacteriana",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Package",
+    "texto": {
+      "descricao": "Família de poliésteres bacterianos com biodegradação em ambiente natural, não só em compostagem industrial. Usados em embalagem, filme agrícola, artigos descartáveis e aplicações médicas. Custam várias vezes o polipropileno, e é aí que a disputa se decide.",
+      "limitacoes": [
+        "Faixa estreita de processamento térmico: degrada perto da temperatura de fusão."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["phb_industrial"]
+  },
+  {
+    "id": "cana.rota.acido_succinico",
+    "kind": "rota",
+    "nome": "Ácido succínico",
+    "resumo": "Fermentação que consome CO2 em vez de liberar, dando um diácido de plataforma",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Cylinder",
+    "texto": {
+      "descricao": "É a molécula-símbolo da química renovável: bactérias como Basfia e Actinobacillus fixam gás carbônico durante a fermentação, e cada tonelada de ácido incorpora carbono em vez de emitir. Leva a poliésteres, poliuretanos, solventes e plastificantes. A história comercial é um alerta: quase todas as plantas abertas entre 2012 e 2016 fecharam.",
+      "comoFunciona": "Em anaerobiose e com CO2 dissolvido, a bactéria desvia o piruvato para a via redutiva do ciclo do ácido cítrico, carboxilando-o e acumulando succinato no meio.",
+      "limitacoes": [
+        "O preço do succínico petroquímico caiu e apagou a vantagem econômica da rota fermentativa.",
+        "Recuperação do ácido a partir do caldo salino é cara."
+      ]
+    },
+    "rota": {
+      "trl": 7,
+      "statusSP": "inexistente",
+      "notaStatus": "Sem planta no Brasil. As unidades comerciais europeias e norte-americanas encerraram ou reduziram operação na segunda metade da década de 2010."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "bagaco_rpr", "incluir_bagaco"],
+    "fontes": ["doe_top_value", "bozell2010", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.acido_succinico",
+    "kind": "produto",
+    "nome": "Ácido succínico",
+    "resumo": "Diácido para poliésteres, poliuretanos e solventes, com CO2 incorporado",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "FlaskConical",
+    "texto": {
+      "descricao": "Bloco de quatro carbonos que leva a butanodiol, tetraidrofurano, poliésteres biodegradáveis como o PBS e plastificantes sem ftalato. Está no topo das listas de moléculas prioritárias da biomassa desde 2004.",
+      "limitacoes": [
+        "Compete com rota petroquímica madura e de custo baixo."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["doe_top_value"]
+  },
+  {
+    "id": "cana.rota.acido_itaconico",
+    "kind": "rota",
+    "nome": "Ácido itacônico",
+    "resumo": "Fungo Aspergillus terreus converte açúcar em monômero acrílico renovável",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Cylinder",
+    "texto": {
+      "descricao": "O ácido itacônico tem uma dupla ligação reativa que o torna substituto direto do ácido acrílico e metacrílico em polímeros. É produzido por fermentação fúngica em escala industrial, hoje quase toda na China e a partir de glicose de milho. Hidrolisado de bagaço e melaço servem igualmente bem como substrato.",
+      "comoFunciona": "O Aspergillus terreus desvia o cis-aconitato do ciclo do ácido cítrico e o descarboxila em itaconato, que é excretado para o meio ácido de cultivo.",
+      "limitacoes": [
+        "Fermentação sensível a metais e a impurezas comuns em hidrolisado de bagaço.",
+        "Preço atual só compete em nichos de polímero especial."
+      ]
+    },
+    "rota": {
+      "trl": 7,
+      "statusSP": "inexistente",
+      "notaStatus": "Produção industrial concentrada na Ásia. Não há planta no Brasil nem em São Paulo."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "bagaco_rpr", "incluir_bagaco"],
+    "fontes": ["doe_top_value", "bozell2010"]
+  },
+  {
+    "id": "cana.prod.acido_itaconico",
+    "kind": "produto",
+    "nome": "Ácido itacônico",
+    "resumo": "Substituto renovável do ácido acrílico em resinas, tintas e superabsorventes",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "FlaskConical",
+    "texto": {
+      "descricao": "Monômero usado em látex de tinta, adesivos, fibras sintéticas e polímeros superabsorventes. Substituição direta de acrílico fóssil sem trocar o processo de polimerização.",
+      "limitacoes": [
+        "Preço precisa cair para competir fora de nichos."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["doe_top_value"]
+  },
+  {
+    "id": "cana.rota.acido_citrico",
+    "kind": "rota",
+    "nome": "Ácido cítrico",
+    "resumo": "A fermentação de melaço mais antiga do mundo, hoje dominada pela China",
+    "anel": 3,
+    "tags": ["quimica", "alimento"],
+    "icone": "Cylinder",
+    "texto": {
+      "descricao": "O Aspergillus niger converte melaço em ácido cítrico com rendimento acima de 70%, num processo industrial estabelecido há quase um século. O Brasil é grande consumidor e importa quase todo o ácido cítrico que usa, apesar de ter o melaço mais barato do mundo. É um caso claro de rota madura sem elo local.",
+      "comoFunciona": "Sob limitação de manganês e ferro e em pH muito ácido, o metabolismo do fungo trava no ciclo do ácido cítrico e o citrato se acumula e é excretado.",
+      "limitacoes": [
+        "Escala mínima competitiva é alta e o mercado é dominado por produtores asiáticos.",
+        "Recuperação clássica com cal gera grande volume de gesso."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "inexistente",
+      "notaStatus": "Tecnologia madura, sem produção relevante em São Paulo; o consumo brasileiro é abastecido por importação."
+    },
+    "paramsRelevantes": ["cana_moida_sp"],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.acido_citrico",
+    "kind": "produto",
+    "nome": "Ácido cítrico",
+    "resumo": "Acidulante de bebidas e alimentos com demanda grande e constante no Brasil",
+    "anel": 4,
+    "tags": ["alimento", "quimica"],
+    "icone": "Candy",
+    "texto": {
+      "descricao": "Acidulante, conservante e quelante usado em bebidas, alimentos, detergentes e farmacêutica. É a commodity de fermentação com maior volume depois do etanol.",
+      "limitacoes": [
+        "Margem estreita: preço internacional é a referência para qualquer entrante."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.rota.aminoacidos",
+    "kind": "rota",
+    "nome": "Aminoácidos e glutamato",
+    "resumo": "Melaço paulista já vira lisina e glutamato monossódico em escala industrial",
+    "anel": 3,
+    "tags": ["alimento", "quimica"],
+    "icone": "Cylinder",
+    "texto": {
+      "descricao": "Corynebacterium glutamicum fermenta açúcar de cana em glutamato, lisina, treonina e outros aminoácidos. Esta é uma das poucas rotas de bioproduto de cana que já opera em escala industrial em São Paulo, abastecendo alimentos e nutrição animal. Mostra que o gargalo das outras rotas é de mercado e de investimento, não de biologia.",
+      "comoFunciona": "A bactéria é engenheirada para superproduzir um aminoácido e excretá-lo; o caldo passa por troca iônica e cristalização até o grau alimentício ou de ração.",
+      "limitacoes": [
+        "Depende de melaço e caldo com preço competitivo frente ao mercado de açúcar.",
+        "Consome muita energia em purificação e cristalização."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "operando",
+      "notaStatus": "São Paulo tem plantas de aminoácidos por fermentação de cana em operação há décadas, integradas à cadeia sucroenergética.",
+      "exemplos": [
+        { "nome": "Ajinomoto", "municipio": "Limeira" },
+        { "nome": "Ajinomoto", "municipio": "Valparaíso" }
+      ]
+    },
+    "paramsRelevantes": ["cana_moida_sp"],
+    "fontes": ["ajinomoto", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.aminoacidos",
+    "kind": "produto",
+    "nome": "Aminoácidos",
+    "resumo": "Lisina e glutamato para ração e alimentos, feitos de açúcar de cana",
+    "anel": 4,
+    "tags": ["alimento"],
+    "icone": "Beef",
+    "texto": {
+      "descricao": "Lisina, treonina e metionina são aditivos essenciais da avicultura e suinocultura; o glutamato monossódico é realçador de sabor. A proximidade entre canaviais, plantas de fermentação e granjas é uma vantagem competitiva paulista concreta.",
+      "limitacoes": [
+        "Preço acompanha o mercado internacional de commodities de nutrição animal."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["ajinomoto"]
+  },
+  {
+    "id": "cana.rota.butanol_abe",
+    "kind": "rota",
+    "nome": "Fermentação ABE",
+    "resumo": "Clostridium transforma açúcar em acetona, butanol e etanol na proporção 3:6:1",
+    "anel": 3,
+    "tags": ["combustivel", "quimica"],
+    "icone": "Cylinder",
+    "texto": {
+      "descricao": "A fermentação acetona-butanol-etanol foi a segunda maior fermentação industrial do mundo até os anos 1950, quando a petroquímica a deslocou. Voltou a operar na China nos anos 2000. O butanol tem densidade energética maior que a do etanol, não absorve água e pode ir por dutos, o que o torna combustível melhor.",
+      "comoFunciona": "O Clostridium primeiro produz ácidos acético e butírico, depois muda de fase e reassimila esses ácidos, convertendo-os em solventes; o butanol responde por cerca de 60% do total.",
+      "limitacoes": [
+        "O butanol é tóxico à própria bactéria acima de 2%, o que limita o título e encarece a destilação.",
+        "Rendimento em massa de solventes fica perto de 0,33 kg por kg de açúcar, bem abaixo do etanol."
+      ]
+    },
+    "rota": {
+      "trl": 7,
+      "statusSP": "inexistente",
+      "notaStatus": "Rota industrial madura e em operação na China. Não há planta ABE em São Paulo; o melaço local seria substrato direto."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "bagaco_rpr", "incluir_bagaco"],
+    "fontes": ["doe_top_value", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.butanol",
+    "kind": "produto",
+    "nome": "Butanol e acetona",
+    "resumo": "Solventes industriais e combustível com mais energia por litro que o etanol",
+    "anel": 4,
+    "tags": ["combustivel", "quimica"],
+    "icone": "Fuel",
+    "texto": {
+      "descricao": "O butanol é solvente, precursor de acrilato de butila e combustível compatível com a infraestrutura de gasolina. A acetona coproduzida tem mercado próprio em solventes e química fina. Cada tonelada de solventes leva junto cerca de um sexto de etanol.",
+      "limitacoes": [
+        "Sem mercado local para a acetona, a economia da rota piora."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["doe_top_value"]
+  },
+  {
+    "id": "cana.rota.farneseno",
+    "kind": "rota",
+    "nome": "Farneseno por levedura",
+    "resumo": "Levedura reprogramada faz hidrocarboneto de 15 carbonos direto do açúcar",
+    "anel": 3,
+    "tags": ["quimica", "combustivel"],
+    "icone": "Microscope",
+    "texto": {
+      "descricao": "Fermentação de precisão: a levedura recebe a via de isoprenoides reescrita e produz farneseno, um hidrocarboneto líquido, em vez de etanol. O produto serve a cosméticos, lubrificantes, pneus e, hidrogenado, a combustível de aviação. São Paulo abriga uma das poucas plantas do mundo desse tipo.",
+      "comoFunciona": "A via do mevalonato é amplificada e desviada para farnesil pirofosfato, convertido em farneseno por uma sintase; como o produto é insolúvel em água, ele se separa sozinho do caldo.",
+      "limitacoes": [
+        "Rendimento em massa é baixo frente ao do etanol, porque o produto é muito reduzido.",
+        "A economia depende de vender esqualano e cosméticos, não combustível."
+      ]
+    },
+    "rota": {
+      "trl": 8,
+      "statusSP": "operando",
+      "notaStatus": "Planta industrial em operação no interior paulista, referência mundial de fermentação de precisão a partir de cana; a empresa passou por reestruturação financeira em 2023.",
+      "exemplos": [{ "nome": "Amyris", "municipio": "Brotas" }]
+    },
+    "paramsRelevantes": ["cana_moida_sp"],
+    "fontes": ["amyris_brotas", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.farneseno",
+    "kind": "produto",
+    "nome": "Farneseno e esqualano",
+    "resumo": "Base de cosméticos, lubrificantes e pneus, e precursor de querosene de aviação",
+    "anel": 4,
+    "tags": ["quimica", "combustivel"],
+    "icone": "Droplet",
+    "texto": {
+      "descricao": "O farneseno hidrogenado vira esqualano, emoliente que substitui o óleo de fígado de tubarão em cosméticos, e farnesano, aprovado como combustível de aviação. É o exemplo mais avançado de molécula complexa feita de cana em escala.",
+      "limitacoes": [
+        "O mercado de cosmético sustenta o preço; o de combustível ainda não."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["amyris_brotas"]
+  },
+  {
+    "id": "cana.rota.lipidios_microbianos",
+    "kind": "rota",
+    "nome": "Óleo microbiano",
+    "resumo": "Leveduras oleaginosas acumulam gordura no hidrolisado, matéria-prima de biodiesel e HVO",
+    "anel": 3,
+    "tags": ["combustivel", "quimica"],
+    "icone": "Blend",
+    "texto": {
+      "descricao": "Leveduras como Rhodotorula e Yarrowia acumulam mais de metade do peso seco em triglicerídeos quando há carbono em excesso e nitrogênio escasso. O óleo obtido tem perfil próximo ao de óleos vegetais e serve a biodiesel, diesel verde e oleoquímica. Transformaria hidrolisado de bagaço em óleo sem ocupar área agrícola.",
+      "comoFunciona": "Com nitrogênio limitado, o metabolismo redireciona acetil-CoA para síntese de ácidos graxos, que se acumulam em gotículas dentro da célula e são extraídos após ruptura celular.",
+      "limitacoes": [
+        "Extração do óleo da célula é energointensiva e domina o custo.",
+        "Compete em preço com óleo de soja, o que é uma barreira dura no Brasil."
+      ]
+    },
+    "rota": {
+      "trl": 4,
+      "statusSP": "inexistente",
+      "notaStatus": "Pesquisa e piloto. Nenhuma produção de óleo microbiano a partir de cana em São Paulo."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "cana_moida_sp"],
+    "fontes": ["fapesp_bioen", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.oleo_microbiano",
+    "kind": "produto",
+    "nome": "Óleo microbiano",
+    "resumo": "Triglicerídeo de fermentação para biodiesel, HVO e oleoquímica",
+    "anel": 4,
+    "tags": ["combustivel", "quimica"],
+    "icone": "Droplets",
+    "texto": {
+      "descricao": "Óleo com perfil de ácidos graxos ajustável pela linhagem e pelo cultivo. Interessa a biodiesel, diesel renovável e substitutos de óleo de palma em cosméticos e alimentos.",
+      "limitacoes": [
+        "Custo por tonelada ainda é múltiplo do óleo vegetal convencional."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["fapesp_bioen"]
+  },
+  {
+    "id": "cana.rota.fos",
+    "kind": "rota",
+    "nome": "Fruto-oligossacarídeos",
+    "resumo": "Enzima liga frutoses da sacarose e cria fibra prebiótica direto do açúcar",
+    "anel": 3,
+    "tags": ["alimento"],
+    "icone": "Candy",
+    "texto": {
+      "descricao": "FOS são obtidos em um único passo enzimático a partir da sacarose, sem fermentação e sem hidrólise da fibra. São fibra prebiótica reconhecida, usada em laticínios, fórmulas infantis e nutrição animal. É das rotas de maior valor por tonelada de açúcar e das mais simples de acoplar a uma usina.",
+      "comoFunciona": "A frutosiltransferase retira frutose de uma molécula de sacarose e a transfere a outra, montando cadeias de duas a quatro frutoses que o intestino humano não digere.",
+      "limitacoes": [
+        "O xarope final é mistura de FOS, glicose e sacarose; separar eleva o custo.",
+        "Registro como ingrediente alimentar exige dossiê e tempo."
+      ]
+    },
+    "rota": {
+      "trl": 8,
+      "statusSP": "inexistente",
+      "notaStatus": "Rota comercial no exterior. Sem planta dedicada em São Paulo, apesar de a matéria-prima ser o produto principal do estado."
+    },
+    "paramsRelevantes": ["cana_moida_sp"],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.fos",
+    "kind": "produto",
+    "nome": "Prebióticos FOS",
+    "resumo": "Fibra solúvel de sacarose para laticínios, fórmulas infantis e ração",
+    "anel": 4,
+    "tags": ["alimento"],
+    "icone": "Candy",
+    "texto": {
+      "descricao": "Ingrediente funcional com efeito bifidogênico comprovado e poder edulcorante parcial. Permite reduzir açúcar e adicionar fibra na mesma formulação.",
+      "limitacoes": [
+        "Dose eficaz maior que a dos XOS, o que pesa na formulação."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.rota.acucares_especiais",
+    "kind": "rota",
+    "nome": "Xaropes e açúcares especiais",
+    "resumo": "Caldo e VHP viram açúcar líquido invertido, orgânico, demerara e xaropes",
+    "anel": 3,
+    "tags": ["alimento"],
+    "icone": "Candy",
+    "texto": {
+      "descricao": "Nem toda diversificação passa por biotecnologia. Açúcar líquido invertido, xaropes, demerara, mascavo e açúcar orgânico são produtos de maior valor obtidos com ajustes de processo na própria usina. São Paulo é o maior polo mundial de açúcar orgânico certificado.",
+      "comoFunciona": "O caldo clarificado é concentrado e, no caso do invertido, tratado com ácido ou invertase para quebrar a sacarose em glicose e frutose, o que evita cristalização no xarope.",
+      "limitacoes": [
+        "Exige certificação e logística dedicada, que a usina padrão não tem.",
+        "Mercado de nicho: o volume não absorve a moagem de uma usina inteira."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "operando",
+      "notaStatus": "Usinas paulistas já produzem açúcar líquido para a indústria de bebidas e açúcar orgânico para exportação.",
+      "exemplos": [{ "nome": "Usina São Francisco (açúcar orgânico)", "municipio": "Sertãozinho" }]
+    },
+    "paramsRelevantes": ["cana_moida_sp"],
+    "fontes": ["unica2024", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.acucar_liquido",
+    "kind": "produto",
+    "nome": "Açúcar líquido e especiais",
+    "resumo": "Xarope invertido, orgânico e demerara com prêmio de preço sobre o VHP",
+    "anel": 4,
+    "tags": ["alimento"],
+    "icone": "Droplets",
+    "texto": {
+      "descricao": "Formatos de açúcar com especificação e certificação próprias, vendidos acima do açúcar bruto. O açúcar líquido abastece a indústria de bebidas paulista sem passar pela cristalização.",
+      "limitacoes": [
+        "Xarope exige logística refrigerada ou tratamento contra contaminação microbiana."
+      ]
+    },
+    "paramsRelevantes": ["cana_moida_sp"],
+    "fontes": ["unica2024"]
+  },
+  {
+    "id": "cana.rota.proteina_unicelular",
+    "kind": "rota",
+    "nome": "Proteína unicelular",
+    "resumo": "Micro-organismos convertem hidrolisado e vinhaça em proteína para ração",
+    "anel": 3,
+    "tags": ["alimento"],
+    "icone": "Beaker",
+    "texto": {
+      "descricao": "Leveduras, fungos filamentosos e bactérias crescem em substrato de baixo valor e acumulam 40 a 60% de proteína no peso seco. Substrato pode ser hidrolisado de bagaço, vinhaça ou melaço. Uma tonelada de proteína assim produzida dispensa área de soja equivalente.",
+      "comoFunciona": "O micro-organismo é cultivado em regime aeróbio contínuo com carbono do resíduo e nitrogênio mineral; a biomassa é separada, inativada e seca em pó proteico.",
+      "limitacoes": [
+        "Alto teor de ácido nucleico limita a inclusão em dietas, sobretudo humanas.",
+        "Aeração e secagem consomem muita energia por tonelada de produto."
+      ]
+    },
+    "rota": {
+      "trl": 5,
+      "statusSP": "inexistente",
+      "notaStatus": "Sem planta dedicada em São Paulo. A levedura excedente da fermentação alcoólica já cumpre parte desse papel e é o caminho mais curto."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "vinhaca_disponivel", "cana_moida_sp"],
+    "fontes": ["fapesp_bioen", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.proteina_unicelular",
+    "kind": "produto",
+    "nome": "Proteína unicelular",
+    "resumo": "Farelo proteico microbiano para aquicultura, aves e suínos",
+    "anel": 4,
+    "tags": ["alimento"],
+    "icone": "Beef",
+    "texto": {
+      "descricao": "Fonte proteica que não depende de área agrícola nova e tem perfil de aminoácidos favorável a peixes e aves. Concorre com farelo de soja e farinha de peixe.",
+      "limitacoes": [
+        "Aprovação como ingrediente de ração exige processo regulatório próprio."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.rota.enzimas_fes",
+    "kind": "rota",
+    "nome": "Enzimas por fermentação sólida",
+    "resumo": "Fungos crescem na torta de filtro úmida e produzem celulase e lipase no local",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Microscope",
+    "texto": {
+      "descricao": "A torta de filtro é úmida, rica em matéria orgânica e nutrientes, e é substrato clássico de fermentação em estado sólido. Fungos como Aspergillus e Trichoderma crescem sobre ela e secretam celulases, xilanases, lipases e proteases. Produzir enzima dentro da usina atacaria um dos maiores custos da rota 2G.",
+      "comoFunciona": "O fungo é inoculado na torta com umidade controlada e sem água livre; cresce sobre a superfície das partículas por alguns dias e as enzimas são extraídas por lavagem do sólido.",
+      "limitacoes": [
+        "Difícil controlar temperatura e oxigênio em leito sólido de grande porte.",
+        "Extração e concentração da enzima do sólido têm rendimento baixo."
+      ]
+    },
+    "rota": {
+      "trl": 4,
+      "statusSP": "inexistente",
+      "notaStatus": "Pesquisa consolidada em laboratório no Brasil, sem unidade industrial em São Paulo."
+    },
+    "paramsRelevantes": ["torta_gerada", "torta_disponivel", "bagaco_rpr", "cana_moida_sp"],
+    "fontes": ["fapesp_bioen", "chandel_bagaco"]
+  },
+  {
+    "id": "cana.prod.enzimas",
+    "kind": "produto",
+    "nome": "Enzimas industriais",
+    "resumo": "Celulases, xilanases e lipases para a própria usina, ração e alimentos",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Pipette",
+    "texto": {
+      "descricao": "Insumo de alto valor unitário e o maior custo variável da hidrólise enzimática. Produzir localmente encurtaria a cadeia e reduziria a dependência de fornecedores globais.",
+      "limitacoes": [
+        "Atividade específica de coquetéis produzidos no local costuma ficar abaixo da dos comerciais."
+      ]
+    },
+    "paramsRelevantes": ["torta_gerada", "bagaco_rpr"],
+    "fontes": ["fapesp_bioen"]
+  },
+  {
+    "id": "cana.rota.cogumelos",
+    "kind": "rota",
+    "nome": "Cultivo de cogumelos",
+    "resumo": "Bagaço e palha viram substrato de shimeji, shiitake e champignon",
+    "anel": 3,
+    "tags": ["alimento", "solo"],
+    "icone": "Sprout",
+    "texto": {
+      "descricao": "Cogumelos comestíveis são fungos degradadores de lignocelulose: comem exatamente o que a usina descarta. Bagaço e palha entram no composto do champignon e servem de substrato direto para Pleurotus e shiitake. É a rota que transforma resíduo em alimento com menor exigência tecnológica de todo o atlas.",
+      "comoFunciona": "O substrato é umedecido, pasteurizado e inoculado com micélio; o fungo coloniza o bagaço em poucas semanas e frutifica quando a temperatura e a umidade do ar mudam.",
+      "limitacoes": [
+        "Mercado paulista de cogumelos é pequeno frente aos milhões de toneladas de bagaço.",
+        "Exige mão de obra e ambiente controlado, longe da lógica industrial da usina."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "operando",
+      "notaStatus": "Bagaço e palha de cana já compõem o substrato de produtores paulistas de cogumelo, embora o volume absorvido seja pequeno.",
+      "exemplos": [{ "nome": "Polo produtor do Alto Tietê", "municipio": "Mogi das Cruzes" }]
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "palha_gerada", "palha_recolhivel"],
+    "fontes": ["unesp_botucatu", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.cogumelos",
+    "kind": "produto",
+    "nome": "Cogumelos comestíveis",
+    "resumo": "Alimento proteico de alto valor obtido em semanas a partir de fibra",
+    "anel": 4,
+    "tags": ["alimento"],
+    "icone": "Leaf",
+    "texto": {
+      "descricao": "Shimeji, shiitake e champignon vendidos frescos, secos ou processados. O substrato exaurido ainda serve como condicionador de solo ou componente de ração, o que fecha o ciclo.",
+      "limitacoes": [
+        "Produto perecível, com logística de frio e mercado regional."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["unesp_botucatu"]
+  }
+]

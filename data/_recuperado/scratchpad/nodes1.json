@@ -1,0 +1,657 @@
+[
+  {
+    "id": "cana.rota.pretrat_explosao_vapor",
+    "kind": "rota",
+    "nome": "Explosão a vapor",
+    "resumo": "Vapor a 190 °C rompe a fibra do bagaço e abre a celulose para as enzimas",
+    "anel": 3,
+    "tags": ["energia", "quimica", "combustivel"],
+    "icone": "Thermometer",
+    "texto": {
+      "descricao": "A parede celular da cana evoluiu para não ser digerida. Qualquer rota que queira o açúcar preso na fibra precisa antes desmontar essa barreira. O bagaço é cozido com vapor saturado sob pressão e descomprimido de forma abrupta, o que dissolve a hemicelulose e desloca a lignina. É o pré-tratamento da rota industrial paulista de etanol 2G.",
+      "comoFunciona": "Vapor a 180-210 °C penetra a fibra por alguns minutos; a descompressão súbita evapora a água interna e estoura a estrutura por dentro, deixando a celulose acessível.",
+      "limitacoes": [
+        "A temperatura alta forma furfural, HMF e ácido acético, que inibem a fermentação seguinte.",
+        "Consome vapor que a usina venderia como bioeletricidade."
+      ]
+    },
+    "rota": {
+      "trl": 8,
+      "statusSP": "operando",
+      "notaStatus": "É o pré-tratamento hidrotérmico das plantas de etanol 2G da Raízen em São Paulo, em escala comercial desde 2015.",
+      "exemplos": [
+        { "nome": "Raízen Costa Pinto (E2G)", "municipio": "Piracicaba" },
+        { "nome": "Raízen Bonfim (E2G)", "municipio": "Guariba" }
+      ]
+    },
+    "paramsRelevantes": ["cana_moida_sp", "bagaco_rpr", "incluir_bagaco", "bagaco_excedente", "palha_gerada", "palha_recolhivel"],
+    "fontes": ["raizen_e2g", "chandel_bagaco", "lnbr_cnpem"]
+  },
+  {
+    "id": "cana.rota.pretrat_acido_diluido",
+    "kind": "rota",
+    "nome": "Hidrólise ácida diluída",
+    "resumo": "Ácido sulfúrico a 1% dissolve a hemicelulose e libera um licor rico em xilose",
+    "anel": 3,
+    "tags": ["quimica", "combustivel"],
+    "icone": "Droplet",
+    "texto": {
+      "descricao": "É o pré-tratamento mais estudado do bagaço e o mais barato em reagente. Ácido sulfúrico diluído a quente hidrolisa a hemicelulose, deixando um sólido de celulose e lignina e um licor de pentoses. Foi a base das primeiras plantas-piloto de 2G no Brasil.",
+      "comoFunciona": "A 120-190 °C, o íon H+ quebra as ligações glicosídicas da hemicelulose, que se dissolve como xilose e arabinose; a celulose cristalina resiste e fica no sólido.",
+      "limitacoes": [
+        "Exige reator resistente à corrosão e neutralização do licor, que gera gesso.",
+        "Parte da xilose degrada em furfural, perdendo açúcar e criando inibidor."
+      ]
+    },
+    "rota": {
+      "trl": 7,
+      "statusSP": "inexistente",
+      "notaStatus": "Rodou em planta-piloto e demonstração no Brasil, inclusive em São Paulo, mas nenhuma unidade comercial paulista usa esta rota hoje."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "bagaco_rpr", "incluir_bagaco", "bagaco_excedente", "palha_gerada", "palha_recolhivel"],
+    "fontes": ["chandel_bagaco", "lnbr_cnpem", "doe_top_value"]
+  },
+  {
+    "id": "cana.rota.hidrolise_acida_concentrada",
+    "kind": "rota",
+    "nome": "Hidrólise ácida concentrada",
+    "resumo": "Ácido forte a frio dissolve celulose e hemicelulose de uma vez, sem enzima",
+    "anel": 3,
+    "tags": ["quimica", "combustivel"],
+    "icone": "FlaskConical",
+    "texto": {
+      "descricao": "Usa ácido sulfúrico ou clorídrico em alta concentração e temperatura baixa. Converte celulose e hemicelulose em açúcares num único passo, com rendimento alto e sem custo de enzima. O que trava é a recuperação do ácido: sem ela, o consumo de reagente e o passivo de sal inviabilizam a conta.",
+      "comoFunciona": "O ácido concentrado descristaliza a celulose e a dissolve; a diluição posterior completa a hidrólise a glicose. O ácido é então separado por membrana ou resina para voltar ao processo.",
+      "limitacoes": [
+        "A recuperação do ácido precisa passar de 98% para fechar economicamente.",
+        "Corrosão e manuseio de ácido concentrado elevam o custo de capital."
+      ]
+    },
+    "rota": {
+      "trl": 5,
+      "statusSP": "inexistente",
+      "notaStatus": "Nenhuma planta em São Paulo. As tentativas comerciais no mundo pararam na etapa de recuperação do ácido."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "bagaco_rpr", "incluir_bagaco", "bagaco_excedente"],
+    "fontes": ["chandel_bagaco", "doe_top_value"]
+  },
+  {
+    "id": "cana.rota.pretrat_alcalino",
+    "kind": "rota",
+    "nome": "Pré-tratamento alcalino",
+    "resumo": "Soda ou cal a quente arranca a lignina e preserva os açúcares da fibra",
+    "anel": 3,
+    "tags": ["quimica", "combustivel"],
+    "icone": "Beaker",
+    "texto": {
+      "descricao": "Hidróxido de sódio, cal ou peróxido alcalino rompem as ligações éster entre lignina e hemicelulose. O sólido resultante fica pobre em lignina e muito acessível à enzima. Como opera em temperatura moderada, forma menos inibidores que a rota ácida.",
+      "comoFunciona": "O íon hidroxila saponifica as pontes entre lignina e polissacarídeos; a lignina se solubiliza no licor negro e a fibra incha, aumentando a área que a enzima alcança.",
+      "limitacoes": [
+        "Consome álcali caro e gera licor negro que precisa de recuperação química.",
+        "A lignina sai dissolvida e degradada, o que reduz seu valor como coproduto."
+      ]
+    },
+    "rota": {
+      "trl": 6,
+      "statusSP": "inexistente",
+      "notaStatus": "Sem unidade paulista. É rota comum em laboratório e piloto, com custo de reagente ainda alto para bagaço."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "bagaco_rpr", "incluir_bagaco", "palha_gerada", "palha_recolhivel"],
+    "fontes": ["chandel_bagaco", "lnbr_cnpem"]
+  },
+  {
+    "id": "cana.rota.pretrat_organosolv",
+    "kind": "rota",
+    "nome": "Organosolv",
+    "resumo": "Etanol quente separa a fibra em três frações e entrega lignina limpa",
+    "anel": 3,
+    "tags": ["quimica", "combustivel"],
+    "icone": "Blend",
+    "texto": {
+      "descricao": "Solvente orgânico, em geral etanol da própria usina, dissolve a lignina sob pressão e temperatura. É o único pré-tratamento que entrega as três frações separadas e com qualidade: celulose sólida, licor de pentoses e lignina de baixo peso molecular e sem enxofre. Essa lignina é a matéria-prima que as rotas de maior valor pedem.",
+      "comoFunciona": "A mistura etanol-água a 160-200 °C quebra as ligações éter da lignina, que fica solúvel; ao resfriar e diluir com água, a lignina precipita em pó e o solvente é destilado de volta.",
+      "limitacoes": [
+        "Operar com solvente inflamável sob pressão encarece o reator.",
+        "Só fecha a conta se a lignina for vendida acima do preço de combustível."
+      ]
+    },
+    "rota": {
+      "trl": 5,
+      "statusSP": "inexistente",
+      "notaStatus": "Não há unidade em São Paulo. Existem plantas de demonstração no exterior; no Brasil, o estágio é de piloto e pesquisa."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "bagaco_rpr", "incluir_bagaco", "palha_gerada", "palha_recolhivel"],
+    "fontes": ["ragauskas_lignin", "chandel_bagaco", "lnbr_cnpem"]
+  },
+  {
+    "id": "cana.rota.pretrat_liquidos_ionicos",
+    "kind": "rota",
+    "nome": "Líquidos iônicos e DES",
+    "resumo": "Sais líquidos dissolvem a celulose inteira em condições brandas, mas custam caro",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "TestTube",
+    "texto": {
+      "descricao": "Líquidos iônicos e solventes eutéticos profundos dissolvem a parede celular sem calor severo e sem degradar açúcar. Em bancada, a fibra tratada chega a converter mais de 90% da celulose. O preço do solvente e a dificuldade de recuperá-lo mantêm a rota longe da escala.",
+      "comoFunciona": "O ânion do sal compete com as pontes de hidrogênio que mantêm a celulose cristalina; a fibra se desmonta e pode ser reprecipitada amorfa, muito mais fácil de hidrolisar.",
+      "limitacoes": [
+        "O solvente custa ordens de grandeza mais que o ácido e precisa ser recuperado quase por inteiro.",
+        "Resíduo de solvente inibe as enzimas e a levedura na etapa seguinte."
+      ]
+    },
+    "rota": {
+      "trl": 3,
+      "statusSP": "inexistente",
+      "notaStatus": "Estágio de bancada. Nenhuma planta no mundo opera com esta rota em escala industrial."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco"],
+    "fontes": ["chandel_bagaco", "fapesp_bioen"]
+  },
+  {
+    "id": "cana.rota.pretrat_afex",
+    "kind": "rota",
+    "nome": "Explosão com amônia (AFEX)",
+    "resumo": "Amônia sob pressão descristaliza a fibra e deixa nitrogênio útil no material",
+    "anel": 3,
+    "tags": ["quimica", "fertilizante"],
+    "icone": "Wind",
+    "texto": {
+      "descricao": "Amônia líquida a alta pressão é injetada na biomassa e depois liberada de forma súbita. Não remove lignina nem hemicelulose: reorganiza a fibra e a torna acessível. O material tratado fica enriquecido em nitrogênio, o que ajuda tanto a fermentação quanto o uso como ração.",
+      "comoFunciona": "A amônia incha a fibra e rompe ligações lignina-carboidrato; a despressurização evapora quase toda a amônia, que é recomprimida e reutilizada no ciclo seguinte.",
+      "limitacoes": [
+        "Funciona melhor em gramíneas de baixa lignina; o bagaço responde menos que a palha de milho.",
+        "Exige circuito fechado de amônia, caro e sujeito a norma de segurança rígida."
+      ]
+    },
+    "rota": {
+      "trl": 4,
+      "statusSP": "inexistente",
+      "notaStatus": "Sem presença em São Paulo. Desenvolvida em piloto nos Estados Unidos, principalmente para resíduos de milho."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "palha_gerada", "palha_recolhivel"],
+    "fontes": ["chandel_bagaco", "doe_top_value"]
+  },
+  {
+    "id": "cana.rota.pretrat_biologico",
+    "kind": "rota",
+    "nome": "Pré-tratamento biológico",
+    "resumo": "Fungos de podridão branca comem a lignina sem reagente e sem calor",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Microscope",
+    "texto": {
+      "descricao": "Fungos basidiomicetos secretam lacases e peroxidases que degradam lignina de forma seletiva. É o pré-tratamento de menor consumo de energia e sem efluente ácido ou alcalino. O problema é o relógio: leva semanas onde o vapor leva minutos.",
+      "comoFunciona": "O fungo cresce sobre o bagaço úmido e usa enzimas oxidativas para abrir os anéis aromáticos da lignina, liberando a celulose sem consumir muito dela.",
+      "limitacoes": [
+        "Tempo de residência de 2 a 8 semanas, incompatível com o ritmo de uma usina.",
+        "O fungo consome parte dos açúcares que se queria preservar."
+      ]
+    },
+    "rota": {
+      "trl": 3,
+      "statusSP": "inexistente",
+      "notaStatus": "Pesquisa acadêmica. Não há operação em escala em São Paulo nem no exterior."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "palha_gerada"],
+    "fontes": ["fapesp_bioen", "chandel_bagaco"]
+  },
+  {
+    "id": "cana.copr.polpa_celulosica",
+    "kind": "coproduto",
+    "nome": "Polpa celulósica pré-tratada",
+    "resumo": "Sólido de celulose e lignina que sai do pré-tratamento pronto para a enzima",
+    "anel": 4,
+    "tags": ["quimica", "combustivel"],
+    "icone": "Layers",
+    "texto": {
+      "descricao": "É a fração sólida que resta depois do pré-tratamento, também chamada celulignina. Concentra a celulose e quase toda a lignina do bagaço original. Serve de entrada tanto para a hidrólise enzimática quanto para rotas de material celulósico.",
+      "limitacoes": [
+        "A acessibilidade da celulose varia muito com o pré-tratamento usado, e com ela o consumo de enzima."
+      ]
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "palha_gerada", "palha_recolhivel"],
+    "fontes": ["chandel_bagaco", "lnbr_cnpem"]
+  },
+  {
+    "id": "cana.copr.hidrolisado_c5",
+    "kind": "coproduto",
+    "nome": "Licor de pentoses (C5)",
+    "resumo": "Caldo de xilose vindo da hemicelulose — cerca de um quarto da massa da fibra",
+    "anel": 4,
+    "tags": ["quimica", "alimento"],
+    "icone": "Droplet",
+    "texto": {
+      "descricao": "A hemicelulose do bagaço é quase toda xilana e responde por 25 a 30% da massa seca. Dissolvida no pré-tratamento, vira um licor de xilose e arabinose com ácido acético e furfural juntos. Esse licor é ao mesmo tempo o maior desperdício e a maior oportunidade da biorrefinaria de cana.",
+      "limitacoes": [
+        "Diluído e contaminado por inibidores, precisa de destoxificação antes de qualquer fermentação.",
+        "Muitas plantas 2G simplesmente queimam ou digerem este licor por falta de rota melhor."
+      ]
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "palha_gerada", "palha_recolhivel"],
+    "fontes": ["chandel_bagaco", "lnbr_cnpem", "doe_top_value"]
+  },
+  {
+    "id": "cana.copr.hidrolisado_c6",
+    "kind": "coproduto",
+    "nome": "Hidrolisado de glicose (C6)",
+    "resumo": "Caldo de glicose liberado da celulose — a mesma matéria-prima do caldo de cana",
+    "anel": 4,
+    "tags": ["quimica", "combustivel"],
+    "icone": "Droplets",
+    "texto": {
+      "descricao": "Resultado da hidrólise da celulose, é uma solução de glicose quimicamente igual à que a usina já fermenta. Isso é o que torna o 2G plugável na usina existente: o caldo entra nas mesmas dornas. Também serve de substrato para toda a química de fermentação de hexoses.",
+      "limitacoes": [
+        "Sai diluído, entre 5 e 12% de açúcar, o que encarece a destilação a jusante."
+      ]
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "palha_gerada", "palha_recolhivel"],
+    "fontes": ["raizen_e2g", "chandel_bagaco"]
+  },
+  {
+    "id": "cana.rota.hidrolise_enzimatica",
+    "kind": "rota",
+    "nome": "Hidrólise enzimática",
+    "resumo": "Coquetel de celulases corta a celulose em glicose a 50 °C, sem ácido",
+    "anel": 3,
+    "tags": ["quimica", "combustivel"],
+    "icone": "Scissors",
+    "texto": {
+      "descricao": "É o coração do etanol de segunda geração. Um coquetel de celulases e beta-glicosidases despolimeriza a celulose da polpa pré-tratada em glicose, em condições brandas e sem gerar inibidor. O custo da enzima caiu mais de dez vezes em quinze anos e deixou de ser o gargalo isolado da rota.",
+      "comoFunciona": "As endoglucanases cortam a cadeia de celulose em pontos aleatórios, as exoglucanases liberam celobiose nas pontas e a beta-glicosidase a converte em glicose, tudo em 24 a 72 horas a 50 °C.",
+      "limitacoes": [
+        "A lignina adsorve enzima de forma improdutiva, o que obriga a dosar mais do que a estequiometria pediria.",
+        "A conversão cai rápido acima de 15% de sólidos, faixa em que a mistura deixa de ser bombeável."
+      ]
+    },
+    "rota": {
+      "trl": 8,
+      "statusSP": "operando",
+      "notaStatus": "São Paulo tem etanol 2G comercial: a Raízen opera hidrólise enzimática de bagaço e palha desde 2015, com produção abaixo da capacidade nominal e programa de expansão revisto.",
+      "exemplos": [
+        { "nome": "Raízen Costa Pinto (E2G)", "municipio": "Piracicaba" },
+        { "nome": "Raízen Bonfim (E2G)", "municipio": "Guariba" }
+      ]
+    },
+    "paramsRelevantes": ["cana_moida_sp", "bagaco_rpr", "incluir_bagaco", "bagaco_excedente", "palha_gerada", "palha_recolhivel"],
+    "fontes": ["raizen_e2g", "lnbr_cnpem", "chandel_bagaco"]
+  },
+  {
+    "id": "cana.rota.fermentacao_c6",
+    "kind": "rota",
+    "nome": "Fermentação de hexoses",
+    "resumo": "A levedura da usina converte a glicose do bagaço em etanol como se fosse caldo",
+    "anel": 3,
+    "tags": ["combustivel", "energia"],
+    "icone": "Cylinder",
+    "texto": {
+      "descricao": "A Saccharomyces cerevisiae que a usina já usa fermenta a glicose do hidrolisado sem modificação genética. Cada quilo de glicose rende cerca de 0,45 kg de etanol e 0,44 kg de CO2. É a etapa madura da rota 2G: o desafio está antes dela, não nela.",
+      "comoFunciona": "A levedura quebra a glicose pela via glicolítica e, na ausência de oxigênio, reduz o piruvato a etanol liberando gás carbônico, o mesmo processo do etanol de caldo.",
+      "limitacoes": [
+        "Inibidores do pré-tratamento, como furfural e ácido acético, alongam a fase lag e derrubam a produtividade.",
+        "O hidrolisado diluído reduz o teor alcoólico do vinho e encarece a destilação."
+      ]
+    },
+    "rota": {
+      "trl": 8,
+      "statusSP": "operando",
+      "notaStatus": "Roda hoje nas plantas 2G paulistas, integrada às dornas da usina de primeira geração."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "bagaco_rpr", "incluir_bagaco", "palha_gerada", "palha_recolhivel", "etanol_por_cana"],
+    "fontes": ["raizen_e2g", "lnbr_cnpem"]
+  },
+  {
+    "id": "cana.rota.fermentacao_c5",
+    "kind": "rota",
+    "nome": "Fermentação de pentoses",
+    "resumo": "O gargalo do 2G: a levedura comum não come xilose, e um terço do açúcar se perde",
+    "anel": 3,
+    "tags": ["combustivel", "quimica"],
+    "icone": "Beaker",
+    "texto": {
+      "descricao": "A xilose é quase um terço dos açúcares do bagaço, e a levedura industrial não sabe fermentá-la. Sem essa etapa, a rota 2G descarta ou queima um terço da matéria-prima que já pagou pré-tratamento e transporte. Leveduras recombinantes e a Scheffersomyces stipitis conseguem, mas com produtividade menor e sensibilidade alta a inibidor.",
+      "comoFunciona": "Genes de xilose redutase e xilitol desidrogenase, ou de xilose isomerase, são inseridos na levedura para converter xilose em xilulose, que entra na via das pentoses fosfato e segue até etanol.",
+      "limitacoes": [
+        "A produtividade em xilose fica de 3 a 5 vezes abaixo da obtida em glicose.",
+        "A linhagem recombinante perde estabilidade nas condições não estéreis de uma usina.",
+        "O licor C5 precisa ser destoxificado antes, e a destoxificação também retira açúcar."
+      ]
+    },
+    "rota": {
+      "trl": 5,
+      "statusSP": "inexistente",
+      "notaStatus": "Nenhuma planta paulista fermenta pentoses em escala; o licor C5 é hoje queimado ou digerido. É o item que mais mudaria a economia do 2G se resolvido."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "bagaco_rpr", "incluir_bagaco", "palha_gerada", "palha_recolhivel"],
+    "fontes": ["lnbr_cnpem", "fapesp_bioen", "chandel_bagaco"]
+  },
+  {
+    "id": "cana.rota.sscf",
+    "kind": "rota",
+    "nome": "Sacarificação e cofermentação",
+    "resumo": "Enzima e levedura no mesmo tanque: a glicose vira etanol antes de inibir a enzima",
+    "anel": 3,
+    "tags": ["combustivel"],
+    "icone": "Merge",
+    "texto": {
+      "descricao": "Em vez de hidrolisar e depois fermentar, o processo SSCF põe enzima e micro-organismo no mesmo reator. A glicose é consumida assim que aparece, o que remove a inibição por produto e reduz o tempo total e o número de tanques. Se o micro-organismo também consome xilose, C5 e C6 seguem juntos.",
+      "comoFunciona": "A temperatura de compromisso, perto de 35 °C, permite que a celulase trabalhe enquanto a levedura fermenta, mantendo a concentração de glicose sempre baixa no meio.",
+      "limitacoes": [
+        "A enzima rende melhor a 50 °C e a levedura a 32 °C; a temperatura intermediária penaliza as duas.",
+        "Dificulta reciclar levedura, prática padrão nas usinas brasileiras."
+      ]
+    },
+    "rota": {
+      "trl": 5,
+      "statusSP": "inexistente",
+      "notaStatus": "Sem uso comercial em São Paulo. Aparece em piloto e demonstração como alternativa à hidrólise separada."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "palha_gerada", "palha_recolhivel"],
+    "fontes": ["lnbr_cnpem", "chandel_bagaco"]
+  },
+  {
+    "id": "cana.rota.cbp",
+    "kind": "rota",
+    "nome": "Bioprocesso consolidado",
+    "resumo": "Um único micro-organismo produz a enzima e fermenta, eliminando a compra de enzima",
+    "anel": 3,
+    "tags": ["combustivel", "quimica"],
+    "icone": "Combine",
+    "texto": {
+      "descricao": "A ideia mais radical do 2G: um organismo que secreta as próprias celulases e converte a fibra direto em etanol. Elimina de uma vez o custo de enzima e um reator inteiro. Candidatos como Clostridium thermocellum e leveduras celulolíticas engenheiradas ainda entregam títulos e velocidades muito baixos.",
+      "comoFunciona": "O micro-organismo monta na superfície da célula um complexo enzimático, o celulossomo, que degrada a celulose e entrega os açúcares direto ao próprio metabolismo.",
+      "limitacoes": [
+        "Títulos de etanol abaixo de 3% em volume, contra 10% ou mais na rota convencional.",
+        "Nenhum organismo conhecido combina alta celulólise e alta tolerância a etanol."
+      ]
+    },
+    "rota": {
+      "trl": 3,
+      "statusSP": "inexistente",
+      "notaStatus": "Pesquisa de bancada, sem planta em nenhum lugar do mundo."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "palha_gerada"],
+    "fontes": ["fapesp_bioen", "lnbr_cnpem"]
+  },
+  {
+    "id": "cana.prod.etanol_2g",
+    "kind": "produto",
+    "nome": "Etanol 2G",
+    "resumo": "Mesma molécula do etanol de caldo, feita da fibra, sem plantar um hectare a mais",
+    "anel": 4,
+    "tags": ["combustivel", "energia"],
+    "icone": "Fuel",
+    "texto": {
+      "descricao": "Etanol produzido a partir de bagaço e palha, quimicamente idêntico ao de primeira geração e misturado no mesmo tanque. Seu valor está na intensidade de carbono: por não exigir terra nova, tem nota alta no RenovaBio e acessa mercados que pagam por baixo carbono. São Paulo é uma das poucas regiões do mundo com produção comercial.",
+      "limitacoes": [
+        "O custo por litro ainda é maior que o do etanol de caldo na mesma usina.",
+        "A produção realizada tem ficado abaixo da capacidade instalada."
+      ]
+    },
+    "paramsRelevantes": ["cana_moida_sp", "bagaco_rpr", "incluir_bagaco", "palha_gerada", "palha_recolhivel", "preco_carbono"],
+    "fontes": ["raizen_e2g", "unica2024"]
+  },
+  {
+    "id": "cana.prod.lignina",
+    "kind": "produto",
+    "nome": "Lignina técnica",
+    "resumo": "Um quarto da fibra da cana e o maior estoque de aromáticos renováveis do planeta",
+    "anel": 4,
+    "tags": ["quimica", "energia"],
+    "icone": "Shell",
+    "texto": {
+      "descricao": "A lignina é 20 a 25% da massa seca do bagaço e sobra praticamente intacta depois da hidrólise da celulose. É o único polímero natural abundante feito de anéis aromáticos, o que a torna a alternativa renovável mais direta ao petróleo na petroquímica de aromáticos. Hoje quase toda ela é queimada por não haver mercado montado.",
+      "limitacoes": [
+        "A estrutura muda conforme o pré-tratamento, e a indústria química precisa de matéria-prima uniforme.",
+        "Queimar a lignina cobre parte da energia do processo 2G; qualquer uso alternativo tem que pagar essa energia de volta."
+      ]
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "palha_gerada", "palha_recolhivel"],
+    "fontes": ["ragauskas_lignin", "doe_top_value", "chandel_bagaco"]
+  },
+  {
+    "id": "cana.rota.lignina_combustao",
+    "kind": "rota",
+    "nome": "Queima da lignina",
+    "resumo": "Destino atual de quase toda a lignina 2G: caldeira, vapor e eletricidade",
+    "anel": 3,
+    "tags": ["energia"],
+    "icone": "Flame",
+    "texto": {
+      "descricao": "A lignina residual da hidrólise tem poder calorífico próximo ao do carvão vegetal, entre 23 e 27 MJ/kg. Queimada na caldeira, cobre a demanda de vapor da planta 2G e ainda exporta eletricidade. É a referência contra a qual toda rota de maior valor precisa competir.",
+      "comoFunciona": "A torta de lignina é desaguada, secada com o próprio calor residual e queimada em caldeira de biomassa junto com o bagaço.",
+      "limitacoes": [
+        "Queimar aromáticos como combustível destrói a estrutura química que dá valor à molécula.",
+        "A lignina úmida da hidrólise precisa de secagem, o que consome parte da energia recuperada."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "operando",
+      "notaStatus": "É o que as plantas 2G paulistas fazem hoje com a lignina residual."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "eficiencia_eletrica", "preco_eletricidade"],
+    "fontes": ["raizen_e2g", "unica2024"]
+  },
+  {
+    "id": "cana.dest.energia_2g",
+    "kind": "destino",
+    "nome": "Vapor e energia da planta 2G",
+    "resumo": "Autoconsumo de vapor e excedente elétrico gerados pela queima da lignina",
+    "anel": 4,
+    "tags": ["energia"],
+    "icone": "Zap",
+    "texto": {
+      "descricao": "A energia recuperada da lignina fecha o balanço térmico da unidade de segunda geração e o que sobra vai para a rede. É o motivo de a lignina raramente sair da usina: ela já tem um comprador cativo dentro de casa.",
+      "limitacoes": [
+        "O valor da energia é baixo frente ao de qualquer aplicação química da mesma massa."
+      ]
+    },
+    "paramsRelevantes": ["eficiencia_eletrica", "preco_eletricidade"],
+    "fontes": ["unica2024"]
+  },
+  {
+    "id": "cana.rota.lignina_resinas",
+    "kind": "rota",
+    "nome": "Resinas e adesivos",
+    "resumo": "Lignina substitui até metade do fenol em resina fenol-formaldeído de painéis",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Blend",
+    "texto": {
+      "descricao": "Resinas fenol-formaldeído colam compensados, MDF e OSB e são feitas de fenol de petróleo. A lignina é um polifenol natural e pode substituir de 30 a 50% desse fenol depois de ativada quimicamente. É a rota de valorização de lignina mais próxima do mercado, porque o comprador já existe e é vizinho da usina.",
+      "comoFunciona": "A lignina é metilolada ou fenolada para aumentar a reatividade dos anéis aromáticos e então copolimerizada com formaldeído, ocupando o lugar do fenol na cadeia da resina.",
+      "limitacoes": [
+        "Acima de 50% de substituição, o tempo de cura sobe e a resistência da junta cai.",
+        "A variabilidade lote a lote da lignina desagrada a indústria de painéis."
+      ]
+    },
+    "rota": {
+      "trl": 5,
+      "statusSP": "inexistente",
+      "notaStatus": "Nenhuma resina de lignina de cana é produzida em São Paulo. Existem produtos comerciais no exterior a partir de lignina kraft de celulose de madeira."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco"],
+    "fontes": ["ragauskas_lignin", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.resina_fenolica",
+    "kind": "produto",
+    "nome": "Resina e adesivo de lignina",
+    "resumo": "Cola de painéis de madeira com parte do fenol fóssil trocada por lignina",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Hammer",
+    "texto": {
+      "descricao": "Adesivo termofixo usado em compensado, MDF e OSB. Com lignina, reduz a dependência de fenol importado e a emissão de formaldeído livre. O mercado paulista de painéis é grande o bastante para absorver a produção de uma planta 2G inteira.",
+      "limitacoes": [
+        "Precisa passar nas normas de resistência à umidade das classes estruturais."
+      ]
+    },
+    "paramsRelevantes": ["bagaco_rpr"],
+    "fontes": ["ragauskas_lignin", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.rota.lignina_fibra_carbono",
+    "kind": "rota",
+    "nome": "Fibra de carbono de lignina",
+    "resumo": "Lignina fiada e carbonizada pode baratear em metade a fibra de carbono",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Thermometer",
+    "texto": {
+      "descricao": "Fibra de carbono hoje sai de poliacrilonitrila derivada de petróleo, e o precursor responde por metade do custo. A lignina tem teor de carbono alto e custo baixo, e é o precursor alternativo mais estudado. As fibras obtidas ainda ficam abaixo do grau estrutural aeronáutico, mas alcançam o grau automotivo.",
+      "comoFunciona": "A lignina purificada é fundida e extrudada em filamento, estabilizada por oxidação ao ar e carbonizada acima de 1000 °C em atmosfera inerte, expulsando tudo que não é carbono.",
+      "limitacoes": [
+        "Módulo e resistência ficam bem abaixo dos da fibra de PAN.",
+        "Exige lignina de altíssima pureza e peso molecular controlado, que o bagaço não entrega naturalmente."
+      ]
+    },
+    "rota": {
+      "trl": 4,
+      "statusSP": "inexistente",
+      "notaStatus": "Pesquisa e piloto no exterior. Não há produção no Brasil, nem de precursor nem de fibra."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco"],
+    "fontes": ["ragauskas_lignin", "doe_top_value"]
+  },
+  {
+    "id": "cana.prod.fibra_carbono",
+    "kind": "produto",
+    "nome": "Fibra de carbono",
+    "resumo": "Reforço leve para automotivo e eólica, hoje 100% de precursor fóssil",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Atom",
+    "texto": {
+      "descricao": "Material de reforço com resistência específica alta, usado em estruturas leves. Uma versão de custo médio a partir de lignina abriria o uso em peças automotivas e pás eólicas, mercados hoje bloqueados pelo preço.",
+      "limitacoes": [
+        "Aplicação aeronáutica exige propriedades que a fibra de lignina ainda não alcança."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["ragauskas_lignin"]
+  },
+  {
+    "id": "cana.rota.lignina_dispersantes",
+    "kind": "rota",
+    "nome": "Dispersantes e ligantes",
+    "resumo": "Lignina sulfonada vira aditivo de concreto, defensivo e ração — mercado que já existe",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Waves",
+    "texto": {
+      "descricao": "Lignossulfonatos são vendidos há décadas como plastificantes de concreto, dispersantes de corante, aglomerantes de ração e veículos de defensivos agrícolas. É o único mercado de lignina com escala real hoje, abastecido por resíduo da polpação sulfito. Adaptar lignina de bagaço a esse mercado exige sulfonação, mas não exige criar demanda.",
+      "comoFunciona": "A sulfonação insere grupos sulfônicos na lignina e a torna solúvel em água e tensoativa; as moléculas se adsorvem nas partículas e as mantêm separadas por repulsão elétrica.",
+      "limitacoes": [
+        "É o uso de menor valor unitário entre os químicos de lignina.",
+        "Concorre com lignossulfonato de madeira já estabelecido e barato."
+      ]
+    },
+    "rota": {
+      "trl": 6,
+      "statusSP": "inexistente",
+      "notaStatus": "Não há sulfonação de lignina de cana em São Paulo; o lignossulfonato consumido aqui vem de celulose de madeira, em boa parte importado."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco"],
+    "fontes": ["ragauskas_lignin", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.dispersante",
+    "kind": "produto",
+    "nome": "Lignossulfonato",
+    "resumo": "Aditivo que reduz água no concreto e mantém sólidos em suspensão",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Droplet",
+    "texto": {
+      "descricao": "Tensoativo aniônico usado em concreto, cerâmica, corantes, ração peletizada e formulações agrícolas. Mercado consolidado, preço modesto e volume grande — o oposto do perfil das outras rotas de lignina.",
+      "limitacoes": [
+        "Preço baixo deixa pouca margem para frete e purificação."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["ragauskas_lignin"]
+  },
+  {
+    "id": "cana.rota.lignina_aromaticos",
+    "kind": "rota",
+    "nome": "Despolimerização a aromáticos",
+    "resumo": "Quebra catalítica da lignina em fenol, BTX e vanilina — o petróleo aromático vegetal",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Atom",
+    "texto": {
+      "descricao": "Se a lignina for despolimerizada de forma controlada, entrega os mesmos anéis aromáticos que a indústria química tira do petróleo: benzeno, tolueno, xilenos, fenóis, guaiacol e vanilina. É a rota de maior valor teórico e a mais distante da prática. O problema é a seletividade: a lignina tende a recondensar em piche em vez de render moléculas puras.",
+      "comoFunciona": "Hidrogenólise ou oxidação catalítica quebra as ligações éter beta-O-4 entre as unidades aromáticas; catalisadores metálicos capturam os fragmentos antes que eles voltem a se ligar entre si.",
+      "limitacoes": [
+        "Mistura de dezenas de compostos parecidos, cuja separação custa mais que o produto.",
+        "Recondensação em produtos insolúveis desativa o catalisador."
+      ]
+    },
+    "rota": {
+      "trl": 3,
+      "statusSP": "inexistente",
+      "notaStatus": "Bancada e piloto pequeno no mundo todo. Vanilina de lignina é a única exceção comercial, e vem de licor sulfito de madeira."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco"],
+    "fontes": ["ragauskas_lignin", "doe_top_value", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.aromaticos_renovaveis",
+    "kind": "produto",
+    "nome": "Aromáticos renováveis",
+    "resumo": "Fenol, BTX, guaiacol e vanilina com o mesmo carbono que a cana fixou",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "FlaskConical",
+    "texto": {
+      "descricao": "Blocos aromáticos que hoje só vêm da nafta e do coque. Substituí-los por carbono vegetal muda a pegada de plásticos de engenharia, resinas, solventes e fármacos. A vanilina é o caso em que a rota já compete: a de lignina custa uma fração da sintética e é aceita como não sintética em alguns mercados.",
+      "limitacoes": [
+        "Sem separação eficiente, o produto é uma mistura de baixo valor."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["ragauskas_lignin", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.rota.lignina_carvao_ativado",
+    "kind": "rota",
+    "nome": "Carvão ativado de lignina",
+    "resumo": "Carbonização e ativação criam poros que adsorvem contaminantes de água e ar",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Filter",
+    "texto": {
+      "descricao": "Lignina e bagaço são precursores clássicos de carvão ativado, com área superficial que passa de 1000 m²/g. O produto atende tratamento de água, purificação de etanol, filtros de ar e recuperação de solvente. É a rota de material carbonoso mais simples de implantar perto de uma usina.",
+      "comoFunciona": "A carbonização em atmosfera inerte forma um esqueleto de carbono, e a ativação com vapor ou com hidróxido de potássio abre a rede de microporos que dá a área de adsorção.",
+      "limitacoes": [
+        "Ativação química gera efluente salino que precisa de tratamento.",
+        "Concorre com carvão de casca de coco e de carvão mineral já baratos no mercado."
+      ]
+    },
+    "rota": {
+      "trl": 5,
+      "statusSP": "inexistente",
+      "notaStatus": "Há produção de carvão ativado no Brasil a partir de outras biomassas; não a partir de lignina de bagaço em São Paulo."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco"],
+    "fontes": ["chandel_bagaco", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.carvao_ativado",
+    "kind": "produto",
+    "nome": "Carvão ativado",
+    "resumo": "Adsorvente poroso para tratamento de água, ar e purificação industrial",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "CircleDot",
+    "texto": {
+      "descricao": "Material com porosidade controlada usado em saneamento, indústria de bebidas, farmacêutica e controle de emissões. Boa parte do consumo brasileiro é importada, o que dá espaço a um produto local de biomassa.",
+      "limitacoes": [
+        "Especificação varia muito por aplicação; não existe um carvão ativado único."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde"]
+  }
+]

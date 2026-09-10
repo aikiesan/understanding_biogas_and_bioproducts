@@ -1,0 +1,1246 @@
+{
+  "nodes": [
+    {
+      "id": "cana.dest.renovabio_neea",
+      "kind": "destino",
+      "nome": "Certificação RenovaBio",
+      "resumo": "Mede o carbono de cada litro de etanol e converte a nota em CBIO emissível",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "combustivel",
+        "energia"
+      ],
+      "icone": "Gauge",
+      "texto": {
+        "descricao": "O RenovaBio (Lei 13.576/2017) atribui a cada usina uma Nota de Eficiência Energético-Ambiental, em gCO2e por MJ, calculada na planilha RenovaCalc com os dados da própria unidade. A certificação é feita por firma inspetora credenciada e homologada pela ANP; quanto menor a intensidade de carbono do combustível diante do fóssil que ele substitui, mais CBIO cada metro cúbico vendido gera. Biodigerir vinhaça e torta entra na conta: o biogás substitui diesel e gás natural na operação, reduz o consumo de energia fóssil da unidade e melhora a nota. O biometano produzido na usina pode ser certificado como combustível próprio, com nota e emissão de CBIO independentes do etanol.",
+        "limitacoes": [
+          "A nota premia intensidade de carbono, não volume de biogás: um projeto grande numa usina já eficiente move pouco a nota.",
+          "A recertificação anual exige rastrear dados de campo e de indústria; usinas com muito fornecedor terceiro têm dificuldade de fechar o inventário.",
+          "O ganho depende de como o biogás é usado na unidade; não existe crédito automático por captura de metano."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana",
+        "vinhaca_disponivel",
+        "preco_carbono"
+      ],
+      "fontes": [
+        "renovabio_lei13576",
+        "decreto9888",
+        "anp_res758",
+        "renovacalc"
+      ]
+    },
+    {
+      "id": "cana.dest.cbio",
+      "kind": "destino",
+      "nome": "CBIO",
+      "resumo": "Título de 1 tCO₂e emitido pela usina e comprado por distribuidora de combustível",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "energia",
+        "combustivel"
+      ],
+      "icone": "Award",
+      "texto": {
+        "descricao": "O Crédito de Descarbonização é um título escritural: cada CBIO equivale a uma tonelada de CO2e evitada. A usina certificada emite CBIO na proporção do combustível que efetivamente vendeu, o título é escriturado por instituição autorizada e negociado em bolsa; quem compra são as distribuidoras de combustíveis fósseis, com metas anuais individualizadas definidas pelo CNPE e pela ANP e prazo para aposentar os títulos. O preço não é fixado por lei: sai do encontro entre meta e oferta, e já oscilou de poucas dezenas a mais de duas centenas de reais por CBIO. Para a rota de biogás é a receita adicional mais acessível hoje, porque não exige novo contrato de venda de energia.",
+        "limitacoes": [
+          "O preço é volátil e depende da meta anual; revisão de meta para baixo derruba a receita do projeto no mesmo ano.",
+          "O CBIO segue a venda do combustível, não a produção: biometano consumido dentro da própria usina não gera título.",
+          "Somar CBIO e crédito voluntário sobre o mesmo metano é dupla contagem e costuma ser barrado na auditoria."
+        ]
+      },
+      "paramsRelevantes": [
+        "preco_carbono",
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "renovabio_lei13576",
+        "anp_metas_cbio",
+        "b3_cbio"
+      ]
+    },
+    {
+      "id": "cana.dest.mercado_voluntario_carbono",
+      "kind": "destino",
+      "nome": "Mercado voluntário de carbono",
+      "resumo": "Crédito emitido por padrão privado e comprado por empresa que compensa por escolha",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "energia"
+      ],
+      "icone": "CloudDrizzle",
+      "texto": {
+        "descricao": "É o mercado em que o crédito nasce de um projeto verificado contra metodologia de um padrão privado, como VCS e Gold Standard, e é comprado por empresas que decidem compensar sem obrigação legal. Num projeto de biogás de cana o crédito vem do metano evitado e da substituição de combustível fóssil; o produtor registra o projeto, prova adicionalidade, mede o gás com medidor calibrado e passa por validação e verificação independentes a cada ciclo. A diferença para o mercado regulado é a origem da demanda: aqui o comprador é voluntário e o preço é negociado caso a caso, lá a demanda é criada por lei. Em São Paulo o obstáculo prático é a linha de base: se a vinhaça já vai para fertirrigação e não fica em lagoa anaeróbia, o metano evitado que se pode reivindicar é pequeno.",
+        "limitacoes": [
+          "Adicionalidade é difícil de provar em projeto que já teria retorno com a venda de energia.",
+          "O custo fixo de validação e verificação inviabiliza projeto de pequeno porte.",
+          "Sem registro nacional obrigatório, o mesmo projeto pode ser reivindicado em programas diferentes se ninguém cruzar as bases."
+        ]
+      },
+      "paramsRelevantes": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "verra_vcs",
+        "gold_standard",
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "cana.dest.sbce",
+      "kind": "destino",
+      "nome": "SBCE — mercado regulado",
+      "resumo": "Teto de emissão com cota negociável; agropecuária fora, indústria da usina dentro",
+      "anel": 4,
+      "tags": [
+        "regulatorio"
+      ],
+      "icone": "Milestone",
+      "texto": {
+        "descricao": "O Sistema Brasileiro de Comércio de Emissões foi criado pela Lei 15.042/2024 e monta um mercado regulado de cap and trade: o órgão gestor define o teto, distribui Cotas Brasileiras de Emissões e obriga o operador regulado a entregar ativo equivalente ao que emitiu. A obrigação é escalonada por porte, com relato acima de 10 mil tCO2e por ano e conciliação de ativos acima de 25 mil. A produção agropecuária primária ficou fora do teto, o que deixa o canavial de fora e a planta industrial da usina potencialmente dentro. Para o biogás, o caminho mais provável não é receber cota e sim gerar CRVE, o certificado de redução verificada que o regulado usa para cumprir parte da obrigação.",
+        "limitacoes": [
+          "A implantação é faseada e a regulamentação do órgão gestor ainda está em construção; a primeira conciliação real não deve ocorrer antes do fim da década.",
+          "A regra de conversão entre CRVE, crédito voluntário e CBIO ainda não está definida.",
+          "Não se sabe como a queima de biomassa da usina será tratada — emissão biogênica neutra ou regra própria."
+        ]
+      },
+      "paramsRelevantes": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "lei15042_2024"
+      ]
+    },
+    {
+      "id": "cana.dest.art6_paris",
+      "kind": "destino",
+      "nome": "Artigo 6 do Acordo de Paris",
+      "resumo": "Transferência internacional do crédito, com ajuste correspondente no inventário do país",
+      "anel": 4,
+      "tags": [
+        "regulatorio"
+      ],
+      "icone": "Merge",
+      "texto": {
+        "descricao": "É o canal pelo qual uma redução verificada no Brasil pode ser contabilizada por outro país na meta nacional dele, pelos mecanismos do Artigo 6.2, bilateral, e 6.4, centralizado na ONU. A diferença em relação ao mercado voluntário puro é o ajuste correspondente: quando o crédito é exportado com autorização, o Brasil soma aquela tonelada de volta ao próprio inventário. A autorização é do governo federal, e o projeto precisa ser elegível na metodologia do mecanismo e estar registrado. Para a cana, o interesse está em rotas com redução mensurável e barata por tonelada, como captura de metano e substituição de diesel na frota agrícola.",
+        "limitacoes": [
+          "A autorização de ajuste correspondente é discricionária e tem pouca prática no Brasil.",
+          "A articulação entre Artigo 6, SBCE e crédito voluntário nacional não está resolvida.",
+          "Metodologias do mecanismo 6.4 para biogás agroindustrial ainda vêm em transição das regras do antigo MDL."
+        ]
+      },
+      "paramsRelevantes": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "acordo_paris_art6",
+        "lei15042_2024"
+      ]
+    },
+    {
+      "id": "cana.dest.inventario_ghg",
+      "kind": "destino",
+      "nome": "Inventário de emissões",
+      "resumo": "Contabiliza as emissões da usina; é a porta de entrada para meta, crédito e cliente",
+      "anel": 4,
+      "tags": [
+        "regulatorio"
+      ],
+      "icone": "Boxes",
+      "texto": {
+        "descricao": "Antes de qualquer crédito existe a contabilidade. O inventário corporativo, pelo GHG Protocol ou pela ISO 14064, separa emissões diretas (escopo 1), de energia comprada (escopo 2) e da cadeia (escopo 3). A usina que quer vender açúcar a trading com meta climática, tomar crédito verde ou se preparar para o SBCE precisa de inventário auditado e recorrente. Na cana é no inventário que aparece o que a biodigestão resolve: metano de lagoa e de estocagem, diesel de frota agrícola e transporte de vinhaça. O CO2 da queima de bagaço e da fermentação é biogênico e é relatado à parte, fora do total de escopo 1.",
+        "limitacoes": [
+          "Escopo 3 agrícola com fornecedor terceiro é o item mais frágil do inventário de usina.",
+          "Inventário não é crédito: sem metodologia e verificação de projeto, a redução declarada não vira ativo negociável."
+        ]
+      },
+      "paramsRelevantes": [],
+      "fontes": [
+        "ghg_protocol_br",
+        "iso14064"
+      ]
+    },
+    {
+      "id": "cana.dest.anp_biometano",
+      "kind": "destino",
+      "nome": "Autorização ANP do biometano",
+      "resumo": "Sem especificação de qualidade e autorização da ANP, o gás não pode ser vendido",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "combustivel",
+        "energia"
+      ],
+      "icone": "TestTube",
+      "texto": {
+        "descricao": "A ANP autoriza a produção e especifica o biometano: teor mínimo de metano, limites de CO2, oxigênio, H2S, enxofre total, umidade e ponto de orvalho, na resolução que consolidou as especificações do gás de origem agrossilvopastoril, de aterro e de esgoto. Para acessar, o produtor pede autorização de produção, comprova a origem da matéria-prima, instala medição e amostragem e emite certificado de qualidade. Sem esse enquadramento o gás continua sendo biogás: pode queimar em caldeira ou motor dentro da unidade, mas não entra em rede nem em posto veicular. Vinhaça e torta geram biogás com H2S alto, então a dessulfurização costuma ser o item que decide se a especificação fecha.",
+        "limitacoes": [
+          "O limite de oxigênio é o que mais reprova lote: entrada de ar no biodigestor ou na dessulfurização biológica derruba a especificação.",
+          "A certificação exige laboratório acreditado, e há poucos no interior paulista.",
+          "O biometano de resíduo urbano e o de vinhaça compartilham a mesma especificação, mas não o mesmo perfil de contaminante."
+        ]
+      },
+      "paramsRelevantes": [
+        "rendimento_upgrading",
+        "fracao_ch4_biogas",
+        "preco_biometano"
+      ],
+      "fontes": [
+        "anp_res886",
+        "anp_res685"
+      ]
+    },
+    {
+      "id": "cana.dest.combustivel_futuro",
+      "kind": "destino",
+      "nome": "Lei do Combustível do Futuro",
+      "resumo": "Cria mandato de biometano e de SAF: oferta voluntária vira demanda obrigatória",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "combustivel",
+        "energia"
+      ],
+      "icone": "Fuel",
+      "texto": {
+        "descricao": "A Lei 14.993/2024 desenhou mandatos de médio prazo para combustíveis de baixo carbono: percentual obrigatório de biometano na oferta de gás natural, meta crescente de redução de emissão para o querosene de aviação e programa de diesel verde. Os percentuais não estão na lei; quem fixa é o CNPE, com prazos e revisões, e a ANP fiscaliza. Para a cana, o efeito é criar comprador cativo onde antes havia só contrato bilateral: o biometano de vinhaça e torta passa a disputar volume que a distribuidora precisa comprar. O mesmo texto abriu caminho ao etanol para querosene de aviação, o que liga a usina ao mercado de SAF.",
+        "limitacoes": [
+          "O mandato só vale depois de o CNPE fixar percentual e a ANP regulamentar; até lá é sinal de mercado, não contrato.",
+          "O gás canalizado em São Paulo é concessão estadual: o mandato federal ainda precisa atravessar a regulação da ARSESP para virar volume."
+        ]
+      },
+      "paramsRelevantes": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "lei14993_2024",
+        "cnpe_metas"
+      ]
+    },
+    {
+      "id": "cana.dest.injecao_rede_gas",
+      "kind": "destino",
+      "nome": "Injeção na rede de gás",
+      "resumo": "Comgás e demais distribuidoras compram o biometano que atende a especificação",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "energia",
+        "combustivel"
+      ],
+      "icone": "Cylinder",
+      "texto": {
+        "descricao": "Em São Paulo a distribuição de gás canalizado é concessão estadual — Comgás na maior parte do estado, além de Gás Brasiliano e GNSPS — sob regulação da ARSESP. Injetar biometano exige atender à especificação da ANP, ter ponto de entrega compatível com a pressão da rede, medição fiscal, odorização quando exigida e contrato com a distribuidora, que pode comprar o gás ou apenas movimentá-lo. Onde não há rede, o gás sai por gasoduto virtual em cilindros comprimidos, o que troca custo de conexão por custo de frete. A distância entre a usina e um ramal com capacidade é, na prática, o que decide o projeto.",
+        "limitacoes": [
+          "Boa parte das usinas paulistas está a dezenas de quilômetros do ramal de distribuição, e a extensão é custo do produtor.",
+          "A demanda da rede é sazonal; em período de baixa a distribuidora pode não absorver a produção contínua do biodigestor.",
+          "Contratos de compra de biometano são bilaterais e pouco padronizados, o que dificulta financiar o projeto pela receita."
+        ]
+      },
+      "paramsRelevantes": [
+        "preco_biometano",
+        "rendimento_upgrading"
+      ],
+      "fontes": [
+        "comgas2025",
+        "arsesp",
+        "anp_res886"
+      ]
+    },
+    {
+      "id": "cana.dest.mercado_livre_gas",
+      "kind": "destino",
+      "nome": "Mercado livre de gás",
+      "resumo": "Vender biometano direto ao consumidor livre, pagando só o transporte da rede",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "energia",
+        "combustivel"
+      ],
+      "icone": "Split",
+      "texto": {
+        "descricao": "Em vez de vender à distribuidora, o produtor pode vender direto a consumidor que se qualifique como livre e usar a rede mediante tarifa de movimentação. Os critérios de elegibilidade e a tarifa são definidos pela ARSESP, dentro do marco estadual do gás canalizado e da Lei do Gás federal. Isso interessa ao biometano porque o preço ao consumidor industrial é maior do que o preço de compra da distribuidora, e porque permite vender o gás junto com o atributo ambiental. Na prática, poucos consumidores atingem o volume mínimo e a negociação de acesso é caso a caso.",
+        "limitacoes": [
+          "Volume mínimo e prazo de migração excluem o consumidor médio, que seria o comprador natural do biometano local.",
+          "Tarifa de movimentação e regra de desequilíbrio podem consumir a diferença de preço que justificava sair da venda à distribuidora."
+        ]
+      },
+      "paramsRelevantes": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "arsesp",
+        "lei_gas_14134"
+      ]
+    },
+    {
+      "id": "cana.dest.leilao_energia",
+      "kind": "destino",
+      "nome": "Leilões regulados (ACR)",
+      "resumo": "Contrato longo com as distribuidoras, vencido por preço, para a bioeletricidade",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "energia"
+      ],
+      "icone": "Hammer",
+      "texto": {
+        "descricao": "No ambiente regulado a usina vende energia às distribuidoras por leilões promovidos pela ANEEL, com estudo da EPE, contratos de 15 a 20 anos e liquidação na CCEE. Para participar, o empreendimento precisa de outorga, cadastro e habilitação técnica na EPE, garantias e data de entrada definida. Foi assim que a bioeletricidade de bagaço cresceu na década de 2010; desde então os leilões de energia nova ficaram escassos e a expansão migrou para o mercado livre. Para uma planta de biogás o leilão dá previsibilidade de receita, mas obriga a competir em preço com fontes de custo marginal muito baixo.",
+        "limitacoes": [
+          "A sazonalidade da safra penaliza a fonte em produto que exige entrega firme o ano todo: o biogás de vinhaça só existe enquanto há destilação.",
+          "Não há leilão dedicado a biogás e biometano; a fonte disputa em condição igual à de fontes de investimento mais barato."
+        ]
+      },
+      "paramsRelevantes": [
+        "preco_eletricidade",
+        "eficiencia_eletrica"
+      ],
+      "fontes": [
+        "aneel_leiloes",
+        "epe_leiloes",
+        "ccee"
+      ]
+    },
+    {
+      "id": "cana.dest.acl",
+      "kind": "destino",
+      "nome": "Mercado livre de energia",
+      "resumo": "Venda bilateral da bioeletricidade a consumidor livre, com preço e prazo negociados",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "energia"
+      ],
+      "icone": "PlugZap",
+      "texto": {
+        "descricao": "No Ambiente de Contratação Livre o gerador negocia preço, prazo e volume direto com consumidor ou comercializadora, e a CCEE apenas liquida as diferenças. Desde 2024 qualquer consumidor atendido em alta tensão pode migrar, o que ampliou a demanda; a abertura para baixa tensão segue em discussão. A bioeletricidade da cana tem vantagem de sazonalidade, porque gera na estação seca, quando o reservatório está baixo e o preço sobe, e por isso costuma capturar prêmio no ACL. Geração de até 30 MW ainda pode ter desconto na tarifa de uso do sistema, mas o direito ao desconto foi restringido para novos empreendimentos pela Lei 14.120/2021.",
+        "limitacoes": [
+          "O prêmio de sazonalidade é volátil: em ano hidrológico bom o preço de curto prazo colapsa.",
+          "O fim do desconto de TUSD para empreendimento novo tirou parte da vantagem competitiva do biogás de pequeno porte.",
+          "Contratar energia sazonal exige lastro na entressafra, o que empurra o gerador a comprar energia de terceiros."
+        ]
+      },
+      "paramsRelevantes": [
+        "preco_eletricidade",
+        "eficiencia_eletrica"
+      ],
+      "fontes": [
+        "ccee",
+        "lei14120_2021",
+        "lei9427_art26",
+        "unica2024"
+      ]
+    },
+    {
+      "id": "cana.dest.irec",
+      "kind": "destino",
+      "nome": "I-REC e certificados verdes",
+      "resumo": "Separa o atributo renovável do MWh e o vende a quem quer zerar o escopo 2",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "energia"
+      ],
+      "icone": "Bolt",
+      "texto": {
+        "descricao": "O certificado de energia renovável é o atributo ambiental do megawatt-hora, destacado da energia física e vendido em separado. No Brasil o padrão I-REC é emitido por emissor local credenciado pela fundação internacional que mantém o registro, a partir de medição registrada e do cadastro da usina geradora. O comprador é a empresa que precisa declarar consumo renovável no escopo 2 do inventário. Para a usina de cana é receita marginal, porém de baixo custo de acesso: a mesma bioeletricidade já vendida no regulado ou no livre pode ter o certificado emitido e negociado à parte.",
+        "limitacoes": [
+          "O preço do certificado é fração pequena do preço da energia e não sustenta decisão de investimento.",
+          "Vender o atributo e ainda reivindicar a energia como renovável na própria pegada é dupla contagem.",
+          "O certificado atesta origem renovável, não redução de emissão; não substitui crédito de carbono."
+        ]
+      },
+      "paramsRelevantes": [
+        "preco_eletricidade"
+      ],
+      "fontes": [
+        "i_track_irec",
+        "instituto_totum"
+      ]
+    },
+    {
+      "id": "cana.dest.pegada_carbono_produto",
+      "kind": "destino",
+      "nome": "Pegada de carbono do produto",
+      "resumo": "Quanto de CO₂e carrega cada tonelada de açúcar e cada litro de etanol vendido",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "alimento",
+        "combustivel"
+      ],
+      "icone": "Microscope",
+      "texto": {
+        "descricao": "É a contabilidade de ciclo de vida do produto, e não da empresa: a ISO 14067 e o padrão de produto do GHG Protocol somam campo, transporte, indústria e distribuição, até o portão ou até o consumo. Quem calcula é a própria usina, com verificação de terceira parte quando o comprador exige. O comprador internacional é quem puxa: a diretiva europeia de renováveis exige redução mínima em relação ao fóssil para o etanol importado, e tradings de açúcar já pedem o número por lote. Biodigerir vinhaça e torta reduz a pegada por dois caminhos: substitui combustível fóssil na operação e evita emissão de metano em lagoa e em pilha.",
+        "limitacoes": [
+          "A alocação entre açúcar e etanol muda o resultado e não há convenção única: por energia, por massa ou por valor econômico.",
+          "A emissão de N2O do solo com vinhaça e com palha tem incerteza alta e domina o resultado agrícola.",
+          "A pegada declarada no RenovaBio não é diretamente comparável à da norma europeia; fronteiras e fatores diferem."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana",
+        "vinhaca_disponivel",
+        "preco_carbono"
+      ],
+      "fontes": [
+        "iso14067",
+        "red3_ue",
+        "renovacalc",
+        "ghg_protocol_br"
+      ]
+    },
+    {
+      "id": "cana.dest.certificacao_sustentabilidade",
+      "kind": "destino",
+      "nome": "Certificação socioambiental",
+      "resumo": "Bonsucro, ISCC e afins abrem mercado externo e cobram auditoria de campo e indústria",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "alimento",
+        "solo"
+      ],
+      "icone": "Leaf",
+      "texto": {
+        "descricao": "São esquemas privados de certificação da cadeia da cana: Bonsucro, específico do setor, e ISCC, reconhecido pela União Europeia para biocombustível. Auditam critérios ambientais, trabalhistas e de rastreabilidade e entregam também um número de emissão por tonelada de produto. Para entrar, a usina mapeia fornecedores, comprova regularidade fundiária e trabalhista, mantém registro de aplicação de insumos e passa por auditoria anual. Em São Paulo boa parte da moagem exportadora já está certificada, o que faz da certificação menos um diferencial e mais uma condição de acesso.",
+        "limitacoes": [
+          "O custo de auditoria recai sobre a usina mesmo quando a não conformidade está no fornecedor de cana.",
+          "Cada comprador aceita um esquema diferente, o que multiplica auditoria sobre o mesmo canavial."
+        ]
+      },
+      "paramsRelevantes": [],
+      "fontes": [
+        "bonsucro",
+        "iscc_eu",
+        "red3_ue"
+      ]
+    },
+    {
+      "id": "cana.dest.licenciamento_cetesb",
+      "kind": "destino",
+      "nome": "Licenciamento CETESB",
+      "resumo": "Sem LP, LI e LO da CETESB, a planta de biogás não opera nem acessa crédito",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "solo"
+      ],
+      "icone": "Filter",
+      "texto": {
+        "descricao": "Em São Paulo, o licenciamento ambiental de atividade potencialmente poluidora cabe à CETESB, em três etapas — licença prévia, de instalação e de operação — com renovação periódica. A planta de biogás anexa à usina entra como unidade de tratamento de resíduos e de geração, e o pedido exige caracterização dos resíduos, projeto de contenção, plano de emergência e, conforme o porte, estudo ambiental. A licença de operação é pré-requisito para a autorização da ANP, para o contrato de conexão e para praticamente qualquer verificação de crédito de carbono. É nessa etapa que a maior parte dos projetos perde tempo.",
+        "limitacoes": [
+          "Não há código de atividade próprio e maduro para biodigestão agroindustrial; o enquadramento varia entre agências regionais.",
+          "Ampliar planta existente pode disparar novo licenciamento da unidade inteira, o que desestimula o retrofit.",
+          "Flare, ruído e odor entram como itens de licença e exigem monitoramento contínuo."
+        ]
+      },
+      "paramsRelevantes": [],
+      "fontes": [
+        "cetesb_licenciamento",
+        "conama237",
+        "decreto_estadual_47400"
+      ]
+    },
+    {
+      "id": "cana.dest.norma_p4231",
+      "kind": "destino",
+      "nome": "Norma CETESB P4.231",
+      "resumo": "Define a dose de vinhaça por hectare pelo potássio do solo e obriga plano anual",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "fertilizante",
+        "solo"
+      ],
+      "icone": "Droplet",
+      "texto": {
+        "descricao": "A P4.231 é a norma técnica da CETESB para aplicação de vinhaça em solo agrícola. Fixa a dose máxima em função da capacidade de troca catiônica e do potássio já presente no solo, proíbe aplicação em área protegida e perto de poço, exige impermeabilização de tanque e canal e obriga a entrega anual do Plano de Aplicação de Vinhaça. Vale para a vinhaça bruta e para o digestato: biodigerir não desobriga nada, porque o potássio atravessa o reator inteiro. O efeito prático é que a área de fertirrigação disponível, e não o volume de vinhaça, é o que limita o sistema.",
+        "limitacoes": [
+          "A dose é calculada pelo potássio; nitrogênio e carga orgânica ficam em segundo plano no controle.",
+          "O raio econômico de transporte restringe a área de aplicação e concentra a carga perto da usina."
+        ]
+      },
+      "paramsRelevantes": [
+        "vinhaca_disponivel"
+      ],
+      "fontes": [
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "cana.dest.registro_fertilizante_mapa",
+      "kind": "destino",
+      "nome": "Registro de fertilizante (MAPA)",
+      "resumo": "Digestato e torta só podem ser vendidos como fertilizante se registrados no MAPA",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "fertilizante"
+      ],
+      "icone": "Package",
+      "texto": {
+        "descricao": "Vender torta, cinza ou digestato como fertilizante exige registro do estabelecimento e do produto no Ministério da Agricultura, sob a Lei 6.894/1980 e a instrução normativa que define garantias mínimas, limites de contaminante e regras de rotulagem. O produtor comprova teores de carbono orgânico, nitrogênio e umidade, limites de metais pesados e ausência de patógeno, e mantém laudo por lote. O uso dentro da própria propriedade dispensa registro, o que explica por que quase todo o digestato de usina volta ao canavial em vez de virar produto. Registrar é o que separa um passivo de um produto com mercado.",
+        "limitacoes": [
+          "Digestato líquido tem baixa concentração de nutriente por tonelada; o frete inviabiliza a venda além de poucas dezenas de quilômetros.",
+          "As classes de contaminante foram escritas para composto e lodo; digestato de vinhaça não encaixa bem em nenhuma delas."
+        ]
+      },
+      "paramsRelevantes": [
+        "torta_gerada",
+        "vinhaca_disponivel"
+      ],
+      "fontes": [
+        "lei6894_1980",
+        "mapa_in61_2020"
+      ]
+    },
+    {
+      "id": "cana.dest.mercado_fertilizantes",
+      "kind": "destino",
+      "nome": "Mercado de fertilizantes",
+      "resumo": "O Brasil importa quase todo o potássio que usa; vinhaça e cinza substituem parte",
+      "anel": 4,
+      "tags": [
+        "fertilizante",
+        "solo",
+        "regulatorio"
+      ],
+      "icone": "Warehouse",
+      "texto": {
+        "descricao": "O Brasil importa a maior parte do fertilizante que consome, e no caso do potássio a dependência externa passa de 95%, concentrada em poucos países fornecedores. O Plano Nacional de Fertilizantes trata isso como questão de segurança de abastecimento e mira reduzir a dependência até 2050. A cana já é o setor que mais substitui adubo mineral por resíduo próprio: a vinhaça devolve potássio ao canavial por fertirrigação, a torta devolve fósforo, cálcio e matéria orgânica, e a cinza da caldeira devolve potássio e silício. Biodigerir não consome esses nutrientes; o digestato sai com o mesmo potássio e com nitrogênio mais disponível para a planta.",
+        "limitacoes": [
+          "A substituição é local: o valor só se realiza dentro do raio de transporte e raramente vira produto comercializado.",
+          "O preço de referência do fertilizante oscila com câmbio e geopolítica, o que torna instável a receita evitada declarada no projeto."
+        ]
+      },
+      "paramsRelevantes": [
+        "torta_gerada",
+        "vinhaca_disponivel"
+      ],
+      "fontes": [
+        "plano_nacional_fertilizantes",
+        "cetesb_p4231",
+        "atlas2020_p66"
+      ]
+    },
+    {
+      "id": "cana.dest.financiamento_climatico",
+      "kind": "destino",
+      "nome": "Financiamento climático",
+      "resumo": "CRA verde, debênture incentivada e crédito do BNDES pagam o CAPEX do biodigestor",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "energia"
+      ],
+      "icone": "Layers",
+      "texto": {
+        "descricao": "A rota de biogás é intensiva em capital e de receita difusa, então o instrumento financeiro decide o projeto tanto quanto a tecnologia. As fontes usuais são debênture incentivada de infraestrutura, CRA com rótulo verde, linhas do BNDES para bioenergia e crédito rural com condicionante climática. Para acessar, o emissor precisa de projeto enquadrado num referencial de finanças sustentáveis, opinião de segunda parte e relato periódico do uso dos recursos e do resultado ambiental. A taxonomia sustentável brasileira, em construção, deve padronizar esse enquadramento e reduzir o custo de comprovação.",
+        "limitacoes": [
+          "Receita de CBIO e de crédito de carbono é volátil e costuma ser descontada ou ignorada na modelagem do financiador.",
+          "Projeto pequeno não paga o custo fixo de emissão de título e acaba dependendo de crédito bancário mais caro."
+        ]
+      },
+      "paramsRelevantes": [
+        "preco_carbono",
+        "preco_biometano",
+        "preco_eletricidade"
+      ],
+      "fontes": [
+        "bndes",
+        "taxonomia_br",
+        "lei12431"
+      ]
+    },
+    {
+      "id": "cana.dest.beccs_ccs",
+      "kind": "destino",
+      "nome": "CCS e crédito de remoção",
+      "resumo": "O CO₂ da fermentação é quase puro; estocá-lo gera remoção, não emissão evitada",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "quimica",
+        "energia"
+      ],
+      "icone": "Mountain",
+      "texto": {
+        "descricao": "A corrente de CO2 da fermentação alcoólica sai com pureza alta, o que a torna a fonte mais barata de captura do setor. Capturar e estocar em reservatório geológico configura bioenergia com captura e armazenamento e é contabilizado como remoção de carbono, não como emissão evitada. O marco legal federal de captura e estocagem geológica foi aprovado em 2024 e transfere à ANP e aos órgãos ambientais a regulamentação de autorização, monitoramento e responsabilidade de longo prazo. O comprador é o mercado de remoção durável, que paga múltiplos do preço de um crédito de redução; o que falta em São Paulo não é CO2, é geologia próxima e infraestrutura de transporte.",
+        "limitacoes": [
+          "Os reservatórios estudados ficam distantes das usinas paulistas; o custo é de transporte, não de captura.",
+          "A regulamentação de monitoramento e de passivo de longo prazo ainda não foi editada.",
+          "Sem estocagem, o CO2 vira uso industrial ou alimentício: é receita, mas não é remoção."
+        ]
+      },
+      "paramsRelevantes": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "marco_ccs_2024",
+        "anp_ccs",
+        "atlas2020"
+      ]
+    },
+    {
+      "id": "cana.dest.tributacao_biometano",
+      "kind": "destino",
+      "nome": "Tributação do biometano",
+      "resumo": "ICMS estadual e regime de PIS/Cofins mudam o preço final mais que a tecnologia",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "combustivel",
+        "energia"
+      ],
+      "icone": "Scissors",
+      "texto": {
+        "descricao": "O tratamento tributário define boa parte da competitividade do biometano diante do gás natural. Existe convênio no CONFAZ autorizando os estados a desonerar operações internas com biogás e biometano, mas a adesão é facultativa e o regime muda de estado para estado; no âmbito federal, biocombustíveis têm regime próprio de PIS e Cofins. A reforma tributária em implantação substitui esses tributos por IBS e CBS, com previsão de regime diferenciado e de tributação seletiva sobre combustível fóssil, o que tende a favorecer o biometano. Para o produtor, a pergunta prática é se a venda é interna, interestadual ou a consumidor final, porque a carga muda em cada caso.",
+        "limitacoes": [
+          "A desoneração estadual precisa ser conferida no regulamento vigente de São Paulo antes de entrar em qualquer modelo financeiro.",
+          "A transição da reforma tributária dura anos e o regime aplicável a biocombustível ainda está sendo regulamentado."
+        ]
+      },
+      "paramsRelevantes": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "confaz_conv112",
+        "reforma_tributaria_ec132"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "prod.etanol_anidro__dest.renovabio_neea",
+      "from": "cana.prod.etanol_anidro",
+      "to": "cana.dest.renovabio_neea",
+      "kind": "regulatorio",
+      "estado": "real",
+      "rotulo": "gCO₂e/MJ",
+      "explicacao": "Cada metro cúbico de anidro vendido carrega a nota de eficiência da usina, que é o que autoriza a emissão de CBIO.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "renovabio_lei13576",
+        "renovacalc"
+      ]
+    },
+    {
+      "id": "prod.etanol_hidratado__dest.renovabio_neea",
+      "from": "cana.prod.etanol_hidratado",
+      "to": "cana.dest.renovabio_neea",
+      "kind": "regulatorio",
+      "estado": "real",
+      "rotulo": "gCO₂e/MJ",
+      "explicacao": "O hidratado vendido na bomba entra na mesma certificação, com nota calculada pela RenovaCalc da unidade.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "renovabio_lei13576",
+        "renovacalc"
+      ]
+    },
+    {
+      "id": "res.vinhaca__dest.renovabio_neea",
+      "from": "cana.res.vinhaca",
+      "to": "cana.dest.renovabio_neea",
+      "kind": "regulatorio",
+      "estado": "real",
+      "rotulo": "melhora a nota",
+      "explicacao": "O biogás da vinhaça substitui diesel e gás natural na operação da usina e derruba a intensidade de carbono declarada.",
+      "params": [
+        "vinhaca_disponivel",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "renovacalc",
+        "atlas2020_p67"
+      ]
+    },
+    {
+      "id": "res.torta__dest.renovabio_neea",
+      "from": "cana.res.torta",
+      "to": "cana.dest.renovabio_neea",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "A codigestão da torta soma metano e reduz energia fóssil nas poucas usinas paulistas que já operam assim.",
+      "params": [
+        "torta_disponivel",
+        "bmp_torta"
+      ],
+      "fontes": [
+        "renovacalc",
+        "atlas2020_p66"
+      ]
+    },
+    {
+      "id": "dest.renovabio_neea__dest.cbio",
+      "from": "cana.dest.renovabio_neea",
+      "to": "cana.dest.cbio",
+      "kind": "regulatorio",
+      "estado": "real",
+      "rotulo": "1 tCO₂e",
+      "explicacao": "A nota multiplicada pelo volume comercializado define quantos CBIO a usina pode emitir e escriturar.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "renovabio_lei13576",
+        "b3_cbio"
+      ]
+    },
+    {
+      "id": "dest.anp_biometano__dest.renovabio_neea",
+      "from": "cana.dest.anp_biometano",
+      "to": "cana.dest.renovabio_neea",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "O biometano especificado e autorizado pode ser certificado como biocombustível próprio, com nota e CBIO independentes do etanol.",
+      "params": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "anp_res758",
+        "anp_res886"
+      ]
+    },
+    {
+      "id": "dest.cbio__dest.financiamento_climatico",
+      "from": "cana.dest.cbio",
+      "to": "cana.dest.financiamento_climatico",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "A receita futura de CBIO pode compor a garantia de um título verde, embora o financiador costume descontá-la pela volatilidade.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "bndes",
+        "b3_cbio"
+      ]
+    },
+    {
+      "id": "dest.sbce__dest.cbio",
+      "from": "cana.dest.sbce",
+      "to": "cana.dest.cbio",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "A lei do SBCE manda compatibilizar o novo mercado com os instrumentos existentes, e a regra de convivência com o CBIO ainda não foi escrita.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "lei15042_2024",
+        "renovabio_lei13576"
+      ]
+    },
+    {
+      "id": "cultura__dest.inventario_ghg",
+      "from": "cana.cultura",
+      "to": "cana.dest.inventario_ghg",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "Campo, transporte e indústria entram no inventário corporativo da usina, que é a base de qualquer declaração climática posterior.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "ghg_protocol_br",
+        "iso14064"
+      ]
+    },
+    {
+      "id": "dest.inventario_ghg__dest.sbce",
+      "from": "cana.dest.inventario_ghg",
+      "to": "cana.dest.sbce",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "rotulo": "acima de 10 kt CO₂e",
+      "obrigatorio": true,
+      "explicacao": "Instalação que ultrapassa o limiar de emissão passa a relatar e, acima do segundo limiar, a conciliar ativos no mercado regulado.",
+      "params": [],
+      "baseLegal": "Lei 15.042/2024",
+      "fontes": [
+        "lei15042_2024"
+      ]
+    },
+    {
+      "id": "dest.inventario_ghg__dest.pegada_carbono_produto",
+      "from": "cana.dest.inventario_ghg",
+      "to": "cana.dest.pegada_carbono_produto",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "Os mesmos dados de escopo 1, 2 e 3 são realocados por produto para gerar a pegada por tonelada de açúcar ou por litro de etanol.",
+      "params": [],
+      "fontes": [
+        "ghg_protocol_br",
+        "iso14067"
+      ]
+    },
+    {
+      "id": "dest.mercado_voluntario_carbono__dest.sbce",
+      "from": "cana.dest.mercado_voluntario_carbono",
+      "to": "cana.dest.sbce",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "rotulo": "CRVE",
+      "explicacao": "Um projeto verificado pode ser reconhecido como certificado de redução e usado pelo regulado para cumprir parte da obrigação.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "lei15042_2024",
+        "verra_vcs"
+      ]
+    },
+    {
+      "id": "dest.mercado_voluntario_carbono__dest.art6_paris",
+      "from": "cana.dest.mercado_voluntario_carbono",
+      "to": "cana.dest.art6_paris",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Exportar o crédito para a meta de outro país exige autorização federal e ajuste correspondente no inventário brasileiro.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "acordo_paris_art6"
+      ]
+    },
+    {
+      "id": "res.vinhaca__dest.mercado_voluntario_carbono",
+      "from": "cana.res.vinhaca",
+      "to": "cana.dest.mercado_voluntario_carbono",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "O metano que deixaria de escapar do manejo da vinhaça pode virar crédito, se a linha de base sustentar a reivindicação.",
+      "params": [
+        "vinhaca_disponivel",
+        "preco_carbono"
+      ],
+      "fontes": [
+        "verra_vcs",
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "res.palha__dest.mercado_voluntario_carbono",
+      "from": "cana.res.palha",
+      "to": "cana.dest.mercado_voluntario_carbono",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "A palha que fica no solo estoca carbono, mas a permanência é difícil de verificar e o crédito de solo ainda é raro em cana.",
+      "params": [
+        "palha_recolhivel",
+        "preco_carbono"
+      ],
+      "fontes": [
+        "verra_vcs",
+        "carvalho2017"
+      ]
+    },
+    {
+      "id": "copr.co2__dest.beccs_ccs",
+      "from": "cana.copr.co2",
+      "to": "cana.dest.beccs_ccs",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "O CO₂ biogênico da fermentação, se injetado em reservatório geológico, gera crédito de remoção durável e não de emissão evitada.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "marco_ccs_2024",
+        "anp_ccs"
+      ]
+    },
+    {
+      "id": "dest.beccs_ccs__dest.mercado_voluntario_carbono",
+      "from": "cana.dest.beccs_ccs",
+      "to": "cana.dest.mercado_voluntario_carbono",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Remoção durável é vendida hoje no mercado voluntário, a preço muito acima do crédito de redução.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "verra_vcs",
+        "gold_standard"
+      ]
+    },
+    {
+      "id": "dest.licenciamento_cetesb__dest.anp_biometano",
+      "from": "cana.dest.licenciamento_cetesb",
+      "to": "cana.dest.anp_biometano",
+      "kind": "regulatorio",
+      "estado": "real",
+      "rotulo": "LO exigida",
+      "obrigatorio": true,
+      "explicacao": "A ANP só autoriza a produção de biometano com a licença de operação estadual em vigor.",
+      "params": [],
+      "baseLegal": "CONAMA 237/1997",
+      "fontes": [
+        "cetesb_licenciamento",
+        "anp_res886"
+      ]
+    },
+    {
+      "id": "dest.licenciamento_cetesb__dest.mercado_voluntario_carbono",
+      "from": "cana.dest.licenciamento_cetesb",
+      "to": "cana.dest.mercado_voluntario_carbono",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "Regularidade ambiental é condição de elegibilidade nos padrões de crédito: sem licença, a validação não passa.",
+      "params": [],
+      "fontes": [
+        "verra_vcs",
+        "cetesb_licenciamento"
+      ]
+    },
+    {
+      "id": "res.vinhaca__dest.licenciamento_cetesb",
+      "from": "cana.res.vinhaca",
+      "to": "cana.dest.licenciamento_cetesb",
+      "kind": "regulatorio",
+      "estado": "real",
+      "obrigatorio": true,
+      "explicacao": "Biodigerir e armazenar vinhaça é atividade licenciável, com exigência de contenção, monitoramento e plano de emergência.",
+      "params": [
+        "vinhaca_disponivel"
+      ],
+      "baseLegal": "Decreto Estadual 47.400/2002",
+      "fontes": [
+        "cetesb_licenciamento"
+      ]
+    },
+    {
+      "id": "res.vinhaca__dest.norma_p4231",
+      "from": "cana.res.vinhaca",
+      "to": "cana.dest.norma_p4231",
+      "kind": "regulatorio",
+      "estado": "real",
+      "rotulo": "obrigatório",
+      "obrigatorio": true,
+      "explicacao": "Toda aplicação de vinhaça ou de digestato em solo agrícola obedece à dose e ao plano anual definidos pela norma.",
+      "params": [
+        "vinhaca_disponivel"
+      ],
+      "baseLegal": "CETESB P4.231",
+      "fontes": [
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "dest.norma_p4231__dest.mercado_fertilizantes",
+      "from": "cana.dest.norma_p4231",
+      "to": "cana.dest.mercado_fertilizantes",
+      "kind": "valor",
+      "estado": "real",
+      "rotulo": "K devolvido",
+      "explicacao": "O potássio devolvido pela fertirrigação substitui cloreto de potássio importado e é a maior economia de insumo da usina.",
+      "params": [
+        "vinhaca_disponivel"
+      ],
+      "fontes": [
+        "plano_nacional_fertilizantes",
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "res.torta__dest.registro_fertilizante_mapa",
+      "from": "cana.res.torta",
+      "to": "cana.dest.registro_fertilizante_mapa",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Torta e digestato vendidos fora da propriedade viram produto regulado e precisam de registro com garantias declaradas.",
+      "params": [
+        "torta_gerada",
+        "torta_disponivel"
+      ],
+      "baseLegal": "Lei 6.894/1980",
+      "fontes": [
+        "lei6894_1980",
+        "mapa_in61_2020"
+      ]
+    },
+    {
+      "id": "dest.registro_fertilizante_mapa__dest.mercado_fertilizantes",
+      "from": "cana.dest.registro_fertilizante_mapa",
+      "to": "cana.dest.mercado_fertilizantes",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Com registro, o resíduo deixa de ser rejeito interno e passa a ter preço de fertilizante organomineral.",
+      "params": [
+        "torta_gerada"
+      ],
+      "fontes": [
+        "mapa_in61_2020"
+      ]
+    },
+    {
+      "id": "copr.cinzas__dest.mercado_fertilizantes",
+      "from": "cana.copr.cinzas",
+      "to": "cana.dest.mercado_fertilizantes",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "A cinza da caldeira volta ao canavial carregando potássio e silício, e é contabilizada como adubo evitado.",
+      "params": [],
+      "fontes": [
+        "atlas2020",
+        "plano_nacional_fertilizantes"
+      ]
+    },
+    {
+      "id": "dest.anp_biometano__dest.injecao_rede_gas",
+      "from": "cana.dest.anp_biometano",
+      "to": "cana.dest.injecao_rede_gas",
+      "kind": "regulatorio",
+      "estado": "real",
+      "rotulo": "especificação",
+      "obrigatorio": true,
+      "explicacao": "Só entra na malha o gás que atende à especificação da ANP e ao requisito técnico da distribuidora.",
+      "params": [
+        "rendimento_upgrading",
+        "fracao_ch4_biogas"
+      ],
+      "fontes": [
+        "anp_res886",
+        "arsesp"
+      ]
+    },
+    {
+      "id": "dest.anp_biometano__dest.combustivel_futuro",
+      "from": "cana.dest.anp_biometano",
+      "to": "cana.dest.combustivel_futuro",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Só o biometano especificado conta para o mandato que o CNPE vai fixar sobre a oferta de gás natural.",
+      "params": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "lei14993_2024",
+        "anp_res886"
+      ]
+    },
+    {
+      "id": "dest.combustivel_futuro__dest.injecao_rede_gas",
+      "from": "cana.dest.combustivel_futuro",
+      "to": "cana.dest.injecao_rede_gas",
+      "kind": "valor",
+      "estado": "potencial",
+      "rotulo": "demanda cativa",
+      "explicacao": "O mandato converte oferta voluntária em compra obrigatória pela distribuidora e reduz o risco comercial do projeto.",
+      "params": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "lei14993_2024"
+      ]
+    },
+    {
+      "id": "prod.etanol_anidro__dest.combustivel_futuro",
+      "from": "cana.prod.etanol_anidro",
+      "to": "cana.dest.combustivel_futuro",
+      "kind": "valor",
+      "estado": "potencial",
+      "rotulo": "SAF",
+      "explicacao": "A meta de redução de emissão da aviação abre demanda para etanol convertido em querosene, com prazo definido por lei.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "lei14993_2024"
+      ]
+    },
+    {
+      "id": "dest.injecao_rede_gas__dest.mercado_livre_gas",
+      "from": "cana.dest.injecao_rede_gas",
+      "to": "cana.dest.mercado_livre_gas",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Em vez de vender à concessionária, o produtor pode usar a rede como transporte e vender direto ao consumidor livre.",
+      "params": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "arsesp",
+        "lei_gas_14134"
+      ]
+    },
+    {
+      "id": "dest.injecao_rede_gas__dest.tributacao_biometano",
+      "from": "cana.dest.injecao_rede_gas",
+      "to": "cana.dest.tributacao_biometano",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "O preço líquido do biometano depende do ICMS estadual e do regime federal de PIS e Cofins aplicável à operação.",
+      "params": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "confaz_conv112",
+        "reforma_tributaria_ec132"
+      ]
+    },
+    {
+      "id": "res.bagaco__dest.acl",
+      "from": "cana.res.bagaco",
+      "to": "cana.dest.acl",
+      "kind": "valor",
+      "estado": "real",
+      "rotulo": "bioeletricidade",
+      "explicacao": "O excedente da cogeração a bagaço é vendido em contrato bilateral, com prêmio na estação seca.",
+      "params": [
+        "preco_eletricidade",
+        "eficiencia_eletrica"
+      ],
+      "fontes": [
+        "unica2024",
+        "ccee"
+      ]
+    },
+    {
+      "id": "res.bagaco__dest.leilao_energia",
+      "from": "cana.res.bagaco",
+      "to": "cana.dest.leilao_energia",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "Foi pelo leilão regulado que a bioeletricidade de bagaço contratou a maior parte da capacidade instalada em São Paulo.",
+      "params": [
+        "preco_eletricidade"
+      ],
+      "fontes": [
+        "aneel_leiloes",
+        "unica2024"
+      ]
+    },
+    {
+      "id": "res.bagaco__dest.irec",
+      "from": "cana.res.bagaco",
+      "to": "cana.dest.irec",
+      "kind": "regulatorio",
+      "estado": "real",
+      "rotulo": "1 MWh",
+      "explicacao": "O atributo renovável do megawatt-hora gerado com bagaço é destacado e vendido como certificado, à parte da energia.",
+      "params": [
+        "preco_eletricidade"
+      ],
+      "fontes": [
+        "i_track_irec",
+        "instituto_totum"
+      ]
+    },
+    {
+      "id": "res.palha__dest.acl",
+      "from": "cana.res.palha",
+      "to": "cana.dest.acl",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Queimar palha recolhida junto com o bagaço amplia o excedente exportável, sobretudo na entressafra.",
+      "params": [
+        "palha_recolhivel",
+        "preco_eletricidade"
+      ],
+      "fontes": [
+        "atlas2020_p65",
+        "unica2024"
+      ]
+    },
+    {
+      "id": "dest.acl__dest.irec",
+      "from": "cana.dest.acl",
+      "to": "cana.dest.irec",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "A mesma energia contratada no mercado livre pode ter o certificado emitido em separado, desde que o atributo não seja reivindicado duas vezes.",
+      "params": [
+        "preco_eletricidade"
+      ],
+      "fontes": [
+        "i_track_irec",
+        "ccee"
+      ]
+    },
+    {
+      "id": "prod.acucar_vhp__dest.pegada_carbono_produto",
+      "from": "cana.prod.acucar_vhp",
+      "to": "cana.dest.pegada_carbono_produto",
+      "kind": "regulatorio",
+      "estado": "real",
+      "rotulo": "kgCO₂e/t",
+      "explicacao": "O comprador internacional já pede a pegada por lote de açúcar bruto, calculada por ciclo de vida.",
+      "params": [],
+      "fontes": [
+        "iso14067",
+        "bonsucro"
+      ]
+    },
+    {
+      "id": "prod.etanol_anidro__dest.pegada_carbono_produto",
+      "from": "cana.prod.etanol_anidro",
+      "to": "cana.dest.pegada_carbono_produto",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "Exportar etanol para mercados com meta de baixo carbono exige comprovar redução mínima frente ao combustível fóssil.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "red3_ue",
+        "iso14067"
+      ]
+    },
+    {
+      "id": "dest.pegada_carbono_produto__dest.certificacao_sustentabilidade",
+      "from": "cana.dest.pegada_carbono_produto",
+      "to": "cana.dest.certificacao_sustentabilidade",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "Os esquemas privados auditam o cálculo de pegada e o transformam em declaração aceita pelo comprador externo.",
+      "params": [],
+      "fontes": [
+        "bonsucro",
+        "iscc_eu"
+      ]
+    },
+    {
+      "id": "prod.acucar_vhp__dest.certificacao_sustentabilidade",
+      "from": "cana.prod.acucar_vhp",
+      "to": "cana.dest.certificacao_sustentabilidade",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "Açúcar certificado acessa comprador que exige rastreabilidade socioambiental, hoje mais condição de acesso do que prêmio.",
+      "params": [],
+      "fontes": [
+        "bonsucro"
+      ]
+    },
+    {
+      "id": "cultura__dest.financiamento_climatico",
+      "from": "cana.cultura",
+      "to": "cana.dest.financiamento_climatico",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "O CAPEX das rotas de biogás depende de crédito de longo prazo com rótulo climático, porque a receita é difusa e o retorno é lento.",
+      "params": [
+        "preco_biometano",
+        "preco_eletricidade"
+      ],
+      "fontes": [
+        "bndes",
+        "taxonomia_br"
+      ]
+    }
+  ],
+  "notas": "22 nós de anel 4, todos kind \"destino\" e sem campo rota (não são tecnologia, logo não têm TRL nem statusSP). Nenhum marcado como inicial. Nenhum stream, porque nenhum deles é um dos quatro resíduos calculados.\n\nCobertura da lista obrigatória: RenovaBio dividido em dois nós (a certificação/NEEA e o CBIO negociável), mercado voluntário, SBCE, Artigo 6 do Acordo de Paris, inventário corporativo de GHG, autorização e especificação ANP do biometano, Lei do Combustível do Futuro (mandato de biometano e SAF), leilões do ACR, mercado livre de energia, I-REC, injeção na rede de gás com Comgás/ARSESP, mercado livre de gás, pegada de carbono do produto, certificação socioambiental (Bonsucro/ISCC), licenciamento CETESB, norma P4.231, registro de fertilizante no MAPA, mercado de fertilizantes e potássio, financiamento climático, CCS/remoção e tributação do biometano.\n\nArestas: 41. Todas de kind \"regulatorio\" (permissão, crédito, certificado — sem massa) ou \"valor\" (fluxo de receita). Nenhuma carrega massa, logo nenhuma tem fracaoDoPai. As que entram nos nós regulatórios vindas da espinha usam apenas os ids canônicos previstos (cana.cultura, cana.res.bagaco, cana.res.palha, cana.res.torta, cana.res.vinhaca, cana.copr.cinzas, cana.copr.co2, cana.prod.etanol_anidro, cana.prod.etanol_hidratado, cana.prod.acucar_vhp); nenhum nó da espinha foi recriado.\n\nCautelas de precisão que ficaram registradas no próprio conteúdo, e não apenas aqui:\n- O efeito da biodigestão da vinhaça sobre a nota do RenovaBio foi marcado como \"real\" porque já ocorre em unidades paulistas certificadas, mas o texto deixa claro que o ganho depende do uso do biogás na unidade e que não há crédito automático por captura de metano.\n- A desoneração estadual de ICMS sobre biogás e biometano está descrita como autorização de convênio CONFAZ com adesão facultativa, e o nó traz limitação explícita mandando conferir o regulamento vigente de São Paulo antes de usar em modelo financeiro.\n- Os limiares do SBCE (10 mil e 25 mil tCO₂e/ano) e a exclusão da agropecuária primária vêm da Lei 15.042/2024; a fase de conciliação real está declarada como projeção, não como regra vigente.\n- Não foram citados nomes de plantas nem capacidades instaladas, porque nós de kind \"destino\" não têm o campo rota.exemplos e porque valores de capacidade por unidade merecem verificação documental antes de entrar no site.\n\nChaves de fonte novas introduzidas (precisam ser resolvidas no registro de fontes do projeto, que ainda não existe em src/): renovabio_lei13576, decreto9888, anp_res758, anp_res685, anp_res886, anp_metas_cbio, anp_ccs, renovacalc, b3_cbio, lei15042_2024, lei14993_2024, cnpe_metas, acordo_paris_art6, ghg_protocol_br, iso14064, iso14067, verra_vcs, gold_standard, i_track_irec, instituto_totum, red3_ue, bonsucro, iscc_eu, aneel_leiloes, epe_leiloes, ccee, lei14120_2021, lei9427_art26, lei_gas_14134, arsesp, cetesb_licenciamento, conama237, decreto_estadual_47400, lei6894_1980, mapa_in61_2020, plano_nacional_fertilizantes, bndes, taxonomia_br, lei12431, marco_ccs_2024, confaz_conv112, reforma_tributaria_ec132. As chaves já usadas em src/model/params.ts foram reaproveitadas sem alteração (atlas2020, atlas2020_p65, atlas2020_p66, atlas2020_p67, unica2024, cetesb_p4231, comgas2025, carvalho2017)."
+}

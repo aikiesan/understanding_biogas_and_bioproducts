@@ -1,0 +1,1100 @@
+[
+  {
+    "id": "cana.rota.fertirrigacao_vinhaca",
+    "kind": "rota",
+    "nome": "Fertirrigação com vinhaça",
+    "resumo": "Cada m³ de vinhaça devolve cerca de 2 kg de K₂O ao canavial",
+    "anel": 3,
+    "tags": ["fertilizante", "solo", "regulatorio"],
+    "icone": "Droplets",
+    "texto": {
+      "descricao": "A vinhaça sai da destilação quente e ácida, na razão de 10 a 15 litros por litro de etanol. Não é efluente a descartar: volta ao canavial como fertilizante, por canal, caminhão-tanque, aspersão ou carretel. É a maior operação de reciclagem de nutrientes da agricultura paulista. O que ela carrega, acima de tudo, é potássio; junto vêm matéria orgânica, cálcio, enxofre e água.",
+      "comoFunciona": "A dose é calculada pelo potássio: mede-se o K da vinhaça e o K já presente no solo, e aplica-se apenas o que a soqueira vai extrair. Nitrogênio e fósforo vêm junto, em quantidade menor, e a carga orgânica alimenta a microbiota do solo.",
+      "limitacoes": [
+        "O frete de água limita o raio econômico a 20 ou 30 km da usina.",
+        "Dose acima da extração de K saliniza o solo e empurra nitrato para o lençol.",
+        "A carga orgânica não digerida vira metano e N₂O no próprio canavial."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "operando",
+      "notaStatus": "Prática universal em São Paulo desde a proibição do lançamento em corpo d'água: toda a vinhaça produzida é aplicada em solo agrícola, sob plano protocolado na CETESB."
+    },
+    "paramsRelevantes": ["etanol_por_cana", "vinhaca_disponivel", "cana_moida_sp"],
+    "fontes": ["cetesb_p4231", "atlas2020_p67", "unica2024"]
+  },
+  {
+    "id": "cana.rota.fertirrigacao_digestato",
+    "kind": "rota",
+    "nome": "Fertirrigação com digestato",
+    "resumo": "Digerir não gasta o adubo: K, N e P seguem no digestato e voltam ao campo",
+    "anel": 3,
+    "tags": ["fertilizante", "solo", "energia", "regulatorio"],
+    "icone": "Recycle",
+    "texto": {
+      "descricao": "Este é o ponto que o atlas existe para explicar. Biodigerir a vinhaça e fertirrigar não são caminhos concorrentes: são etapas em sequência. O biodigestor consome carbono orgânico, que sai como metano; os minerais não são consumidos por nada e permanecem no líquido. O digestato deixa o reator com praticamente todo o potássio, todo o fósforo e todo o nitrogênio que entraram, e segue para o mesmo canavial, sob o mesmo plano de aplicação.",
+      "comoFunciona": "As arqueias metanogênicas quebram moléculas de carbono e liberam CH₄ e CO₂. Potássio, cálcio e fósforo são elementos minerais: não têm rota bioquímica de saída do líquido. O nitrogênio orgânico é mineralizado a amoniacal, forma que a planta absorve direto.",
+      "limitacoes": [
+        "O N amoniacal volatiliza como amônia se o digestato for aplicado em superfície, em dia quente, sem incorporação.",
+        "A área e o plano de aplicação continuam os mesmos: digerir não reduz a demanda de terra.",
+        "Em São Paulo, poucas usinas têm biodigestor de vinhaça instalado."
+      ]
+    },
+    "rota": {
+      "trl": 8,
+      "statusSP": "operando",
+      "notaStatus": "Onde há biodigestor de vinhaça em São Paulo, a fertirrigação já é feita com o digestato; são poucas unidades diante de um parque de mais de 150 usinas.",
+      "exemplos": [
+        { "nome": "Raízen Bonfim", "municipio": "Guariba" },
+        { "nome": "Cocal", "municipio": "Narandiba" }
+      ]
+    },
+    "paramsRelevantes": ["etanol_por_cana", "vinhaca_disponivel", "vinhaca_biogas", "ch4_vinhaca"],
+    "fontes": ["cetesb_p4231", "atlas2020_p67", "unica2024"]
+  },
+  {
+    "id": "cana.rota.concentracao_vinhaca",
+    "kind": "rota",
+    "nome": "Concentração de vinhaça",
+    "resumo": "Evapora a água e reduz o volume a um quarto, sem tirar nada do potássio",
+    "anel": 3,
+    "tags": ["fertilizante", "solo", "energia"],
+    "icone": "Thermometer",
+    "texto": {
+      "descricao": "A vinhaça é quase toda água. Transportá-la é transportar água. Evaporadores de múltiplo efeito, movidos a vapor de escape da própria usina, retiram a maior parte dessa água e deixam um concentrado com 20 a 25% de sólidos. O potássio continua todo lá, agora num volume três a quatro vezes menor, capaz de pagar frete até áreas distantes do canal.",
+      "comoFunciona": "O vapor de baixa pressão aquece a vinhaça em série de efeitos: a água evapora em cada estágio e o vapor gerado aquece o estágio seguinte. Saem um xarope escuro e um condensado limpo, que volta ao processo como água de reuso.",
+      "limitacoes": [
+        "O vapor usado na evaporação é vapor que deixa de gerar eletricidade.",
+        "A vinhaça incrusta e corrói os trocadores; a manutenção é cara.",
+        "Só fecha a conta quando a área a fertilizar está longe o bastante para o frete evitado pagar a energia gasta."
+      ]
+    },
+    "rota": {
+      "trl": 8,
+      "statusSP": "em_implantacao",
+      "notaStatus": "Poucas unidades paulistas operam evaporadores de vinhaça, quase sempre para alcançar áreas fora do raio de canal."
+    },
+    "paramsRelevantes": ["etanol_por_cana", "vinhaca_disponivel"],
+    "fontes": ["atlas2020_p67", "cetesb_p4231"]
+  },
+  {
+    "id": "cana.rota.membranas_vinhaca",
+    "kind": "rota",
+    "nome": "Membranas na vinhaça",
+    "resumo": "Ultrafiltração e osmose separam água reutilizável de um concentrado salino",
+    "anel": 3,
+    "tags": ["fertilizante", "quimica"],
+    "icone": "Filter",
+    "texto": {
+      "descricao": "Em vez de ferver, filtrar. A ultrafiltração retém coloides e sólidos suspensos; a osmose reversa retém os sais dissolvidos e deixa passar água de qualidade industrial. O resultado é o mesmo da evaporação, concentrado fertilizante e água limpa, sem consumo de vapor.",
+      "comoFunciona": "A pressão empurra o líquido contra membranas de poro decrescente. O que não passa fica retido e concentra; o que passa é permeado, quase livre de sais.",
+      "limitacoes": [
+        "A vinhaça entope membrana rápido: o pré-tratamento domina o custo.",
+        "O consumo elétrico e a troca de membranas ainda superam o ganho de frete.",
+        "Não há instalação em escala industrial em usina paulista."
+      ]
+    },
+    "rota": {
+      "trl": 5,
+      "statusSP": "inexistente",
+      "notaStatus": "Existe em bancada e em piloto de pesquisa; nenhuma usina paulista opera membranas para vinhaça em escala."
+    },
+    "paramsRelevantes": ["etanol_por_cana", "vinhaca_disponivel"],
+    "fontes": ["atlas2020_p67"]
+  },
+  {
+    "id": "cana.rota.estruvita_digestato",
+    "kind": "rota",
+    "nome": "Estruvita do digestato",
+    "resumo": "Precipita fósforo e amônio num cristal sólido que viaja sem carregar água",
+    "anel": 3,
+    "tags": ["fertilizante", "quimica"],
+    "icone": "FlaskConical",
+    "texto": {
+      "descricao": "Estruvita é fosfato de amônio e magnésio. Precipita quando se ajusta o pH e se adiciona magnésio a um líquido rico em amônio e fosfato. Em digestato de suinocultura e de esgoto é rota consolidada; aplicada ao digestato da cana, recuperaria N e P numa forma sólida, de liberação lenta, transportável a qualquer distância.",
+      "comoFunciona": "Eleva-se o pH para perto de 9 e adiciona-se uma fonte de magnésio. Fosfato, amônio e magnésio cristalizam juntos e decantam como um pó branco granulável.",
+      "limitacoes": [
+        "A vinhaça é pobre em fósforo e em magnésio: sem adicionar Mg, quase não precipita.",
+        "O fósforo da cana está sobretudo na torta de filtro, não na vinhaça.",
+        "Nenhuma unidade brasileira recupera estruvita de vinhaça em escala."
+      ]
+    },
+    "rota": {
+      "trl": 5,
+      "statusSP": "inexistente",
+      "notaStatus": "Sem planta em São Paulo. A rota é conhecida em efluente de suinocultura e de esgoto, não em vinhaça de cana."
+    },
+    "paramsRelevantes": ["etanol_por_cana", "vinhaca_disponivel"],
+    "fontes": ["atlas2020_p67"]
+  },
+  {
+    "id": "cana.rota.stripping_amonia",
+    "kind": "rota",
+    "nome": "Stripping de amônia",
+    "resumo": "Arrasta o N amoniacal do digestato e o fixa como sulfato de amônio",
+    "anel": 3,
+    "tags": ["fertilizante", "quimica"],
+    "icone": "Wind",
+    "texto": {
+      "descricao": "A digestão converte nitrogênio orgânico em amoniacal. Elevando pH e temperatura, esse nitrogênio passa à fase gasosa como amônia, é arrastado por ar ou vapor e absorvido em ácido sulfúrico. Saem um sal nitrogenado comercial e um digestato com menos N, útil quando a área disponível limita a dose.",
+      "comoFunciona": "Ar sobe numa coluna recheada enquanto o digestato desce. A amônia deixa o líquido, encontra ácido sulfúrico no lavador e vira sulfato de amônio dissolvido.",
+      "limitacoes": [
+        "Consome álcali para subir o pH e ácido para capturar a amônia.",
+        "A vinhaça tem N diluído; a coluna teria de tratar volumes enormes para pouco produto.",
+        "Retirar N do digestato só faz sentido onde falta área para aplicar."
+      ]
+    },
+    "rota": {
+      "trl": 6,
+      "statusSP": "inexistente",
+      "notaStatus": "Tecnologia madura no biogás europeu de dejetos; sem aplicação a digestato de vinhaça em São Paulo."
+    },
+    "paramsRelevantes": ["etanol_por_cana", "vinhaca_disponivel"],
+    "fontes": ["atlas2020_p67"]
+  },
+  {
+    "id": "cana.rota.polimento_microalgas",
+    "kind": "rota",
+    "nome": "Polimento com microalgas",
+    "resumo": "Algas consomem N e P do digestato diluído e devolvem água mais limpa",
+    "anel": 3,
+    "tags": ["fertilizante", "quimica"],
+    "icone": "TestTube",
+    "texto": {
+      "descricao": "Microalgas cultivadas em digestato diluído usam o nitrogênio amoniacal e o fosfato como nutrientes, e o CO₂ da fermentação como fonte de carbono. O efluente sai com menos carga; a biomassa colhida pode voltar ao solo como biofertilizante ou seguir para outras rotas.",
+      "comoFunciona": "Em lagoas rasas ou fotobiorreatores, luz e CO₂ sustentam o crescimento; o N e o P dissolvidos são incorporados à célula e retirados do líquido quando a biomassa é colhida.",
+      "limitacoes": [
+        "A vinhaça é escura: a luz não penetra, e o cultivo exige diluição alta.",
+        "A colheita da biomassa é o gargalo de custo.",
+        "Não existe operação comercial acoplada a usina de cana em São Paulo."
+      ]
+    },
+    "rota": {
+      "trl": 4,
+      "statusSP": "inexistente",
+      "notaStatus": "Pesquisa de laboratório e piloto em universidades paulistas; nenhuma planta operando junto a usina."
+    },
+    "paramsRelevantes": ["etanol_por_cana", "vinhaca_disponivel"],
+    "fontes": ["atlas2020_p67"]
+  },
+  {
+    "id": "cana.rota.reuso_agua",
+    "kind": "rota",
+    "nome": "Reuso de água na usina",
+    "resumo": "A cana chega com 70% de água; recircular condensados derrubou a captação",
+    "anel": 3,
+    "tags": ["regulatorio", "solo"],
+    "icone": "Waves",
+    "texto": {
+      "descricao": "A usina é superavitária em água: cada tonelada de cana entra com cerca de 700 litros. O circuito hídrico paulista foi fechado em duas décadas. A lavagem de cana com água praticamente desapareceu quando a colheita mecanizada trouxe a cana picada, que perde açúcar ao ser lavada, e a limpeza a seco assumiu. O que resta de água nova vem de condensados de evaporação e de efluentes tratados, reaproveitados na embebição, na lavagem de gases e na fertirrigação.",
+      "comoFunciona": "Condensados de evaporação e de destilação são segregados por qualidade e devolvidos ao ponto do processo que aceita aquela qualidade; o excedente vai para a lavoura junto com a vinhaça.",
+      "limitacoes": [
+        "Água de reuso carrega açúcar residual, incrusta e exige monitoramento contínuo.",
+        "A outorga estadual e a cobrança pelo uso da água pressionam a captação, mas em anos secos o consumo ainda concorre com o abastecimento urbano."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "operando",
+      "notaStatus": "Padrão do setor em São Paulo: a captação média caiu de cerca de 5 m³ por tonelada de cana nos anos 1990 para perto de 1 m³/t."
+    },
+    "paramsRelevantes": ["cana_moida_sp"],
+    "fontes": ["unica2024", "cetesb_p4231"]
+  },
+  {
+    "id": "cana.rota.palha_cobertura",
+    "kind": "rota",
+    "nome": "Palha como cobertura do solo",
+    "resumo": "Os 50 a 60% de palha que ficam seguram água, erosão e plantas daninhas",
+    "anel": 3,
+    "tags": ["solo", "fertilizante"],
+    "icone": "Wheat",
+    "texto": {
+      "descricao": "Com mais de 96% da área paulista colhida mecanicamente e sem queima, a palha passou a ficar sobre o solo por padrão: uma manta de 10 a 20 toneladas de matéria seca por hectare. Essa manta não é resíduo esperando destino. É a razão pela qual só parte da palha pode ser recolhida: a agronomia exige que metade ou mais permaneça no talhão.",
+      "comoFunciona": "A camada de palha intercepta a gota de chuva antes que ela desagregue o solo, corta a evaporação direta, bloqueia a luz que dispara a germinação de daninhas, e libera potássio rápido e nitrogênio lento à medida que se decompõe.",
+      "limitacoes": [
+        "Abriga broca-gigante e migdolus, e favorece a cigarrinha-das-raízes.",
+        "Atrasa a brotação da soqueira em solos frios e úmidos do sul do estado.",
+        "Dificulta o contato do herbicida e da vinhaça com o solo."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "operando",
+      "notaStatus": "Não é uma escolha tecnológica, é o estado atual do canavial paulista: a palha fica no chão porque a colheita crua a deixa lá."
+    },
+    "paramsRelevantes": ["palha_gerada", "palha_recolhivel", "cana_moida_sp"],
+    "fontes": ["atlas2020_p65", "carvalho2017", "tenelli2021", "hassuani2005", "unica2024"]
+  },
+  {
+    "id": "cana.rota.torta_adubo_direto",
+    "kind": "rota",
+    "nome": "Torta de filtro no sulco",
+    "resumo": "20 a 30 t/ha no sulco de plantio entregam fósforo, cálcio e matéria orgânica",
+    "anel": 3,
+    "tags": ["fertilizante", "solo"],
+    "icone": "Tractor",
+    "texto": {
+      "descricao": "A torta de filtro é o lodo retido na filtração do caldo, depois da calagem. Ela concentra o fosfato adicionado para clarificar o caldo, mais cálcio, matéria orgânica e micronutrientes. Aplicada no sulco de plantio, coloca o fósforo exatamente onde a raiz nova vai buscá-lo. É o uso mais antigo e mais difundido de um resíduo da cana em São Paulo.",
+      "comoFunciona": "Distribuidores acoplados à plantadora depositam a torta no fundo do sulco. O fósforo orgânico é liberado devagar e sofre menos fixação pelos óxidos de ferro e alumínio do solo tropical do que o fosfato solúvel.",
+      "limitacoes": [
+        "Sai do filtro com 70 a 75% de água: o frete limita o raio a poucas dezenas de quilômetros.",
+        "Sem compostar, atrai moscas e pode imobilizar nitrogênio nas primeiras semanas.",
+        "A dose real varia com a distância do talhão, e não com a necessidade da planta."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "operando",
+      "notaStatus": "Rotina em toda usina paulista: a torta volta ao campo por benefício agronômico comprovado e por falta de destino melhor."
+    },
+    "paramsRelevantes": ["torta_gerada", "torta_disponivel", "cana_moida_sp"],
+    "fontes": ["atlas2020_p66", "feedstocks_yaml"]
+  },
+  {
+    "id": "cana.rota.compostagem_torta",
+    "kind": "rota",
+    "nome": "Compostagem de torta",
+    "resumo": "Leiras de torta com cinza e bagacilho estabilizam o fósforo e matam patógenos",
+    "anel": 3,
+    "tags": ["fertilizante", "solo"],
+    "icone": "Boxes",
+    "texto": {
+      "descricao": "Compostar é deixar a microbiota fazer, no pátio, o que faria no solo. A torta úmida é misturada a cinza de caldeira, fuligem do lavador de gases e bagacilho, montada em leiras e revolvida por 60 a 90 dias. Sai um material seco, estável, sem odor, com relação C/N equilibrada e nutrientes menos sujeitos a perda.",
+      "comoFunciona": "Na fase termofílica a leira passa de 55 °C por dias seguidos, o que elimina sementes de daninhas e patógenos. Depois vem a maturação, em que o carbono lábil se converte em substâncias húmicas.",
+      "limitacoes": [
+        "Perde de 20 a 40% da massa, e parte do nitrogênio escapa como amônia.",
+        "Exige pátio impermeabilizado, controle de chorume e revolvimento mecânico.",
+        "Leira mal aerada emite metano e óxido nitroso, anulando parte do ganho ambiental."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "operando",
+      "notaStatus": "Prática consolidada em boa parte das usinas paulistas, sobretudo onde a cinza e a fuligem precisam de destino junto com a torta."
+    },
+    "paramsRelevantes": ["torta_gerada", "torta_disponivel"],
+    "fontes": ["atlas2020_p66", "feedstocks_yaml"]
+  },
+  {
+    "id": "cana.rota.vermicompostagem",
+    "kind": "rota",
+    "nome": "Vermicompostagem da torta",
+    "resumo": "Minhocas convertem torta pré-compostada em húmus de alta atividade biológica",
+    "anel": 3,
+    "tags": ["fertilizante", "solo"],
+    "icone": "Leaf",
+    "texto": {
+      "descricao": "A minhoca vermelha da Califórnia processa a torta já pré-compostada e devolve coprólitos: o vermicomposto. O produto tem fósforo e micronutrientes mais disponíveis que o composto convencional, além de população microbiana ativa e reguladores de crescimento vegetal. O valor por tonelada é alto; o volume processável é baixo.",
+      "comoFunciona": "As minhocas trituram e revolvem o material, e a passagem pelo trato digestivo altera a forma química dos nutrientes. O processo é mesofílico, não passa de 30 °C, e por isso não higieniza por calor: daí a pré-compostagem.",
+      "limitacoes": [
+        "A escala não conversa com o volume de torta que uma usina gera por safra.",
+        "Sensível a temperatura, umidade e resíduos de defensivos na torta.",
+        "Sem higienização térmica própria, depende de pré-compostagem bem conduzida."
+      ]
+    },
+    "rota": {
+      "trl": 7,
+      "statusSP": "em_implantacao",
+      "notaStatus": "Existe em canteiros pequenos e em projetos de pesquisa; nenhuma usina paulista vermicomposta a totalidade da torta."
+    },
+    "paramsRelevantes": ["torta_gerada", "torta_disponivel"],
+    "fontes": ["atlas2020_p66"]
+  },
+  {
+    "id": "cana.rota.organomineral",
+    "kind": "rota",
+    "nome": "Organomineral granulado",
+    "resumo": "Granula composto de torta e cinza com NPK mineral e cria um adubo que viaja",
+    "anel": 3,
+    "tags": ["fertilizante", "solo", "quimica"],
+    "icone": "Package",
+    "texto": {
+      "descricao": "Composto de torta e cinza, seco e misturado a fontes minerais concentradas, é granulado em disco ou extrusora. O grânulo tem densidade e resistência para passar em adubadora comum e para ser vendido fora da usina. É a rota que transforma resíduo volumoso em produto de mercado, com registro no Ministério da Agricultura.",
+      "comoFunciona": "A secagem reduz a umidade a menos de 15%, a mistura ajusta a fórmula NPK e a granulação aglomera as partículas em grânulos de 2 a 4 mm, com resistência mecânica suficiente para o transporte.",
+      "limitacoes": [
+        "Secar exige energia: parte do ganho ambiental se perde aí.",
+        "O teor de nutriente é baixo diante do adubo mineral puro, e o frete por unidade de N, P ou K continua alto.",
+        "A produção é pequena diante do consumo paulista de fertilizante."
+      ]
+    },
+    "rota": {
+      "trl": 8,
+      "statusSP": "operando",
+      "notaStatus": "Algumas usinas e fábricas de fertilizante já granulam torta compostada com cinza; o volume é marginal diante do NPK importado."
+    },
+    "paramsRelevantes": ["torta_gerada", "torta_disponivel"],
+    "fontes": ["atlas2020_p66", "market_prices"]
+  },
+  {
+    "id": "cana.rota.cinzas_corretivo",
+    "kind": "rota",
+    "nome": "Cinzas como corretivo",
+    "resumo": "A cinza da caldeira volta ao canavial como fonte de potássio, cálcio e silício",
+    "anel": 3,
+    "tags": ["fertilizante", "solo"],
+    "icone": "Flame",
+    "texto": {
+      "descricao": "Queimar bagaço na caldeira não destrói os minerais: eles ficam na cinza de grelha e na fuligem do lavador de gases. A cinza concentra potássio, cálcio, magnésio e silício, e volta ao campo como corretivo e fonte de nutrientes. É um fluxo que a usina precisa destinar de qualquer maneira, e o canavial é o destino natural.",
+      "comoFunciona": "A cinza é peneirada para separar areia e material não queimado, umedecida para não voar, e distribuída a lanço ou incorporada junto com a torta compostada.",
+      "limitacoes": [
+        "A composição varia muito com a terra que entra junto com a cana; boa parte da cinza é areia.",
+        "O poder de neutralização é modesto perto do calcário.",
+        "Se a caldeira queima outros resíduos além do bagaço, aparecem metais que precisam ser monitorados."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "operando",
+      "notaStatus": "Destino padrão da cinza de caldeira em São Paulo, geralmente misturada à torta na compostagem ou aplicada direto no talhão."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "bagaco_rpr"],
+    "fontes": ["atlas2020_p66", "unica2024"]
+  },
+  {
+    "id": "cana.rota.k_das_cinzas",
+    "kind": "rota",
+    "nome": "Extração de potássio da cinza",
+    "resumo": "Lixivia a cinza com água e cristaliza o potássio solúvel como sal fertilizante",
+    "anel": 3,
+    "tags": ["fertilizante", "quimica"],
+    "icone": "Beaker",
+    "texto": {
+      "descricao": "Parte do potássio da cinza está como carbonato e óxido solúveis em água. Lavar a cinza, filtrar e evaporar o extrato produziria um sal potássico concentrado, num país que importa quase todo o cloreto de potássio que consome. O resíduo insolúvel, sílica e areia, continuaria indo para o solo.",
+      "comoFunciona": "Água em contracorrente dissolve os sais de potássio da cinza; o extrato é clarificado e evaporado até cristalizar.",
+      "limitacoes": [
+        "O teor de K na cinza paulista é baixo e diluído por areia.",
+        "Consome água e energia de evaporação para produzir pouco sal.",
+        "Nenhuma unidade opera essa extração no Brasil."
+      ]
+    },
+    "rota": {
+      "trl": 4,
+      "statusSP": "inexistente",
+      "notaStatus": "Rota de bancada. Nenhuma usina paulista extrai potássio da cinza; a cinza vai inteira ao campo."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "bagaco_rpr"],
+    "fontes": ["atlas2020_p66"]
+  },
+  {
+    "id": "cana.rota.biochar_solo",
+    "kind": "rota",
+    "nome": "Biochar no solo",
+    "resumo": "Carbono pirolisado que não se decompõe: fica no solo e retém água e cátions",
+    "anel": 3,
+    "tags": ["solo", "energia", "regulatorio"],
+    "icone": "CircleDot",
+    "texto": {
+      "descricao": "Pirolisar palha, bagaço ou torta entre 400 e 700 °C, sem oxigênio, converte parte do carbono numa estrutura aromática que a microbiota não consegue quebrar. Aplicado ao solo, esse carbono permanece por séculos, enquanto a palha deixada no campo se decompõe em uma ou duas safras. É a única rota do atlas em que carbono da cana sai de circulação em vez de voltar à atmosfera.",
+      "comoFunciona": "Sem oxigênio a biomassa não queima: decompõe-se termicamente em gases, líquidos e um sólido carbonoso poroso. Os poros retêm água e trocam cátions, o que aumenta a capacidade de troca do solo arenoso.",
+      "limitacoes": [
+        "A biomassa usada para biochar deixa de gerar energia na caldeira ou metano no biodigestor.",
+        "A resposta agronômica em solo tropical é variável, às vezes nula no primeiro ciclo.",
+        "Certificar o carbono removido exige medição e monitoramento caros."
+      ]
+    },
+    "rota": {
+      "trl": 6,
+      "statusSP": "inexistente",
+      "notaStatus": "Não há aplicação agrícola de biochar de cana em escala comercial em São Paulo; existem lotes de pesquisa e projetos de pirólise anunciados."
+    },
+    "paramsRelevantes": ["palha_gerada", "palha_recolhivel", "preco_carbono"],
+    "fontes": ["atlas2020_p65", "carvalho2017"]
+  },
+  {
+    "id": "cana.rota.hidrochar",
+    "kind": "rota",
+    "nome": "Carbonização hidrotérmica",
+    "resumo": "Cozinha torta e vinhaça a 200 °C sob pressão e gera um sólido condicionador",
+    "anel": 3,
+    "tags": ["solo", "quimica"],
+    "icone": "Cylinder",
+    "texto": {
+      "descricao": "A carbonização hidrotérmica trabalha com o material molhado, o que dispensa a secagem que encarece a pirólise. Torta de filtro e vinhaça concentrada, mantidas entre 180 e 250 °C sob pressão por algumas horas, viram um sólido escuro, o hidrochar, e um líquido rico em compostos orgânicos.",
+      "comoFunciona": "A água em estado subcrítico catalisa a desidratação e a descarboxilação da biomassa; o carbono se rearranja num sólido mais denso e mais estável que a matéria-prima.",
+      "limitacoes": [
+        "O hidrochar é menos estável no solo que o biochar de pirólise.",
+        "O líquido que sobra tem carga orgânica alta e precisa de tratamento.",
+        "Não existe unidade industrial processando resíduo de cana no Brasil."
+      ]
+    },
+    "rota": {
+      "trl": 4,
+      "statusSP": "inexistente",
+      "notaStatus": "Pesquisa acadêmica no Brasil. Nenhuma planta de carbonização hidrotérmica processando resíduo de cana em São Paulo."
+    },
+    "paramsRelevantes": ["torta_gerada", "torta_disponivel"],
+    "fontes": ["atlas2020_p66"]
+  },
+  {
+    "id": "cana.rota.substancias_humicas",
+    "kind": "rota",
+    "nome": "Extração de húmicos",
+    "resumo": "Extrai ácidos húmicos e fúlvicos da torta compostada para uso foliar e no solo",
+    "anel": 3,
+    "tags": ["fertilizante", "quimica", "solo"],
+    "icone": "Pipette",
+    "texto": {
+      "descricao": "Substâncias húmicas são a fração estável da matéria orgânica: moléculas grandes que quelam nutrientes, seguram cátions e estimulam a raiz. Extraídas com álcali do composto de torta e purificadas, viram um produto de baixo volume e alto preço, aplicado via foliar ou por fertirrigação.",
+      "comoFunciona": "Hidróxido de potássio ou de sódio solubiliza a fração húmica do composto; a acidificação separa os ácidos húmicos, que precipitam, dos fúlvicos, que permanecem em solução.",
+      "limitacoes": [
+        "O rendimento de extração é baixo e varia com a maturidade do composto.",
+        "A padronização do produto é difícil, e o mercado brasileiro ainda importa a maior parte do insumo.",
+        "Nenhuma usina paulista extrai húmicos da própria torta em escala."
+      ]
+    },
+    "rota": {
+      "trl": 4,
+      "statusSP": "inexistente",
+      "notaStatus": "Sem produção industrial a partir de torta em São Paulo; o insumo vendido no estado vem sobretudo de leonardita importada."
+    },
+    "paramsRelevantes": ["torta_gerada", "torta_disponivel"],
+    "fontes": ["atlas2020_p66"]
+  },
+  {
+    "id": "cana.rota.substrato_mpb",
+    "kind": "rota",
+    "nome": "Substrato para mudas (MPB)",
+    "resumo": "Torta compostada vira o substrato das mudas pré-brotadas que replantam a cana",
+    "anel": 3,
+    "tags": ["fertilizante", "solo"],
+    "icone": "Sprout",
+    "texto": {
+      "descricao": "O sistema de mudas pré-brotadas troca a tora de cana inteira por gemas individuais germinadas em bandeja. O substrato dessas bandejas precisa de porosidade, retenção de água e nutrição inicial, e a torta de filtro compostada entrega as três coisas. É a rota mais curta do atlas: o resíduo da cana volta como a própria cana.",
+      "comoFunciona": "A torta compostada e peneirada é misturada a substrato comercial e a cinza; a gema enraíza na bandeja por 30 a 60 dias antes de ir ao campo.",
+      "limitacoes": [
+        "Exige composto maduro e uniforme; torta crua queima a muda.",
+        "O volume usado é pequeno diante da torta gerada.",
+        "Só faz sentido onde a usina adotou o sistema de mudas pré-brotadas."
+      ]
+    },
+    "rota": {
+      "trl": 8,
+      "statusSP": "operando",
+      "notaStatus": "Usado nos viveiros de mudas pré-brotadas de São Paulo, sistema que ainda cobre uma parcela pequena do replantio."
+    },
+    "paramsRelevantes": ["torta_gerada", "torta_disponivel"],
+    "fontes": ["atlas2020_p66"]
+  },
+  {
+    "id": "cana.rota.bioinsumos_substrato",
+    "kind": "rota",
+    "nome": "Substrato para bioinsumos",
+    "resumo": "Usa torta e vinhaça como meio de cultura nas biofábricas da própria usina",
+    "anel": 3,
+    "tags": ["solo", "quimica"],
+    "icone": "Microscope",
+    "texto": {
+      "descricao": "As usinas paulistas já operam biofábricas: multiplicam Metarhizium contra a cigarrinha e Cotesia contra a broca, em escala industrial e dentro da própria unidade. O que ainda não se faz é usar o resíduo da cana como meio de cultura. Torta e vinhaça têm carbono, nitrogênio e minerais para isso, e a pesquisa testa substituir o arroz e os meios sintéticos por eles.",
+      "comoFunciona": "O fungo ou a bactéria cresce sobre um substrato sólido ou líquido esterilizado; a torta fornece carbono e fósforo, a vinhaça, potássio e nitrogênio solúveis.",
+      "limitacoes": [
+        "A esterilização do resíduo custa energia e nem sempre é completa.",
+        "A variabilidade da torta compromete a padronização exigida pelo registro do bioinsumo.",
+        "Nenhuma biofábrica paulista usa resíduo de cana como substrato principal."
+      ]
+    },
+    "rota": {
+      "trl": 4,
+      "statusSP": "inexistente",
+      "notaStatus": "As biofábricas existem e são rotina em São Paulo, mas cultivam sobre arroz e meios sintéticos, não sobre resíduo da cana."
+    },
+    "paramsRelevantes": ["torta_gerada", "torta_disponivel"],
+    "fontes": ["atlas2020_p66"]
+  },
+  {
+    "id": "cana.rota.gotejamento_digestato",
+    "kind": "rota",
+    "nome": "Gotejamento com digestato",
+    "resumo": "Digestato filtrado entope menos gotejador e leva água e K à zona da raiz",
+    "anel": 3,
+    "tags": ["fertilizante", "solo"],
+    "icone": "Droplet",
+    "texto": {
+      "descricao": "Aplicar vinhaça por gotejamento subsuperficial coloca água e potássio na profundidade da raiz, com perda quase nula por evaporação e sem escorrimento. O obstáculo sempre foi o entupimento: a vinhaça in natura tem sólidos e carga orgânica que colonizam o emissor. A digestão anaeróbia remove boa parte desses sólidos e da DQO, e é isso que torna o gotejamento plausível.",
+      "comoFunciona": "Tubos enterrados a 20 ou 30 cm liberam a lâmina gota a gota; filtros de disco e cloração periódica mantêm o emissor aberto.",
+      "limitacoes": [
+        "Investimento por hectare muito acima da aspersão e do carretel.",
+        "Exige filtragem fina e manutenção constante, mesmo com digestato.",
+        "Roedores e raízes danificam a tubulação enterrada entre cortes."
+      ]
+    },
+    "rota": {
+      "trl": 7,
+      "statusSP": "em_implantacao",
+      "notaStatus": "O gotejamento subsuperficial cobre uma fração pequena da área paulista, e o uso de vinhaça digerida nele é experimental."
+    },
+    "paramsRelevantes": ["etanol_por_cana", "vinhaca_disponivel"],
+    "fontes": ["atlas2020_p67", "cetesb_p4231"]
+  },
+  {
+    "id": "cana.rota.separacao_digestato",
+    "kind": "rota",
+    "nome": "Separação de fases do digestato",
+    "resumo": "Prensa separa um sólido rico em fósforo de um líquido rico em potássio e N",
+    "anel": 3,
+    "tags": ["fertilizante", "solo"],
+    "icone": "Split",
+    "texto": {
+      "descricao": "O digestato que sai do biodigestor é um só material, mas contém dois produtos com logísticas diferentes. Uma prensa parafuso ou um decantador centrífugo separa a fração sólida, com matéria orgânica e fósforo, transportável, da fração líquida, com potássio e nitrogênio amoniacal, que segue para fertirrigação próxima.",
+      "comoFunciona": "A prensa força o digestato contra uma peneira cilíndrica: o líquido atravessa e o sólido é comprimido e expelido com 20 a 30% de matéria seca.",
+      "limitacoes": [
+        "Digestato de vinhaça pura tem pouco sólido; a separação rende pouco.",
+        "Faz mais sentido quando a torta de filtro é co-digerida junto com a vinhaça.",
+        "Equipamento e manutenção adicionais para um ganho apenas logístico."
+      ]
+    },
+    "rota": {
+      "trl": 8,
+      "statusSP": "em_implantacao",
+      "notaStatus": "Presente onde há co-digestão de torta com vinhaça; raro nas unidades que digerem apenas vinhaça."
+    },
+    "paramsRelevantes": ["etanol_por_cana", "vinhaca_disponivel", "torta_disponivel"],
+    "fontes": ["atlas2020_p66", "atlas2020_p67"]
+  },
+
+  {
+    "id": "cana.prod.digestato_liquido",
+    "kind": "produto",
+    "nome": "Digestato líquido",
+    "resumo": "Vinhaça digerida: perdeu carbono e DQO, manteve o K, ganhou N amoniacal",
+    "anel": 4,
+    "tags": ["fertilizante", "solo"],
+    "icone": "Droplets",
+    "texto": {
+      "descricao": "É a vinhaça depois do biodigestor. Sai com a demanda química de oxigênio muito reduzida, sem o odor da vinhaça fresca, e com o mesmo potássio que entrou. O nitrogênio mudou de forma: era orgânico, virou amoniacal, que a planta absorve direto. Do ponto de vista do canavial, é um fertilizante melhor do que a vinhaça bruta.",
+      "limitacoes": [
+        "Continua sendo água em quase toda a sua massa: o raio de aplicação não muda.",
+        "O nitrogênio amoniacal volatiliza se aplicado em superfície sem incorporação."
+      ]
+    },
+    "paramsRelevantes": ["etanol_por_cana", "vinhaca_disponivel", "vinhaca_biogas"],
+    "fontes": ["atlas2020_p67", "cetesb_p4231"]
+  },
+  {
+    "id": "cana.prod.digestato_solido",
+    "kind": "produto",
+    "nome": "Digestato sólido",
+    "resumo": "Fração prensada do digestato: matéria orgânica e fósforo já transportáveis",
+    "anel": 4,
+    "tags": ["fertilizante", "solo"],
+    "icone": "Container",
+    "texto": {
+      "descricao": "A fração retida na prensa concentra a matéria orgânica não digerida e o fósforo. Com 20 a 30% de matéria seca, paga frete até áreas fora do raio da vinhaça, e pode ser compostada ou granulada antes de ir ao campo.",
+      "limitacoes": [
+        "O volume é pequeno quando o substrato é vinhaça pura.",
+        "Ainda úmido o bastante para exigir manejo rápido, sob risco de odor."
+      ]
+    },
+    "paramsRelevantes": ["torta_disponivel", "vinhaca_disponivel"],
+    "fontes": ["atlas2020_p66", "atlas2020_p67"]
+  },
+  {
+    "id": "cana.prod.vinhaca_concentrada",
+    "kind": "produto",
+    "nome": "Vinhaça concentrada",
+    "resumo": "Um quarto do volume, o mesmo potássio: o adubo líquido que aguenta viajar",
+    "anel": 4,
+    "tags": ["fertilizante", "solo"],
+    "icone": "Blend",
+    "texto": {
+      "descricao": "Xarope escuro com 20 a 25% de sólidos, obtido por evaporação ou por membranas. Todo o potássio da vinhaça original está ali, num volume três a quatro vezes menor. É o que permite levar o nutriente a talhões que o canal nunca alcançaria, e é também um produto vendável a terceiros.",
+      "limitacoes": [
+        "Alta condutividade elétrica: exige diluição ou dose baixa para não salinizar.",
+        "Viscoso e corrosivo, precisa de tanque e bomba dedicados."
+      ]
+    },
+    "paramsRelevantes": ["etanol_por_cana", "vinhaca_disponivel"],
+    "fontes": ["atlas2020_p67"]
+  },
+  {
+    "id": "cana.prod.agua_reuso",
+    "kind": "produto",
+    "nome": "Água de reuso",
+    "resumo": "Condensado de evaporação e efluente tratado que voltam ao processo e à lavoura",
+    "anel": 4,
+    "tags": ["regulatorio"],
+    "icone": "CloudDrizzle",
+    "texto": {
+      "descricao": "A água que a usina deixa de captar. Vem sobretudo dos condensados de evaporação e de destilação, e do efluente tratado. Volta à embebição, à lavagem de gases, à limpeza de piso e, no excedente, à lavoura junto com a vinhaça.",
+      "limitacoes": [
+        "Cada ponto do processo aceita uma qualidade de água diferente; misturar tudo inviabiliza o reuso.",
+        "Condensado com açúcar arrastado fermenta e cheira; exige segregação."
+      ]
+    },
+    "paramsRelevantes": ["cana_moida_sp"],
+    "fontes": ["unica2024"]
+  },
+  {
+    "id": "cana.prod.composto_organico",
+    "kind": "produto",
+    "nome": "Composto orgânico",
+    "resumo": "Torta, cinza e bagacilho estabilizados numa matriz seca, sem odor e higienizada",
+    "anel": 4,
+    "tags": ["fertilizante", "solo"],
+    "icone": "Boxes",
+    "texto": {
+      "descricao": "Produto da leira madura: matéria orgânica humificada, com fósforo, cálcio, potássio e micronutrientes num material seco e uniforme. Aplicado no plantio ou em cobertura na soqueira, e vendido a outras culturas quando sobra.",
+      "limitacoes": [
+        "O teor de nutriente por tonelada é baixo; o valor está na matéria orgânica, não no NPK.",
+        "A qualidade depende do controle da leira, que varia entre usinas."
+      ]
+    },
+    "paramsRelevantes": ["torta_gerada", "torta_disponivel"],
+    "fontes": ["atlas2020_p66"]
+  },
+  {
+    "id": "cana.prod.vermicomposto",
+    "kind": "produto",
+    "nome": "Vermicomposto",
+    "resumo": "Húmus de minhoca: fósforo e micronutrientes em forma prontamente disponível",
+    "anel": 4,
+    "tags": ["fertilizante", "solo"],
+    "icone": "Shell",
+    "texto": {
+      "descricao": "Coprólitos de minhoca, com nutrientes mais solúveis que os do composto convencional e carga microbiana ativa. Preço por tonelada bem acima do composto, mercado voltado a horticultura, viveiro e jardinagem, não à lavoura extensiva.",
+      "limitacoes": [
+        "Volume incompatível com a escala da torta gerada por uma usina.",
+        "Sem padronização, o produto varia de lote para lote."
+      ]
+    },
+    "paramsRelevantes": ["torta_gerada", "torta_disponivel"],
+    "fontes": ["atlas2020_p66"]
+  },
+  {
+    "id": "cana.prod.organomineral_granulado",
+    "kind": "produto",
+    "nome": "Organomineral granulado",
+    "resumo": "Grânulo de composto com NPK mineral, dosável em adubadora comum e registrável",
+    "anel": 4,
+    "tags": ["fertilizante", "solo", "quimica"],
+    "icone": "Package",
+    "texto": {
+      "descricao": "Fertilizante registrado, com fórmula declarada, que carrega matéria orgânica junto com o NPK. Serve à própria usina e ao mercado externo, e é a única forma em que o nutriente da cana viaja centenas de quilômetros sem perder a conta econômica.",
+      "limitacoes": [
+        "Concorre com adubo mineral de teor muito mais alto por tonelada.",
+        "Depende de composto seco e uniforme, o que exige pátio bem operado."
+      ]
+    },
+    "paramsRelevantes": ["torta_gerada", "torta_disponivel"],
+    "fontes": ["atlas2020_p66", "market_prices"]
+  },
+  {
+    "id": "cana.prod.corretivo_cinzas",
+    "kind": "produto",
+    "nome": "Corretivo de cinzas",
+    "resumo": "Cinza e fuligem peneiradas: K, Ca e silício que substituem parte do KCl",
+    "anel": 4,
+    "tags": ["fertilizante", "solo"],
+    "icone": "Mountain",
+    "texto": {
+      "descricao": "Material alcalino, rico em potássio, cálcio e silício solúvel. O silício importa na cana: fortalece a parede celular e reduz o ataque de broca e o estresse hídrico. É corretivo e fertilizante ao mesmo tempo, com composição variável de caldeira para caldeira.",
+      "limitacoes": [
+        "Boa parte da massa é areia arrastada com a cana, sem valor agronômico.",
+        "Precisa de análise por lote: sem isso, a dose é chute."
+      ]
+    },
+    "paramsRelevantes": ["cana_moida_sp", "bagaco_rpr"],
+    "fontes": ["atlas2020_p66"]
+  },
+  {
+    "id": "cana.prod.biochar_agricola",
+    "kind": "produto",
+    "nome": "Biochar agrícola",
+    "resumo": "Carbono estável e poroso, aplicado ao solo para reter água e cátions",
+    "anel": 4,
+    "tags": ["solo", "regulatorio"],
+    "icone": "CircleDot",
+    "texto": {
+      "descricao": "Sólido carbonoso de pirólise, com superfície interna enorme e carbono resistente à decomposição. No solo arenoso do oeste paulista, atua sobre a capacidade de troca de cátions e a retenção de água, dois limitantes clássicos. É também o carbono da cana que não volta à atmosfera.",
+      "limitacoes": [
+        "A resposta agronômica depende da matéria-prima e da temperatura de pirólise; não há produto padronizado.",
+        "O preço só fecha se o carbono removido for remunerado."
+      ]
+    },
+    "paramsRelevantes": ["palha_recolhivel", "preco_carbono"],
+    "fontes": ["atlas2020_p65", "carvalho2017"]
+  },
+  {
+    "id": "cana.prod.estruvita",
+    "kind": "produto",
+    "nome": "Estruvita",
+    "resumo": "Cristal de fosfato de amônio e magnésio: N e P sem água para transportar",
+    "anel": 4,
+    "tags": ["fertilizante", "quimica"],
+    "icone": "Snowflake",
+    "texto": {
+      "descricao": "Fertilizante sólido de liberação lenta, com nitrogênio, fósforo e magnésio. Recuperado de efluente, é fósforo que deixa de ser importado como rocha fosfática. Num digestato de cana, seria o único produto capaz de tirar fósforo do sistema líquido em forma vendável.",
+      "limitacoes": [
+        "Depende de adicionar magnésio, que não existe em quantidade na vinhaça.",
+        "Sem escala, o custo por quilo de P recuperado fica acima do fosfato mineral."
+      ]
+    },
+    "paramsRelevantes": ["etanol_por_cana", "vinhaca_disponivel"],
+    "fontes": ["atlas2020_p67"]
+  },
+  {
+    "id": "cana.prod.sulfato_amonio",
+    "kind": "produto",
+    "nome": "Sulfato de amônio",
+    "resumo": "Sal nitrogenado com 21% de N recuperado do digestato, pronto para o mercado",
+    "anel": 4,
+    "tags": ["fertilizante", "quimica"],
+    "icone": "FlaskConical",
+    "texto": {
+      "descricao": "Produto do lavador ácido no stripping de amônia: solução ou cristal de sulfato de amônio, fertilizante nitrogenado padrão com enxofre junto. Retira nitrogênio do digestato e o coloca numa forma que pode sair da usina.",
+      "limitacoes": [
+        "Só se justifica onde a área de aplicação limita a dose de nitrogênio.",
+        "O consumo de ácido sulfúrico traz de volta um insumo mineral à conta ambiental."
+      ]
+    },
+    "paramsRelevantes": ["etanol_por_cana", "vinhaca_disponivel"],
+    "fontes": ["atlas2020_p67"]
+  },
+  {
+    "id": "cana.prod.substrato_mudas",
+    "kind": "produto",
+    "nome": "Substrato para mudas",
+    "resumo": "Mistura à base de torta compostada onde a gema pré-brotada forma raiz",
+    "anel": 4,
+    "tags": ["fertilizante", "solo"],
+    "icone": "Sprout",
+    "texto": {
+      "descricao": "Substrato de viveiro com porosidade, retenção de água e nutrição inicial, formulado com torta compostada, cinza peneirada e material comercial. Baixo volume, alto valor por tonelada, e destino curto: o próprio canavial que o gerou.",
+      "limitacoes": [
+        "Exige composto maduro; material cru compromete a germinação da gema.",
+        "Consome uma fração mínima da torta disponível."
+      ]
+    },
+    "paramsRelevantes": ["torta_gerada", "torta_disponivel"],
+    "fontes": ["atlas2020_p66"]
+  },
+  {
+    "id": "cana.prod.acidos_humicos",
+    "kind": "produto",
+    "nome": "Ácidos húmicos",
+    "resumo": "Extrato de baixo volume e alto valor, vendido como condicionador de solo",
+    "anel": 4,
+    "tags": ["fertilizante", "quimica", "solo"],
+    "icone": "Pipette",
+    "texto": {
+      "descricao": "Concentrado líquido ou sólido de substâncias húmicas, aplicado em doses de litros por hectare. Melhora a disponibilidade de fósforo e micronutrientes e estimula o crescimento radicular. O mercado brasileiro é abastecido por leonardita importada, o que abre espaço para uma fonte nacional.",
+      "limitacoes": [
+        "Efeito agronômico varia muito com solo e dose; a literatura é heterogênea.",
+        "Sem norma de qualidade robusta, o produto é difícil de comparar entre fornecedores."
+      ]
+    },
+    "paramsRelevantes": ["torta_gerada", "torta_disponivel"],
+    "fontes": ["atlas2020_p66"]
+  },
+  {
+    "id": "cana.prod.biofertilizante_algal",
+    "kind": "produto",
+    "nome": "Biofertilizante algal",
+    "resumo": "Biomassa de microalgas colhida do digestato, devolvida ao solo com N e P",
+    "anel": 4,
+    "tags": ["fertilizante", "solo"],
+    "icone": "TestTube",
+    "texto": {
+      "descricao": "A biomassa que cresceu consumindo o nitrogênio e o fósforo do digestato. Aplicada ao solo, devolve esses nutrientes em forma orgânica, junto com polissacarídeos que ajudam a agregar as partículas do solo.",
+      "limitacoes": [
+        "A colheita e a secagem consomem mais energia do que o produto vale como adubo.",
+        "Sem produção em escala no Brasil, não há preço de referência."
+      ]
+    },
+    "paramsRelevantes": ["etanol_por_cana", "vinhaca_disponivel"],
+    "fontes": ["atlas2020_p67"]
+  },
+
+  {
+    "id": "cana.dest.solo_canavial",
+    "kind": "destino",
+    "nome": "Solo do canavial",
+    "resumo": "O mesmo solo que produziu a cana recebe de volta quase tudo o que saiu dela",
+    "anel": 4,
+    "tags": ["solo", "fertilizante"],
+    "icone": "Merge",
+    "texto": {
+      "descricao": "Este é o destino que fecha o atlas. Vinhaça, digestato, torta, composto, cinza, palha e biochar convergem para o mesmo lugar: o solo que vai produzir a próxima safra. A cana é uma cultura semiperene, colhida no mesmo talhão por cinco ou seis cortes, o que torna a reposição de nutriente uma operação anual e obrigatória.",
+      "limitacoes": [
+        "A dose de cada material é limitada pelo nutriente mais concentrado, quase sempre o potássio.",
+        "Na prática, o raio de transporte define o que chega a cada talhão, e não a necessidade da planta.",
+        "Tráfego de máquina pesada para distribuir resíduo compacta o solo e desfaz parte do ganho."
+      ]
+    },
+    "paramsRelevantes": ["torta_disponivel", "vinhaca_disponivel", "palha_recolhivel"],
+    "fontes": ["atlas2020_p66", "cetesb_p4231", "carvalho2017"]
+  },
+  {
+    "id": "cana.dest.subst_fertilizante",
+    "kind": "destino",
+    "nome": "Fertilizante mineral evitado",
+    "resumo": "Cada tonelada de K devolvida é cloreto de potássio importado que não se compra",
+    "anel": 4,
+    "tags": ["fertilizante", "solo"],
+    "icone": "Warehouse",
+    "texto": {
+      "descricao": "O Brasil importa a maior parte do fertilizante que consome, e no potássio a dependência externa passa de 90%. Vinhaça, digestato, cinza e torta cobrem uma parcela relevante da adubação do próprio canavial: potássio, no caso da vinhaça e da cinza; fósforo e cálcio, no caso da torta. É a economia mais concreta de toda a cadeia de resíduos, e a que aparece primeiro no caixa da usina.",
+      "limitacoes": [
+        "A substituição é parcial: o nitrogênio continua vindo majoritariamente de fonte mineral.",
+        "O crédito de nutriente só é real quando a dose é calculada por análise de solo e de resíduo."
+      ]
+    },
+    "paramsRelevantes": ["torta_disponivel", "vinhaca_disponivel"],
+    "fontes": ["atlas2020_p66", "market_prices"]
+  },
+  {
+    "id": "cana.dest.materia_organica_solo",
+    "kind": "destino",
+    "nome": "Matéria orgânica do solo",
+    "resumo": "Carbono que permanece: palha e composto sustentam o estoque de C e a vida do solo",
+    "anel": 4,
+    "tags": ["solo", "regulatorio"],
+    "icone": "Layers",
+    "texto": {
+      "descricao": "A matéria orgânica governa quase tudo o que o solo faz: retém água, troca cátions, agrega partículas e alimenta a microbiota. O fim da queima da palha inverteu uma tendência de décadas de perda de carbono nos solos do canavial paulista. Composto, digestato sólido e biochar reforçam esse estoque a partir da indústria.",
+      "limitacoes": [
+        "O ganho de carbono satura: depois de alguns anos o solo para de acumular.",
+        "Medir variação de estoque de carbono exige amostragem profunda e séries longas.",
+        "Remover palha demais reverte o ganho em poucas safras."
+      ]
+    },
+    "paramsRelevantes": ["palha_gerada", "palha_recolhivel", "preco_carbono"],
+    "fontes": ["carvalho2017", "tenelli2021", "leal2013"]
+  },
+  {
+    "id": "cana.dest.controle_erosao",
+    "kind": "destino",
+    "nome": "Controle de erosão",
+    "resumo": "A manta de palha corta o impacto da chuva e segura o solo no talhão",
+    "anel": 4,
+    "tags": ["solo"],
+    "icone": "Mountain",
+    "texto": {
+      "descricao": "A erosão em canavial começa com o impacto da gota de chuva desagregando o agregado do solo. A palha intercepta esse impacto e reduz a velocidade do escoamento superficial. Em solos arenosos e declivosos do oeste paulista, é o serviço mais importante que a cobertura presta.",
+      "limitacoes": [
+        "O efeito cai rápido quando a cobertura fica abaixo de 7 ou 8 toneladas de matéria seca por hectare.",
+        "Não substitui terraço e plantio em nível em áreas de declive acentuado."
+      ]
+    },
+    "paramsRelevantes": ["palha_gerada", "palha_recolhivel"],
+    "fontes": ["carvalho2017", "hassuani2005"]
+  },
+  {
+    "id": "cana.dest.agua_no_solo",
+    "kind": "destino",
+    "nome": "Água retida no solo",
+    "resumo": "Sob palha a evaporação cai, e o canavial atravessa melhor o veranico",
+    "anel": 4,
+    "tags": ["solo"],
+    "icone": "CloudDrizzle",
+    "texto": {
+      "descricao": "A cobertura morta reduz a evaporação direta da superfície e amortece a temperatura do solo. Em anos de veranico, isso se traduz em produtividade preservada. A lâmina de vinhaça e o gotejamento atuam pelo lado oposto, adicionando água; o biochar age sobre a capacidade de armazenamento do próprio solo.",
+      "limitacoes": [
+        "Em solo já encharcado, a palha atrasa a secagem e prejudica a brotação.",
+        "O ganho hídrico varia com o tipo de solo e não se acumula indefinidamente."
+      ]
+    },
+    "paramsRelevantes": ["palha_gerada", "palha_recolhivel"],
+    "fontes": ["carvalho2017", "tenelli2021"]
+  },
+  {
+    "id": "cana.dest.supressao_daninhas",
+    "kind": "destino",
+    "nome": "Supressão de daninhas",
+    "resumo": "A palha bloqueia a luz, reduz a germinação de daninhas e o gasto com herbicida",
+    "anel": 4,
+    "tags": ["solo"],
+    "icone": "Scissors",
+    "texto": {
+      "descricao": "Muitas sementes de daninha precisam de luz para germinar. Uma cobertura contínua de palha reduz drasticamente a emergência dessas espécies e permite cortar aplicações de herbicida pré-emergente. É um benefício econômico direto, medido em litros de defensivo não aplicados.",
+      "limitacoes": [
+        "Espécies tolerantes à sombra, como a corda-de-viola, atravessam a palhada.",
+        "A palha também intercepta o herbicida pré-emergente, exigindo ajuste de manejo."
+      ]
+    },
+    "paramsRelevantes": ["palha_gerada", "palha_recolhivel"],
+    "fontes": ["carvalho2017"]
+  },
+  {
+    "id": "cana.dest.pressao_pragas",
+    "kind": "destino",
+    "nome": "Pressão de pragas na palhada",
+    "resumo": "A mesma palha que protege o solo abriga broca, migdolus e cigarrinha",
+    "anel": 4,
+    "tags": ["solo"],
+    "icone": "CircleDashed",
+    "texto": {
+      "descricao": "Nem todo efeito da palhada é favorável. A cobertura estabiliza umidade e temperatura também para as pragas: a cigarrinha-das-raízes encontra o microclima de que precisa, e a broca-gigante e o migdolus se abrigam sob a manta. Este nó existe para que o mapa não conte apenas o lado bom da cobertura, e é uma das razões técnicas para recolher parte da palha.",
+      "limitacoes": [
+        "A relação entre quantidade de palha e população de praga não é linear nem igual em todo o estado.",
+        "Separar o efeito da palha do efeito do fim da queima é difícil, porque as duas coisas aconteceram juntas."
+      ]
+    },
+    "paramsRelevantes": ["palha_recolhivel"],
+    "fontes": ["carvalho2017", "tenelli2021"]
+  },
+  {
+    "id": "cana.dest.emissoes_solo",
+    "kind": "destino",
+    "nome": "Emissões de N₂O do solo",
+    "resumo": "Vinhaça com N mineral sobre palha úmida eleva o N₂O, gás de alto potencial",
+    "anel": 4,
+    "tags": ["solo", "regulatorio"],
+    "icone": "Wind",
+    "texto": {
+      "descricao": "Aplicar vinhaça junto com nitrogênio mineral, sobre palha úmida, cria exatamente a condição que a desnitrificação pede: carbono lábil, nitrato e pouco oxigênio. Medições em canavial paulista registram picos de óxido nitroso nessa combinação, e o N₂O tem potencial de aquecimento centenas de vezes maior que o do CO₂. A vinhaça digerida chega ao solo com muito menos carbono lábil e reduz a emissão de metano; o efeito sobre o N₂O ainda é disputado.",
+      "limitacoes": [
+        "As medições de campo são pontuais e variam muito entre safras, solos e doses.",
+        "Separar o efeito da vinhaça do efeito do adubo nitrogenado exige experimento fatorial, que existe em poucos sítios.",
+        "Os fatores de emissão usados nos inventários nacionais são médias, não valores locais."
+      ]
+    },
+    "paramsRelevantes": ["vinhaca_disponivel", "palha_recolhivel", "preco_carbono"],
+    "fontes": ["cetesb_p4231", "atlas2020_p67"]
+  },
+  {
+    "id": "cana.dest.salinizacao",
+    "kind": "destino",
+    "nome": "Salinização e lixiviação",
+    "resumo": "Dose acima da extração de K saliniza o solo e empurra nitrato para o lençol",
+    "anel": 4,
+    "tags": ["solo", "regulatorio"],
+    "icone": "Gauge",
+    "texto": {
+      "descricao": "É por isso que a P4.231 existe. Aplicada acima do que a soqueira extrai, a vinhaça acumula potássio no perfil, eleva a condutividade elétrica e desloca cálcio e magnésio do complexo de troca; o nitrato não absorvido desce com a água de chuva. A norma da CETESB fixa a dose máxima justamente em função do potássio do solo e da vinhaça.",
+      "limitacoes": [
+        "O efeito é cumulativo e lento: aparece depois de anos de sobredose no mesmo talhão.",
+        "Monitorar exige análise periódica de solo em profundidade, que nem toda usina faz."
+      ]
+    },
+    "paramsRelevantes": ["vinhaca_disponivel", "etanol_por_cana"],
+    "fontes": ["cetesb_p4231"]
+  },
+  {
+    "id": "cana.dest.conformidade_p4231",
+    "kind": "destino",
+    "nome": "Conformidade com a P4.231",
+    "resumo": "O Plano de Aplicação de Vinhaça é condição da licença de operação da usina",
+    "anel": 4,
+    "tags": ["regulatorio", "solo"],
+    "icone": "Award",
+    "texto": {
+      "descricao": "A norma técnica P4.231 da CETESB disciplina o armazenamento, o transporte e a aplicação de vinhaça em solo agrícola no estado de São Paulo. Proíbe o lançamento em corpo d'água, exige impermeabilização de tanques e canais, impõe distâncias mínimas de núcleos urbanos e de corpos d'água, e obriga cada usina a protocolar um Plano de Aplicação de Vinhaça com a dose calculada por talhão. É a razão pela qual a fertirrigação não é uma opção: é o único destino legal.",
+      "limitacoes": [
+        "A fiscalização se apoia em autodeclaração e amostragem, não em medição contínua.",
+        "A norma foi escrita para a vinhaça in natura; a vinhaça biodigerida é enquadrada na mesma regra, sem dispositivo próprio."
+      ]
+    },
+    "paramsRelevantes": ["vinhaca_disponivel"],
+    "fontes": ["cetesb_p4231"]
+  },
+  {
+    "id": "cana.dest.renovabio_neea",
+    "kind": "destino",
+    "nome": "Nota de eficiência RenovaBio",
+    "resumo": "Substituir adubo mineral e digerir a vinhaça melhoram a nota do etanol",
+    "anel": 4,
+    "tags": ["regulatorio", "energia"],
+    "icone": "Milestone",
+    "texto": {
+      "descricao": "A RenovaCalc calcula a intensidade de carbono de cada usina certificada, e o fertilizante mineral é uma das maiores parcelas do inventário agrícola. Reciclar nutriente pela vinhaça, pela torta e pela cinza reduz essa parcela e melhora a nota de eficiência energético-ambiental, que define quantos CBIOs a usina emite por metro cúbico de etanol.",
+      "limitacoes": [
+        "O ganho depende de comprovar a substituição de adubo mineral, o que exige registro de dose por talhão.",
+        "As emissões de N₂O da própria fertirrigação entram no cálculo e consomem parte do ganho."
+      ]
+    },
+    "paramsRelevantes": ["preco_carbono", "etanol_por_cana"],
+    "fontes": ["renovacalc", "unica2024"]
+  },
+  {
+    "id": "cana.dest.credito_carbono_solo",
+    "kind": "destino",
+    "nome": "Crédito de carbono no solo",
+    "resumo": "Carbono em palha e biochar pode virar crédito, se houver medição confiável",
+    "anel": 4,
+    "tags": ["regulatorio", "solo"],
+    "icone": "Atom",
+    "texto": {
+      "descricao": "O mercado voluntário paga por carbono removido da atmosfera e mantido fora dela. O biochar tem metodologias de remoção mais aceitas, porque a permanência do carbono é longa e mensurável; o carbono de palha no solo é mais barato de gerar e muito mais difícil de comprovar. Nenhum projeto de cana paulista emitiu crédito de solo em escala.",
+      "limitacoes": [
+        "Estoque de carbono em solo tropical é caro de medir e reverte se o manejo mudar.",
+        "Sem adicionalidade demonstrada, a palha que já ficava no campo não gera crédito."
+      ]
+    },
+    "paramsRelevantes": ["preco_carbono", "palha_recolhivel"],
+    "fontes": ["carvalho2017", "renovacalc"]
+  },
+  {
+    "id": "cana.dest.circuito_hidrico",
+    "kind": "destino",
+    "nome": "Circuito hídrico fechado",
+    "resumo": "Captação abaixo de 1 m³ por tonelada de cana, contra 5 m³ nos anos 1990",
+    "anel": 4,
+    "tags": ["regulatorio"],
+    "icone": "Droplet",
+    "texto": {
+      "descricao": "O setor sucroenergético paulista reduziu a captação de água por tonelada de cana em cerca de 80% em três décadas, por reuso em cascata, limpeza a seco e recirculação de condensados. É um dos indicadores ambientais em que o setor tem série histórica sólida e resultado inequívoco.",
+      "limitacoes": [
+        "A redução por tonelada convive com aumento de moagem: o volume absoluto captado caiu menos.",
+        "Fechar o circuito concentra sais nas correntes internas e exige purga periódica."
+      ]
+    },
+    "paramsRelevantes": ["cana_moida_sp"],
+    "fontes": ["unica2024"]
+  },
+  {
+    "id": "cana.dest.mercado_fertilizantes",
+    "kind": "destino",
+    "nome": "Mercado de fertilizantes",
+    "resumo": "Composto e organomineral que sobram são vendidos para café, citros e grãos",
+    "anel": 4,
+    "tags": ["fertilizante"],
+    "icone": "Truck",
+    "texto": {
+      "descricao": "Quando o produto fica seco, estável e registrado, ele deixa de ser resíduo com destino cativo e vira mercadoria. Composto, organomineral, vermicomposto e húmicos saem da usina para culturas vizinhas, e o preço passa a ser referência do valor do resíduo.",
+      "limitacoes": [
+        "O frete continua sendo o fator dominante do preço final.",
+        "Registro no Ministério da Agricultura e garantia de fórmula exigem estrutura que poucas usinas têm."
+      ]
+    },
+    "paramsRelevantes": ["torta_disponivel"],
+    "fontes": ["market_prices", "atlas2020_p66"]
+  },
+  {
+    "id": "cana.dest.replantio_canavial",
+    "kind": "destino",
+    "nome": "Replantio do canavial",
+    "resumo": "A muda pré-brotada fecha o ciclo mais curto: resíduo da cana volta como cana",
+    "anel": 4,
+    "tags": ["solo"],
+    "icone": "Sprout",
+    "texto": {
+      "descricao": "A cada cinco ou seis cortes o canavial é reformado. O sistema de mudas pré-brotadas reduz em mais de dez vezes a quantidade de cana-semente necessária, e o substrato dessas mudas pode vir da torta compostada da própria usina.",
+      "limitacoes": [
+        "O sistema exige viveiro, mão de obra treinada e logística de bandejas.",
+        "Ainda cobre parcela pequena da área reformada em São Paulo."
+      ]
+    },
+    "paramsRelevantes": ["torta_disponivel"],
+    "fontes": ["atlas2020_p66"]
+  },
+  {
+    "id": "cana.dest.controle_biologico",
+    "kind": "destino",
+    "nome": "Controle biológico",
+    "resumo": "Fungos e parasitoides criados na usina combatem broca e cigarrinha sem inseticida",
+    "anel": 4,
+    "tags": ["solo"],
+    "icone": "Microscope",
+    "texto": {
+      "descricao": "São Paulo é o maior programa de controle biológico em área contínua do mundo, apoiado nas biofábricas das próprias usinas. É a resposta prática à pressão de pragas que a palhada favorece, e o ponto em que resíduo, solo e fitossanidade se encontram.",
+      "limitacoes": [
+        "A eficácia depende de clima e de janela de aplicação, e cai em anos secos.",
+        "O uso de resíduo da cana como substrato de multiplicação ainda é pesquisa."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["unica2024"]
+  }
+]

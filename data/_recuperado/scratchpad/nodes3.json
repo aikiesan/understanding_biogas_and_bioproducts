@@ -1,0 +1,985 @@
+[
+  {
+    "id": "cana.rota.alcohol_to_jet",
+    "kind": "rota",
+    "nome": "Alcohol-to-jet (ATJ)",
+    "resumo": "Quatro passos catalíticos transformam etanol anidro em querosene de aviação",
+    "anel": 3,
+    "tags": ["combustivel", "energia", "regulatorio"],
+    "icone": "Wind",
+    "texto": {
+      "descricao": "A aviação não pode eletrificar no médio prazo e depende de combustível líquido denso. A rota alcohol-to-jet parte do etanol, produto que São Paulo já faz em maior volume no mundo depois dos Estados Unidos, e monta cadeias longas de hidrocarboneto. É a rota de SAF com maior aderência à base industrial paulista.",
+      "comoFunciona": "O etanol é desidratado a eteno, o eteno é oligomerizado em cadeias de 8 a 16 carbonos, essas cadeias são hidrogenadas e o produto é fracionado em querosene, nafta e diesel.",
+      "limitacoes": [
+        "São necessários cerca de 1,6 litro de etanol por litro de querosene, o que pressiona a oferta.",
+        "Custo por litro fica de duas a quatro vezes acima do querosene fóssil sem política de apoio."
+      ]
+    },
+    "rota": {
+      "trl": 8,
+      "statusSP": "anunciado",
+      "notaStatus": "Há projetos anunciados de ATJ a partir de etanol brasileiro e nenhuma planta construída em São Paulo. A Lei 14.993/2024, do Combustível do Futuro, cria a obrigação de redução de emissões no querosene de aviação a partir de 2027 e é o que sustenta os anúncios."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "etanol_por_cana", "preco_carbono"],
+    "fontes": ["lanzajet_atj", "lei_14993_2024", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.saf",
+    "kind": "produto",
+    "nome": "SAF — querosene de aviação",
+    "resumo": "Bioquerosene certificado, misturável até 50% no querosene fóssil",
+    "anel": 4,
+    "tags": ["combustivel", "energia"],
+    "icone": "Fuel",
+    "texto": {
+      "descricao": "Combustível de aviação sustentável, quimicamente equivalente ao querosene fóssil e aprovado em mistura pelas normas internacionais. Reduz de 60 a 80% as emissões de ciclo de vida quando feito de etanol de cana. É hoje a única alternativa de descarbonização da aviação de longo curso.",
+      "limitacoes": [
+        "Mistura limitada a 50% pelas especificações vigentes, por falta de aromáticos.",
+        "Volume mundial produzido ainda é uma fração de 1% do consumo de querosene."
+      ]
+    },
+    "paramsRelevantes": ["etanol_por_cana", "cana_moida_sp", "preco_carbono"],
+    "fontes": ["lanzajet_atj", "lei_14993_2024"]
+  },
+  {
+    "id": "cana.prod.nafta_renovavel",
+    "kind": "produto",
+    "nome": "Nafta e diesel renováveis",
+    "resumo": "Coprodutos do ATJ que vão à petroquímica e ao transporte pesado",
+    "anel": 4,
+    "tags": ["combustivel", "quimica"],
+    "icone": "Droplet",
+    "texto": {
+      "descricao": "O fracionamento do ATJ não entrega só querosene: gera nafta, matéria-prima de eteno e propeno na petroquímica, e uma fração diesel. Esses coprodutos respondem por parte relevante da receita da planta.",
+      "limitacoes": [
+        "Quanto maior a seletividade a querosene, menor o volume desses coprodutos."
+      ]
+    },
+    "paramsRelevantes": ["etanol_por_cana"],
+    "fontes": ["lanzajet_atj"]
+  },
+  {
+    "id": "cana.rota.farnesano_saf",
+    "kind": "rota",
+    "nome": "Hidrogenação a farnesano",
+    "resumo": "Farneseno hidrogenado vira o primeiro SAF de cana aprovado por norma",
+    "anel": 3,
+    "tags": ["combustivel"],
+    "icone": "Cog",
+    "texto": {
+      "descricao": "O farneseno produzido por levedura, ao ser hidrogenado, gera farnesano, aprovado como combustível de aviação em mistura de até 10%. Foi a primeira rota de SAF a partir de cana certificada internacionalmente. A produção segue direcionada a cosméticos, onde o mesmo produto vale muito mais.",
+      "comoFunciona": "As quatro duplas ligações do farneseno são saturadas com hidrogênio sobre catalisador metálico, gerando um alcano ramificado de 15 carbonos, estável e com ponto de congelamento baixo.",
+      "limitacoes": [
+        "Limite de mistura de 10%, metade do permitido a outras rotas.",
+        "Só é competitiva se o mercado de cosmético estiver saturado."
+      ]
+    },
+    "rota": {
+      "trl": 7,
+      "statusSP": "inexistente",
+      "notaStatus": "A produção de farneseno existe em São Paulo, mas o direcionamento a combustível de aviação não é praticado hoje no estado."
+    },
+    "paramsRelevantes": ["cana_moida_sp"],
+    "fontes": ["amyris_brotas", "lei_14993_2024"]
+  },
+  {
+    "id": "cana.rota.desidratacao_etanol",
+    "kind": "rota",
+    "nome": "Desidratação a eteno",
+    "resumo": "Etanol sobre alumina a 400 °C perde água e vira eteno verde",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Thermometer",
+    "texto": {
+      "descricao": "A reação mais simples e mais consequente da química do etanol: tirar uma molécula de água e obter eteno, o insumo de maior volume da petroquímica mundial. Cada quilo de etanol rende 0,58 kg de eteno. É a porta pela qual a cana entra na cadeia dos plásticos.",
+      "comoFunciona": "Sobre catalisador ácido de alumina ou zeólita a 350-450 °C, o etanol perde água e forma eteno com seletividade acima de 97%; o eteno é depois purificado a grau polímero.",
+      "limitacoes": [
+        "É endotérmica e consome muito calor por tonelada de eteno.",
+        "A competitividade depende do preço do etanol frente ao da nafta e do gás natural."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "inexistente",
+      "notaStatus": "Rota industrial madura no Brasil, mas a planta de eteno de etanol fica em Triunfo, no Rio Grande do Sul. São Paulo entra como fornecedor de etanol, não como produtor de eteno verde."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "etanol_por_cana"],
+    "fontes": ["braskem_pe_verde", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.etileno_verde",
+    "kind": "produto",
+    "nome": "Eteno verde",
+    "resumo": "Mesma molécula do eteno fóssil, com carbono que veio da atmosfera",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Atom",
+    "texto": {
+      "descricao": "Insumo básico de polietileno, PVC, óxido de eteno e uma lista longa de químicos. Indistinguível do eteno fóssil na planta a jusante, o que permite trocar a origem sem trocar o parque industrial.",
+      "limitacoes": [
+        "Preço maior que o do eteno de nafta; o prêmio depende de demanda por conteúdo renovável."
+      ]
+    },
+    "paramsRelevantes": ["etanol_por_cana", "cana_moida_sp"],
+    "fontes": ["braskem_pe_verde"]
+  },
+  {
+    "id": "cana.rota.polietileno_verde",
+    "kind": "rota",
+    "nome": "Polimerização a PE verde",
+    "resumo": "Eteno de etanol vira polietileno idêntico ao fóssil, reciclável na mesma cadeia",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Cog",
+    "texto": {
+      "descricao": "O eteno verde é polimerizado nos mesmos reatores do polietileno convencional, gerando resina com propriedades idênticas e certificado de carbono renovável. É o bioproduto de cana de maior volume no mundo, com centenas de milhares de toneladas por ano. Não é biodegradável, e essa é a característica mais mal compreendida do produto.",
+      "comoFunciona": "O eteno é polimerizado com catalisador de coordenação em fase gasosa ou em solução, formando cadeias de polietileno de alta ou baixa densidade.",
+      "limitacoes": [
+        "Renovável não significa biodegradável: o PE verde persiste no ambiente como o fóssil.",
+        "A capacidade instalada no Brasil está fora de São Paulo."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "inexistente",
+      "notaStatus": "Opera comercialmente no Brasil desde 2010, em Triunfo (RS), com etanol comprado em boa parte de usinas paulistas."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "etanol_por_cana"],
+    "fontes": ["braskem_pe_verde"]
+  },
+  {
+    "id": "cana.prod.polietileno_verde",
+    "kind": "produto",
+    "nome": "Polietileno verde",
+    "resumo": "Resina de origem vegetal com desempenho igual ao PE de petróleo",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Package",
+    "texto": {
+      "descricao": "Usada em embalagem, filme, tampa, brinquedo e cosmético por marcas que buscam conteúdo renovável certificado. Entra na mesma cadeia de reciclagem do polietileno convencional.",
+      "limitacoes": [
+        "Vantagem climática vem só da origem do carbono, não do fim de vida."
+      ]
+    },
+    "paramsRelevantes": ["etanol_por_cana"],
+    "fontes": ["braskem_pe_verde"]
+  },
+  {
+    "id": "cana.rota.pvc_verde",
+    "kind": "rota",
+    "nome": "PVC de eteno de etanol",
+    "resumo": "Eteno verde clorado dá PVC com parte do carbono de origem vegetal",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Cog",
+    "texto": {
+      "descricao": "O PVC é metade carbono e metade cloro em massa. Trocar o eteno fóssil pelo de etanol torna renovável a fração orgânica da resina. A indústria de PVC paulista tem escala e já consome eteno, o que faria a substituição ser só uma troca de fornecedor.",
+      "comoFunciona": "O eteno reage com cloro formando dicloroetano, que é craqueado a cloreto de vinila e polimerizado em PVC pelo mesmo processo usado com eteno fóssil.",
+      "limitacoes": [
+        "No máximo metade do carbono da resina é renovável, pelo próprio balanço da molécula.",
+        "O cloro vem de eletrólise intensiva em eletricidade, o que domina a pegada do produto."
+      ]
+    },
+    "rota": {
+      "trl": 7,
+      "statusSP": "inexistente",
+      "notaStatus": "Já houve anúncio de eteno de etanol para PVC em São Paulo, sem planta construída. O PVC produzido no estado usa eteno fóssil."
+    },
+    "paramsRelevantes": ["etanol_por_cana", "cana_moida_sp"],
+    "fontes": ["cgee_quimica_verde", "braskem_pe_verde"]
+  },
+  {
+    "id": "cana.prod.pvc_verde",
+    "kind": "produto",
+    "nome": "PVC parcialmente renovável",
+    "resumo": "Resina de tubos e perfis com a fração orgânica vinda de etanol",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Cylinder",
+    "texto": {
+      "descricao": "Aplicações em construção civil: tubos, conexões, perfis de janela e revestimento. O apelo é reduzir a intensidade de carbono de um material de longa vida útil.",
+      "limitacoes": [
+        "Certificação de conteúdo renovável precisa de rastreabilidade em toda a cadeia."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.rota.meg_verde",
+    "kind": "rota",
+    "nome": "MEG verde",
+    "resumo": "Eteno oxidado vira monoetilenoglicol, o outro monômero da garrafa PET",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Cog",
+    "texto": {
+      "descricao": "O monoetilenoglicol é 30% da massa do PET e é o componente que já se produz de cana em escala mundial, por rota indireta a partir de etanol. Também é usado em fluido de arrefecimento e em fibras de poliéster. Com FDCA renovável, fecharia a primeira garrafa 100% vegetal.",
+      "comoFunciona": "O eteno é oxidado com ar a óxido de eteno e hidratado a monoetilenoglicol; há também rotas diretas de hidrogenólise de açúcar em desenvolvimento.",
+      "limitacoes": [
+        "Oxidação do eteno exige planta grande e catalisador de prata caro.",
+        "As rotas diretas de açúcar a glicóis ainda não passaram de demonstração."
+      ]
+    },
+    "rota": {
+      "trl": 8,
+      "statusSP": "inexistente",
+      "notaStatus": "Existe produção de MEG de cana no mundo, principalmente na Índia a partir de etanol de melaço. Nada em São Paulo."
+    },
+    "paramsRelevantes": ["etanol_por_cana", "cana_moida_sp"],
+    "fontes": ["cgee_quimica_verde", "bozell2010"]
+  },
+  {
+    "id": "cana.prod.meg_verde",
+    "kind": "produto",
+    "nome": "MEG verde",
+    "resumo": "Glicol renovável para PET, poliéster têxtil e anticongelante",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Droplet",
+    "texto": {
+      "descricao": "Responsável pela fração renovável das garrafas de PET vegetal já no mercado. Também vai a fibras de poliéster e fluidos térmicos.",
+      "limitacoes": [
+        "Sozinho, leva o PET só a 30% de conteúdo renovável."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.rota.butadieno_verde",
+    "kind": "rota",
+    "nome": "Butadieno de etanol",
+    "resumo": "Processo Lebedev converte etanol em butadieno, a base da borracha sintética",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Cog",
+    "texto": {
+      "descricao": "O butadieno é o monômero da borracha sintética de pneus e foi produzido de etanol em escala industrial na União Soviética e nos Estados Unidos até os anos 1960. Com a petroquímica, o butadieno passou a ser subproduto do craqueamento de nafta. A escassez desse subproduto em rotas modernas de gás natural reabre a discussão sobre a rota do etanol.",
+      "comoFunciona": "Sobre catalisador de óxidos mistos a 350-400 °C, o etanol é desidrogenado a acetaldeído, condensado e desidratado numa sequência de passos que termina em butadieno.",
+      "limitacoes": [
+        "Seletividade de 60 a 70%, com muitos coprodutos a separar.",
+        "Consome cerca de 2,5 kg de etanol por quilo de butadieno."
+      ]
+    },
+    "rota": {
+      "trl": 6,
+      "statusSP": "inexistente",
+      "notaStatus": "Rota historicamente industrial, hoje sem planta comercial no mundo. Nenhum projeto em operação em São Paulo."
+    },
+    "paramsRelevantes": ["etanol_por_cana", "cana_moida_sp"],
+    "fontes": ["cgee_quimica_verde", "bozell2010"]
+  },
+  {
+    "id": "cana.prod.butadieno_verde",
+    "kind": "produto",
+    "nome": "Butadieno verde",
+    "resumo": "Monômero de borracha de pneu com carbono renovável",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "CircleDot",
+    "texto": {
+      "descricao": "Base das borrachas SBR e BR, usadas sobretudo em pneus. Uma rota renovável mudaria a pegada de um produto de altíssimo volume e sem alternativa biodegradável.",
+      "limitacoes": [
+        "Preço muito atrelado ao ciclo do craqueamento de nafta."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.rota.levedura_racao",
+    "kind": "rota",
+    "nome": "Levedura seca para ração",
+    "resumo": "Excedente de levedura da dorna é secado e vira ingrediente proteico de ração",
+    "anel": 3,
+    "tags": ["alimento"],
+    "icone": "Filter",
+    "texto": {
+      "descricao": "A fermentação alcoólica multiplica a levedura, e o excedente precisa ser retirado do circuito. Secado em spray dryer ou rolo, esse creme vira farelo com 35 a 45% de proteína. É a rota de bioproduto de cana com maior volume real em São Paulo depois do açúcar e do etanol.",
+      "comoFunciona": "O creme de levedura separado nas centrífugas é lavado, concentrado e secado; a inativação térmica encerra a atividade fermentativa e estabiliza o produto.",
+      "limitacoes": [
+        "Secagem consome energia e concorre com o uso do vapor no processo.",
+        "Preço acompanha o farelo de soja, o que limita o retorno."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "operando",
+      "notaStatus": "Prática difundida nas usinas paulistas; parte do excedente ainda volta ao processo ou vai à vinhaça em vez de ser secada."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "etanol_por_cana"],
+    "fontes": ["unica2024", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.levedura_racao",
+    "kind": "produto",
+    "nome": "Levedura seca",
+    "resumo": "Farelo proteico e fonte de vitaminas do complexo B para nutrição animal",
+    "anel": 4,
+    "tags": ["alimento"],
+    "icone": "Beef",
+    "texto": {
+      "descricao": "Ingrediente consolidado em rações de aves, suínos, bovinos e pets, valorizado pela proteína e pelo efeito sobre a microbiota. Vem de um fluxo que a usina precisa purgar de qualquer forma.",
+      "limitacoes": [
+        "Composição varia com a condição da fermentação, o que dificulta padronizar o produto."
+      ]
+    },
+    "paramsRelevantes": ["etanol_por_cana"],
+    "fontes": ["unica2024"]
+  },
+  {
+    "id": "cana.rota.extrato_levedura",
+    "kind": "rota",
+    "nome": "Extrato de levedura",
+    "resumo": "Autólise abre a célula e libera peptídeos e nucleotídeos de sabor umami",
+    "anel": 3,
+    "tags": ["alimento"],
+    "icone": "Blend",
+    "texto": {
+      "descricao": "Rompendo a célula da levedura, o conteúdo interno vira extrato rico em aminoácidos e nucleotídeos, usado como realçador de sabor natural e base de meios de cultura. Vale muitas vezes mais que a levedura seca. São Paulo tem produção industrial consolidada a partir de levedura de cana.",
+      "comoFunciona": "As próprias enzimas da levedura degradam suas proteínas e ácidos nucleicos em temperatura controlada; a parede insolúvel é separada por centrifugação e o extrato é concentrado ou secado.",
+      "limitacoes": [
+        "Exige levedura de qualidade constante e livre de contaminação bacteriana.",
+        "Processo mais caro e mais exigente em controle que a simples secagem."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "operando",
+      "notaStatus": "Há produção industrial de extrato de levedura de cana em São Paulo, com exportação para a indústria de alimentos.",
+      "exemplos": [{ "nome": "Biorigin", "municipio": "Lençóis Paulista" }]
+    },
+    "paramsRelevantes": ["cana_moida_sp", "etanol_por_cana"],
+    "fontes": ["biorigin", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.extrato_levedura",
+    "kind": "produto",
+    "nome": "Extrato de levedura",
+    "resumo": "Realçador de sabor natural, alternativa ao glutamato adicionado",
+    "anel": 4,
+    "tags": ["alimento"],
+    "icone": "Container",
+    "texto": {
+      "descricao": "Ingrediente de sopas, molhos, snacks e pratos prontos, também usado em meios de cultura microbiológicos. Permite declarar sabor natural na rotulagem, o que sustenta o prêmio de preço.",
+      "limitacoes": [
+        "Mercado técnico e exigente em especificação sensorial e microbiológica."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["biorigin"]
+  },
+  {
+    "id": "cana.rota.betaglucana",
+    "kind": "rota",
+    "nome": "Beta-glucanas e MOS",
+    "resumo": "A parede da levedura vira aditivo imunomodulador para animais e humanos",
+    "anel": 3,
+    "tags": ["alimento"],
+    "icone": "Filter",
+    "texto": {
+      "descricao": "O que sobra da autólise, a parede celular, contém beta-glucanas e mananoligossacarídeos. As beta-glucanas modulam a resposta imune; os MOS adsorvem bactérias patogênicas no intestino e substituem antibióticos promotores de crescimento. É a fração de maior valor unitário da levedura.",
+      "comoFunciona": "A parede separada por centrifugação é lavada e fracionada; tratamentos enzimáticos e químicos concentram a beta-glucana e a fração de manoproteína.",
+      "limitacoes": [
+        "Rendimento baixo por tonelada de levedura, o que exige escala de fermentação grande.",
+        "Alegações funcionais dependem de aprovação regulatória por mercado."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "operando",
+      "notaStatus": "Produzidas em São Paulo a partir de levedura de cana e exportadas para nutrição animal e humana.",
+      "exemplos": [{ "nome": "Biorigin", "municipio": "Lençóis Paulista" }]
+    },
+    "paramsRelevantes": ["cana_moida_sp", "etanol_por_cana"],
+    "fontes": ["biorigin", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.betaglucana_mos",
+    "kind": "produto",
+    "nome": "Beta-glucanas e MOS",
+    "resumo": "Aditivo que substitui antibiótico promotor de crescimento em ração",
+    "anel": 4,
+    "tags": ["alimento"],
+    "icone": "Sparkles",
+    "texto": {
+      "descricao": "Usados em aquicultura, avicultura e pets para melhorar imunidade e controle sanitário, e em suplementos humanos. A restrição global a antibióticos em ração amplia esse mercado.",
+      "limitacoes": [
+        "Eficácia depende de dose e de espécie, com resultados variáveis na literatura."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["biorigin"]
+  },
+  {
+    "id": "cana.rota.co2_purificacao",
+    "kind": "rota",
+    "nome": "Purificação do CO2",
+    "resumo": "O gás da dorna já sai a 99% puro: só falta lavar, secar e liquefazer",
+    "anel": 3,
+    "tags": ["alimento", "quimica"],
+    "icone": "Filter",
+    "texto": {
+      "descricao": "Cada litro de etanol fermentado libera cerca de 0,77 kg de gás carbônico quase puro, sem nitrogênio nem gases de combustão. É a corrente de CO2 mais barata de capturar que existe, porque não precisa de separação. Hoje quase todo esse gás é ventilado para a atmosfera nas usinas paulistas.",
+      "comoFunciona": "O gás da dorna passa por lavagem com água para remover etanol arrastado, secagem, remoção de traços de enxofre e compostos voláteis e liquefação a baixa temperatura.",
+      "limitacoes": [
+        "A fermentação é sazonal e a demanda de CO2 não é, o que obriga a estocar ou a ficar ocioso.",
+        "Precisa atender norma alimentar rígida, com controle de contaminantes traço."
+      ]
+    },
+    "rota": {
+      "trl": 9,
+      "statusSP": "operando",
+      "notaStatus": "Algumas usinas paulistas já recuperam e vendem CO2 para o mercado de bebidas; a maior parte do gás fermentativo do estado continua sendo ventilada."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "etanol_por_cana"],
+    "fontes": ["unica2024", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.co2_alimenticio",
+    "kind": "produto",
+    "nome": "CO2 grau alimentício",
+    "resumo": "Gás carbônico purificado para carbonatação, gelo seco e atmosfera modificada",
+    "anel": 4,
+    "tags": ["alimento", "quimica"],
+    "icone": "Container",
+    "texto": {
+      "descricao": "Insumo de refrigerantes, cervejas e água com gás, além de gelo seco, embalagem em atmosfera modificada e extração supercrítica. O Brasil já teve crises de abastecimento de CO2 ligadas à dependência de fontes fósseis e de fertilizantes.",
+      "limitacoes": [
+        "Logística de gás liquefeito limita o raio econômico de entrega."
+      ]
+    },
+    "paramsRelevantes": ["etanol_por_cana", "cana_moida_sp"],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.dest.industria_bebidas",
+    "kind": "destino",
+    "nome": "Indústria de bebidas",
+    "resumo": "Carbonatação de refrigerante e cerveja com CO2 de origem fermentativa",
+    "anel": 4,
+    "tags": ["alimento"],
+    "icone": "Droplets",
+    "texto": {
+      "descricao": "Maior consumidor de CO2 grau alimentício do estado, com plantas concentradas na mesma região das usinas. É o destino natural do gás fermentativo purificado, e a substituição de CO2 fóssil por fermentativo reduz a emissão contábil da bebida.",
+      "limitacoes": [
+        "Demanda contínua ao longo do ano, contra oferta concentrada na safra."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.rota.beccs",
+    "kind": "rota",
+    "nome": "BECCS — armazenamento geológico",
+    "resumo": "Injetar o CO2 da fermentação no subsolo gera emissão líquida negativa",
+    "anel": 3,
+    "tags": ["energia", "regulatorio"],
+    "icone": "Mountain",
+    "texto": {
+      "descricao": "Como o carbono do CO2 fermentativo saiu da atmosfera pela fotossíntese, guardá-lo no subsolo resulta em remoção líquida, e não apenas em emissão evitada. A pureza do gás faz do etanol de cana um dos casos de menor custo por tonelada removida no mundo. O que falta em São Paulo é geologia caracterizada, marco regulatório aplicado e preço de carbono.",
+      "comoFunciona": "O CO2 purificado é comprimido a estado supercrítico e injetado a mais de 800 metros de profundidade em formação salina ou reservatório depletado, sob rocha selante que impede a migração.",
+      "limitacoes": [
+        "A Bacia do Paraná tem potencial estudado, mas sem caracterização de detalhe nem poço de injeção operando.",
+        "Sem preço de carbono relevante, não há receita que pague compressão, duto e monitoramento."
+      ]
+    },
+    "rota": {
+      "trl": 6,
+      "statusSP": "inexistente",
+      "notaStatus": "Nenhuma injeção de CO2 fermentativo em São Paulo. Há estudos de armazenamento na Bacia do Paraná e projetos comerciais dessa rota em operação nos Estados Unidos."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "etanol_por_cana", "preco_carbono"],
+    "fontes": ["iea_ccus", "fapesp_bioen"]
+  },
+  {
+    "id": "cana.dest.armazenamento_geologico",
+    "kind": "destino",
+    "nome": "Armazenamento geológico",
+    "resumo": "Carbono biogênico retirado do ciclo por milhares de anos em rocha porosa",
+    "anel": 4,
+    "tags": ["regulatorio", "energia"],
+    "icone": "Mountain",
+    "texto": {
+      "descricao": "Reservatório subterrâneo que recebe e retém o CO2 injetado. É o único destino do carbono da cana que resulta em remoção permanente, e por isso o único que gera crédito de remoção, e não de emissão evitada.",
+      "limitacoes": [
+        "Exige monitoramento por décadas e responsabilidade legal de longo prazo definida."
+      ]
+    },
+    "paramsRelevantes": ["preco_carbono"],
+    "fontes": ["iea_ccus"]
+  },
+  {
+    "id": "cana.rota.metanacao_ptx",
+    "kind": "rota",
+    "nome": "Metanação power-to-X",
+    "resumo": "CO2 mais hidrogênio verde viram metano sintético pela reação de Sabatier",
+    "anel": 3,
+    "tags": ["energia", "combustivel"],
+    "icone": "PlugZap",
+    "texto": {
+      "descricao": "Em vez de enterrar o CO2 fermentativo, ele pode ser recombinado com hidrogênio de eletrólise para formar metano. O resultado é gás injetável na rede, que estoca eletricidade renovável em forma química. A usina entra com CO2 concentrado, calor e conexão elétrica, tudo no mesmo sítio.",
+      "comoFunciona": "Sobre catalisador de níquel a 300-400 °C, quatro moléculas de hidrogênio reduzem uma de CO2 a metano e água, liberando calor aproveitável no processo.",
+      "limitacoes": [
+        "Consome cerca de 0,5 kg de hidrogênio por quilo de metano, e hidrogênio verde ainda é caro.",
+        "A eficiência global do ciclo eletricidade-gás fica abaixo de 60%."
+      ]
+    },
+    "rota": {
+      "trl": 6,
+      "statusSP": "inexistente",
+      "notaStatus": "Há plantas de demonstração na Europa. Nada em São Paulo, e o gargalo é o custo do hidrogênio eletrolítico."
+    },
+    "paramsRelevantes": ["cana_moida_sp", "etanol_por_cana", "preco_biometano", "preco_eletricidade"],
+    "fontes": ["iea_ccus", "abiogas2018"]
+  },
+  {
+    "id": "cana.prod.metano_sintetico",
+    "kind": "produto",
+    "nome": "Metano sintético",
+    "resumo": "Gás renovável equivalente ao biometano, injetável na rede existente",
+    "anel": 4,
+    "tags": ["energia", "combustivel"],
+    "icone": "Flame",
+    "texto": {
+      "descricao": "Quimicamente igual ao gás natural, aproveita rede, veículos e queimadores já instalados. Serve como forma de estocar eletricidade renovável excedente em escala de semanas ou meses.",
+      "limitacoes": [
+        "Só faz sentido onde há eletricidade renovável barata e excedente."
+      ]
+    },
+    "paramsRelevantes": ["preco_biometano"],
+    "fontes": ["abiogas2018"]
+  },
+  {
+    "id": "cana.rota.co2_microalgas",
+    "kind": "rota",
+    "nome": "Microalgas com CO2",
+    "resumo": "O gás da dorna alimenta cultivo de algas para óleo, pigmento e proteína",
+    "anel": 3,
+    "tags": ["alimento", "quimica"],
+    "icone": "Waves",
+    "texto": {
+      "descricao": "Microalgas fixam CO2 concentrado com produtividade por área muito maior que a de plantas superiores. Rendem óleo, proteína, pigmentos como astaxantina e ficocianina e biomassa para ração. A usina oferece o que o cultivo precisa: CO2 puro, água, nutrientes da vinhaça e sol.",
+      "comoFunciona": "O CO2 é borbulhado em tanques abertos ou fotobiorreatores, onde a alga o fixa por fotossíntese; a biomassa é colhida por floculação ou centrifugação e depois secada.",
+      "limitacoes": [
+        "Colheita e secagem dominam o custo, porque a cultura é muito diluída.",
+        "Só produtos de alto valor, como pigmentos, pagam a conta hoje."
+      ]
+    },
+    "rota": {
+      "trl": 5,
+      "statusSP": "inexistente",
+      "notaStatus": "Pesquisa e piloto no Brasil. Nenhum cultivo comercial acoplado a usina em São Paulo."
+    },
+    "paramsRelevantes": ["etanol_por_cana", "cana_moida_sp", "vinhaca_disponivel"],
+    "fontes": ["fapesp_bioen", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.biomassa_microalgal",
+    "kind": "produto",
+    "nome": "Biomassa de microalgas",
+    "resumo": "Óleo, proteína e pigmentos de alto valor fixados a partir de CO2",
+    "anel": 4,
+    "tags": ["alimento", "quimica"],
+    "icone": "Leaf",
+    "texto": {
+      "descricao": "Vai a suplementos, aquicultura, cosméticos e pigmentos naturais. A fração de óleo pode seguir a biodiesel, mas esse uso raramente paga o custo de produção.",
+      "limitacoes": [
+        "Escala de mercado pequena para os produtos que hoje sustentam o preço."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["fapesp_bioen"]
+  },
+  {
+    "id": "cana.rota.nanocelulose_cnc",
+    "kind": "rota",
+    "nome": "Nanocristais de celulose",
+    "resumo": "Ácido dissolve o amorfo e sobram bastões cristalinos mais fortes que o aço",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Microscope",
+    "texto": {
+      "descricao": "Sob hidrólise ácida controlada, as regiões desorganizadas da celulose se dissolvem e restam nanocristais com resistência específica acima da do aço. Servem de reforço em polímeros, aditivo reológico, filme barreira e base de compósitos. O bagaço é uma das fontes mais baratas de celulose para essa rota.",
+      "comoFunciona": "Ácido sulfúrico a cerca de 64% ataca preferencialmente as regiões amorfas da microfibrila; a suspensão é neutralizada, dialisada e dispersada por ultrassom em nanobastões estáveis.",
+      "limitacoes": [
+        "Rendimento em massa fica entre 30 e 40% da celulose de partida.",
+        "Manter a suspensão estável e secá-la sem agregação continua difícil."
+      ]
+    },
+    "rota": {
+      "trl": 5,
+      "statusSP": "inexistente",
+      "notaStatus": "Pesquisa consolidada em São Paulo, inclusive em institutos federais no interior, sem produção comercial a partir de bagaço."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "palha_gerada"],
+    "fontes": ["embrapa_instrumentacao", "chandel_bagaco"]
+  },
+  {
+    "id": "cana.prod.nanocelulose",
+    "kind": "produto",
+    "nome": "Nanocristais de celulose",
+    "resumo": "Nanomaterial de reforço para plásticos, tintas, filmes e compósitos",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Sparkles",
+    "texto": {
+      "descricao": "Aditivo de altíssimo valor por quilo que melhora rigidez, barreira e reologia em quantidades pequenas. Aplicações vão de tinta e cosmético a embalagem e biomedicina.",
+      "limitacoes": [
+        "Mercado ainda em formação, com volumes anuais na casa de toneladas."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["embrapa_instrumentacao"]
+  },
+  {
+    "id": "cana.rota.mfc_desfibrilacao",
+    "kind": "rota",
+    "nome": "Celulose microfibrilada",
+    "resumo": "Cisalhamento mecânico desfia a fibra em microfibrilas sem reagente químico",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Blend",
+    "texto": {
+      "descricao": "Diferente dos nanocristais, aqui a fibra é apenas desfiada, preservando as regiões amorfas e mantendo cadeias longas e emaranhadas. O produto é um gel que espessa, retém água e reforça papel, tinta, adesivo e compósito. Consome muita energia mecânica, mas nenhum reagente perigoso.",
+      "comoFunciona": "A polpa passa repetidas vezes por homogeneizador de alta pressão ou moinho de discos até que as fibras se abram em microfibrilas de dezenas de nanômetros de diâmetro.",
+      "limitacoes": [
+        "Consumo elétrico alto; pré-tratamento enzimático é usado para reduzi-lo.",
+        "Gel com 2 a 3% de sólidos: transportar água é o principal custo logístico."
+      ]
+    },
+    "rota": {
+      "trl": 7,
+      "statusSP": "inexistente",
+      "notaStatus": "Há produção industrial de celulose microfibrilada em São Paulo a partir de eucalipto, não de bagaço; a rota do bagaço segue em pesquisa."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco"],
+    "fontes": ["suzano_mfc", "embrapa_instrumentacao"]
+  },
+  {
+    "id": "cana.prod.mfc",
+    "kind": "produto",
+    "nome": "Celulose microfibrilada",
+    "resumo": "Gel de microfibrilas que reforça papel e substitui espessantes sintéticos",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Waves",
+    "texto": {
+      "descricao": "Usada para aumentar resistência de papel com menos fibra, como aditivo reológico em tintas e adesivos e como agente de retenção de água em argamassas e alimentos.",
+      "limitacoes": [
+        "Alta viscosidade dificulta bombeamento e mistura em processos industriais."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["suzano_mfc"]
+  },
+  {
+    "id": "cana.rota.polpacao_bagaco",
+    "kind": "rota",
+    "nome": "Polpação do bagaço",
+    "resumo": "Depois de retirar a medula, o bagaço vira polpa de papel e papelão",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Cog",
+    "texto": {
+      "descricao": "A fibra do bagaço tem comprimento parecido com o da fibra curta de eucalipto e serve a papel de imprimir, papelão e embalagem. Existem dezenas de fábricas de papel de bagaço no mundo, sobretudo na Índia, China, Colômbia e Argentina. Em São Paulo, o eucalipto ganhou essa disputa há décadas.",
+      "comoFunciona": "O bagaço é desmedulado para tirar as células de parênquima, cozido com soda e depois branqueado; o rendimento em polpa fica em torno de 45 a 50% da massa seca.",
+      "limitacoes": [
+        "A medula representa cerca de 30% do bagaço e precisa ser separada e queimada.",
+        "Exige recuperação de químicos, planta cara para a escala típica de uma usina."
+      ]
+    },
+    "rota": {
+      "trl": 8,
+      "statusSP": "inexistente",
+      "notaStatus": "Nenhuma fábrica de papel de bagaço em São Paulo. O bagaço vale mais como combustível de caldeira que como fibra, com o preço de energia atual."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "bagaco_excedente"],
+    "fontes": ["chandel_bagaco", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.papel_papelao",
+    "kind": "produto",
+    "nome": "Papel e papelão de bagaço",
+    "resumo": "Papel de imprimir e embalagem feitos de fibra agrícola, não de floresta",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Package",
+    "texto": {
+      "descricao": "Papel de imprimir, escrever, tissue e papelão ondulado. Em países sem base florestal competitiva, é a principal fonte de fibra virgem.",
+      "limitacoes": [
+        "Resistência mecânica menor que a da fibra longa de conífera."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["chandel_bagaco"]
+  },
+  {
+    "id": "cana.rota.polpa_moldada",
+    "kind": "rota",
+    "nome": "Polpa moldada",
+    "resumo": "Polpa de bagaço prensada em molde vira prato, bandeja e embalagem descartável",
+    "anel": 3,
+    "tags": ["quimica", "alimento"],
+    "icone": "Boxes",
+    "texto": {
+      "descricao": "Pratos, bandejas, copos e embalagens de bagaço prensado substituem isopor e plástico descartável e são compostáveis. É uma das aplicações do bagaço com maior crescimento no mundo, impulsionada pelas leis que restringem descartáveis plásticos. Quase tudo o que se vende no Brasil é importado.",
+      "comoFunciona": "A polpa diluída é sugada contra um molde vazado que retém a fibra na forma desejada; a peça é prensada a quente para secar e ganhar rigidez.",
+      "limitacoes": [
+        "Barreira a gordura e a líquido quente exige aditivo, que pode comprometer a compostabilidade.",
+        "Produto volumoso e de baixo valor por metro cúbico, sensível a frete."
+      ]
+    },
+    "rota": {
+      "trl": 8,
+      "statusSP": "inexistente",
+      "notaStatus": "Rota industrial madura na Ásia. Sem produção a partir de bagaço em São Paulo; os descartáveis de bagaço vendidos aqui são importados."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "bagaco_excedente"],
+    "fontes": ["chandel_bagaco", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.embalagem_moldada",
+    "kind": "produto",
+    "nome": "Descartáveis de bagaço",
+    "resumo": "Pratos, bandejas e embalagens compostáveis em substituição ao isopor",
+    "anel": 4,
+    "tags": ["alimento", "quimica"],
+    "icone": "Boxes",
+    "texto": {
+      "descricao": "Itens de serviço de alimentação e embalagem de proteína e hortifrúti. Compostáveis em ambiente doméstico, ao contrário de boa parte dos bioplásticos.",
+      "limitacoes": [
+        "Concorre com plástico descartável muito mais barato onde não há restrição legal."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.rota.paineis_mdf",
+    "kind": "rota",
+    "nome": "Painéis MDF e MDP",
+    "resumo": "Partículas de bagaço coladas e prensadas viram painel de móvel e construção",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Hammer",
+    "texto": {
+      "descricao": "Painéis de fibra e de partículas aceitam bagaço no lugar da madeira, com desempenho comparável em uso interno. Existem plantas comerciais na Índia e na China. Combina bem com a rota de resina de lignina: o mesmo resíduo forneceria fibra e cola.",
+      "comoFunciona": "O bagaço desmedulado é desfibrado, misturado com resina e prensado a quente, formando um painel de densidade controlada.",
+      "limitacoes": [
+        "Absorção de água maior que a do painel de madeira limita uso em área úmida.",
+        "Depende de bagaço seco e estocado, o que exige pátio e controle de fungos."
+      ]
+    },
+    "rota": {
+      "trl": 7,
+      "statusSP": "inexistente",
+      "notaStatus": "Sem planta em São Paulo. A indústria paulista de painéis é abastecida por madeira de reflorestamento, com custo e logística já consolidados."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco", "bagaco_excedente", "palha_gerada"],
+    "fontes": ["chandel_bagaco", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.painel_mdf",
+    "kind": "produto",
+    "nome": "Painéis de bagaço",
+    "resumo": "MDF e MDP para móveis e divisórias feitos de fibra agrícola",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Layers",
+    "texto": {
+      "descricao": "Painéis usados em móveis, divisórias e forros. Estocam carbono biogênico por décadas na vida útil do produto, ao contrário de qualquer uso energético do mesmo bagaço.",
+      "limitacoes": [
+        "Precisa atender normas de emissão de formaldeído."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["chandel_bagaco"]
+  },
+  {
+    "id": "cana.rota.compositos",
+    "kind": "rota",
+    "nome": "Compósitos de fibra",
+    "resumo": "Fibra de bagaço em plástico reduz custo, peso e uso de resina fóssil",
+    "anel": 3,
+    "tags": ["quimica"],
+    "icone": "Merge",
+    "texto": {
+      "descricao": "Fibras curtas de bagaço são incorporadas a polipropileno, polietileno ou bioplásticos como carga de reforço. Reduzem o consumo de resina, aumentam rigidez e permitem alegar conteúdo renovável. Encontram uso em peças automotivas, decks e perfis.",
+      "comoFunciona": "A fibra é seca, tratada na superfície para aderir ao polímero apolar e misturada ao plástico fundido em extrusora antes da moldagem.",
+      "limitacoes": [
+        "A fibra degrada acima de 200 °C, o que exclui polímeros de processamento quente.",
+        "Absorção de umidade pela fibra prejudica a estabilidade dimensional."
+      ]
+    },
+    "rota": {
+      "trl": 6,
+      "statusSP": "inexistente",
+      "notaStatus": "Compósitos com fibras vegetais já são usados no Brasil; com bagaço de cana, o estágio em São Paulo é de piloto e pesquisa."
+    },
+    "paramsRelevantes": ["bagaco_rpr", "incluir_bagaco"],
+    "fontes": ["chandel_bagaco", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.composito_fibra",
+    "kind": "produto",
+    "nome": "Compósitos plástico-fibra",
+    "resumo": "Peças automotivas, decks e perfis com carga de fibra de cana",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Boxes",
+    "texto": {
+      "descricao": "Materiais para interiores automotivos, construção e mobiliário urbano. Mais leves que os plásticos com carga mineral e com conteúdo renovável mensurável.",
+      "limitacoes": [
+        "Reciclagem é mais difícil que a do plástico puro."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["chandel_bagaco"]
+  },
+  {
+    "id": "cana.rota.celulose_bacteriana",
+    "kind": "rota",
+    "nome": "Celulose bacteriana",
+    "resumo": "Bactérias tecem nanocelulose pura em melaço, sem lignina para remover",
+    "anel": 3,
+    "tags": ["quimica", "alimento"],
+    "icone": "Microscope",
+    "texto": {
+      "descricao": "Komagataeibacter e outras bactérias sintetizam celulose pura fora da célula quando cultivadas em meio açucarado. O material não tem lignina nem hemicelulose e forma uma película com pureza e cristalinidade que nenhuma fibra vegetal alcança. Aplicações vão de curativo e implante a alimento e couro alternativo.",
+      "comoFunciona": "A bactéria polimeriza glicose e extruda microfibrilas na interface ar-líquido, formando uma membrana gelatinosa que é depois lavada e purificada.",
+      "limitacoes": [
+        "Produtividade baixa por metro quadrado e por dia, e cultivo estático ocupa muita área.",
+        "Custo por quilo só é aceitável em aplicações médicas e de alto valor."
+      ]
+    },
+    "rota": {
+      "trl": 5,
+      "statusSP": "inexistente",
+      "notaStatus": "Pesquisa e produção artesanal. Não há unidade industrial em São Paulo usando melaço de cana como substrato."
+    },
+    "paramsRelevantes": ["cana_moida_sp"],
+    "fontes": ["fapesp_bioen", "cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.prod.celulose_bacteriana",
+    "kind": "produto",
+    "nome": "Celulose bacteriana",
+    "resumo": "Nanocelulose de pureza médica para curativos, implantes e couro alternativo",
+    "anel": 4,
+    "tags": ["quimica", "alimento"],
+    "icone": "Shell",
+    "texto": {
+      "descricao": "Usada em curativos de queimadura, membranas para regeneração tecidual, alimentos como a nata de coco e materiais têxteis alternativos ao couro.",
+      "limitacoes": [
+        "Escala de produção incompatível com mercados de grande volume."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["fapesp_bioen"]
+  },
+  {
+    "id": "cana.dest.industria_quimica",
+    "kind": "destino",
+    "nome": "Indústria química",
+    "resumo": "Polo petroquímico paulista como comprador de blocos renováveis",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Factory",
+    "texto": {
+      "descricao": "São Paulo concentra a maior demanda química do país, em solventes, resinas, tintas e intermediários. Cada bloco renovável produzido de cana tem um comprador a poucas centenas de quilômetros, o que é uma vantagem logística rara no mundo.",
+      "limitacoes": [
+        "O comprador exige especificação constante e contrato de longo prazo, difíceis para uma planta pioneira."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.dest.embalagens",
+    "kind": "destino",
+    "nome": "Embalagens e plásticos",
+    "resumo": "Cadeia de embalagem que absorve PE verde, PLA, PHB e polpa moldada",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Package",
+    "texto": {
+      "descricao": "Mercado que puxa a demanda por conteúdo renovável, por causa de metas corporativas e de legislação sobre descartáveis. Reúne rotas muito diferentes entre si: renovável e persistente, como o PE verde, e biodegradável, como PHB e polpa moldada.",
+      "limitacoes": [
+        "Confundir origem renovável com biodegradabilidade é o erro mais comum deste mercado."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.dest.industria_alimenticia",
+    "kind": "destino",
+    "nome": "Indústria de alimentos",
+    "resumo": "Adoçantes, prebióticos, acidulantes e ingredientes funcionais de cana",
+    "anel": 4,
+    "tags": ["alimento"],
+    "icone": "Candy",
+    "texto": {
+      "descricao": "Destino dos bioprodutos de maior valor unitário do atlas: xilitol, FOS, XOS, extrato de levedura, ácido cítrico e cogumelos. Volume pequeno frente à moagem, mas margem muito superior à do açúcar e do etanol.",
+      "limitacoes": [
+        "Exige certificação sanitária e rastreabilidade que a usina padrão não possui."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.dest.nutricao_animal",
+    "kind": "destino",
+    "nome": "Nutrição animal",
+    "resumo": "Aves, suínos, bovinos e aquicultura consumindo proteína e aditivos de cana",
+    "anel": 4,
+    "tags": ["alimento"],
+    "icone": "Beef",
+    "texto": {
+      "descricao": "A proximidade entre canaviais e granjas paulistas dá vantagem logística à levedura seca, aos aminoácidos, à proteína unicelular e às beta-glucanas. É o destino que absorve maior volume entre os bioprodutos não energéticos.",
+      "limitacoes": [
+        "Preço é ancorado no farelo de soja, o que limita o valor capturável."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.dest.construcao_civil",
+    "kind": "destino",
+    "nome": "Construção civil",
+    "resumo": "Painéis, PVC, dispersantes de concreto e compósitos com carbono de cana",
+    "anel": 4,
+    "tags": ["quimica"],
+    "icone": "Hammer",
+    "texto": {
+      "descricao": "Setor de grande volume e vida útil longa, o que faz dele um estoque de carbono biogênico quando usa material de origem vegetal. Recebe painéis de bagaço, lignossulfonatos, PVC parcialmente renovável e compósitos.",
+      "limitacoes": [
+        "Normas técnicas e certificação de desempenho retardam a entrada de material novo."
+      ]
+    },
+    "paramsRelevantes": [],
+    "fontes": ["cgee_quimica_verde"]
+  },
+  {
+    "id": "cana.dest.mercado_aviacao",
+    "kind": "destino",
+    "nome": "Mercado de aviação",
+    "resumo": "Companhias aéreas obrigadas por lei a reduzir emissões a partir de 2027",
+    "anel": 4,
+    "tags": ["combustivel", "regulatorio"],
+    "icone": "Wind",
+    "texto": {
+      "descricao": "A Lei 14.993/2024 institui a obrigação progressiva de redução de emissões no querosene de aviação usado em voos domésticos, a partir de 2027. Junto ao esquema internacional CORSIA, cria a demanda que sustenta qualquer projeto de SAF em São Paulo.",
+      "limitacoes": [
+        "A obrigação é de redução de emissão, não de volume físico, o que admite caminhos concorrentes ao ATJ."
+      ]
+    },
+    "paramsRelevantes": ["preco_carbono"],
+    "fontes": ["lei_14993_2024"]
+  }
+]

@@ -1,0 +1,2534 @@
+{
+  "nodes": [
+    {
+      "id": "cana.cultura",
+      "kind": "cultura",
+      "nome": "Cana-de-açúcar",
+      "resumo": "439,1 Mt moídas por safra em São Paulo — a maior biomassa organizada do país",
+      "anel": 0,
+      "tags": [
+        "energia",
+        "alimento",
+        "combustivel"
+      ],
+      "icone": "Sprout",
+      "texto": {
+        "descricao": "Saccharum officinarum é a cultura que organiza a paisagem do centro-norte paulista. São Paulo mói 439,1 Mt por safra, cerca de metade da cana do Brasil, entregue a usinas que produzem açúcar e etanol no mesmo pátio. Cada tonelada que entra na moenda sai como quatro coisas ao mesmo tempo: açúcar, etanol, energia e resíduo. O Atlas parte daqui porque é o único ponto do mapa em que a massa é conhecida com precisão de balança fiscal.",
+        "limitacoes": [
+          "A base do CP2B cobre 247,2 Mt (56,3% da moagem paulista); o restante fica com usinas não mapeadas.",
+          "Todo o grafo é normalizado por tonelada de cana moída, não por hectare — variações de produtividade agrícola não aparecem."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp",
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "atlas2020",
+        "unica2024",
+        "conab2024"
+      ],
+      "inicial": true
+    },
+    {
+      "id": "cana.proc.plantio",
+      "kind": "processo",
+      "nome": "Plantio e tratos culturais",
+      "resumo": "Cinco a seis cortes por canavial antes da reforma; ciclo de 12 a 18 meses",
+      "anel": 1,
+      "tags": [
+        "solo"
+      ],
+      "icone": "Tractor",
+      "texto": {
+        "descricao": "O canavial é implantado por toletes em sulcos e conduzido por cinco a seis cortes antes da reforma. Entre cortes entram adubação, controle de plantas daninhas e, em boa parte de São Paulo, fertirrigação com vinhaça e aplicação de torta de filtro. É nesta etapa que os resíduos da usina voltam ao campo, fechando o ciclo de nutrientes.",
+        "comoFunciona": "O tolete brota a partir das gemas e forma a soqueira; cada colheita corta a parte aérea e a soqueira rebrota, com produtividade decrescente até a reforma.",
+        "limitacoes": [
+          "A produtividade por hectare não entra no modelo: o Atlas trabalha com tonelada moída, não com área.",
+          "O retorno de nutrientes via vinhaça e torta é contabilizado no ramo dos resíduos, não aqui."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "atlas2020",
+        "conab2024"
+      ]
+    },
+    {
+      "id": "cana.proc.colheita",
+      "kind": "processo",
+      "nome": "Colheita mecanizada",
+      "resumo": "Mais de 96% da área colhida sem queima; a palha fica no campo em vez de virar fumaça",
+      "anel": 1,
+      "tags": [
+        "solo",
+        "regulatorio"
+      ],
+      "icone": "Combine",
+      "texto": {
+        "descricao": "A Lei estadual 11.241/2002 e o Protocolo Agroambiental de 2007 anteciparam o fim da queima do canavial paulista. Hoje mais de 96% da área é colhida mecanicamente, crua. A consequência material é direta: 140 kg de matéria seca de palha por tonelada de cana deixaram de virar fumaça e passaram a ficar sobre o solo. É o maior estoque de biomassa lignocelulósica não utilizada de São Paulo, e existe por decisão regulatória, não por escolha industrial.",
+        "comoFunciona": "A colhedora corta o colmo na base, pica em rebolos de 20 a 30 cm, separa folhas e ponteiros por exaustores e descarrega no transbordo que acompanha a máquina.",
+        "limitacoes": [
+          "Os exaustores derrubam parte do palhiço junto com os colmos: a impureza vegetal que chega à usina sobe para 5 a 12 kg por tonelada.",
+          "O tráfego de máquinas compacta o solo e é o custo agronômico da mecanização.",
+          "O percentual de 96% é da área colhida, não da massa; áreas de difícil mecanização ainda usam corte manual."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp",
+        "palha_gerada",
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "lei11241_2002",
+        "protocolo_agroambiental",
+        "atlas2020_p65"
+      ],
+      "inicial": true
+    },
+    {
+      "id": "cana.proc.transporte",
+      "kind": "processo",
+      "nome": "Transporte até a usina",
+      "resumo": "Rodotrens de até 74 t rodam em média 25 km; a distância define o raio econômico",
+      "anel": 1,
+      "tags": [
+        "energia"
+      ],
+      "icone": "Truck",
+      "texto": {
+        "descricao": "A cana colhida vai do transbordo ao caminhão e do caminhão à mesa alimentadora. O raio médio em São Paulo fica em torno de 25 km, e é essa distância que trava qualquer rota que exija mover biomassa de baixa densidade. A cana precisa ser moída em até 24 a 48 horas após o corte: depois disso a sacarose começa a inverter e a perda é irreversível.",
+        "comoFunciona": "Composições rodoviárias de dois a três reboques carregam de 45 a 74 toneladas por viagem, em operação contínua durante a safra.",
+        "limitacoes": [
+          "A palha, com densidade dez vezes menor que a do colmo, tem raio econômico muito mais curto — daí o custo de recolhimento de cerca de R$ 65/t.",
+          "Perdas de campo e de transbordo, da ordem de 1 a 2%, não são separadas no balanço deste grafo."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp",
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "atlas2020",
+        "hassuani2005"
+      ]
+    },
+    {
+      "id": "cana.proc.recepcao",
+      "kind": "processo",
+      "nome": "Recepção e limpeza",
+      "resumo": "Limpeza a seco tira terra e palhiço sem gastar os 3 m³ de água da lavagem antiga",
+      "anel": 1,
+      "tags": [
+        "solo"
+      ],
+      "icone": "Filter",
+      "texto": {
+        "descricao": "A cana é pesada, amostrada para pagamento por teor de sacarose e descarregada na mesa alimentadora. Com a cana picada da colheita mecanizada, a lavagem com água foi abandonada — arrastava sacarose junto com a terra. No lugar entrou a limpeza a seco, com ventiladores e peneiras, que recupera de 60 a 70% da impureza mineral sem gerar efluente.",
+        "comoFunciona": "A mesa inclinada a 45° espalha a cana em camada fina; jatos de ar e peneiras rotativas separam terra, areia e folhas soltas por diferença de densidade.",
+        "limitacoes": [
+          "Onde ainda há lavagem úmida, o consumo chega a 3 a 5 m³ de água por tonelada, com circuito fechado e alta carga de sólidos.",
+          "A limpeza a seco derruba palha que poderia ser recolhida para energia, mas ela sai misturada com terra e tem baixo valor como combustível."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "elia_neto2016",
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.proc.preparo",
+      "kind": "processo",
+      "nome": "Preparo: picador e desfibrador",
+      "resumo": "Facas e martelos rompem as células e levam o índice de preparo a 88-92%",
+      "anel": 1,
+      "tags": [
+        "energia"
+      ],
+      "icone": "Scissors",
+      "texto": {
+        "descricao": "Antes da extração, a cana passa por jogos de facas rotativas e por um desfibrador de martelos. O objetivo não é extrair caldo, é abrir a célula: quanto mais células rompidas, mais açúcar a moenda ou o difusor consegue tirar depois. O índice de preparo, medido em laboratório, fica entre 88% e 92% nas usinas paulistas.",
+        "comoFunciona": "As facas cortam a cana em pedaços e o desfibrador a esmaga contra uma placa de impacto, desfazendo o colmo em fibras sem espremer o caldo.",
+        "limitacoes": [
+          "É um dos maiores consumidores de potência mecânica da usina, entre 8 e 15 kWh por tonelada.",
+          "Preparo insuficiente derruba a extração; preparo excessivo aumenta o bagacilho no caldo e sobrecarrega a filtração."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.proc.moagem",
+      "kind": "processo",
+      "nome": "Moagem e extração do caldo",
+      "resumo": "Ternos de rolos com embebição extraem 96-97% do açúcar e deixam 280 kg de bagaço",
+      "anel": 1,
+      "tags": [
+        "energia"
+      ],
+      "icone": "Cog",
+      "texto": {
+        "descricao": "É o ponto em que a cana se parte em dois fluxos que nunca mais se encontram: caldo e bagaço. No Brasil dominam as moendas, ternos de quatro ou seis rolos em série com embebição composta de água quente em contracorrente, que extraem de 96% a 97% da sacarose. O difusor, alternativa usada por poucas usinas paulistas, lixivia o açúcar em vez de espremê-lo: chega a 97-98% de extração e consome menos potência mecânica, mas exige preparo de célula muito melhor e é menos tolerante a variação de matéria-prima. Os 280 kg de bagaço por tonelada de cana saem daqui.",
+        "comoFunciona": "Cada terno espreme a fibra entre rolos sob pressão hidráulica; a água de embebição aplicada no último terno atravessa a série no sentido contrário, lavando o açúcar que restou.",
+        "limitacoes": [
+          "A embebição adiciona água: o caldo misto pesa mais que os 720 kg/t usados no balanço deste grafo, que trata só a massa de origem cana.",
+          "O bagaço sai com cerca de 50% de umidade, o que limita seu poder calorífico útil na caldeira."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp",
+        "bagaco_rpr"
+      ],
+      "fontes": [
+        "rein2017",
+        "feedstocks_yaml",
+        "atlas2020"
+      ],
+      "inicial": true
+    },
+    {
+      "id": "cana.proc.tratamento_caldo",
+      "kind": "processo",
+      "nome": "Tratamento do caldo",
+      "resumo": "Cal, enxofre e calor a 105 °C coagulam os coloides e preparam a decantação",
+      "anel": 1,
+      "tags": [
+        "quimica"
+      ],
+      "icone": "Thermometer",
+      "texto": {
+        "descricao": "O caldo misto sai da moenda ácido, turvo e cheio de material em suspensão. O tratamento neutraliza e coagula. Na linha de açúcar branco entra primeiro a sulfitação, com SO2 gasoso levando o pH a 3,8-4,2 e clareando o caldo; em seguida a caleagem com leite de cal sobe o pH a 7,0-7,2. Na linha de VHP e na de etanol a sulfitação é dispensada. O caldo caleado é aquecido a 105 °C e passa por um balão de flash que retira o ar dissolvido.",
+        "comoFunciona": "O cálcio reage com os fosfatos do caldo e forma fosfato de cálcio, que precipita arrastando coloides, ceras e material corado; o calor completa a coagulação das proteínas.",
+        "limitacoes": [
+          "O teor de fósforo natural do caldo governa a clarificação; abaixo de 300 mg/kg é preciso adicionar ácido fosfórico.",
+          "O SO2 residual no açúcar é objeto de restrição em mercados importadores, o que empurra usinas para a rota VHP."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.proc.decantacao",
+      "kind": "processo",
+      "nome": "Decantação",
+      "resumo": "O lodo sedimenta levando terra, ceras e coloides; o caldo sai clarificado por cima",
+      "anel": 1,
+      "tags": [
+        "quimica"
+      ],
+      "icone": "Layers",
+      "texto": {
+        "descricao": "O caldo caleado e aquecido entra em decantadores de bandejas múltiplas, onde o floco de fosfato de cálcio desce por gravidade. O caldo clarificado transborda por cima, com cerca de 90% da massa que entrou; o lodo sai por baixo, concentrado. Sem esta separação, nem a evaporação nem a fermentação funcionam bem.",
+        "comoFunciona": "Polímeros floculantes aglomeram as partículas coaguladas em flocos grandes o bastante para sedimentar em 2 a 3 horas de tempo de residência.",
+        "limitacoes": [
+          "Cana com muita impureza mineral, típica da colheita mecanizada, aumenta o volume de lodo e portanto a geração de torta."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp",
+        "torta_gerada"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.proc.filtracao",
+      "kind": "processo",
+      "nome": "Filtração do lodo",
+      "resumo": "Filtro rotativo a vácuo ou filtro-prensa tira 35 kg de torta por tonelada de cana",
+      "anel": 1,
+      "tags": [
+        "fertilizante"
+      ],
+      "icone": "Filter",
+      "texto": {
+        "descricao": "O lodo do decantador ainda carrega açúcar, e é para recuperá-lo que existe a filtração. O filtro rotativo a vácuo, com bagacilho como auxiliar, retém o sólido e devolve o caldo filtrado ao tratamento. Filtros-prensa de membrana, mais modernos, dispensam o bagacilho e entregam torta mais seca. O sólido retido é a torta de filtro: 35 kg por tonelada de cana, o resíduo mais concentrado em fósforo de toda a usina.",
+        "comoFunciona": "O tambor gira parcialmente submerso no lodo enquanto o vácuo puxa o líquido através de uma tela; a camada de sólido que se forma é lavada com água quente e raspada na saída.",
+        "limitacoes": [
+          "A perda de sacarose na torta, entre 1% e 2% do açúcar entrado, é um indicador de eficiência acompanhado de perto.",
+          "A geração de torta é a divergência de fontes mais grosseira do projeto: a planilha de fatores diz 3 a 4 kg/t, o banco diz 30 a 40, e o Atlas adota 35."
+        ]
+      },
+      "paramsRelevantes": [
+        "torta_gerada",
+        "torta_disponivel",
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "atlas2020_p66",
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.proc.evaporacao",
+      "kind": "processo",
+      "nome": "Evaporação",
+      "resumo": "Múltiplo efeito concentra o caldo de 15 para 65 °Brix usando vapor de escape",
+      "anel": 1,
+      "tags": [
+        "energia"
+      ],
+      "icone": "Waves",
+      "texto": {
+        "descricao": "O caldo clarificado tem cerca de 85% de água. A evaporação em múltiplo efeito, geralmente de quatro ou cinco estágios em série, tira dois terços dessa água e entrega xarope a 60-68 °Brix. É o coração térmico da usina: o vapor vegetal sangrado dos primeiros efeitos aquece o resto da fábrica, e é por isso que a integração energética da destilaria e da fábrica de açúcar passa por aqui.",
+        "comoFunciona": "Cada efeito opera a pressão menor que o anterior, de modo que o vapor gerado pela ebulição de um estágio serve de fonte de calor para o seguinte — a mesma energia é usada quatro ou cinco vezes.",
+        "limitacoes": [
+          "Toda economia de vapor de processo aqui vira bagaço excedente lá na caldeira: os dois números são o mesmo número visto de lados opostos."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp",
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "rein2017",
+        "ctbe_vsb"
+      ]
+    },
+    {
+      "id": "cana.proc.cozimento",
+      "kind": "processo",
+      "nome": "Cozimento e cristalização",
+      "resumo": "Cozedores a vácuo levam o xarope à supersaturação e fazem o cristal crescer",
+      "anel": 1,
+      "tags": [
+        "alimento"
+      ],
+      "icone": "Snowflake",
+      "texto": {
+        "descricao": "O xarope é fervido sob vácuo até passar do ponto de saturação. Introduz-se então uma semente de cristais finos, e o açúcar dissolvido migra para a superfície dessas sementes. O sistema paulista trabalha em três estágios — massas A, B e C — em que o mel de uma massa alimenta a seguinte, esgotando a sacarose até o limite econômico.",
+        "comoFunciona": "O vácuo abaixa o ponto de ebulição para cerca de 65 °C, o que evita que a sacarose caramelize enquanto a água evapora e a solução fica supersaturada.",
+        "limitacoes": [
+          "Quanto mais esgotado o mel final, menor a matéria-prima que sobra para a destilaria: açúcar e etanol competem pelo mesmo carbono.",
+          "A pureza do mel final varia de 28% a 40% ART conforme o esquema de cozimento, o que muda o rendimento da fermentação."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.proc.centrifugacao",
+      "kind": "processo",
+      "nome": "Centrifugação do açúcar",
+      "resumo": "Força de mil g separa o cristal do mel; o esgotamento vai até a massa C",
+      "anel": 1,
+      "tags": [
+        "alimento"
+      ],
+      "icone": "CircleDot",
+      "texto": {
+        "descricao": "A massa cozida é uma suspensão de cristais em mel. A centrífuga gira o conjunto contra uma tela perfurada: o mel atravessa, o cristal fica retido e é lavado com água ou vapor. Das massas A e B saem os méis que retornam ao cozimento; da massa C sai o mel final, que não volta e segue para a destilaria.",
+        "comoFunciona": "A aceleração centrífuga, da ordem de mil vezes a gravidade, força o líquido através da camada de cristais como uma filtração acelerada.",
+        "limitacoes": [
+          "A lavagem do cristal redissolve parte do açúcar e é o principal ajuste entre cor do produto e rendimento."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.proc.secagem",
+      "kind": "processo",
+      "nome": "Secagem e ensaque",
+      "resumo": "Secador rotativo baixa a umidade a 0,04% e o açúcar sai a granel ou em big bag",
+      "anel": 1,
+      "tags": [
+        "alimento"
+      ],
+      "icone": "Sun",
+      "texto": {
+        "descricao": "O açúcar sai da centrífuga com cerca de 1% de umidade e precisa chegar abaixo de 0,05% para não empedrar nem fermentar na estocagem. Secadores rotativos ou de leito fluidizado sopram ar quente e depois ar frio sobre o cristal em movimento. Daqui saem o VHP a granel, destinado à exportação, e o cristal ensacado para o mercado interno.",
+        "comoFunciona": "O ar quente arrasta a umidade superficial do cristal e o resfriamento subsequente evita que a umidade interna migre de volta para a superfície durante a estocagem.",
+        "limitacoes": [
+          "O pó de açúcar gerado na secagem é risco de explosão e exige exaustão dedicada; é recuperado e volta ao processo."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.proc.refino",
+      "kind": "processo",
+      "nome": "Refino",
+      "resumo": "Redissolve o cristal, descolora com carvão ou resina e recristaliza a 99,9% de pol",
+      "anel": 1,
+      "tags": [
+        "alimento"
+      ],
+      "icone": "Sparkles",
+      "texto": {
+        "descricao": "O refino não é etapa obrigatória da usina: a maior parte do açúcar paulista sai como VHP e é refinada no destino. Onde existe refinaria acoplada, o cristal é redissolvido, clarificado por flotação ou carbonatação, descolorido com carvão ativado ou resina de troca iônica e recristalizado. O produto tem cor abaixo de 45 UI e pol acima de 99,8%.",
+        "comoFunciona": "A descoloração retém as moléculas coradas em uma superfície adsorvente; a recristalização a partir do licor limpo produz um cristal com muito menos inclusão de impureza.",
+        "limitacoes": [
+          "O refino consome vapor e água adicionais e só se paga com escala e mercado próximo.",
+          "O licor residual do refino volta ao cozimento ou engrossa o mel final, o que o grafo representa como retorno de 5%."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.proc.preparo_mosto",
+      "kind": "processo",
+      "nome": "Preparo do mosto",
+      "resumo": "Caldo, xarope e melaço são misturados e diluídos até 16-22 °Brix para a dorna",
+      "anel": 1,
+      "tags": [
+        "combustivel"
+      ],
+      "icone": "Merge",
+      "texto": {
+        "descricao": "O mosto é a matéria-prima da fermentação, e numa usina mista ele é uma mistura ajustável: caldo clarificado, xarope e mel final entram em proporção variável conforme o preço relativo de açúcar e etanol naquela semana. A concentração é acertada entre 16 e 22 °Brix e a temperatura baixada a 30-32 °C antes de entrar na dorna.",
+        "comoFunciona": "Mosto muito concentrado gera etanol demais para a levedura suportar e trava a fermentação; muito diluído desperdiça volume de dorna e energia de destilação.",
+        "limitacoes": [
+          "A flexibilidade açúcar/etanol é decidida no mercado, não na engenharia — o grafo mostra os dois caminhos abertos sem fixar a divisão."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "amorim2011",
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.proc.fermentacao",
+      "kind": "processo",
+      "nome": "Fermentação Melle-Boinot",
+      "resumo": "Reciclo de levedura fecha a dorna em 6-10 h com 8-11% de etanol no vinho",
+      "anel": 1,
+      "tags": [
+        "combustivel",
+        "quimica"
+      ],
+      "icone": "FlaskConical",
+      "texto": {
+        "descricao": "O processo Melle-Boinot é a assinatura da indústria brasileira: em vez de descartar a levedura ao fim de cada batelada, ela é recuperada por centrifugação, tratada e devolvida à dorna seguinte. Isso mantém uma população celular altíssima, de 8% a 17% em volume, e encurta a fermentação para 6 a 10 horas. Linhagens selecionadas como PE-2, CAT-1 e SA-1, isoladas em dornas industriais paulistas, dominam o parque. A eficiência de conversão fica entre 89% e 92% do teórico de Gay-Lussac.",
+        "comoFunciona": "Saccharomyces cerevisiae quebra sacarose em glicose e frutose e converte cada molécula de açúcar em duas de etanol e duas de CO2, liberando calor que precisa ser retirado por trocadores.",
+        "limitacoes": [
+          "Contaminação bacteriana, sobretudo por Lactobacillus, é a principal perda de rendimento e o motivo do tratamento ácido do fermento.",
+          "A eficiência industrial de 89-92% é média de safra; dornas individuais variam bem mais."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "amorim2011",
+        "basso2008"
+      ]
+    },
+    {
+      "id": "cana.proc.tratamento_fermento",
+      "kind": "processo",
+      "nome": "Tratamento do fermento",
+      "resumo": "Centrífugas recuperam o creme de levedura; banho ácido a pH 2,0-2,5 corta a bactéria",
+      "anel": 1,
+      "tags": [
+        "quimica"
+      ],
+      "icone": "Microscope",
+      "texto": {
+        "descricao": "Ao fim da fermentação, o vinho é centrifugado. O creme de levedura, com 60-70% de células em volume, vai para as cubas de tratamento, onde recebe ácido sulfúrico até pH 2,0-2,5 e fica de uma a três horas. O ácido mata a bactéria contaminante sem matar a levedura, que é mais tolerante. O que sobra do crescimento celular, e que o reciclo não comporta, é purgado: é a levedura excedente.",
+        "comoFunciona": "A parede celular da levedura resiste ao pH baixo por mais tempo que a das bactérias lácticas; a diferença de tolerância é o que faz a seleção.",
+        "limitacoes": [
+          "O uso de antibióticos como alternativa ao ácido deixa resíduo na levedura seca vendida para ração e é objeto de restrição comercial.",
+          "A purga de fermento é ajustada por operação e varia muito entre usinas — o número de excedente é o mais frágil deste trecho."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "amorim2011",
+        "basso2008"
+      ]
+    },
+    {
+      "id": "cana.proc.destilacao",
+      "kind": "processo",
+      "nome": "Destilação",
+      "resumo": "Colunas A-B levam o vinho de 8% a 93 °INPM e despejam 10-13 L de vinhaça por litro",
+      "anel": 1,
+      "tags": [
+        "combustivel",
+        "energia"
+      ],
+      "icone": "Cylinder",
+      "texto": {
+        "descricao": "O vinho delevedurado entra no conjunto de colunas A, A1, D, B e B1. A coluna A esgota o etanol do vinho e descarrega pelo fundo a vinhaça, a 85-90 °C. A coluna B retifica o flegma até 92,5-94,6 °INPM, o etanol hidratado combustível. É o ponto do grafo em que nasce o maior fluxo líquido da agroindústria paulista: 10 a 13 litros de vinhaça por litro de etanol.",
+        "comoFunciona": "Etanol e água fervem a temperaturas diferentes; pratos sucessivos na coluna repetem evaporação e condensação até que o vapor no topo esteja concentrado em etanol.",
+        "limitacoes": [
+          "A destilação não consegue passar de 96% em massa: acima disso etanol e água formam azeótropo e destilam juntos.",
+          "O consumo de vapor da destilaria, 2 a 3 kg por litro de etanol, é o que disputa bagaço com a exportação de eletricidade."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana",
+        "vinhaca_disponivel",
+        "vinhaca_biogas"
+      ],
+      "fontes": [
+        "atlas2020_p67",
+        "rein2017",
+        "elia_neto2016"
+      ]
+    },
+    {
+      "id": "cana.proc.desidratacao",
+      "kind": "processo",
+      "nome": "Desidratação do etanol",
+      "resumo": "Peneira molecular quebra o azeótropo e leva o hidratado a 99,6 °INPM",
+      "anel": 1,
+      "tags": [
+        "combustivel"
+      ],
+      "icone": "Split",
+      "texto": {
+        "descricao": "Para ser misturado à gasolina, o etanol precisa estar praticamente anidro — água residual causaria separação de fases no tanque. A rota dominante hoje é a peneira molecular de zeólita 3A, que substituiu a destilação azeotrópica com ciclohexano e a extrativa com monoetilenoglicol. O produto sai com no mínimo 99,3 °INPM, conforme a especificação da ANP.",
+        "comoFunciona": "Os poros da zeólita têm 3 angströms: a molécula de água entra e fica retida, a de etanol não cabe e passa direto; o leito saturado é regenerado sob vácuo.",
+        "limitacoes": [
+          "A regeneração devolve uma corrente rica em água e etanol que volta à destilação, contabilizada aqui como flegmaça.",
+          "As rotas antigas com ciclohexano ainda operam em algumas plantas e deixam traço de solvente no produto."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "anp_res907",
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.proc.caldeira",
+      "kind": "processo",
+      "nome": "Caldeira e cogeração",
+      "resumo": "Queima do bagaço move a usina inteira e ainda exporta 21.218 GWh/ano à rede",
+      "anel": 1,
+      "tags": [
+        "energia"
+      ],
+      "icone": "Flame",
+      "texto": {
+        "descricao": "O bagaço vai direto da moenda para a caldeira. As plantas modernas queimam a 65-100 bar e 480-520 °C, acionam turbogeradores de condensação e entregam vapor de escape à fábrica. A usina é autossuficiente em energia e ainda exporta: o setor sucroenergético registrou 21.218 GWh de bioeletricidade em 2024, segundo a UNICA. É exatamente por isso que o bagaço fica fora da conta de biogás por padrão neste Atlas — contá-lo duas vezes duplicaria energia que o setor já recupera.",
+        "comoFunciona": "A combustão do bagaço aquece água em tubos e gera vapor de alta pressão; o vapor expande em turbinas gerando eletricidade e sai a pressão baixa, ainda quente o bastante para evaporar caldo e destilar vinho.",
+        "limitacoes": [
+          "A umidade de 50% do bagaço consome parte do calor da própria queima e limita a eficiência da caldeira.",
+          "Excedente de bagaço só existe onde a integração térmica da fábrica foi otimizada; em plantas antigas de 21 bar sobra pouco ou nada.",
+          "Ligar o bagaço na conta de biogás é uma chave do modelo, não um cenário-base: mostra quanto o panorama incha e por quê."
+        ]
+      },
+      "paramsRelevantes": [
+        "incluir_bagaco",
+        "bagaco_excedente",
+        "eficiencia_eletrica",
+        "preco_eletricidade",
+        "bmp_bagaco"
+      ],
+      "fontes": [
+        "unica2024",
+        "ctbe_vsb",
+        "feedstocks_yaml"
+      ]
+    },
+    {
+      "id": "cana.copr.colmos",
+      "kind": "coproduto",
+      "nome": "Colmos",
+      "resumo": "O caule que carrega a sacarose: 12-16% de açúcar, 12-14% de fibra, o resto água",
+      "anel": 2,
+      "tags": [
+        "alimento",
+        "combustivel"
+      ],
+      "icone": "Wheat",
+      "texto": {
+        "descricao": "O colmo é a única parte da planta que a usina compra. Chega com 12% a 16% de sacarose, 12% a 14% de fibra e cerca de 70% de água, e é sobre a sua massa que todos os fatores deste Atlas são normalizados. Tudo o que se diz por tonelada de cana refere-se a tonelada de colmo entregue na moenda.",
+        "limitacoes": [
+          "A cana entregue traz impureza mineral e vegetal, de 5 a 20 kg por tonelada, que é contabilizada como cana mas não é colmo."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "atlas2020",
+        "rein2017"
+      ],
+      "inicial": true
+    },
+    {
+      "id": "cana.res.palha",
+      "kind": "residuo",
+      "nome": "Palha (palhiço)",
+      "resumo": "140 kg de matéria seca por tonelada de cana, deitados no campo desde o fim da queima",
+      "anel": 2,
+      "tags": [
+        "energia",
+        "solo"
+      ],
+      "icone": "Layers",
+      "stream": "palha",
+      "texto": {
+        "descricao": "Palhiço é o conjunto de folhas secas, folhas verdes e ponteiros que a colhedora separa do colmo e devolve ao solo. São 140 kg de matéria seca por tonelada de cana, o maior estoque lignocelulósico ocioso de São Paulo. Existe em escala porque a queima acabou, e continua no campo porque metade dele precisa ficar lá: a palhada protege o solo da erosão, retém umidade e devolve carbono e potássio. A fração recolhível fica entre 40% no cenário real e 50% no ideal.",
+        "limitacoes": [
+          "De 50% a 60% da palha tem de permanecer no solo por razão agronômica; recolher mais que isso troca energia por degradação.",
+          "O recolhimento custa cerca de R$ 65 por tonelada e só se paga em raio curto.",
+          "Relação C/N alta, de 75 a 100, o que inviabiliza monodigestão e obriga codigestão com material rico em nitrogênio.",
+          "O modelo não penaliza deterioração de palha estocada entre safras — há um controle para testar esse efeito."
+        ]
+      },
+      "paramsRelevantes": [
+        "palha_gerada",
+        "palha_recolhivel",
+        "perda_estocagem_palha",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "atlas2020_p65",
+        "hassuani2005",
+        "carvalho2017",
+        "tenelli2021"
+      ],
+      "inicial": true
+    },
+    {
+      "id": "cana.res.bagaco",
+      "kind": "residuo",
+      "nome": "Bagaço",
+      "resumo": "280 kg por tonelada de cana, já queimados na caldeira — fora da conta por padrão",
+      "anel": 2,
+      "tags": [
+        "energia"
+      ],
+      "icone": "Boxes",
+      "stream": "bagaco",
+      "texto": {
+        "descricao": "O bagaço é a fibra que sobra da extração do caldo: 280 kg por tonelada de cana, com cerca de 50% de umidade. Nos padrões do CP2B, sólidos totais de 58,9% e sólidos voláteis a 90% dos sólidos, com BMP entre 115 e 220 L CH4 por kg de SV. É o resíduo mais abundante e o menos disponível: já é combustível da própria usina. Tratá-lo como biomassa livre foi o maior erro corrigido deste projeto, e por isso ele entra desligado no cálculo de biogás.",
+        "limitacoes": [
+          "Disponibilidade real depende do excedente após a demanda térmica da usina, que varia com o nível de integração energética de cada planta.",
+          "A tabela residuos do banco ainda registra 13,99% de disponibilidade para o bagaço; residueFactors.ts e o CSV do FDE registram 0%.",
+          "Recalcitrância da lignina exige pré-tratamento para que o BMP de laboratório se realize em digestor industrial."
+        ]
+      },
+      "paramsRelevantes": [
+        "bagaco_rpr",
+        "incluir_bagaco",
+        "bagaco_excedente",
+        "bmp_bagaco",
+        "sv_bagaco"
+      ],
+      "fontes": [
+        "feedstocks_yaml",
+        "unica2024",
+        "paulose2021",
+        "talha2016"
+      ],
+      "inicial": true
+    },
+    {
+      "id": "cana.res.agua_lavagem",
+      "kind": "residuo",
+      "nome": "Água de lavagem",
+      "resumo": "Terra, areia e palhiço retirados na recepção; a lavagem úmida virou circuito fechado",
+      "anel": 2,
+      "tags": [
+        "solo"
+      ],
+      "icone": "CloudDrizzle",
+      "texto": {
+        "descricao": "Onde ainda existe lavagem com água, o efluente carrega de 3 a 5 m³ por tonelada, com terra, areia, folhas e sacarose arrastada. É recirculado em circuito fechado com caixas de decantação, e o sedimento retirado volta ao campo. Com a limpeza a seco a corrente encolheu, mas o material sólido separado continua existindo e continua indo para o canavial.",
+        "limitacoes": [
+          "A carga orgânica é baixa comparada à da vinhaça, mas o volume é grande e o descarte é regulado.",
+          "A massa desta corrente não é medida com precisão: os 2% usados no balanço são estimativa de impureza, não de água."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "elia_neto2016"
+      ]
+    },
+    {
+      "id": "cana.copr.caldo_misto",
+      "kind": "coproduto",
+      "nome": "Caldo misto",
+      "resumo": "O caldo bruto das moendas: 15-18 °Brix, ácido, turvo, com bagacilho em suspensão",
+      "anel": 2,
+      "tags": [
+        "alimento",
+        "combustivel"
+      ],
+      "icone": "Droplets",
+      "texto": {
+        "descricao": "É a mistura do caldo primário, mais rico, com o caldo dos ternos seguintes, diluído pela embebição. Sai a 15-18 °Brix, pH entre 5,0 e 5,5, cheio de bagacilho e terra. Todo o açúcar e todo o etanol da usina passam por aqui. A partir deste nó o grafo se bifurca de forma definitiva entre a fábrica de açúcar e a destilaria.",
+        "limitacoes": [
+          "A massa do caldo misto é maior que a fração de cana atribuída a ele, porque inclui a água de embebição — o balanço deste Atlas contabiliza apenas a massa de origem cana."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.copr.caldo_clarificado",
+      "kind": "coproduto",
+      "nome": "Caldo clarificado",
+      "resumo": "Caldo limpo a pH neutro, pronto para virar açúcar na evaporação ou etanol na dorna",
+      "anel": 2,
+      "tags": [
+        "alimento",
+        "combustivel"
+      ],
+      "icone": "Droplet",
+      "texto": {
+        "descricao": "O caldo que transborda do decantador, somado ao caldo filtrado que retorna, é o insumo comum das duas linhas da usina. Sai com pH próximo de 7, livre da maior parte dos coloides e da terra. A decisão de mandá-lo para a evaporação ou para o preparo do mosto é comercial e muda de semana para semana.",
+        "limitacoes": [
+          "Nem toda usina é mista; destilarias autônomas mandam todo o caldo clarificado para a fermentação."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp",
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.res.lodo",
+      "kind": "residuo",
+      "nome": "Lodo da decantação",
+      "resumo": "Fase densa do decantador: terra, ceras, fosfato de cálcio e açúcar a recuperar",
+      "anel": 2,
+      "tags": [
+        "fertilizante"
+      ],
+      "icone": "CircleDashed",
+      "texto": {
+        "descricao": "O lodo é a corrente intermediária que existe apenas entre o decantador e o filtro. Concentra tudo o que o caldo precisava perder e ainda retém sacarose, o que obriga a filtrá-lo em vez de descartá-lo. Da sua filtração nascem a torta de filtro e o caldo filtrado que volta ao tratamento.",
+        "limitacoes": [
+          "Volume e composição variam com a impureza mineral da cana, que subiu com a colheita mecanizada."
+        ]
+      },
+      "paramsRelevantes": [
+        "torta_gerada"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.res.torta",
+      "kind": "residuo",
+      "nome": "Torta de filtro",
+      "resumo": "35 kg/t de cana, rica em fósforo, cálcio e potássio — o melhor BMP da cana",
+      "anel": 2,
+      "tags": [
+        "fertilizante",
+        "energia",
+        "solo"
+      ],
+      "icone": "Package",
+      "stream": "torta",
+      "texto": {
+        "descricao": "A torta é o sólido retido na filtração do lodo: 35 kg por tonelada de cana, com cerca de 70% de umidade e sólidos voláteis em torno de 20% da base úmida. É rica em fósforo, cálcio e matéria orgânica, e hoje volta quase toda ao canavial como condicionador de solo. Do ponto de vista da digestão anaeróbia é o melhor material da cana: BMP de 200 a 380 L CH4 por kg de SV, o maior dos quatro fluxos, e já disponível no pátio da usina sem custo de coleta.",
+        "limitacoes": [
+          "Concorre com o uso agronômico consolidado: cada tonelada digerida é uma tonelada que deixa de ir inteira ao campo — embora o digestato conserve os nutrientes.",
+          "Geração sazonal, restrita aos 200 a 240 dias de safra, o que ociosa o digestor no entressafra.",
+          "As fontes do CP2B divergem em uma ordem de grandeza sobre a geração; adotou-se 35 kg/t, valor do script do Atlas."
+        ]
+      },
+      "paramsRelevantes": [
+        "torta_gerada",
+        "torta_disponivel",
+        "bmp_torta",
+        "sv_torta"
+      ],
+      "fontes": [
+        "atlas2020_p66",
+        "talha2016",
+        "velasquez2020"
+      ],
+      "inicial": true
+    },
+    {
+      "id": "cana.copr.xarope",
+      "kind": "coproduto",
+      "nome": "Xarope",
+      "resumo": "Caldo concentrado a 60-68 °Brix; pode virar cristal no cozedor ou mosto na dorna",
+      "anel": 2,
+      "tags": [
+        "alimento",
+        "combustivel"
+      ],
+      "icone": "Container",
+      "texto": {
+        "descricao": "O xarope é o caldo depois de perder dois terços da água. É estável o bastante para ser estocado por algumas horas e serve às duas linhas: cristaliza no cozedor ou entra no mosto da fermentação. Usinas flex usam o xarope como ponto de arbitragem entre açúcar e etanol dentro da mesma safra.",
+        "limitacoes": [
+          "Estocagem prolongada inverte sacarose e escurece o produto."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.copr.condensado",
+      "kind": "coproduto",
+      "nome": "Condensado vegetal",
+      "resumo": "Água quente e limpa dos evaporadores, devolvida à caldeira ou à embebição",
+      "anel": 2,
+      "tags": [
+        "energia"
+      ],
+      "icone": "Pipette",
+      "texto": {
+        "descricao": "A água evaporada do caldo condensa nos efeitos seguintes e volta como condensado vegetal, quente e de baixa condutividade. O condensado dos primeiros efeitos, mais puro, é água de alimentação de caldeira; o dos últimos, com arraste de açúcar, vai para embebição e lavagem. É a razão de a usina ser praticamente autossuficiente em água: a cana entra com 70% de água e essa água é reaproveitada dentro da planta.",
+        "limitacoes": [
+          "Arraste de sacarose no condensado é perda direta e indicador de mau funcionamento do evaporador."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "elia_neto2016",
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.copr.massa_cozida",
+      "kind": "coproduto",
+      "nome": "Massa cozida",
+      "resumo": "Suspensão de cristais em mel saindo do cozedor, com 8-10% de umidade",
+      "anel": 2,
+      "tags": [
+        "alimento"
+      ],
+      "icone": "Snowflake",
+      "texto": {
+        "descricao": "A massa cozida é o produto do cozedor: cristais de sacarose imersos no mel de onde cresceram. Passa por cristalizadores, onde continua a depositar açúcar enquanto esfria lentamente, e daí segue para a centrífuga, que separa as duas fases.",
+        "limitacoes": [
+          "Resfriamento rápido demais forma cristais finos que atravessam a tela da centrífuga e voltam ao mel."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.copr.mel_final",
+      "kind": "coproduto",
+      "nome": "Mel final",
+      "resumo": "O mel esgotado da massa C: 28-40% de pureza, não volta mais ao cozimento",
+      "anel": 2,
+      "tags": [
+        "alimento",
+        "combustivel"
+      ],
+      "icone": "Blend",
+      "texto": {
+        "descricao": "Mel final é o licor que sobra da última centrifugação, depois que o cozimento esgotou economicamente a sacarose. Chega a 85-90 °Brix e pureza de 28% a 40%, com todo o açúcar redutor e todos os sais que não cristalizaram. Não retorna à fábrica de açúcar: sai da linha, é padronizado e estocado.",
+        "limitacoes": [
+          "Quanto melhor o esgotamento na fábrica de açúcar, menos açúcar fermentescível chega à destilaria."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp",
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.copr.melaco",
+      "kind": "coproduto",
+      "nome": "Melaço",
+      "resumo": "Mel final padronizado e estocado: matéria-prima fermentescível fora da safra de caldo",
+      "anel": 2,
+      "tags": [
+        "combustivel",
+        "alimento",
+        "quimica"
+      ],
+      "icone": "Shell",
+      "texto": {
+        "descricao": "Melaço é o mel final tratado como matéria-prima: padronizado em concentração, estocado em tanques e dosado no mosto. Além da destilaria, alimenta a produção de levedura, de ração animal e de fermentações químicas. É o único intermediário da usina que se transporta bem e se comercializa a distância, o que faz dele o ponto de entrada de terceiros na cadeia da cana.",
+        "limitacoes": [
+          "Alto teor de sais e de compostos inibidores reduz a eficiência da fermentação quando o mosto é rico em melaço.",
+          "O preço acompanha o do açúcar, o que muda o custo de qualquer rota que dependa dele."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "rein2017",
+        "amorim2011"
+      ]
+    },
+    {
+      "id": "cana.copr.vinho",
+      "kind": "coproduto",
+      "nome": "Vinho fermentado",
+      "resumo": "Mosto fermentado com 8-11% de etanol em volume e a levedura ainda em suspensão",
+      "anel": 2,
+      "tags": [
+        "combustivel"
+      ],
+      "icone": "TestTube",
+      "texto": {
+        "descricao": "O vinho é o conteúdo da dorna ao fim da fermentação: etanol de 8% a 11% em volume, água, levedura, glicerol, ácidos orgânicos e o que não fermentou. Ainda não é produto nem resíduo — é o material do qual serão separados, em sequência, a levedura, o etanol e a vinhaça.",
+        "limitacoes": [
+          "Teores acima de 11% exigem linhagens tolerantes e refrigeração mais intensa; a maior parte do parque paulista opera abaixo disso."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "amorim2011"
+      ]
+    },
+    {
+      "id": "cana.copr.levedura",
+      "kind": "coproduto",
+      "nome": "Levedura excedente",
+      "resumo": "Purga do creme de fermento, secada e vendida como proteína para ração animal",
+      "anel": 2,
+      "tags": [
+        "alimento",
+        "quimica"
+      ],
+      "icone": "Microscope",
+      "texto": {
+        "descricao": "O reciclo de fermento mantém a população celular alta, mas a levedura também cresce, e o excesso precisa ser purgado a cada ciclo. Esse creme é secado em spray dryer ou rolo e vendido como levedura seca inativa, com 35% a 45% de proteína bruta, para ração de aves, suínos e pets. Frações mais nobres, como parede celular e beta-glucanos, alcançam preços muito acima do de ração.",
+        "limitacoes": [
+          "A quantidade purgada varia com a operação de cada usina e é o número mais frágil deste trecho da espinha: a ordem de grandeza usada aqui é de 10 a 20 kg de matéria seca por m³ de etanol.",
+          "Resíduo de antibiótico usado no controle de contaminação restringe mercados de ração."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "amorim2011",
+        "basso2008"
+      ]
+    },
+    {
+      "id": "cana.copr.co2",
+      "kind": "coproduto",
+      "nome": "CO2 fermentativo",
+      "resumo": "0,76 kg por litro de etanol, biogênico e quase puro na saída da dorna",
+      "anel": 2,
+      "tags": [
+        "quimica",
+        "regulatorio"
+      ],
+      "icone": "Atom",
+      "texto": {
+        "descricao": "Cada litro de etanol produz cerca de 0,76 kg de CO2 na dorna. É uma corrente concentrada, acima de 99% de pureza depois da lavagem em torre, e biogênica por origem. Parte já é capturada em São Paulo para bebidas carbonatadas e gelo seco; a maior parte é ventilada. Como corrente concentrada e de origem vegetal, é a candidata mais barata do setor a captura e armazenamento.",
+        "limitacoes": [
+          "A captura só se paga com demanda industrial próxima ou com preço de carbono; hoje a maioria das dornas é aberta à atmosfera.",
+          "A liberação é sazonal e intermitente, o que dificulta contratos de fornecimento contínuo."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana",
+        "preco_carbono"
+      ],
+      "fontes": [
+        "amorim2011",
+        "ctbe_vsb"
+      ]
+    },
+    {
+      "id": "cana.res.vinhaca",
+      "kind": "residuo",
+      "nome": "Vinhaça",
+      "resumo": "10-13 L por litro de etanol, quente, ácida e rica em potássio — o maior efluente",
+      "anel": 2,
+      "tags": [
+        "fertilizante",
+        "energia",
+        "regulatorio"
+      ],
+      "icone": "Waves",
+      "stream": "vinhaca",
+      "texto": {
+        "descricao": "A vinhaça sai do fundo da coluna de destilação a 85-90 °C, com pH em torno de 4, DQO alta e muito potássio. São 10 a 13 litros por litro de etanol, o maior fluxo líquido da agroindústria paulista. A norma CETESB P4.231 obriga o retorno controlado ao canavial como fertirrigação, com dosagem calculada por potássio e proteção de poços e cursos d'água. Digestão e fertirrigação não competem: são sequenciais. O digestato mantém potássio, nitrogênio e fósforo e volta ao campo depois de entregar o metano.",
+        "limitacoes": [
+          "Distância de transporte é o limite prático: cada quilômetro de canal ou caminhão-tanque encarece o retorno ao campo.",
+          "A rota direta do Atlas usa 114 m³ de biogás por m³ de etanol, com 50% de CH4 no cenário real e 65% no ideal — é modelo, não medição de planta.",
+          "A geração é sazonal e acompanha a safra, o que ociosa o digestor por três a quatro meses."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana",
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca",
+        "fracao_ch4_biogas"
+      ],
+      "fontes": [
+        "atlas2020_p67",
+        "cetesb_p4231",
+        "elia_neto2016"
+      ],
+      "inicial": true
+    },
+    {
+      "id": "cana.res.flegmaca",
+      "kind": "residuo",
+      "nome": "Flegmaça",
+      "resumo": "Efluente da coluna de retificação: menos volume e menos carga que a vinhaça",
+      "anel": 2,
+      "tags": [
+        "fertilizante"
+      ],
+      "icone": "Beaker",
+      "texto": {
+        "descricao": "A flegmaça sai da coluna de retificação e da regeneração da peneira molecular, não do esgotamento do vinho. É bem menos carregada que a vinhaça e costuma ser misturada a ela antes da fertirrigação, ou reaproveitada como água de processo. Aparece no grafo porque é um efluente distinto, com composição e destino próprios.",
+        "limitacoes": [
+          "A relação de volume com o etanol produzido varia com a configuração das colunas; a faixa de 0,5 a 1,5 L por litro de etanol usada aqui é indicativa, não medida.",
+          "Quando misturada à vinhaça, deixa de ser contabilizada em separado nos balanços das usinas."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "elia_neto2016",
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.copr.oleo_fusel",
+      "kind": "coproduto",
+      "nome": "Óleo fúsel",
+      "resumo": "2 a 3 litros por m³ de etanol; álcool isoamílico para solvente e fragrância",
+      "anel": 2,
+      "tags": [
+        "quimica"
+      ],
+      "icone": "Droplet",
+      "texto": {
+        "descricao": "Óleo fúsel é a mistura de álcoois superiores, sobretudo isoamílico, retirada em prato lateral da coluna de retificação. São 2 a 3 litros por metro cúbico de etanol, um volume pequeno com valor unitário alto: serve de solvente e de matéria-prima para fragrâncias e ésteres. É o coproduto mais discreto da destilaria e um dos poucos que sai da usina já com destino químico.",
+        "limitacoes": [
+          "Volume baixo demais para sustentar uma cadeia industrial própria; é vendido a granel para terceiros beneficiarem."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.copr.cinzas",
+      "kind": "coproduto",
+      "nome": "Cinzas e fuligem",
+      "resumo": "3 a 8 kg/t de cana da grelha e dos lavadores; sílica, potássio e carbono não queimado",
+      "anel": 2,
+      "tags": [
+        "fertilizante",
+        "solo"
+      ],
+      "icone": "Mountain",
+      "texto": {
+        "descricao": "Da queima do bagaço restam cinzas de grelha e a fuligem retida nos lavadores de gases. São 3 a 8 kg por tonelada de cana, número que sobe com a terra que entra junto com a cana. A composição é dominada por sílica, com potássio, cálcio e carbono não queimado. Quase tudo volta ao canavial, geralmente misturado à torta de filtro, e há uso consolidado da cinza como adição pozolânica em cimento e argamassa.",
+        "limitacoes": [
+          "O carbono não queimado indica perda de eficiência da caldeira e varia muito entre plantas.",
+          "O alto teor de sílica limita o valor agronômico direto, mas é justamente o que interessa à indústria de cimento."
+        ]
+      },
+      "paramsRelevantes": [
+        "bagaco_rpr",
+        "incluir_bagaco"
+      ],
+      "fontes": [
+        "unica2024",
+        "ctbe_vsb"
+      ]
+    },
+    {
+      "id": "cana.res.gases_caldeira",
+      "kind": "residuo",
+      "nome": "Gases de combustão",
+      "resumo": "CO2 biogênico diluído a 12-14% saindo da chaminé, hoje inteiramente ventilado",
+      "anel": 2,
+      "tags": [
+        "energia",
+        "regulatorio"
+      ],
+      "icone": "Wind",
+      "texto": {
+        "descricao": "A queima do bagaço lança pela chaminé uma corrente com 12% a 14% de CO2, biogênico como o da dorna mas muito mais diluído e muito maior em volume. Passa por lavadores ou precipitadores que retêm o material particulado, e sai. É a maior corrente de carbono da usina e a menos aproveitada, justamente porque a diluição encarece qualquer captura.",
+        "limitacoes": [
+          "Capturar CO2 a 12% custa muito mais que capturar os 99% da dorna: qualquer rota BECCS a partir daqui é de TRL baixo no Brasil.",
+          "O controle de material particulado é exigência ambiental corrente; a captura de carbono não é."
+        ]
+      },
+      "paramsRelevantes": [
+        "incluir_bagaco",
+        "preco_carbono"
+      ],
+      "fontes": [
+        "ctbe_vsb",
+        "unica2024"
+      ]
+    },
+    {
+      "id": "cana.copr.vapor",
+      "kind": "coproduto",
+      "nome": "Vapor de processo",
+      "resumo": "Vapor de escape a 2,5 bar move evaporação, cozimento e destilação da usina inteira",
+      "anel": 2,
+      "tags": [
+        "energia"
+      ],
+      "icone": "Gauge",
+      "texto": {
+        "descricao": "O vapor gerado na caldeira a 65-100 bar passa pelas turbinas, gera eletricidade e sai a cerca de 2,5 bar ainda quente. Esse vapor de escape é a energia térmica de toda a fábrica: evaporadores, cozedores, aquecedores de caldo e colunas de destilação. A eficiência com que a usina usa esse vapor determina, diretamente, quanto bagaço sobra para qualquer outra coisa.",
+        "limitacoes": [
+          "Reduzir o consumo específico de vapor é o caminho real para liberar bagaço — o número que aparece no controle de excedente vem daqui."
+        ]
+      },
+      "paramsRelevantes": [
+        "bagaco_excedente",
+        "eficiencia_eletrica"
+      ],
+      "fontes": [
+        "ctbe_vsb",
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.prod.acucar_vhp",
+      "kind": "produto",
+      "nome": "Açúcar VHP",
+      "resumo": "Pol 99,0-99,4 e cor alta; sai a granel por Santos para refinarias no exterior",
+      "anel": 4,
+      "tags": [
+        "alimento"
+      ],
+      "icone": "Warehouse",
+      "texto": {
+        "descricao": "Very High Polarization é o açúcar bruto de exportação: polarização entre 99,0 e 99,4, cor elevada, sem sulfitação. Não é feito para consumo direto — é insumo de refinarias fora do Brasil. É o principal produto de açúcar de São Paulo em volume e sai a granel pelo porto de Santos.",
+        "limitacoes": [
+          "O preço acompanha o contrato nº 11 de Nova York e o câmbio, o que torna a divisão açúcar/etanol da usina uma decisão de mercado semanal."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "unica2024",
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.prod.acucar_cristal",
+      "kind": "produto",
+      "nome": "Açúcar cristal",
+      "resumo": "Cristal branco sulfitado, cor 100-250 UI, para mesa e indústria de alimentos",
+      "anel": 4,
+      "tags": [
+        "alimento"
+      ],
+      "icone": "Candy",
+      "texto": {
+        "descricao": "O cristal branco é produzido com sulfitação do caldo e destina-se ao mercado interno e a importadores que não refinam. Cor entre 100 e 250 UI e polarização acima de 99,7. Ensacado em 50 kg ou em big bags de uma tonelada, é o formato mais familiar do açúcar brasileiro.",
+        "limitacoes": [
+          "A restrição a resíduo de SO2 em alguns mercados empurra usinas para a rota VHP, sem sulfitação."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.prod.acucar_refinado",
+      "kind": "produto",
+      "nome": "Açúcar refinado",
+      "resumo": "Cor abaixo de 45 UI e pol acima de 99,8; feito onde há refinaria acoplada",
+      "anel": 4,
+      "tags": [
+        "alimento"
+      ],
+      "icone": "Award",
+      "texto": {
+        "descricao": "O refinado, granulado ou amorfo, é o produto de maior valor e menor volume da fábrica de açúcar. Exige refinaria com descoloração e recristalização, o que poucas usinas paulistas têm no mesmo sítio. A maior parte do refinado consumido no Brasil vem de refinarias independentes que compram cristal ou VHP.",
+        "limitacoes": [
+          "Consumo adicional de vapor, água e insumos químicos só se justifica com mercado consumidor próximo."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "cana.prod.etanol_hidratado",
+      "kind": "produto",
+      "nome": "Etanol hidratado",
+      "resumo": "92,5 a 94,6 °INPM, vendido puro na bomba para a frota flex",
+      "anel": 4,
+      "tags": [
+        "combustivel",
+        "energia"
+      ],
+      "icone": "Fuel",
+      "texto": {
+        "descricao": "O hidratado é o etanol combustível vendido diretamente nos postos, com 92,5 a 94,6 °INPM conforme especificação da ANP. É também a matéria-prima do anidro e do etanol neutro para bebidas e química fina. A usina mista paulista produz, em média, 0,047838 m³ de etanol total por tonelada de cana; uma destilaria autônoma chega perto de 0,085 m³/t.",
+        "limitacoes": [
+          "A competitividade contra a gasolina depende da paridade de 70% no preço de bomba, o que faz a demanda oscilar dentro da mesma safra."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana",
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "atlas2020_tab_iv2",
+        "anp_res907"
+      ]
+    },
+    {
+      "id": "cana.prod.etanol_anidro",
+      "kind": "produto",
+      "nome": "Etanol anidro",
+      "resumo": "Mínimo 99,3 °INPM; existe para ser misturado à gasolina, não para ser vendido puro",
+      "anel": 4,
+      "tags": [
+        "combustivel",
+        "regulatorio"
+      ],
+      "icone": "Blend",
+      "texto": {
+        "descricao": "O anidro é o hidratado depois de passar pela peneira molecular: no mínimo 99,3 °INPM. Não é vendido ao consumidor final — vai para as distribuidoras e é misturado à gasolina A para formar a gasolina C. A demanda por anidro é, portanto, definida por resolução, não por preço relativo.",
+        "limitacoes": [
+          "Qualquer mudança no percentual de mistura desloca volumes imediatamente entre anidro e hidratado, sem mexer na capacidade instalada."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana",
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "anp_res907",
+        "cnpe2025"
+      ]
+    },
+    {
+      "id": "cana.dest.exportacao_acucar",
+      "kind": "destino",
+      "nome": "Exportação de açúcar",
+      "resumo": "Santos escoa o VHP paulista a granel; o preço vem do contrato nº 11 e do câmbio",
+      "anel": 4,
+      "tags": [
+        "alimento"
+      ],
+      "icone": "Package",
+      "texto": {
+        "descricao": "A maior parte do açúcar de São Paulo sai do país. O VHP embarca a granel por Santos e é refinado no destino. É este destino que dá ao açúcar o caráter de commodity dolarizada e que, na prática, arbitra quanto de cada tonelada de cana vira açúcar e quanto vira etanol.",
+        "limitacoes": [
+          "Capacidade portuária e logística ferroviária são gargalos recorrentes de pico de safra."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "unica2024"
+      ]
+    },
+    {
+      "id": "cana.dest.industria_alimentar",
+      "kind": "destino",
+      "nome": "Indústria de alimentos",
+      "resumo": "Cristal e refinado abastecem bebidas, panificação, laticínios e o consumo de mesa",
+      "anel": 4,
+      "tags": [
+        "alimento"
+      ],
+      "icone": "Candy",
+      "texto": {
+        "descricao": "O açúcar que fica no Brasil vai para bebidas, panificação, confeitaria, laticínios e mesa. É a fração de menor volume da produção paulista, mas a de contrato mais estável, porque não depende de câmbio nem de frete internacional.",
+        "limitacoes": [
+          "A demanda interna cresce pouco e é sensível a mudanças regulatórias de rotulagem e teor de açúcar."
+        ]
+      },
+      "paramsRelevantes": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "unica2024"
+      ]
+    },
+    {
+      "id": "cana.dest.mistura_gasolina",
+      "kind": "destino",
+      "nome": "Mistura na gasolina C",
+      "resumo": "Percentual de anidro na gasolina definido por resolução do CNPE, hoje em 30%",
+      "anel": 4,
+      "tags": [
+        "combustivel",
+        "regulatorio"
+      ],
+      "icone": "Fuel",
+      "texto": {
+        "descricao": "Todo o etanol anidro produzido tem um único destino: a mistura obrigatória com a gasolina A nas bases das distribuidoras. O percentual é fixado por resolução do CNPE, dentro da faixa autorizada pela Lei 13.033/2014, e foi elevado a 30% em 2025. É a demanda mais previsível de toda a cadeia da cana, porque é definida por norma.",
+        "limitacoes": [
+          "Uma alteração de um ponto percentual no teor de mistura desloca centenas de milhões de litros por ano entre anidro e hidratado."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "lei13033_2014",
+        "cnpe2025",
+        "anp_res907"
+      ]
+    },
+    {
+      "id": "cana.dest.frota_flex",
+      "kind": "destino",
+      "nome": "Frota flex",
+      "resumo": "Hidratado puro na bomba; a concorrência com a gasolina se decide na paridade de 70%",
+      "anel": 4,
+      "tags": [
+        "combustivel"
+      ],
+      "icone": "Truck",
+      "texto": {
+        "descricao": "A frota flex brasileira é o que permite ao etanol hidratado disputar mercado litro a litro com a gasolina. Como o etanol rende cerca de 70% da energia da gasolina por litro, o consumidor troca de combustível quando o preço relativo cruza esse limiar. É o único elo da cadeia em que a decisão de consumo é tomada semanalmente por milhões de pessoas.",
+        "limitacoes": [
+          "A eletrificação da frota leve é a incerteza estrutural de longo prazo sobre este destino."
+        ]
+      },
+      "paramsRelevantes": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "anp_res907"
+      ]
+    },
+    {
+      "id": "cana.dest.autoconsumo",
+      "kind": "destino",
+      "nome": "Autoconsumo da usina",
+      "resumo": "A usina é autossuficiente: o vapor e a eletricidade que ela usa vêm do próprio bagaço",
+      "anel": 4,
+      "tags": [
+        "energia"
+      ],
+      "icone": "PlugZap",
+      "texto": {
+        "descricao": "Antes de exportar qualquer coisa, a cogeração alimenta a própria usina: acionamento de moendas, bombas, centrífugas, iluminação e todo o vapor de processo. Essa demanda interna é o primeiro credor do bagaço e a razão pela qual o excedente disponível para outras rotas é muito menor que a massa gerada.",
+        "limitacoes": [
+          "Plantas antigas de 21 bar consomem praticamente todo o bagaço no autoconsumo e não exportam nada."
+        ]
+      },
+      "paramsRelevantes": [
+        "bagaco_excedente",
+        "eficiencia_eletrica",
+        "preco_eletricidade"
+      ],
+      "fontes": [
+        "unica2024",
+        "ctbe_vsb"
+      ]
+    },
+    {
+      "id": "cana.dest.renovabio",
+      "kind": "destino",
+      "nome": "RenovaBio (CBIO)",
+      "resumo": "Cada tonelada de CO2 evitada certificada vira um CBIO negociado em bolsa",
+      "anel": 4,
+      "tags": [
+        "regulatorio",
+        "energia"
+      ],
+      "icone": "Award",
+      "texto": {
+        "descricao": "O RenovaBio dá ao etanol um segundo fluxo de receita, que não é massa nem energia: o CBIO, título emitido a partir da nota fiscal de venda do biocombustível e da nota de eficiência energético-ambiental da planta. Não há material atravessando esta seta — atravessa um direito, e é por isso que ela aparece como aresta regulatória no grafo.",
+        "limitacoes": [
+          "O preço do CBIO é volátil e depende das metas anuais fixadas para as distribuidoras.",
+          "A nota de eficiência premia quem reduz a pegada da planta, o que conecta este destino às rotas de biogás sem que haja fluxo físico entre eles."
+        ]
+      },
+      "paramsRelevantes": [
+        "preco_carbono",
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "cnpe2025",
+        "anp_res907"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "cultura__proc.plantio",
+      "from": "cana.cultura",
+      "to": "cana.proc.plantio",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "ciclo de 5-6 cortes",
+      "explicacao": "O canavial é implantado e conduzido por vários cortes antes da reforma, e é dele que sai toda a biomassa deste mapa.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "atlas2020",
+        "conab2024"
+      ]
+    },
+    {
+      "id": "proc.plantio__proc.colheita",
+      "from": "cana.proc.plantio",
+      "to": "cana.proc.colheita",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A cana em ponto de maturação é entregue à colheita entre abril e novembro.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 1,
+      "fontes": [
+        "atlas2020"
+      ]
+    },
+    {
+      "id": "proc.colheita__copr.colmos",
+      "from": "cana.proc.colheita",
+      "to": "cana.copr.colmos",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "colmos picados",
+      "explicacao": "A colhedora separa o colmo do palhiço e é só o colmo que segue para a usina.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 0.88,
+      "fontes": [
+        "hassuani2005",
+        "atlas2020"
+      ]
+    },
+    {
+      "id": "proc.colheita__res.palha",
+      "from": "cana.proc.colheita",
+      "to": "cana.res.palha",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "140 kg MS/t",
+      "explicacao": "Folhas e ponteiros são soprados de volta ao solo pelos exaustores da colhedora, formando a palhada.",
+      "params": [
+        "palha_gerada",
+        "palha_recolhivel"
+      ],
+      "fracaoDoPai": 0.12,
+      "fontes": [
+        "atlas2020_p65",
+        "hassuani2005",
+        "carvalho2017"
+      ]
+    },
+    {
+      "id": "copr.colmos__proc.transporte",
+      "from": "cana.copr.colmos",
+      "to": "cana.proc.transporte",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "raio médio 25 km",
+      "explicacao": "Os colmos precisam chegar à moenda em 24 a 48 horas, antes que a sacarose inverta.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "atlas2020"
+      ]
+    },
+    {
+      "id": "proc.transporte__proc.recepcao",
+      "from": "cana.proc.transporte",
+      "to": "cana.proc.recepcao",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A cana é pesada e amostrada na portaria: é aqui que a massa do grafo passa a ser medida em balança fiscal.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 1,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.recepcao__proc.preparo",
+      "from": "cana.proc.recepcao",
+      "to": "cana.proc.preparo",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A cana limpa segue da mesa alimentadora para as facas e o desfibrador.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 0.98,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.recepcao__res.agua_lavagem",
+      "from": "cana.proc.recepcao",
+      "to": "cana.res.agua_lavagem",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "terra e impureza",
+      "explicacao": "A limpeza retira terra, areia e palhiço solto que entraram junto com a cana colhida mecanicamente.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 0.02,
+      "fontes": [
+        "elia_neto2016"
+      ]
+    },
+    {
+      "id": "proc.preparo__proc.moagem",
+      "from": "cana.proc.preparo",
+      "to": "cana.proc.moagem",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "preparo 88-92%",
+      "explicacao": "A cana desfibrada vai inteira para a extração; o preparo abre a célula sem separar nenhuma fração.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 1,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.moagem__copr.caldo_misto",
+      "from": "cana.proc.moagem",
+      "to": "cana.copr.caldo_misto",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "extração 96-97%",
+      "explicacao": "O caldo espremido nos ternos, somado à água de embebição, carrega quase todo o açúcar da cana.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 0.72,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.moagem__res.bagaco",
+      "from": "cana.proc.moagem",
+      "to": "cana.res.bagaco",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "280 kg/t",
+      "explicacao": "A fibra que resta depois da extração sai da última moenda com cerca de 50% de umidade.",
+      "params": [
+        "bagaco_rpr",
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 0.28,
+      "fontes": [
+        "feedstocks_yaml",
+        "atlas2020"
+      ]
+    },
+    {
+      "id": "copr.caldo_misto__proc.tratamento_caldo",
+      "from": "cana.copr.caldo_misto",
+      "to": "cana.proc.tratamento_caldo",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O caldo bruto precisa ser neutralizado e coagulado antes de qualquer uso.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.tratamento_caldo__proc.decantacao",
+      "from": "cana.proc.tratamento_caldo",
+      "to": "cana.proc.decantacao",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "pH 7,0-7,2 a 105 °C",
+      "explicacao": "O caldo caleado e aquecido vai para os decantadores com os flocos já formados.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 1,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.decantacao__copr.caldo_clarificado",
+      "from": "cana.proc.decantacao",
+      "to": "cana.copr.caldo_clarificado",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O caldo limpo transborda por cima do decantador e segue para a fábrica de açúcar ou para a destilaria.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 0.9,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.decantacao__res.lodo",
+      "from": "cana.proc.decantacao",
+      "to": "cana.res.lodo",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A fase densa que sedimenta leva terra, ceras e coloides, e ainda retém açúcar a recuperar.",
+      "params": [
+        "torta_gerada"
+      ],
+      "fracaoDoPai": 0.1,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "res.lodo__proc.filtracao",
+      "from": "cana.res.lodo",
+      "to": "cana.proc.filtracao",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O lodo é filtrado para recuperar a sacarose que ficaria perdida no descarte.",
+      "params": [
+        "torta_gerada"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "res.bagaco__proc.filtracao",
+      "from": "cana.res.bagaco",
+      "to": "cana.proc.filtracao",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "bagacilho",
+      "explicacao": "A fração fina do bagaço é peneirada e usada como auxiliar de filtração no filtro rotativo a vácuo.",
+      "params": [
+        "bagaco_rpr"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.filtracao__res.torta",
+      "from": "cana.proc.filtracao",
+      "to": "cana.res.torta",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "35 kg/t de cana",
+      "explicacao": "O sólido retido na tela do filtro é a torta, com o fósforo e o cálcio que o caldo perdeu.",
+      "params": [
+        "torta_gerada",
+        "torta_disponivel"
+      ],
+      "fracaoDoPai": 0.35,
+      "fontes": [
+        "atlas2020_p66",
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.filtracao__copr.caldo_clarificado",
+      "from": "cana.proc.filtracao",
+      "to": "cana.copr.caldo_clarificado",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "caldo filtrado",
+      "explicacao": "O filtrado, com o açúcar recuperado do lodo, volta a se somar ao caldo clarificado.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 0.65,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "copr.caldo_clarificado__proc.evaporacao",
+      "from": "cana.copr.caldo_clarificado",
+      "to": "cana.proc.evaporacao",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "linha do açúcar",
+      "explicacao": "A parcela destinada ao açúcar é concentrada em múltiplo efeito.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "copr.caldo_clarificado__proc.preparo_mosto",
+      "from": "cana.copr.caldo_clarificado",
+      "to": "cana.proc.preparo_mosto",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "linha do etanol",
+      "explicacao": "A parcela destinada ao etanol vai direto ao mosto, sem passar pela cristalização.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "amorim2011"
+      ]
+    },
+    {
+      "id": "proc.evaporacao__copr.xarope",
+      "from": "cana.proc.evaporacao",
+      "to": "cana.copr.xarope",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "60-68 °Brix",
+      "explicacao": "O caldo concentrado sai pronto para cristalizar ou para reforçar o mosto.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 0.35,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.evaporacao__copr.condensado",
+      "from": "cana.proc.evaporacao",
+      "to": "cana.copr.condensado",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "Dois terços da massa que entra no evaporador saem como água condensada e reaproveitada.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 0.65,
+      "fontes": [
+        "elia_neto2016"
+      ]
+    },
+    {
+      "id": "copr.xarope__proc.cozimento",
+      "from": "cana.copr.xarope",
+      "to": "cana.proc.cozimento",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O xarope é fervido sob vácuo até a supersaturação que faz o cristal crescer.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "copr.xarope__proc.preparo_mosto",
+      "from": "cana.copr.xarope",
+      "to": "cana.proc.preparo_mosto",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "arbitragem açúcar/etanol",
+      "explicacao": "Usinas flex desviam xarope para a fermentação quando o etanol paga mais que o açúcar.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "amorim2011"
+      ]
+    },
+    {
+      "id": "proc.cozimento__copr.massa_cozida",
+      "from": "cana.proc.cozimento",
+      "to": "cana.copr.massa_cozida",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "Sai do cozedor a suspensão de cristais em mel que a centrífuga vai separar.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 0.9,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.cozimento__copr.condensado",
+      "from": "cana.proc.cozimento",
+      "to": "cana.copr.condensado",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A água evaporada no cozedor condensa e volta ao circuito de água da usina.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 0.1,
+      "fontes": [
+        "elia_neto2016"
+      ]
+    },
+    {
+      "id": "copr.massa_cozida__proc.centrifugacao",
+      "from": "cana.copr.massa_cozida",
+      "to": "cana.proc.centrifugacao",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A massa cozida é levada às centrífugas depois de esfriar nos cristalizadores.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.centrifugacao__proc.secagem",
+      "from": "cana.proc.centrifugacao",
+      "to": "cana.proc.secagem",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "cristal úmido",
+      "explicacao": "O cristal retido na tela segue com cerca de 1% de umidade para o secador.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 0.7,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.centrifugacao__copr.mel_final",
+      "from": "cana.proc.centrifugacao",
+      "to": "cana.copr.mel_final",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "massa C esgotada",
+      "explicacao": "O mel que atravessa a tela na última massa não retorna ao cozimento e sai da fábrica de açúcar.",
+      "params": [
+        "cana_moida_sp",
+        "etanol_por_cana"
+      ],
+      "fracaoDoPai": 0.3,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "copr.mel_final__copr.melaco",
+      "from": "cana.copr.mel_final",
+      "to": "cana.copr.melaco",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "padronização",
+      "explicacao": "Padronizado em concentração e estocado, o mel final passa a ser tratado como matéria-prima comercial.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "copr.melaco__proc.preparo_mosto",
+      "from": "cana.copr.melaco",
+      "to": "cana.proc.preparo_mosto",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O melaço é diluído no mosto e fornece o açúcar que a fábrica de açúcar não conseguiu cristalizar.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "amorim2011"
+      ]
+    },
+    {
+      "id": "proc.secagem__prod.acucar_vhp",
+      "from": "cana.proc.secagem",
+      "to": "cana.prod.acucar_vhp",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "a granel",
+      "explicacao": "A maior parte do açúcar seco de São Paulo sai como VHP para exportação.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 0.55,
+      "fontes": [
+        "unica2024"
+      ]
+    },
+    {
+      "id": "proc.secagem__prod.acucar_cristal",
+      "from": "cana.proc.secagem",
+      "to": "cana.prod.acucar_cristal",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "ensacado",
+      "explicacao": "O cristal branco sulfitado é o formato do mercado interno.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 0.3,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.secagem__proc.refino",
+      "from": "cana.proc.secagem",
+      "to": "cana.proc.refino",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "Onde há refinaria acoplada, parte do cristal é redissolvida e recristalizada.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 0.15,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.refino__prod.acucar_refinado",
+      "from": "cana.proc.refino",
+      "to": "cana.prod.acucar_refinado",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "cor < 45 UI",
+      "explicacao": "O cristal recristalizado a partir do licor descolorido é o açúcar de maior valor da usina.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 0.95,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.refino__copr.mel_final",
+      "from": "cana.proc.refino",
+      "to": "cana.copr.mel_final",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "licor residual",
+      "explicacao": "O licor que o refino não consegue mais esgotar engrossa o mel final.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fracaoDoPai": 0.05,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "prod.acucar_vhp__dest.exportacao_acucar",
+      "from": "cana.prod.acucar_vhp",
+      "to": "cana.dest.exportacao_acucar",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "Porto de Santos",
+      "explicacao": "O VHP embarca a granel e é refinado no país de destino.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "unica2024"
+      ]
+    },
+    {
+      "id": "prod.acucar_cristal__dest.industria_alimentar",
+      "from": "cana.prod.acucar_cristal",
+      "to": "cana.dest.industria_alimentar",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O cristal abastece bebidas, panificação e consumo de mesa no mercado interno.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "unica2024"
+      ]
+    },
+    {
+      "id": "prod.acucar_refinado__dest.industria_alimentar",
+      "from": "cana.prod.acucar_refinado",
+      "to": "cana.dest.industria_alimentar",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O refinado atende aplicações que exigem cor baixa e dissolução rápida.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "prod.acucar_cristal__dest.exportacao_acucar",
+      "from": "cana.prod.acucar_cristal",
+      "to": "cana.dest.exportacao_acucar",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "parcela menor",
+      "explicacao": "Parte do cristal também é exportada, para mercados que compram açúcar branco pronto.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "unica2024"
+      ]
+    },
+    {
+      "id": "proc.preparo_mosto__proc.fermentacao",
+      "from": "cana.proc.preparo_mosto",
+      "to": "cana.proc.fermentacao",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "16-22 °Brix",
+      "explicacao": "O mosto acertado em concentração e temperatura é bombeado para as dornas.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fracaoDoPai": 1,
+      "fontes": [
+        "amorim2011"
+      ]
+    },
+    {
+      "id": "proc.fermentacao__copr.vinho",
+      "from": "cana.proc.fermentacao",
+      "to": "cana.copr.vinho",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "8-11% v/v",
+      "explicacao": "Em 6 a 10 horas a levedura converte o açúcar do mosto e o conteúdo da dorna vira vinho.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fracaoDoPai": 0.91,
+      "fontes": [
+        "amorim2011",
+        "basso2008"
+      ]
+    },
+    {
+      "id": "proc.fermentacao__copr.co2",
+      "from": "cana.proc.fermentacao",
+      "to": "cana.copr.co2",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "0,76 kg/L de etanol",
+      "explicacao": "Cada molécula de açúcar fermentada gera duas de etanol e duas de CO2, que escapa pelo respiro da dorna.",
+      "params": [
+        "etanol_por_cana",
+        "preco_carbono"
+      ],
+      "fracaoDoPai": 0.09,
+      "fontes": [
+        "amorim2011",
+        "ctbe_vsb"
+      ]
+    },
+    {
+      "id": "copr.vinho__proc.tratamento_fermento",
+      "from": "cana.copr.vinho",
+      "to": "cana.proc.tratamento_fermento",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O vinho é centrifugado para recuperar a levedura antes de seguir para a destilação.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "amorim2011"
+      ]
+    },
+    {
+      "id": "proc.tratamento_fermento__proc.destilacao",
+      "from": "cana.proc.tratamento_fermento",
+      "to": "cana.proc.destilacao",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "vinho delevedurado",
+      "explicacao": "Sem a levedura em suspensão, o vinho pode ser aquecido nas colunas sem incrustar.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fracaoDoPai": 0.98,
+      "fontes": [
+        "amorim2011",
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.tratamento_fermento__copr.levedura",
+      "from": "cana.proc.tratamento_fermento",
+      "to": "cana.copr.levedura",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "purga do creme",
+      "explicacao": "O crescimento celular que o reciclo não comporta é purgado e secado como levedura inativa.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fracaoDoPai": 0.02,
+      "fontes": [
+        "amorim2011",
+        "basso2008"
+      ]
+    },
+    {
+      "id": "proc.destilacao__prod.etanol_hidratado",
+      "from": "cana.proc.destilacao",
+      "to": "cana.prod.etanol_hidratado",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "92,5-94,6 °INPM",
+      "explicacao": "O produto de topo da coluna de retificação é o etanol combustível vendido na bomba.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fracaoDoPai": 0.045,
+      "fontes": [
+        "anp_res907",
+        "atlas2020_tab_iv2"
+      ]
+    },
+    {
+      "id": "proc.destilacao__proc.desidratacao",
+      "from": "cana.proc.destilacao",
+      "to": "cana.proc.desidratacao",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A parcela destinada à mistura com gasolina segue para a peneira molecular.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fracaoDoPai": 0.04,
+      "fontes": [
+        "anp_res907"
+      ]
+    },
+    {
+      "id": "proc.destilacao__res.vinhaca",
+      "from": "cana.proc.destilacao",
+      "to": "cana.res.vinhaca",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "10-13 L/L de etanol",
+      "explicacao": "O fundo da coluna de esgotamento descarrega o vinho já sem etanol, quente e carregado de potássio.",
+      "params": [
+        "etanol_por_cana",
+        "vinhaca_disponivel",
+        "vinhaca_biogas"
+      ],
+      "fracaoDoPai": 0.88,
+      "fontes": [
+        "atlas2020_p67",
+        "elia_neto2016"
+      ]
+    },
+    {
+      "id": "proc.destilacao__res.flegmaca",
+      "from": "cana.proc.destilacao",
+      "to": "cana.res.flegmaca",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A coluna de retificação descarrega um efluente próprio, bem menos carregado que a vinhaça.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fracaoDoPai": 0.034,
+      "fontes": [
+        "elia_neto2016"
+      ]
+    },
+    {
+      "id": "proc.destilacao__copr.oleo_fusel",
+      "from": "cana.proc.destilacao",
+      "to": "cana.copr.oleo_fusel",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "2-3 L/m³ de etanol",
+      "explicacao": "Os álcoois superiores são retirados em prato lateral e vendidos à indústria química.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fracaoDoPai": 0.001,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "proc.desidratacao__prod.etanol_anidro",
+      "from": "cana.proc.desidratacao",
+      "to": "cana.prod.etanol_anidro",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "mín. 99,3 °INPM",
+      "explicacao": "Depois da zeólita, o etanol está seco o bastante para não separar fase dentro do tanque de gasolina.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fracaoDoPai": 0.96,
+      "fontes": [
+        "anp_res907"
+      ]
+    },
+    {
+      "id": "proc.desidratacao__res.flegmaca",
+      "from": "cana.proc.desidratacao",
+      "to": "cana.res.flegmaca",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "regeneração da peneira",
+      "explicacao": "A regeneração do leito de zeólita devolve uma corrente rica em água que volta ao circuito da destilaria.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fracaoDoPai": 0.04,
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "prod.etanol_anidro__dest.mistura_gasolina",
+      "from": "cana.prod.etanol_anidro",
+      "to": "cana.dest.mistura_gasolina",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "obrigatório",
+      "explicacao": "Todo o anidro vai para a mistura compulsória com gasolina A nas bases das distribuidoras.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "obrigatorio": true,
+      "baseLegal": "Lei 13.033/2014 e resolução do CNPE",
+      "fontes": [
+        "lei13033_2014",
+        "cnpe2025"
+      ]
+    },
+    {
+      "id": "prod.etanol_hidratado__dest.frota_flex",
+      "from": "cana.prod.etanol_hidratado",
+      "to": "cana.dest.frota_flex",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "paridade de 70%",
+      "explicacao": "O hidratado é vendido puro e disputa a bomba com a gasolina a cada reabastecimento.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "anp_res907"
+      ]
+    },
+    {
+      "id": "prod.etanol_hidratado__dest.renovabio",
+      "from": "cana.prod.etanol_hidratado",
+      "to": "cana.dest.renovabio",
+      "kind": "regulatorio",
+      "estado": "real",
+      "rotulo": "CBIO",
+      "explicacao": "A venda do hidratado gera crédito de descarbonização proporcional à nota de eficiência da planta, sem que nada material atravesse esta seta.",
+      "params": [
+        "preco_carbono",
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "cnpe2025",
+        "anp_res907"
+      ]
+    },
+    {
+      "id": "prod.etanol_anidro__dest.renovabio",
+      "from": "cana.prod.etanol_anidro",
+      "to": "cana.dest.renovabio",
+      "kind": "regulatorio",
+      "estado": "real",
+      "rotulo": "CBIO",
+      "explicacao": "O anidro comercializado também emite CBIOs, que são o segundo fluxo de receita do etanol.",
+      "params": [
+        "preco_carbono",
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "cnpe2025"
+      ]
+    },
+    {
+      "id": "res.bagaco__proc.caldeira",
+      "from": "cana.res.bagaco",
+      "to": "cana.proc.caldeira",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "combustível da usina",
+      "explicacao": "O bagaço vai direto da moenda à fornalha e é o que torna a usina autossuficiente em energia.",
+      "params": [
+        "bagaco_rpr",
+        "incluir_bagaco",
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "unica2024",
+        "ctbe_vsb"
+      ]
+    },
+    {
+      "id": "res.palha__proc.caldeira",
+      "from": "cana.res.palha",
+      "to": "cana.proc.caldeira",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "fardos e palhiço da limpeza",
+      "explicacao": "Parte da palha recolhida em fardos, e a que chega junto com a cana, é queimada junto com o bagaço.",
+      "params": [
+        "palha_recolhivel",
+        "perda_estocagem_palha"
+      ],
+      "fontes": [
+        "hassuani2005",
+        "unica2024"
+      ]
+    },
+    {
+      "id": "proc.caldeira__copr.cinzas",
+      "from": "cana.proc.caldeira",
+      "to": "cana.copr.cinzas",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "3-8 kg/t de cana",
+      "explicacao": "O inorgânico do bagaço e a terra que veio junto sobram na grelha e nos lavadores de gases.",
+      "params": [
+        "bagaco_rpr",
+        "incluir_bagaco"
+      ],
+      "fracaoDoPai": 0.03,
+      "fontes": [
+        "ctbe_vsb"
+      ]
+    },
+    {
+      "id": "proc.caldeira__res.gases_caldeira",
+      "from": "cana.proc.caldeira",
+      "to": "cana.res.gases_caldeira",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "12-14% de CO2",
+      "explicacao": "Quase toda a massa queimada sai pela chaminé como gás de combustão de carbono biogênico.",
+      "params": [
+        "incluir_bagaco",
+        "preco_carbono"
+      ],
+      "fracaoDoPai": 0.97,
+      "fontes": [
+        "ctbe_vsb"
+      ]
+    },
+    {
+      "id": "proc.caldeira__copr.vapor",
+      "from": "cana.proc.caldeira",
+      "to": "cana.copr.vapor",
+      "kind": "energia",
+      "estado": "real",
+      "rotulo": "65-100 bar",
+      "explicacao": "O calor da queima vira vapor de alta pressão, que aciona turbinas antes de aquecer a fábrica.",
+      "params": [
+        "eficiencia_eletrica",
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "ctbe_vsb",
+        "unica2024"
+      ]
+    },
+    {
+      "id": "proc.caldeira__dest.autoconsumo",
+      "from": "cana.proc.caldeira",
+      "to": "cana.dest.autoconsumo",
+      "kind": "energia",
+      "estado": "real",
+      "rotulo": "autossuficiência",
+      "explicacao": "A eletricidade dos turbogeradores atende primeiro a própria usina; só o que sobra pode ser exportado.",
+      "params": [
+        "eficiencia_eletrica",
+        "preco_eletricidade",
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "unica2024"
+      ]
+    },
+    {
+      "id": "copr.vapor__dest.autoconsumo",
+      "from": "cana.copr.vapor",
+      "to": "cana.dest.autoconsumo",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "O vapor de escape é integralmente consumido dentro da planta e define quanto bagaço sobra.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "ctbe_vsb"
+      ]
+    },
+    {
+      "id": "copr.vapor__proc.evaporacao",
+      "from": "cana.copr.vapor",
+      "to": "cana.proc.evaporacao",
+      "kind": "energia",
+      "estado": "real",
+      "rotulo": "vapor de escape",
+      "explicacao": "A evaporação é a maior consumidora térmica da usina e opera com o vapor que saiu das turbinas.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "rein2017",
+        "ctbe_vsb"
+      ]
+    },
+    {
+      "id": "copr.vapor__proc.cozimento",
+      "from": "cana.copr.vapor",
+      "to": "cana.proc.cozimento",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "Os cozedores a vácuo são aquecidos com vapor vegetal sangrado dos primeiros efeitos.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "copr.vapor__proc.tratamento_caldo",
+      "from": "cana.copr.vapor",
+      "to": "cana.proc.tratamento_caldo",
+      "kind": "energia",
+      "estado": "real",
+      "rotulo": "aquecimento a 105 °C",
+      "explicacao": "O aquecimento do caldo caleado antes da decantação também vem do vapor de escape.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "copr.vapor__proc.destilacao",
+      "from": "cana.copr.vapor",
+      "to": "cana.proc.destilacao",
+      "kind": "energia",
+      "estado": "real",
+      "rotulo": "2-3 kg/L de etanol",
+      "explicacao": "A destilaria é a segunda maior demanda de vapor e disputa bagaço com a exportação de eletricidade.",
+      "params": [
+        "bagaco_excedente",
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "ctbe_vsb",
+        "rein2017"
+      ]
+    },
+    {
+      "id": "copr.condensado__proc.caldeira",
+      "from": "cana.copr.condensado",
+      "to": "cana.proc.caldeira",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "água de alimentação",
+      "explicacao": "O condensado limpo dos primeiros efeitos volta como água de alimentação da caldeira, fechando o circuito de água.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "elia_neto2016"
+      ]
+    }
+  ],
+  "notas": "Espinha completa: 54 nós (1 cultura, 20 processos, 22 materiais de anel 2, 5 produtos, 6 destinos) e 71 arestas. Nenhum nó de kind \"rota\" foi criado — a espinha para no ponto em que cada resíduo existe. Ids canônicos reservados foram todos criados aqui e podem ser referenciados por outros agentes: cana.cultura, cana.res.palha, cana.res.bagaco, cana.res.torta, cana.res.vinhaca, cana.copr.melaco, cana.copr.levedura, cana.copr.co2, cana.copr.cinzas, cana.copr.caldo_misto, cana.prod.etanol_hidratado, cana.prod.etanol_anidro, cana.prod.acucar_vhp.\n\nNós com inicial: true (8): cana.cultura, cana.proc.colheita, cana.proc.moagem, cana.copr.colmos, cana.res.palha, cana.res.bagaco, cana.res.torta, cana.res.vinhaca.\n\nBalanço de massa por processo (soma das fracaoDoPai das arestas de massa saindo de cada processo): plantio 1,00; colheita 1,00; transporte 1,00; recepção 1,00; preparo 1,00; moagem 1,00; tratamento_caldo 1,00; decantação 1,00; filtração 1,00; evaporação 1,00; cozimento 1,00; centrifugação 1,00; secagem 1,00; refino 1,00; preparo_mosto 1,00; fermentação 1,00; tratamento_fermento 1,00; destilação 1,00 (0,045 hidratado + 0,04 para desidratação + 0,88 vinhaça + 0,034 flegmaça + 0,001 óleo fúsel); desidratação 1,00; caldeira 1,00. As arestas que saem de nós de material (não de processo) não levam fracaoDoPai, conforme o contrato — é o caso de bagaço→filtração (bagacilho), bagaço→caldeira, palha→caldeira, condensado→caldeira e das bifurcações caldo_clarificado→{evaporação, preparo_mosto} e xarope→{cozimento, preparo_mosto}, que representam a arbitragem açúcar/etanol e por isso ficam deliberadamente sem fração fixa.\n\nConvenções adotadas: (a) o balanço contabiliza apenas massa de origem cana — a água de embebição e a de lavagem não inflam as frações, e isso está declarado nas limitações de moagem e caldo misto; (b) o etanol anidro é alimentado pela desidratação a partir de uma sangria da destilação, e não do nó de produto hidratado, para não criar aresta de anel 4 voltando ao anel 1; (c) o caldo filtrado retorna como aresta filtração→caldo_clarificado em vez de laço para o tratamento, mantendo a ordem radial; (d) arestas de utilidade (vapor→processos) são kind \"energia\" e propositalmente andam do anel 2 para o anel 1, porque é assim que a integração térmica funciona.\n\nTrês nós não pedidos foram acrescentados por exaustividade e para fechar balanços: cana.res.lodo (a torta precisa ter origem explícita), cana.res.gases_caldeira (fecha a massa da caldeira e é o ponto de entrada de qualquer rota BECCS) e cana.copr.oleo_fusel (coproduto real da retificação). Também foram criados cana.copr.condensado, cana.copr.xarope, cana.copr.massa_cozida e cana.copr.vapor como intermediários necessários.\n\nNúmeros frágeis marcados como tais no texto: geração de levedura excedente (10-20 kg MS/m³ de etanol, varia por operação), volume de flegmaça (0,5-1,5 L/L de etanol, depende da configuração das colunas), massa de água de lavagem (os 2% são estimativa de impureza, não medição) e geração de torta (divergência de uma ordem de grandeza entre fontes do CP2B; adotado 35 kg/t).\n\nChaves de fonte usadas: atlas2020, atlas2020_p65, atlas2020_p66, atlas2020_p67, atlas2020_tab_iv2, unica2024, conab2024, feedstocks_yaml, cetesb_p4231, lei11241_2002, protocolo_agroambiental, lei13033_2014, cnpe2025, anp_res907, rein2017, elia_neto2016, amorim2011, basso2008, hassuani2005, carvalho2017, tenelli2021, ctbe_vsb, paulose2021, talha2016, velasquez2020. Precisam ser registradas no catálogo de fontes do projeto (nenhum registro de SourceId foi encontrado em src/ — hoje as chaves só aparecem soltas em src/model/params.ts).\n\nPonto de atenção para o orquestrador: o percentual de anidro na gasolina C é tratado no texto como \"elevado a 30% em 2025 por resolução do CNPE, dentro da faixa da Lei 13.033/2014\". Se o projeto exigir citação normativa exata, conferir o número da resolução antes de publicar."
+}
