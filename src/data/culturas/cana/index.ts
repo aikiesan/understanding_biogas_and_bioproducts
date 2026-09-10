@@ -2,7 +2,7 @@ import type { AtlasEdge, AtlasNode, CulturaDef } from '@/types/atlas'
 import { curar } from '@/graph/curar'
 import bruto from './grafo.json'
 import { comTier } from './hierarquia'
-import { CENTRO, EXCLUIDOS, FOCOS, PROMOVIDOS, VAGAS } from './nucleo'
+import { CENTRO, EXCLUIDOS, FOCOS, PROCESSOS_COMO_ROTA, PROMOVIDOS, VAGAS } from './nucleo'
 
 /**
  * O grafo da cana vem de um JSON gerado e revisado, nao de codigo escrito a mao.
@@ -44,6 +44,7 @@ export const curadoria = curar(nodesBrutos, edgesValidas, {
   vagas: VAGAS,
   promovidos: PROMOVIDOS,
   excluidos: EXCLUIDOS,
+  processosComoRota: PROCESSOS_COMO_ROTA,
 })
 
 const noMapa = new Set<string>([CENTRO, ...curadoria.processos, ...FOCOS.map((f) => f.id), ...curadoria.vagas.map((v) => v.id)])

@@ -14,11 +14,18 @@ import type { AtlasEdge, AtlasNode } from '@/types/atlas'
  *    mapa tem de significar distancia na cadeia, senao o desenho mente.
  * 2. **Maturidade.** No empate, TRL mais alto ganha: uma rota que existe em
  *    campo vale mais vaga que uma promessa.
- * 3. **Processo por ultimo.** A caldeira e rota legitima do bagaco; moagem e
- *    refino nao sao "o que fazer com o bagaco" — sao como ele aparece, e ja
- *    tem lugar no anel de processos.
+ * 3. **Processo so por permissao.** O vapor da caldeira realimenta a usina,
+ *    entao pela topologia meia linha de processamento aparece "a jusante do
+ *    bagaco". E verdade de grafo e mentira de leitura: "o que fazer com o
+ *    bagaco" nao e refino nem cozimento, e essas etapas ja tem lugar no anel de
+ *    processos. So entra quem esta em `processosComoRota`.
  *
- * Os apices sao os DESTINOS, porque destino e onde a cadeia termina de fato.
+ * **Destino vai sempre para o anel de apices**, seja qual for a distancia. Isso
+ * quebra `camada = distancia` de proposito, e a razao e que o anel externo
+ * significa uma coisa so: aqui a cadeia termina. Sem a excecao, "Certificacao
+ * RenovaBio" — um destino a um passo da vinhaca — caia na abertura e o anel de
+ * apices ficava pela metade com destino sobrando. A aresta de um pai na camada
+ * 3 ate o apice pula camadas e vira travessia tenue no desenho.
  *
  * Repeticao e usada de proposito: um conceito alcancado por dois residuos
  * ocupa vaga nos dois ramos. Poe-lo num canto so obrigaria o outro ramo a
@@ -56,6 +63,8 @@ export interface EsqueletoSpec {
   vagas: Record<number, number>
   promovidos?: ReadonlyArray<{ id: string; ramo: number; camada: number }>
   excluidos?: readonly string[]
+  /** Processos que valem como rota de valorizacao. O resto so vive no anel. */
+  processosComoRota?: readonly string[]
 }
 
 export function curar(
@@ -65,6 +74,7 @@ export function curar(
 ): Curadoria {
   const { centro, focos } = spec
   const excluidos = new Set(spec.excluidos ?? [])
+  const processoPermitido = new Set(spec.processosComoRota ?? [])
   const porId = new Map(nodes.map((n) => [n.id, n]))
   const sai = new Map<string, string[]>()
   for (const e of edges) (sai.get(e.from) ?? sai.set(e.from, []).get(e.from)!).push(e.to)
@@ -137,27 +147,28 @@ export function curar(
        * verdade, moram justamente nas pontas mais longas.
        */
       const ultima = camada === ultimaCamada
+      const ehDestino = (id: string) => porId.get(id)?.kind === 'destino'
       const candidatos = [...distancia.entries()]
-        .filter(([, dist]) => (ultima ? dist >= d : dist === d))
+        .filter(([id, dist]) =>
+          // Destino sempre na ultima camada; o resto pela distancia.
+          ultima ? dist >= d || ehDestino(id) : dist === d && !ehDestino(id),
+        )
         .filter(([id]) => porId.has(id) && !excluidos.has(id) && !admitidos.has(id))
+        .filter(([id]) => !ehProcesso(id) || processoPermitido.has(id))
         .map(([id]) => id)
-        // A cascata: precisa de um pai ja admitido uma camada para dentro. Na
-        // ultima, um pai na propria camada tambem serve — a aresta vira um arco
-        // tangencial, que o desenho suporta.
+        // A cascata: precisa de um pai ja admitido. Uma camada para dentro em
+        // geral; para destino, qualquer camada serve, porque ele foi promovido
+        // ao anel externo e a aresta que chega nele pode atravessar.
         .filter((id) =>
           (entrando.get(id) ?? []).some((pai) => {
             const c = admitidos.get(pai)
+            if (c === undefined) return false
+            if (ehDestino(id)) return c < camada || c === camada
             return c === camada - 1 || (ultima && c === camada)
           }),
         )
 
       const ordenar = (a: string, b: string) => {
-        // Processo por ultimo: a caldeira e rota legitima do bagaco, mas moagem
-        // e refino nao sao "o que fazer com o bagaco" — sao como ele aparece, e
-        // ja tem lugar no anel de processos.
-        const pa = ehProcesso(a) ? 1 : 0
-        const pb = ehProcesso(b) ? 1 : 0
-        if (pa !== pb) return pa - pb
         // Na ultima camada, destino primeiro: apice e onde a cadeia termina.
         if (camada === ultimaCamada) {
           const da = porId.get(a)?.kind === 'destino' ? 0 : 1
