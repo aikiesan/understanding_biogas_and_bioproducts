@@ -166,7 +166,7 @@ export function gerarEsqueleto(
   }
 
   // ── Conexoes ─────────────────────────────────────────────────────────────
-  const conexoes = tracar(edges, porArquetipo)
+  const conexoes = tracar(edges, porArquetipo, spec.centro)
 
   // ── Extensao ─────────────────────────────────────────────────────────────
   let minX = Infinity
@@ -220,16 +220,15 @@ export function gerarEsqueleto(
 function tracar(
   edges: AtlasEdge[],
   porArquetipo: Map<string, InstanciaPosicionada[]>,
+  centro: string,
 ): ConexaoTracada[] {
   const conexoes: ConexaoTracada[] = []
+  const ordenadas = [...edges].sort((a, b) => a.id.localeCompare(b.id))
 
-  for (const e of [...edges].sort((a, b) => a.id.localeCompare(b.id))) {
-    const origens = porArquetipo.get(e.from)
-    const destinos = porArquetipo.get(e.to)
-    if (!origens || !destinos) continue
-
-    // Com repeticao, uma aresta tem varios pares possiveis. Vale o mais curto:
-    // e o que mantem a ligacao dentro do ramo.
+  const maisCurto = (
+    origens: InstanciaPosicionada[],
+    destinos: InstanciaPosicionada[],
+  ): [InstanciaPosicionada, InstanciaPosicionada] | null => {
     let melhor: [InstanciaPosicionada, InstanciaPosicionada] | null = null
     let menor = Infinity
     for (const a of origens) {
@@ -241,6 +240,52 @@ function tracar(
         }
       }
     }
+    return melhor
+  }
+
+  /**
+   * A escolha do par nao pode ser feita aresta a aresta, isolada.
+   *
+   * A versao anterior pegava sempre o par mais curto, e cada aresta decidia
+   * sozinha. O resultado tinha um buraco que nao dava sintoma: a aresta
+   * `caldeira -> cinzas` escolheu a copia `caldeira@1`, que nao recebe linha
+   * nenhuma. As cinzas ficavam desenhadas penduradas num galho morto — visiveis,
+   * bonitas e sem caminho ate a cana. Foram 2 nos em 78, e so apareceram quando
+   * a constelacao do hover tentou percorrer o desenho.
+   *
+   * Entao a escolha corre em PONTO FIXO: uma aresta so parte de uma instancia
+   * que ja recebeu linha. A semente e a espinha — o centro e o anel de
+   * processos, que sao contiguos por construcao. As arestas que sobram no fim
+   * sao as que nao tem por onde chegar, e essas caem no par mais curto: se o
+   * caminho nao existe, o desenho ao menos nao mente sobre a distancia.
+   */
+  const alcancaveis = new Set<string>()
+  for (const i of porArquetipo.get(centro) ?? []) alcancaveis.add(i.id)
+  for (const lista of porArquetipo.values())
+    for (const i of lista) if (i.anel === 1) alcancaveis.add(i.id)
+
+  const escolhido = new Map<string, [InstanciaPosicionada, InstanciaPosicionada]>()
+  for (let mudou = true; mudou; ) {
+    mudou = false
+    for (const e of ordenadas) {
+      if (escolhido.has(e.id)) continue
+      const origens = (porArquetipo.get(e.from) ?? []).filter((i) => alcancaveis.has(i.id))
+      const destinos = porArquetipo.get(e.to)
+      if (origens.length === 0 || !destinos) continue
+      const par = maisCurto(origens, destinos)
+      if (!par) continue
+      escolhido.set(e.id, par)
+      alcancaveis.add(par[1].id)
+      mudou = true
+    }
+  }
+
+  for (const e of ordenadas) {
+    const origens = porArquetipo.get(e.from)
+    const destinos = porArquetipo.get(e.to)
+    if (!origens || !destinos) continue
+
+    const melhor = escolhido.get(e.id) ?? maisCurto(origens, destinos)
     if (!melhor) continue
     const [a, b] = melhor
 

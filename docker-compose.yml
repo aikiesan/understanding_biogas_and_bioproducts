@@ -1,0 +1,44 @@
+# Ambiente de validacao visual. `docker compose up dev` e abrir localhost:5173.
+services:
+  dev:
+    build:
+      context: .
+      target: dev
+    ports:
+      - '5173:5173'
+    volumes:
+      # O codigo vem do host: editar aqui aparece no navegador do container.
+      - .:/app
+      # ...menos node_modules. O host tem binarios de win32 (esbuild, rollup) e
+      # o container precisa dos de linux-musl. Sem este volume anonimo o bind
+      # mount sobrepoe a pasta da imagem e o vite morre com "Cannot find module
+      # @esbuild/linux-x64". E o erro numero um de Vite em Docker no Windows.
+      - /app/node_modules
+    environment:
+      # Ver o comentario do Dockerfile: bind mount no Windows nao gera inotify.
+      - VITE_POLLING=1
+    # O vite so responde de fora se escutar em 0.0.0.0 — ver CMD do Dockerfile.
+
+  # A app como o GitHub Pages vai servi-la, com o subpath de producao.
+  # URL: http://localhost:4173/understanding_biogas_and_bioproducts/
+  preview:
+    build:
+      context: .
+      target: preview
+    ports:
+      - '4173:4173'
+    volumes:
+      # O codigo vem do host, como no dev, e o build roda na partida. Sem isto o
+      # preview congela na imagem e passa a servir um mapa velho com cara de
+      # atual — que foi como ele mentiu na primeira vez.
+      - .:/app
+      - /app/node_modules
+    profiles: ['publicar']
+
+  # `docker compose run --rm verificar` — os tres comandos do HANDOFF num
+  # ambiente limpo, sem o node_modules do host no caminho.
+  verificar:
+    build:
+      context: .
+      target: verificar
+    profiles: ['ci']

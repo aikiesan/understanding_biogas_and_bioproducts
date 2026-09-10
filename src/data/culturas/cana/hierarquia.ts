@@ -27,8 +27,10 @@ export function comTier(
   edges: AtlasEdge[],
   centro: string,
   focos: readonly string[],
+  elos: readonly string[] = [],
 ): AtlasNode[] {
   const ehFoco = new Set(focos)
+  const ehElo = new Set(elos)
 
   // Quem alimenta um foco diretamente.
   const produzemFoco = new Set<string>()
@@ -42,6 +44,12 @@ export function comTier(
     let tier: Tier = 'passagem'
     if (no.id === centro) tier = 'inicio'
     else if (ehFoco.has(no.id)) tier = 'keystone'
+    // ELO antes de `produzemFoco`: os colmos e o caldo alimentam a linha, mas
+    // sao a cana andando pela usina, nao uma decisao de valorizacao. Como
+    // `modificador` viram conta pequena no colar em vez de disputarem 133px de
+    // rotulo com "Moagem e extracao do caldo" — e o anel de processos e onde a
+    // densidade de texto do mapa e maior.
+    else if (ehElo.has(no.id)) tier = 'modificador'
     else if (produzemFoco.has(no.id)) tier = 'notavel'
     return { ...no, tier }
   })

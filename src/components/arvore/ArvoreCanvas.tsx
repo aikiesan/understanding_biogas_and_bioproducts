@@ -3,13 +3,12 @@ import type { AtlasEdge, AtlasNode } from '@/types/atlas'
 import { gerarEsqueleto } from '@/graph/layout/esqueletoRadial'
 import { curadoria } from '@/data/culturas/cana'
 import { ABERTURA, CENTRO, FOCOS, RAIOS, WOBBLE } from '@/data/culturas/cana/nucleo'
-import { indexar } from '@/graph/selectors'
+import { rotaAte } from '@/graph/rota'
 import { useCamera } from './useCamera'
 import { Defs } from './Defs'
 import { CamadaFundo } from './CamadaFundo'
 import { CamadaConexoes } from './CamadaConexoes'
 import { CamadaNos } from './CamadaNos'
-import { Tooltip, type DadosDoTooltip } from './Tooltip'
 import { aplicarEstados } from './aplicarEstados'
 import styles from './arvore.module.css'
 
@@ -19,17 +18,30 @@ interface Props {
   alocados: ReadonlySet<string>
   alocaveis: ReadonlySet<string>
   selecionado: string | null
+  sobrevoado: string | null
+  raizes: ReadonlySet<string>
   galhoQueCai: ReadonlySet<string>
   onSelecionar: (id: string | null) => void
   onAlternar: (id: string) => void
   onSobrevoar: (id: string | null) => void
 }
 
-/** Baldes de nível de detalhe. Trocam raramente, então quase não escrevem no DOM. */
+/**
+ * Baldes de nível de detalhe. Trocam raramente, então quase não escrevem no DOM.
+ *
+ * Os cortes são baixos de propósito. O mapa abre enquadrado inteiro, e com o
+ * esqueleto atual isso dá escala perto de 0,3 — com os cortes antigos
+ * (0,25 · 0,5 · 1,0) os rótulos do anel de processos só existiam em `detalhe`,
+ * ou seja, a mais de três vezes a escala de abertura. Ler o nome de uma etapa
+ * da usina exigia uma viagem, e o anel é a primeira coisa que a pessoa vê.
+ *
+ * Agora `leitura` começa logo acima da abertura: um empurrão na roda já nomeia
+ * a linha da usina.
+ */
 function baldeDeLod(k: number): 'constelacao' | 'regioes' | 'leitura' | 'detalhe' {
-  if (k < 0.25) return 'constelacao'
-  if (k < 0.5) return 'regioes'
-  if (k < 1.0) return 'leitura'
+  if (k < 0.18) return 'constelacao'
+  if (k < 0.34) return 'regioes'
+  if (k < 0.62) return 'leitura'
   return 'detalhe'
 }
 
@@ -39,6 +51,8 @@ export function ArvoreCanvas({
   alocados,
   alocaveis,
   selecionado,
+  sobrevoado,
+  raizes,
   galhoQueCai,
   onSelecionar,
   onAlternar,
@@ -46,7 +60,6 @@ export function ArvoreCanvas({
 }: Props) {
   const [lod, setLod] = useState<ReturnType<typeof baldeDeLod>>('regioes')
   const lodRef = useRef(lod)
-  const [tooltip, setTooltip] = useState<DadosDoTooltip | null>(null)
 
   const aoEscalar = useCallback((k: number) => {
     const balde = baldeDeLod(k)
@@ -56,7 +69,7 @@ export function ArvoreCanvas({
     }
   }, [])
 
-  const { svgRef, palcoRef, tamanho, irPara, aproximar, paraTela } = useCamera({ aoEscalar })
+  const { svgRef, palcoRef, tamanho, irPara, aproximar } = useCamera({ aoEscalar })
 
   const malha = useMemo(
     () =>
@@ -69,7 +82,21 @@ export function ArvoreCanvas({
       }),
     [nodes, edges],
   )
-  const idx = useMemo(() => indexar(nodes, edges), [nodes, edges])
+
+  /**
+   * A constelacao do hover.
+   *
+   * Memoizada pelo no sob o cursor: sem isso a busca em largura rodaria a cada
+   * evento de mousemove, inclusive nos que nao trocam de no — e sao dezenas por
+   * segundo atravessando um disco de 52px.
+   */
+  const rota = useMemo(
+    () =>
+      sobrevoado ? rotaAte(sobrevoado, malha.conexoes, raizes, malha.porArquetipo) : null,
+    [sobrevoado, malha.conexoes, raizes, malha.porArquetipo],
+  )
+  const rotaInstancias = useMemo(() => new Set(rota?.instancias ?? []), [rota])
+  const rotaConexoes = useMemo(() => new Set(rota?.conexoes ?? []), [rota])
 
   useEffect(() => {
     for (const aviso of malha.avisos) console.warn(`[árvore] ${aviso}`)
@@ -86,9 +113,22 @@ export function ArvoreCanvas({
       alocaveis,
       selecionado,
       galhoQueCai,
+      rotaInstancias,
+      rotaConexoes,
+      sobrevoado,
       conexoes: malha.conexoes,
     })
-  }, [palcoNode, alocados, alocaveis, selecionado, galhoQueCai, malha.conexoes])
+  }, [
+    palcoNode,
+    alocados,
+    alocaveis,
+    selecionado,
+    galhoQueCai,
+    rotaInstancias,
+    rotaConexoes,
+    sobrevoado,
+    malha.conexoes,
+  ])
 
   // ── Enquadra na primeira medição válida ─────────────────────────────────
   const jaEnquadrou = useRef(false)
@@ -133,44 +173,24 @@ export function ArvoreCanvas({
     [estadoDe, onAlternar, onSelecionar],
   )
 
+  /**
+   * O hover so publica QUAL no esta sob o cursor. Quem conta a historia e a
+   * barra de baixo.
+   *
+   * Havia aqui um balao ancorado no proprio no. Ele cobria justamente a
+   * constelacao que o hover acabara de acender — a informacao tapava a
+   * resposta. A barra fica longe do cursor de proposito: o caminho inteiro
+   * continua a vista enquanto se le sobre a ponta dele.
+   */
   const aoMover = useCallback(
     (evento: React.MouseEvent<SVGSVGElement>) => {
       const alvo = (evento.target as Element).closest('[data-no]')
-      const id = alvo?.getAttribute('data-no') ?? null
-      if (!id) {
-        onSobrevoar(null)
-        setTooltip(null)
-        return
-      }
-      // O tooltip ancora na CÓPIA sob o cursor: com a repetição, `data-no` é
-      // um-para-muitos, e ancorar por ele poria o balão noutro canto do mapa.
-      const p = malha.porInstancia.get(alvo?.getAttribute('data-instancia') ?? '')
-      const no = idx.porId.get(id)
-      if (!p || !no) return
-      const [tx, ty] = paraTela(p.x, p.y - p.r)
-      const estado = estadoDe(id)
-      onSobrevoar(id)
-      setTooltip({
-        no,
-        x: tx,
-        y: ty,
-        estado,
-        falta:
-          estado === 'bloqueado'
-            ? (idx.entrando.get(id) ?? [])
-                .filter((e) => !alocados.has(e.from))
-                .map((e) => idx.porId.get(e.from)?.nome ?? e.from)
-            : [],
-        copias: malha.porArquetipo.get(id)?.length ?? 1,
-      })
+      onSobrevoar(alvo?.getAttribute('data-no') ?? null)
     },
-    [alocados, estadoDe, idx, malha.porArquetipo, malha.porInstancia, onSobrevoar, paraTela],
+    [onSobrevoar],
   )
 
-  const sair = useCallback(() => {
-    onSobrevoar(null)
-    setTooltip(null)
-  }, [onSobrevoar])
+  const sair = useCallback(() => onSobrevoar(null), [onSobrevoar])
 
   return (
     <div className={styles.wrapper}>
@@ -194,8 +214,6 @@ export function ArvoreCanvas({
           <CamadaNos nodes={nodes} instancias={malha.instancias} />
         </g>
       </svg>
-
-      <Tooltip dados={tooltip} largura={tamanho.largura} />
 
       {/* A instrução desaparece depois da primeira alocação: instrução que fica
           para sempre é instrução que não funcionou. */}

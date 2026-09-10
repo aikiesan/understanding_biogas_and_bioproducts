@@ -45,6 +45,9 @@ describe('estado compartilhado entre copias', () => {
       alocaveis: new Set(['Y']),
       selecionado: 'X',
       galhoQueCai: new Set(),
+      rotaInstancias: new Set<string>(),
+      rotaConexoes: new Set<string>(),
+      sobrevoado: null,
       conexoes: [],
     })
 
@@ -72,6 +75,9 @@ describe('estado compartilhado entre copias', () => {
       alocaveis: new Set(),
       selecionado: null,
       galhoQueCai: new Set(),
+      rotaInstancias: new Set<string>(),
+      rotaConexoes: new Set<string>(),
+      sobrevoado: null,
       conexoes: [
         {
           id: 'e1~0',
@@ -120,6 +126,9 @@ describe('o galho que cai chega a todas as copias', () => {
       alocaveis: new Set(),
       selecionado: null,
       galhoQueCai: new Set(['X']),
+      rotaInstancias: new Set<string>(),
+      rotaConexoes: new Set<string>(),
+      sobrevoado: null,
       conexoes: [],
     })
 

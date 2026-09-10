@@ -11,6 +11,8 @@ import {
   WOBBLE,
 } from '@/data/culturas/cana/nucleo'
 import { gerarEsqueleto } from '@/graph/layout/esqueletoRadial'
+import { indexar } from '@/graph/selectors'
+import { alocaveisAgora, raizesDe } from '@/graph/alocacao'
 
 /**
  * Os invariantes do esqueleto radial.
@@ -116,7 +118,34 @@ describe('as vagas respeitam o esqueleto', () => {
   it('a linha de processamento ocupa a camada 1 inteira, sem repetir', () => {
     expect(curadoria.processos.length).toBeGreaterThan(15)
     expect(new Set(curadoria.processos).size).toBe(curadoria.processos.length)
-    for (const id of curadoria.processos) expect(porId.get(id)?.anel).toBe(1)
+    // Anel 1 sao as etapas; anel 2, os ELOS — o material que corre entre elas
+    // (colmos, caldo, xarope, vinho, vapor). A versao anterior exigia anel 1 e
+    // so, e por isso os elos ficavam de fora: ver o teste seguinte, que e o que
+    // mede o estrago.
+    for (const id of curadoria.processos) expect(porId.get(id)?.anel).toBeLessThanOrEqual(2)
+  })
+
+  /**
+   * TODO NO DO MAPA PODE SER ACESO.
+   *
+   * Este e o teste que faltava, e a falha que ele pega nao tinha sintoma: o
+   * mapa desenhava os 68 nos, todos clicaveis, e 23 deles jamais acendiam —
+   * entre eles bagaco e torta, dois dos quatro pilares. A causa era um elo so
+   * fora do anel, os colmos, que rompia a linha da usina logo no comeco.
+   *
+   * Um no desenhado que nao pode ser aceso e pior que um no ausente: promete
+   * um caminho que nao existe, e a pessoa procura o que esta faltando nela.
+   */
+  it('todo no desenhado e alcancavel a partir da raiz', () => {
+    const idx = indexar(cana.nodes, cana.edges)
+    let acesos = new Set(raizesDe(cana.nodes))
+    for (;;) {
+      const podem = alocaveisAgora(cana.nodes, acesos, idx)
+      if (podem.size === 0) break
+      acesos = new Set([...acesos, ...podem])
+    }
+    const presos = cana.nodes.filter((n) => !acesos.has(n.id)).map((n) => n.id)
+    expect(presos).toEqual([])
   })
 
   it('o recorte e o mapa contam a mesma coisa', () => {
@@ -187,7 +216,7 @@ describe('a geometria', () => {
   })
 
   it('grafo vazio não explode', () => {
-    const r = gerarEsqueleto([], [], { processos: [], vagas: [], preteridos: [] }, spec)
+    const r = gerarEsqueleto([], [], { processos: [], elos: [], vagas: [], preteridos: [] }, spec)
     expect(r.instancias).toHaveLength(0)
   })
 })

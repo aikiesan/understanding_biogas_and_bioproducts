@@ -42,8 +42,24 @@ export const NOME_DA_CAMADA = [
   'Ápices',
 ] as const
 
-/** Raio de cada camada. */
-export const RAIOS = [0, 205, 355, 505, 655, 805] as const
+/**
+ * Raio de cada camada.
+ *
+ * O anel de processos manda no numero, porque e onde a densidade de texto do
+ * mapa e maior. Os 31 nos da espinha pedem 2834px de perimetro somado; o
+ * rotulo mais largo — "Preparo: picador e desfibrador" — pede 133px sozinho.
+ * Com o desencontro alternado do WOBBLE os vizinhos caem em duas sub-orbitas,
+ * e o que tem de caber e o vao entre um no e o SEGUINTE, nao o proximo:
+ *
+ *   raio 205 (antes)  sub-orbita interna  76px por rotulo   nao cabia
+ *   raio 360 (agora)  sub-orbita interna 133px por rotulo   cabe exato
+ *
+ * Os 205 ja apertavam com os 20 processos de antes; os elos so tornaram a
+ * conta visivel. Tudo para fora acompanha, e os pilares vao a 520 para manter
+ * 126px livres da sub-orbita externa do anel — menos que isso e o hexagono do
+ * pilar encosta no rotulo do processo que o produz.
+ */
+export const RAIOS = [0, 360, 520, 680, 840, 990] as const
 
 /** Vagas por ramo, nas camadas de leque. */
 export const VAGAS: Record<number, number> = { 3: 9, 4: 9, 5: 5 }
@@ -56,8 +72,15 @@ export const VAGAS: Record<number, number> = { 3: 9, 4: 9, 5: 5 }
  */
 export const ABERTURA: Record<number, number> = { 3: 28, 4: 36, 5: 26 }
 
-/** Desencontro radial alternado, para a camada nao ler como circunferencia. */
-export const WOBBLE: Record<number, number> = { 1: 16, 3: 10, 4: 13, 5: 0 }
+/**
+ * Desencontro radial alternado, para a camada nao ler como circunferencia.
+ *
+ * No anel de processos ele nao e enfeite: e o que dobra a capacidade de
+ * rotulo, pondo vizinhos em sub-orbitas diferentes. Os 32px vem da altura do
+ * rotulo (30px) mais folga — abaixo disso as duas sub-orbitas voltam a colidir
+ * na vertical e o desencontro deixa de comprar espaco.
+ */
+export const WOBBLE: Record<number, number> = { 1: 32, 3: 10, 4: 13, 5: 0 }
 
 /**
  * Correcoes autoradas da curadoria.

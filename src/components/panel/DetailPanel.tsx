@@ -34,18 +34,10 @@ export function DetailPanel() {
     [preset, ajustes],
   )
 
-  if (!no) {
-    return (
-      <aside className={styles.painelVazio} aria-label="Detalhes">
-        <p className={styles.dica}>
-          Clique num nó para abrir o que ele é, quanto ele rende e quais fatores o governam.
-        </p>
-        <p className={styles.dicaSecundaria}>
-          Duplo clique — ou o marcador <strong>+N</strong> — abre as conexões escondidas.
-        </p>
-      </aside>
-    )
-  }
+  // Sem selecao, sem painel. O convite a clicar mora agora na barra de baixo,
+  // que ja acompanha o cursor — dedicar um quarto da tela a repeti-lo era
+  // pagar caro por uma frase.
+  if (!no) return null
 
   const fluxo = no.stream ? resultado.streams[no.stream] : undefined
   const entradas = idx.entrando.get(no.id) ?? []

@@ -23,7 +23,7 @@ export const CamadaConexoes = memo(function CamadaConexoes({ conexoes, edges }: 
   const porId = useMemo(() => new Map(edges.map((e) => [e.id, e])), [edges])
 
   return (
-    <g className={styles.camadaConexoes}>
+    <g className={styles.camadaConexoes} data-camada="conexoes">
       {conexoes.map((c) => {
         // `arestaId`, nao `c.id`: o id do caminho e unico por tracado, porque
         // uma aresta pode render mais de um quando as pontas se repetem. Buscar
