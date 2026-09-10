@@ -1,11 +1,12 @@
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { PainelPreview } from '@/components/panel/PainelPreview'
 import styles from './App.module.css'
 
 const ETAPAS = [
-  { fase: 'Fase 1', titulo: 'Identidade e publicação', estado: 'atual' },
-  { fase: 'Fase 2', titulo: 'Motor de cálculo e parâmetros', estado: 'proxima' },
-  { fase: 'Fase 3', titulo: 'Grafo radial da cana', estado: 'proxima' },
+  { fase: 'Fase 1', titulo: 'Identidade e publicação', estado: 'pronta' },
+  { fase: 'Fase 2', titulo: 'Motor de cálculo e parâmetros', estado: 'pronta' },
+  { fase: 'Fase 3', titulo: 'Grafo radial da cana', estado: 'atual' },
   { fase: 'Fase 4', titulo: 'Parâmetros ajustáveis ao vivo', estado: 'proxima' },
   { fase: 'Fase 5', titulo: 'Metodologia e rastreabilidade', estado: 'proxima' },
   { fase: 'Fase 6', titulo: 'Rotas completas e ACV', estado: 'proxima' },
@@ -31,6 +32,8 @@ export default function App() {
           </p>
         </section>
 
+        <PainelPreview />
+
         <section className={styles.premissa} aria-labelledby="premissa-titulo">
           <h2 id="premissa-titulo" className={styles.h2}>
             Totais de entrada, fatores editáveis, fluxo calculado ao vivo
@@ -51,7 +54,13 @@ export default function App() {
             {ETAPAS.map((etapa) => (
               <li
                 key={etapa.fase}
-                className={etapa.estado === 'atual' ? styles.etapaAtual : styles.etapa}
+                className={
+                  etapa.estado === 'atual'
+                    ? styles.etapaAtual
+                    : etapa.estado === 'pronta'
+                      ? styles.etapaPronta
+                      : styles.etapa
+                }
               >
                 <span className={styles.etapaFase}>{etapa.fase}</span>
                 <span className={styles.etapaTitulo}>{etapa.titulo}</span>

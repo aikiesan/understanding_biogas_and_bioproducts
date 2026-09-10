@@ -98,3 +98,15 @@
   .main { padding: var(--space-10) var(--space-4) var(--space-12); gap: var(--space-10); }
   .premissa { padding: var(--space-5); }
 }
+
+.etapaPronta {
+  composes: etapa;
+  border-color: var(--brand-secondary);
+  background: var(--bg-surface);
+}
+
+.etapaPronta .etapaFase::after {
+  content: ' · pronta';
+  color: var(--text-secondary);
+  font-weight: var(--weight-medium);
+}
