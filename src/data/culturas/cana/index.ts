@@ -54,6 +54,7 @@ const nodes = comTier(
   edgesValidas,
   CENTRO,
   FOCOS.map((f) => f.id),
+  curadoria.elos,
 )
 const edges = edgesValidas.filter((e) => noMapa.has(e.from) && noMapa.has(e.to))
 

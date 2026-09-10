@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { cana } from '@/data/culturas/cana'
+import { cana, curadoria } from '@/data/culturas/cana'
 import { CENTRO, FOCOS } from '@/data/culturas/cana/nucleo'
 import { tierDoNo } from '@/types/atlas'
 import { useAtlas } from '@/state/atlasStore'
@@ -10,6 +10,8 @@ import { useAtlas } from '@/state/atlasStore'
  * quebra de um jeito visivel: o mapa continua desenhando bonito enquanto a
  * mecanica esta morta.
  */
+
+const porIdDoMapa = new Map(cana.nodes.map((n) => [n.id, n]))
 
 describe('hierarquia visual', () => {
   it('a cana e origem e os quatro focos sao keystone', () => {
@@ -33,9 +35,27 @@ describe('hierarquia visual', () => {
     for (const n of cana.nodes) expect(n.tier).toBeDefined()
   })
 
-  it('as quatro camadas existem de fato', () => {
+  it('as cinco camadas existem de fato', () => {
+    // `modificador` entrou com os ELOS — o material que corre entre dois
+    // processos (colmos, caldo, xarope, vinho). Ele e conta pequena no colar da
+    // espinha: nao e decisao de valorizacao, e nao disputa espaco de rotulo com
+    // as etapas da usina, que e onde a densidade de texto do mapa e maior.
     const tiers = new Set(cana.nodes.map((n) => tierDoNo(n)))
-    expect([...tiers].sort()).toEqual(['inicio', 'keystone', 'notavel', 'passagem'])
+    expect([...tiers].sort()).toEqual([
+      'inicio',
+      'keystone',
+      'modificador',
+      'notavel',
+      'passagem',
+    ])
+  })
+
+  it('todo elo e modificador, e nenhum processo e', () => {
+    // Guarda a fronteira: se um dia um processo virar elo por engano, a etapa
+    // some do mapa virando pontinho sem rotulo — e o mapa continua bonito.
+    for (const id of curadoria.elos) expect(porIdDoMapa.get(id)?.tier).toBe('modificador')
+    const processosPuros = curadoria.processos.filter((p) => !curadoria.elos.includes(p))
+    for (const id of processosPuros) expect(porIdDoMapa.get(id)?.tier).not.toBe('modificador')
   })
 })
 

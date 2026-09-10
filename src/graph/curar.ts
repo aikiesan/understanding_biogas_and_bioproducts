@@ -50,8 +50,10 @@ export interface Preterido {
 }
 
 export interface Curadoria {
-  /** A linha de processamento, em ordem de cadeia. Camada 1. */
+  /** A linha de processamento e seus elos, em ordem de cadeia. Camada 1. */
   processos: string[]
+  /** Quais desses sao ELO — material entre processos, nao etapa. */
+  elos: string[]
   vagas: Vaga[]
   /** Quem ficou fora, na ordem em que perdeu a vaga. */
   preteridos: Preterido[]
@@ -82,6 +84,42 @@ export function curar(
   const ehProcesso = (id: string) => porId.get(id)?.anel === 1
   const ehFoco = new Set(focos)
 
+  /**
+   * Um ELO: o material que liga um processo ao seguinte.
+   *
+   * Os colmos, o caldo, o xarope, o vinho, o vapor. Sao `anel === 2` como os
+   * residuos, mas nao sao materia-prima de rota nenhuma: sao a cana andando
+   * pela usina. Antes ficavam de fora, porque a espinha guardava so
+   * `anel === 1` — e o efeito foi silencioso e grave. A linha se rompia no
+   * desenho num ponto so, os colmos, e com ela morriam 23 dos 68 nos do mapa,
+   * incluindo dois dos quatro pilares: bagaco e torta ficavam clicaveis e
+   * inacendiveis, porque nao havia caminho desenhado ate eles.
+   *
+   * A regra e derivada, nao uma lista: e elo quem recebe de um processo e
+   * entrega a um processo. Um foco nunca e elo — o residuo e o comeco de um
+   * ramo, e o lugar dele e o vertice do leque, nao o anel.
+   */
+  const elos = (() => {
+    // Ponto fixo, e nao um salto so: a cadeia do acucar passa por
+    // `centrifugacao -> mel_final -> melaco -> preparo_mosto`, dois elos
+    // seguidos. A primeira versao olhava um salto e deixava o mel final de
+    // fora; o melaco entao continuava sem produtor, desenhado e inacendivel.
+    const dentro = new Set<string>()
+    const candidatos = nodes.filter((n) => n.anel === 2 && !ehFoco.has(n.id)).map((n) => n.id)
+    for (let mudou = true; mudou; ) {
+      mudou = false
+      for (const id of candidatos) {
+        if (dentro.has(id)) continue
+        if ((sai.get(id) ?? []).some((b) => ehProcesso(b) || dentro.has(b))) {
+          dentro.add(id)
+          mudou = true
+        }
+      }
+    }
+    return dentro
+  })()
+  const ehElo = (id: string) => elos.has(id)
+
   // ── Camada 1: a linha de processamento, em ordem de cadeia ───────────────
   // Busca em profundidade a partir da cana: manter a cadeia contigua e o que
   // faz vizinho de processo ser vizinho no anel, e as arestas entre eles
@@ -94,7 +132,11 @@ export function curar(
       const atual = pilha.pop()!
       if (visto.has(atual)) continue
       visto.add(atual)
-      if (ehProcesso(atual)) processos.push(atual)
+      // Elo entra na mesma passada que o processo, para herdar a ORDEM DA
+      // CADEIA da busca. Uma segunda passada inserindo elos depois os poria em
+      // qualquer lugar do anel, e a aresta colheita->colmos viraria corda
+      // atravessando o circulo em vez de arco curto entre vizinhos.
+      if (ehProcesso(atual) || ehElo(atual)) processos.push(atual)
       const seguintes = (sai.get(atual) ?? [])
         .filter((b) => !visto.has(b) && (ehProcesso(b) || porId.get(b)?.anel === 2))
         .sort((x, y) => (porId.get(y)?.nome ?? y).localeCompare(porId.get(x)?.nome ?? x, 'pt-BR'))
@@ -205,7 +247,7 @@ export function curar(
     }
   })
 
-  return { processos, vagas, preteridos }
+  return { processos, elos: processos.filter(ehElo), vagas, preteridos }
 }
 
 /** Distancia a jusante de um foco, sem voltar ao centro nem invadir outro foco. */
