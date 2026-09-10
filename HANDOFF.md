@@ -47,9 +47,10 @@ Estado ao fim da sessão de 2026-09-10. `npm run build` e `npx vitest run`
 
 ## O que falta
 
-1. **Tooltip de hover.** `ArvoreCanvas` já reporta a posição na tela junto do
-   id (`onSobrevoar(id, pos)`), mas `App.tsx` descarta a posição — o store só
-   guarda o id. Falta o componente que consome as duas coisas.
+1. **Tooltip de hover — não existe nada, nem o consumo do id.**
+   `ArvoreCanvas` reporta `onSobrevoar(id, pos)`, mas `App.tsx` descarta a
+   posição e o store guarda o id em `sobrevoado`, que **nenhum componente lê**.
+   O caminho todo está aberto, não só o desenho do tooltip.
 2. **Aviso antes de apagar.** `quedaAoApagar` calcula o galho que cai, mas a
    interface ainda apaga direto. O previsto é pintar o galho em vermelho e
    pedir confirmação.
@@ -58,7 +59,30 @@ Estado ao fim da sessão de 2026-09-10. `npm run build` e `npx vitest run`
 4. **`linhaDeBase` está no fallback.** Nenhum nó traz
    `alocadoNaLinhaDeBase`, então ela deriva o cenário caminhando por arestas em
    estado `real`. Funciona, mas o certo é marcar os nós no corpus.
-5. **`visiveis` / `expandir` / `recolher` no store** são do modelo anterior
-   (grafo que expande por vizinhança). `Legenda` ainda chama
-   `expandirTudo`/`recolherTudo`. Decidir se some ou se vira outra coisa.
+5. **Resíduo do modelo anterior — três controles da interface não fazem nada.**
+   A migração do "grafo que expande por vizinhança" para a árvore de alocação
+   compila, mas não foi concluída. Auditoria de 2026-09-10:
+
+   *Controles clicáveis sem efeito no mapa (o mais grave, porque é visível):*
+   - Botões **expandir tudo / recolher tudo** (`Legenda.tsx:112` e `:115`)
+     mexem em `visiveis`, e `visiveis` não chega ao `ArvoreCanvas`.
+   - **Checkbox de potenciais** e os **sete filtros de tag** idem:
+     `ArvoreCanvas`, `CamadaNos`, `CamadaConexoes` e `aplicarEstados` não têm
+     uma única referência a `mostrarPotenciais` ou `tagsAtivas`.
+
+   *Morto no store (zero consumidores):*
+   - `expandir` / `recolher` — únicas usuárias de `vizinhos()`.
+   - `sobrevoado` — escrito, nunca lido (ver item 1).
+   - `Foco` — tipo exportado sem uso.
+
+   *Exports mortos em `src/graph/selectors.ts`:* `jusante`, `cadeia`,
+   `subgrafoVisivel`, `ocultosAoRedor`. Sobrevivem `indexar`, `montante`
+   (usado pelo `DetailPanel`) e `vizinhos` (só pelo código morto acima).
+
+   **Decisão pendente sobre os filtros:** ligar `mostrarPotenciais` /
+   `tagsAtivas` a `aplicarEstados` — é onde cabem, já que é lá que a classe do
+   nó é escrita, e o corpus já traz `tags` e estado de aresta — ou remover os
+   controles da Legenda até a mecânica existir. Ligar é a opção melhor.
+   O resto (`visiveis`, `expandir`, `recolher`, `Foco`, exports mortos) pode
+   sair sem substituto.
 6. **Bundle em 643 kB.** Ainda sem code-splitting.
