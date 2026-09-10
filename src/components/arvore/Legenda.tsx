@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { Eraser } from 'lucide-react'
 import { ChevronDown, ChevronUp } from './icones'
+import { useAtlas } from '@/state/atlasStore'
 import styles from './Legenda.module.css'
 
 /**
@@ -65,6 +67,13 @@ export function Legenda() {
    * A consulta e feita uma vez, na montagem: a legenda nao deve abrir sozinha
    * so porque a pessoa girou o telefone.
    */
+  const limparRota = useAtlas((e) => e.limparRota)
+  const alocados = useAtlas((e) => e.alocados)
+  const raizes = useAtlas((e) => e.raizes)
+  // A raiz nunca apaga, entao "limpar" so tem sentido acima dela.
+  const acesos = alocados.size - raizes.size
+  const podeLimpar = acesos > 0
+
   const [aberta, setAberta] = useState(
     () => typeof window === 'undefined' || window.innerWidth >= 760,
   )
@@ -151,6 +160,28 @@ export function Legenda() {
               </li>
             </ul>
           </div>
+
+          {/*
+            Limpar mora na legenda, e nao no mapa.
+            Com o clique acendendo a rota inteira, desfazer deixou de ser
+            "apagar um no" e virou "recomecar" — e recomecar e um gesto de
+            painel, nao de mapa. Posto entre os controles de zoom, seria vizinho
+            de gestos reversiveis e do tamanho deles; aqui esta atras de um
+            passo (abrir a legenda), que e o atrito certo para uma acao que
+            desfaz o trabalho da pessoa.
+
+            So aparece quando ha o que limpar: um botao que nao faz nada quando
+            clicado ensina a desconfiar dos outros.
+          */}
+          {podeLimpar && (
+            <div className={styles.bloco}>
+              <button type="button" className={styles.limpar} onClick={limparRota}>
+                <Eraser size={13} aria-hidden="true" />
+                Limpar rotas
+                <span className={styles.contagem}>{acesos} acesos</span>
+              </button>
+            </div>
+          )}
         </div>
       )}
     </aside>

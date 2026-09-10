@@ -98,6 +98,42 @@ export function quedaAoApagar(
   return caem
 }
 
+/**
+ * Acender um CAMINHO INTEIRO, passo a passo.
+ *
+ * E o par construtivo de `quedaAoApagar`. Sem isto a constelacao do hover era
+ * so ilustracao: ela mostra os 7 nos que levam ate um destino, e o clique
+ * acendia um — e se o destino estivesse bloqueado, nenhum. A pessoa via o
+ * caminho e nao podia percorre-lo.
+ *
+ * Anda em ORDEM e valida cada passo com a mesma `alocavel` de sempre, em vez
+ * de despejar o conjunto em `alocados`. A diferenca nao e estilo: um caminho
+ * pode atravessar um no com `exclui` ou `requisitos`, e despejar o conjunto
+ * acenderia duas rotas mutuamente exclusivas ao mesmo tempo. O invariante
+ * "alocacao = cadeia conectada e coerente" tem de valer depois disto tambem.
+ *
+ * Nao acende nada pela metade: se um passo e impossivel, devolve `parouEm` e o
+ * conjunto ORIGINAL. Acender 3 de 7 depois de prometer 7 e pior que recusar —
+ * a pessoa fica com um galho no meio do caminho sem saber por que parou.
+ */
+export function acenderCaminho(
+  caminho: readonly string[],
+  alocados: ReadonlySet<string>,
+  idx: Indice,
+): { alocados: Set<string>; acesos: string[]; parouEm: string | null } {
+  const novo = new Set(alocados)
+  const acesos: string[] = []
+  for (const id of caminho) {
+    if (novo.has(id)) continue
+    if (!alocavel(id, novo, idx)) {
+      return { alocados: new Set(alocados), acesos: [], parouEm: id }
+    }
+    novo.add(id)
+    acesos.push(id)
+  }
+  return { alocados: novo, acesos, parouEm: null }
+}
+
 /** As raizes do grafo: os portoes de partida das culturas. */
 export function raizesDe(nodes: AtlasNode[]): Set<string> {
   return new Set(nodes.filter(ehRaiz).map((n) => n.id))

@@ -3,7 +3,7 @@ import type { AtlasEdge, AtlasNode } from '@/types/atlas'
 import type { ParamId, PresetId } from '@/model/tipos'
 import { paramsDoPreset } from '@/model/params'
 import { indexar } from '@/graph/selectors'
-import { alocaveisAgora, quedaAoApagar, raizesDe } from '@/graph/alocacao'
+import { acenderCaminho, alocaveisAgora, quedaAoApagar, raizesDe } from '@/graph/alocacao'
 
 interface AtlasState {
   nodes: AtlasNode[]
@@ -21,6 +21,16 @@ interface AtlasState {
    * acende e SELECIONA, e o painel espera ser pedido na barra de baixo.
    */
   detalhe: string | null
+
+  /**
+   * A rota do no em foco, publicada pelo mapa.
+   *
+   * Mora aqui porque duas superficies precisam dela e nenhuma pode recalcula-la:
+   * o mapa a desenha, e a barra de baixo diz quantos nos ela acenderia. Ela
+   * depende do LAYOUT — de quais conexoes estao desenhadas —, entao so o mapa
+   * sabe monta-la; a barra recebe.
+   */
+  rotaEmFoco: string[]
 
   preset: PresetId
   /** Apenas os parametros que o usuario mexeu. O resto vem do preset. */
@@ -45,6 +55,8 @@ interface AtlasState {
   carregar: (nodes: AtlasNode[], edges: AtlasEdge[]) => void
   selecionar: (id: string | null) => void
   detalhar: (id: string | null) => void
+  definirRota: (ids: string[]) => void
+  acenderRota: (ids?: readonly string[]) => void
   sobrevoar: (id: string | null) => void
   trocarPreset: (p: PresetId) => void
   ajustar: (id: ParamId, valor: number) => void
@@ -61,6 +73,7 @@ export const useAtlas = create<AtlasState>((set, get) => ({
   selecionado: null,
   sobrevoado: null,
   detalhe: null,
+  rotaEmFoco: [],
   preset: 'real',
   ajustes: {},
   alocados: new Set(),
@@ -102,6 +115,38 @@ export const useAtlas = create<AtlasState>((set, get) => ({
   selecionar: (id) => set(id === null ? { selecionado: null, detalhe: null } : { selecionado: id }),
   sobrevoar: (id) => set({ sobrevoado: id }),
   detalhar: (id) => set({ detalhe: id }),
+  definirRota: (ids) => set({ rotaEmFoco: ids }),
+
+  /**
+   * Acende a rota inteira ate o no em foco.
+   *
+   * O par construtivo de `confirmarApagar`, e a razao de a constelacao ser
+   * mecanica em vez de ilustracao: o hover mostra os 7 nos que levam ao
+   * destino, e isto os percorre. Nao pede dialogo porque o proprio hover ja foi
+   * a previa — a pessoa viu exatamente o que vai acender antes de clicar, que e
+   * mais do que um "tem certeza?" jamais mostraria.
+   *
+   * Acender e reversivel; apagar derruba galho. Por isso este caminho e direto
+   * e `quedaAoApagar` continua pedindo confirmacao.
+   */
+  acenderRota: (ids) => {
+    const { nodes, edges, alocados, rotaEmFoco } = get()
+    // Aceita a rota por argumento porque quem clica ja a tem em maos e ela
+    // pode ser mais nova que `rotaEmFoco`: no toque, o clique define a selecao
+    // e a rota so e publicada no render seguinte — usar a do estado acenderia
+    // o caminho do no ANTERIOR, sem erro nenhum aparecendo.
+    const caminho = ids ?? rotaEmFoco
+    if (caminho.length === 0) return
+    const idx = indexar(nodes, edges)
+    const r = acenderCaminho(caminho, alocados, idx)
+    if (r.acesos.length === 0) return
+    set({
+      alocados: r.alocados,
+      alocaveis: alocaveisAgora(nodes, r.alocados, idx),
+      pendenteDeApagar: null,
+      galhoQueCai: new Set(),
+    })
+  },
 
 
   trocarPreset: (preset) => set({ preset, ajustes: {} }),

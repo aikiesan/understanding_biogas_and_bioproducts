@@ -23,6 +23,8 @@ interface Props {
   galhoQueCai: ReadonlySet<string>
   onSelecionar: (id: string | null) => void
   onDetalhar: (id: string | null) => void
+  onRota: (ids: string[]) => void
+  onAcenderRota: (ids: readonly string[]) => void
   onAlternar: (id: string) => void
   onSobrevoar: (id: string | null) => void
 }
@@ -57,6 +59,8 @@ export function ArvoreCanvas({
   galhoQueCai,
   onSelecionar,
   onDetalhar,
+  onRota,
+  onAcenderRota,
   onAlternar,
   onSobrevoar,
 }: Props) {
@@ -109,6 +113,10 @@ export function ArvoreCanvas({
     [emFoco, malha.conexoes, raizes, malha.porArquetipo],
   )
   const rotaInstancias = useMemo(() => new Set(rota?.instancias ?? []), [rota])
+
+  // A barra de baixo precisa da rota para dizer quantos nos ela acenderia, e so
+  // o mapa sabe monta-la: ela depende de quais conexoes estao desenhadas.
+  useEffect(() => onRota(rota?.nos ?? []), [rota, onRota])
   const rotaConexoes = useMemo(() => new Set(rota?.conexoes ?? []), [rota])
 
   useEffect(() => {
@@ -195,12 +203,6 @@ export function ArvoreCanvas({
     irPara({ minX: -ate, minY: -ate, maxX: ate, maxY: ate })
   }, [irPara, malha.raios, malha.instancias.length, svgRef, tamanho])
 
-  const estadoDe = useCallback(
-    (id: string): 'alocado' | 'alocavel' | 'bloqueado' =>
-      alocados.has(id) ? 'alocado' : alocaveis.has(id) ? 'alocavel' : 'bloqueado',
-    [alocados, alocaveis],
-  )
-
   /**
    * Clique simples faz a acao principal.
    *
@@ -228,10 +230,40 @@ export function ArvoreCanvas({
        * exatamente onde a constelacao que o toque acabou de acender corre. Ali
        * o toque acende e seleciona, e o painel espera o botao da barra.
        */
-      if (window.matchMedia('(hover: hover)').matches) onDetalhar(id)
-      if (estadoDe(id) !== 'bloqueado') onAlternar(id)
+      /**
+       * VER E SEGUIR SAO O MESMO GESTO — onde houve previa.
+       *
+       * A constelacao mostra os 7 nos que levam ate um destino; antes o clique
+       * acendia um, e se o destino estivesse bloqueado, nenhum. A pessoa via o
+       * caminho e nao podia percorre-lo. Agora o clique acende a cadeia
+       * inteira, e o hover e a confirmacao: voce olhou exatamente o que vai
+       * acender antes de clicar, o que e mais do que um "tem certeza?" mostra.
+       *
+       * No TOQUE nao houve previa nenhuma — o primeiro toque e que revela a
+       * rota. Acender 7 nos ali seria agir antes de a pessoa ver o que pediu.
+       * Entao o toque so seleciona, e quem confirma e o botao da barra.
+       *
+       * A rota e recalculada aqui, e nao lida do estado: no toque a selecao
+       * acabou de mudar e a rota publicada ainda e a do no anterior.
+       */
+      if (!window.matchMedia('(hover: hover)').matches) return
+      onDetalhar(id)
+      if (alocados.has(id)) {
+        onAlternar(id)
+        return
+      }
+      onAcenderRota(rotaAte(id, malha.conexoes, raizes, malha.porArquetipo)?.nos ?? [])
     },
-    [estadoDe, onAlternar, onDetalhar, onSelecionar],
+    [
+      alocados,
+      malha.conexoes,
+      malha.porArquetipo,
+      onAcenderRota,
+      onAlternar,
+      onDetalhar,
+      onSelecionar,
+      raizes,
+    ],
   )
 
   /**
