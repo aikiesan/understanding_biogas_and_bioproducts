@@ -69,3 +69,18 @@ export const WOBBLE: Record<number, number> = { 1: 16, 3: 10, 4: 13, 5: 0 }
  */
 export const PROMOVIDOS: Array<{ id: string; ramo: number; camada: number }> = []
 export const EXCLUIDOS: string[] = []
+
+/**
+ * Os processos que valem como rota de valorizacao.
+ *
+ * O vapor da caldeira realimenta a usina, entao pela topologia meia linha de
+ * processamento aparece "a jusante do bagaco": cozimento, destilacao,
+ * evaporacao, filtracao. E verdade de grafo e mentira de leitura — "o que fazer
+ * com o bagaco" nao e refino nem cozimento, e essas etapas ja tem lugar no anel
+ * de processos. Uma lista de permissao e mais honesta que dezenove exclusoes:
+ * diz o que E rota, em vez de enumerar o que nao e.
+ *
+ * A caldeira fica porque queimar bagaco para gerar energia e uma decisao de
+ * valorizacao de verdade — e a principal delas, hoje, em Sao Paulo.
+ */
+export const PROCESSOS_COMO_ROTA: string[] = ['cana.proc.caldeira']

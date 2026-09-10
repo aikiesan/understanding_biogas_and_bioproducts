@@ -6,6 +6,7 @@ import {
   FOCOS,
   NOME_DA_CAMADA,
   RAIOS,
+  PROCESSOS_COMO_ROTA,
   VAGAS,
   WOBBLE,
 } from '@/data/culturas/cana/nucleo'
@@ -31,35 +32,63 @@ describe('a camada é a distância', () => {
     // a um passo do residuo acabava na camada 5 porque as de dentro ja tinham
     // enchido. Proximidade no mapa precisa significar proximidade na cadeia.
     for (const v of curadoria.vagas) {
-      if (v.camada === ultimaCamada) {
-        expect(v.distancia).toBeGreaterThanOrEqual(ultimaCamada - primeiraCamada + 1)
-      } else {
-        expect(v.camada).toBe(v.distancia + primeiraCamada - 1)
-      }
+      if (v.camada === ultimaCamada) continue
+      expect(porId.get(v.id)?.kind).not.toBe('destino')
+      expect(v.camada).toBe(v.distancia + primeiraCamada - 1)
     }
   })
 
-  it('nenhum nó entra sem um pai na camada de dentro', () => {
+  it('destino mora sempre no anel de ápices', () => {
+    // A excecao deliberada a regra acima: o anel externo significa uma coisa so
+    // — aqui a cadeia termina. Sem ela, "Certificacao RenovaBio", um destino a
+    // um passo da vinhaca, caia na abertura e o anel de apices ficava pela
+    // metade com destino sobrando.
+    for (const v of curadoria.vagas) {
+      if (porId.get(v.id)?.kind !== 'destino') continue
+      expect(v.camada).toBe(ultimaCamada)
+    }
+    // E os apices sao so destinos? Nao necessariamente — a camada absorve
+    // tambem quem esta longe. Mas tem de haver destino la.
+    for (let ramo = 0; ramo < FOCOS.length; ramo++) {
+      const apices = curadoria.vagas.filter((v) => v.ramo === ramo && v.camada === ultimaCamada)
+      expect(apices.some((v) => porId.get(v.id)?.kind === 'destino')).toBe(true)
+    }
+  })
+
+  it('nenhum nó entra sem um pai já admitido', () => {
     // A cascata. Sem ela, um no cujos pais foram todos preteridos fica no mapa
     // sem nunca poder ser aceso — visivel, clicavel e inalcancavel.
-    const camadaDe = new Map<string, number[]>()
+    const camadasDe = new Map<string, number[]>()
     for (const v of curadoria.vagas) {
-      const l = camadaDe.get(v.id) ?? camadaDe.set(v.id, []).get(v.id)!
+      const l = camadasDe.get(v.id) ?? camadasDe.set(v.id, []).get(v.id)!
       l.push(v.camada)
     }
-    for (const f of FOCOS) camadaDe.set(f.id, [primeiraCamada - 1])
+    for (const f of FOCOS) camadasDe.set(f.id, [primeiraCamada - 1])
 
     for (const v of curadoria.vagas) {
       const pais = cana.edges.filter((e) => e.to === v.id).map((e) => e.from)
+      const ehDestino = porId.get(v.id)?.kind === 'destino'
       const temPai = pais.some((p) =>
-        (camadaDe.get(p) ?? []).some(
-          (c) => c === v.camada - 1 || (v.camada === ultimaCamada && c === v.camada),
+        (camadasDe.get(p) ?? []).some((c) =>
+          // Destino subiu para o anel externo, entao aceita pai de qualquer
+          // camada de dentro; o resto exige a camada imediatamente anterior.
+          ehDestino ? c <= v.camada : c === v.camada - 1 || (v.camada === ultimaCamada && c === v.camada),
         ),
       )
-      // Processos moram no anel 1 e alimentam a camada 3 por travessia.
+      // Processos moram no anel 1 e alimentam as camadas de leque por travessia.
       const paiNoAnel = pais.some((p) => porId.get(p)?.anel === 1 || p === CENTRO)
       expect(temPai || paiNoAnel).toBe(true)
     }
+  })
+
+  it('só a caldeira ocupa vaga de rota entre os processos', () => {
+    // O vapor da caldeira realimenta a usina, entao pela topologia cozimento,
+    // destilacao e refino aparecem "a jusante do bagaco". E verdade de grafo e
+    // mentira de leitura, e eles ja tem lugar no anel de processos.
+    const processosEmVaga = new Set(
+      curadoria.vagas.filter((v) => porId.get(v.id)?.anel === 1).map((v) => v.id),
+    )
+    expect([...processosEmVaga].sort()).toEqual([...PROCESSOS_COMO_ROTA].sort())
   })
 })
 
