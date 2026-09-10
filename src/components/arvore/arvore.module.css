@@ -472,3 +472,30 @@
 /* Enquanto a rota está acesa, o resto do mapa recua. Sem isso a constelação
    compete com 78 nós e ~118 linhas e não se lê como um caminho. */
 .camadaConexoes[data-rota-ativa='sim'] .conexao:not([data-rota='sim']) { opacity: 0.18; }
+
+/* ── Tela estreita ─────────────────────────────────────────────────────────
+   Medido em 375×812: a barra central (188px, centrada) e os controles de zoom
+   (canto direito) se sobrepunham — os dois disputavam a mesma faixa de baixo.
+   Aqui eles passam a dividir a altura em vez da largura: controles acima, à
+   direita; a barra encosta no rodapé ocupando a largura toda, porque é ela que
+   diz o que o nó tocado é. */
+@media (max-width: 720px) {
+  .controles {
+    inset-block-end: calc(var(--space-4) + 62px);
+    inset-inline-end: var(--space-3);
+    padding: 4px;
+  }
+
+  .controles button { inline-size: 30px; block-size: 30px; }
+
+  /* "Enquadrar" vira só o ícone de alvo: o rótulo custava 84px numa faixa que
+     já não cabia, e o gesto é reversível — descobrir por toque é barato. */
+  .enquadrar { font-size: 0 !important; padding-inline: var(--space-2); }
+  .enquadrar::before { content: '⤢'; font-size: 15px; }
+}
+
+/* Alvos de toque: 32px é confortável no mouse e pequeno demais no dedo. A
+   recomendação de 44px vale para tudo que se aperta, não só para botões. */
+@media (pointer: coarse) {
+  .controles button { inline-size: 42px; block-size: 42px; }
+}

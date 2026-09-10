@@ -21,13 +21,26 @@ export function DetailPanel() {
   const [aba, setAba] = useState<Aba>('resumo')
   const nodes = useAtlas((s) => s.nodes)
   const edges = useAtlas((s) => s.edges)
-  const selecionado = useAtlas((s) => s.selecionado)
+  const detalhe = useAtlas((s) => s.detalhe)
+  const detalhar = useAtlas((s) => s.detalhar)
   const selecionar = useAtlas((s) => s.selecionar)
+
+  /**
+   * Navegar pelas conexoes move o painel E a selecao.
+   *
+   * So trocar o painel deixaria a constelacao acesa num no e o texto falando de
+   * outro — o mapa e o painel contando historias diferentes, que e a coisa que
+   * este projeto mais evita.
+   */
+  const irParaNo = (id: string) => {
+    selecionar(id)
+    detalhar(id)
+  }
   const preset = useAtlas((s) => s.preset)
   const ajustes = useAtlas((s) => s.ajustes)
 
   const idx = useMemo(() => indexar(nodes, edges), [nodes, edges])
-  const no = selecionado ? idx.porId.get(selecionado) : undefined
+  const no = detalhe ? idx.porId.get(detalhe) : undefined
 
   const resultado = useMemo(
     () => computeFlows(paramsEfetivos(preset, ajustes), 'sp_ano'),
@@ -57,7 +70,9 @@ export function DetailPanel() {
         <button
           type="button"
           className={styles.fechar}
-          onClick={() => selecionar(null)}
+          // Fecha o painel e mantem a selecao: a rota continua acesa no mapa,
+          // que e o que a pessoa estava lendo.
+          onClick={() => detalhar(null)}
           aria-label="Fechar detalhes"
         >
           <X size={17} />
@@ -167,7 +182,7 @@ export function DetailPanel() {
             <ul className={styles.conexoes}>
               {entradas.map((e) => (
                 <li key={e.id}>
-                  <button type="button" onClick={() => selecionar(e.from)}>
+                  <button type="button" onClick={() => irParaNo(e.from)}>
                     ← {idx.porId.get(e.from)?.nome}
                   </button>
                   <span className={e.estado === 'real' ? styles.real : styles.potencial}>
@@ -177,7 +192,7 @@ export function DetailPanel() {
               ))}
               {saidas.map((e) => (
                 <li key={e.id}>
-                  <button type="button" onClick={() => selecionar(e.to)}>
+                  <button type="button" onClick={() => irParaNo(e.to)}>
                     → {idx.porId.get(e.to)?.nome}
                   </button>
                   <span className={e.estado === 'real' ? styles.real : styles.potencial}>
