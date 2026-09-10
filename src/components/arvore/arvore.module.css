@@ -1,0 +1,265 @@
+.wrapper {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: hidden;
+  background: var(--arv-fundo);
+}
+
+/* No tema claro o tabuleiro escuro precisa ler como inset deliberado,
+   não como bug de contraste. */
+:global(:root:not(.dark)) .wrapper {
+  box-shadow: inset 0 0 0 1px var(--border-default), inset 0 12px 34px rgb(0 0 0 / 0.5);
+}
+
+.svg {
+  inline-size: 100%;
+  block-size: 100%;
+  display: block;
+  cursor: grab;
+  touch-action: none;
+}
+
+.svg:active { cursor: grabbing; }
+
+.fundo {
+  fill: var(--arv-fundo);
+  width: 100%;
+  height: 100%;
+}
+
+.instrucoes {
+  position: absolute;
+  inset-block-start: var(--space-4);
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  background: rgb(11 20 24 / 0.72);
+  color: var(--arv-texto-morto);
+  font-size: var(--text-xs);
+  pointer-events: none;
+}
+
+/* ── Fundo: cunhas de família e anéis de etapa ───────────────────────── */
+
+.cunha { opacity: 0.05; stroke: none; }
+
+.cunha[data-familia='0'] { fill: var(--fam-0); }
+.cunha[data-familia='1'] { fill: var(--fam-1); }
+.cunha[data-familia='2'] { fill: var(--fam-2); }
+.cunha[data-familia='3'] { fill: var(--fam-3); }
+.cunha[data-familia='4'] { fill: var(--fam-4); }
+.cunha[data-familia='5'] { fill: var(--fam-5); }
+.cunha[data-familia='6'] { fill: var(--fam-6); }
+.cunha[data-familia='7'] { fill: var(--fam-7); }
+
+.divisor { stroke: var(--arv-grade); stroke-width: 1; opacity: 0.6; }
+
+.anelGuia {
+  stroke: var(--arv-grade);
+  stroke-width: 1;
+  stroke-dasharray: 2 10;
+  opacity: 0.7;
+}
+
+.rotuloSetor {
+  font-size: 34px;
+  font-weight: var(--weight-black);
+  font-family: var(--font-display);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+.rotuloSetor[data-familia='0'] { fill: var(--fam-0); }
+.rotuloSetor[data-familia='1'] { fill: var(--fam-1); }
+.rotuloSetor[data-familia='2'] { fill: var(--fam-2); }
+.rotuloSetor[data-familia='3'] { fill: var(--fam-3); }
+.rotuloSetor[data-familia='4'] { fill: var(--fam-4); }
+.rotuloSetor[data-familia='5'] { fill: var(--fam-5); }
+.rotuloSetor[data-familia='6'] { fill: var(--fam-6); }
+.rotuloSetor[data-familia='7'] { fill: var(--fam-7); }
+
+/* ── Conexões ────────────────────────────────────────────────────────── */
+
+.conexaoHalo {
+  stroke: transparent;
+  stroke-width: 9;
+  stroke-linecap: round;
+}
+
+.conexaoLinha {
+  stroke: var(--arv-borda-morta);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+/* Potencial é tracejado, e continua tracejado mesmo quando aceso: o traço
+   diz que a rota não existe em escala, o brilho diz que você a escolheu. */
+.conexao[data-fluxo='potencial'] .conexaoLinha { stroke-dasharray: 7 6; }
+.conexao[data-especie='regulatorio'] .conexaoLinha { stroke-dasharray: 2 6; }
+.conexao[data-obrigatorio='sim'] .conexaoLinha { stroke-width: 2.4; }
+
+.conexao[data-estado='alocavel'] .conexaoLinha {
+  stroke: var(--arv-lima-fraca);
+  stroke-width: 2;
+}
+
+.conexao[data-estado='alocado'] .conexaoLinha {
+  stroke: var(--arv-lima);
+  stroke-width: 2.6;
+}
+
+/* O "brilho" do caminho aceso: um traço largo e translúcido por baixo.
+   Custa zero filtros SVG, que é o que mantém o zoom fluido. */
+.conexao[data-estado='alocado'] .conexaoHalo {
+  stroke: var(--arv-lima);
+  opacity: 0.16;
+}
+
+/* ── Nós ─────────────────────────────────────────────────────────────── */
+
+.no { cursor: pointer; }
+.no:focus { outline: none; }
+
+.alvo { fill: transparent; }
+
+.disco {
+  fill: var(--arv-fundo-no);
+  stroke: var(--arv-borda-morta);
+  stroke-width: 1.6;
+}
+
+.ornamento { color: var(--arv-borda-morta); }
+.ornAnel { stroke: currentColor; stroke-width: 1.4; stroke-dasharray: 5 5; opacity: 0.8; }
+.ornAnelInterno { stroke: currentColor; stroke-width: 1; opacity: 0.5; }
+.ornEntalhe { stroke: currentColor; stroke-width: 1.6; opacity: 0.7; }
+
+.icone { color: var(--arv-texto-morto); opacity: 0.5; pointer-events: none; }
+
+.rotulo {
+  fill: var(--arv-texto-morto);
+  font-size: 11px;
+  font-weight: var(--weight-medium);
+  text-anchor: middle;
+  paint-order: stroke fill;
+  stroke: var(--arv-fundo);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+/* Estados. A diferença nunca é só de cor: bloqueado é vazado, disponível é
+   tracejado, alocado é preenchido. Quem não distingue matiz distingue forma. */
+
+.no[data-estado='alocavel'] .disco {
+  stroke: var(--arv-lima);
+  stroke-width: 2;
+  stroke-dasharray: 4 3;
+}
+.no[data-estado='alocavel'] .icone { opacity: 0.9; }
+.no[data-estado='alocavel'] .rotulo { fill: var(--arv-texto); }
+.no[data-estado='alocavel'] .ornamento { color: var(--arv-lima-fraca); }
+
+.no[data-estado='alocado'] .disco {
+  stroke: var(--arv-lima);
+  stroke-width: 2.4;
+  stroke-dasharray: none;
+}
+.no[data-estado='alocado'] .icone { opacity: 1; color: var(--arv-fundo); }
+.no[data-estado='alocado'] .rotulo { fill: var(--arv-texto); font-weight: var(--weight-semibold); }
+.no[data-estado='alocado'] .ornamento { color: var(--arv-lima); }
+
+/* O preenchimento do nó aceso vem da família — é o que deixa seguir uma
+   linhagem com os olhos, sem precisar traçar as setas. */
+.no[data-estado='alocado'][data-familia='0'] .disco { fill: var(--fam-0); }
+.no[data-estado='alocado'][data-familia='1'] .disco { fill: var(--fam-1); }
+.no[data-estado='alocado'][data-familia='2'] .disco { fill: var(--fam-2); }
+.no[data-estado='alocado'][data-familia='3'] .disco { fill: var(--fam-3); }
+.no[data-estado='alocado'][data-familia='4'] .disco { fill: var(--fam-4); }
+.no[data-estado='alocado'][data-familia='5'] .disco { fill: var(--fam-5); }
+.no[data-estado='alocado'][data-familia='6'] .disco { fill: var(--fam-6); }
+.no[data-estado='alocado'][data-familia='7'] .disco { fill: var(--fam-7); }
+.no[data-estado='alocado'][data-familia='miolo'] .disco { fill: var(--arv-lima); }
+
+.no:hover .disco { stroke: var(--arv-lima); }
+.no[data-selecionado='sim'] .disco {
+  stroke: var(--cp2b-branco);
+  stroke-width: 3;
+}
+.no[data-selecionado='sim'] .rotulo { fill: var(--cp2b-branco); }
+
+/* Tiers com peso próprio */
+.no[data-tier='inicio'] .disco { fill: var(--cp2b-verde-escuro); stroke: var(--arv-lima); stroke-width: 3; }
+.no[data-tier='inicio'] .icone { color: var(--arv-lima); opacity: 1; }
+.no[data-tier='inicio'] .rotulo { font-size: 17px; font-weight: var(--weight-black); fill: var(--arv-texto); }
+
+.no[data-tier='keystone'] .rotulo { font-size: 13px; font-weight: var(--weight-bold); }
+.no[data-tier='modificador'] .rotulo { font-size: 10px; }
+
+/* ── Nível de detalhe ────────────────────────────────────────────────── */
+/* Uma regra de display por camada. Zero trabalho de React por passo de zoom. */
+
+.svg[data-lod='constelacao'] .rotulo,
+.svg[data-lod='constelacao'] .icone,
+.svg[data-lod='constelacao'] .ornamento { display: none; }
+.svg[data-lod='constelacao'] .no[data-tier='inicio'] .rotulo { display: block; }
+.svg[data-lod='constelacao'] .anelGuia { display: none; }
+
+.svg[data-lod='regioes'] .no[data-tier='notavel'] .rotulo,
+.svg[data-lod='regioes'] .no[data-tier='passagem'] .rotulo,
+.svg[data-lod='regioes'] .no[data-tier='modificador'] .rotulo { display: none; }
+.svg[data-lod='regioes'] .no[data-tier='modificador'] .icone { display: none; }
+
+.svg[data-lod='leitura'] .no[data-tier='modificador'] .rotulo { display: none; }
+.svg[data-lod='leitura'] .rotuloSetor { opacity: 0.16; }
+
+.svg[data-lod='detalhe'] .rotuloSetor { opacity: 0.1; }
+
+/* Aceso e selecionado mantêm o rótulo em qualquer distância: é o que dá
+   orientação num mapa muito maior que a tela. */
+.svg .no[data-estado='alocado'] .rotulo,
+.svg .no[data-selecionado='sim'] .rotulo { display: block !important; }
+
+/* ── Controles ───────────────────────────────────────────────────────── */
+
+.controles {
+  position: absolute;
+  inset-block-end: var(--space-5);
+  inset-inline-end: var(--space-5);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border: 1px solid var(--arv-grade);
+  border-radius: var(--radius-full);
+  background: rgb(11 20 24 / 0.9);
+  box-shadow: var(--shadow-dark-md);
+}
+
+.controles button {
+  inline-size: 32px;
+  block-size: 32px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--arv-texto);
+  font-size: var(--text-lg);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.controles button:hover { background: rgb(255 255 255 / 0.08); }
+
+.enquadrar {
+  inline-size: auto !important;
+  padding-inline: var(--space-3);
+  font-size: var(--text-sm) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .no, .conexao, .disco { transition: none !important; animation: none !important; }
+}

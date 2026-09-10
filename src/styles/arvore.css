@@ -1,0 +1,49 @@
+/*
+ * Tokens da árvore.
+ *
+ * O canvas é sempre escuro, nos dois temas do site. Não é capricho: o que faz
+ * um nó aceso ler como aceso é o contraste contra um campo profundo, e um
+ * tabuleiro claro com nós luminosos parece defeito, não escolha. O cabeçalho,
+ * o painel lateral e o tooltip continuam seguindo o tema do sistema.
+ *
+ * Todas as cores derivam da paleta CP2B, escurecidas ou clareadas até passarem
+ * em 4,5:1 contra --arv-fundo.
+ */
+
+:root {
+  /* Campo */
+  --arv-fundo: #0b1418; /* azul petróleo dessaturado e escurecido */
+  --arv-fundo-no: #12222a;
+  --arv-nevoa: #060d10;
+  --arv-grade: #172a33;
+
+  /* O "ouro" da árvore: o que está aceso */
+  --arv-lima: #b6e03b;
+  --arv-lima-fraca: #6c8524;
+
+  /* Acentos por natureza do nó, já clareados para o escuro */
+  --arv-verde: #7bc845;
+  --arv-ambar: #f0a54a;
+  --arv-azul: #7fb3e0;
+  --arv-terra: #d4ad33;
+  --arv-violeta: #a78bfa;
+  --arv-cinza: #94a3b8;
+
+  /* Traços e texto */
+  --arv-borda-morta: #2c3d46;
+  --arv-texto: #e7eef1;
+  --arv-texto-morto: #8aa0aa;
+  --arv-perigo: #f87171;
+}
+
+/* Matiz de cada família. A ordem segue os setores do esqueleto da cana. */
+:root {
+  --fam-0: #9ccc65; /* palha */
+  --fam-1: #f0a54a; /* bagaço e térmica */
+  --fam-2: #e8c468; /* açúcar */
+  --fam-3: #7bc845; /* etanol */
+  --fam-4: #a78bfa; /* levedura e CO₂ */
+  --fam-5: #5ec8d8; /* vinhaça */
+  --fam-6: #d4ad33; /* torta e solo */
+  --fam-7: #7fb3e0;
+}

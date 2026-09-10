@@ -1,0 +1,1093 @@
+{
+  "edges": [
+    {
+      "id": "res.bagaco__rota.caldeira_21bar",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.caldeira_21bar",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "280 kg/t cana",
+      "explicacao": "No arranjo legado o bagaço é queimado apenas para gerar o vapor que a fábrica consome.",
+      "params": ["bagaco_rpr", "cana_moida_sp", "incluir_bagaco"],
+      "fontes": ["unica2024", "cgee_bioetanol"]
+    },
+    {
+      "id": "rota.caldeira_21bar__prod.vapor_processo",
+      "from": "cana.rota.caldeira_21bar",
+      "to": "cana.prod.vapor_processo",
+      "kind": "energia",
+      "estado": "real",
+      "rotulo": "21 bar",
+      "explicacao": "O vapor de 21 bar é expandido até 2,5 bar e entregue ao processo, com pouco trabalho de eixo pelo caminho.",
+      "params": [],
+      "fontes": ["cgee_bioetanol"]
+    },
+    {
+      "id": "rota.caldeira_21bar__rota.turbina_contrapressao",
+      "from": "cana.rota.caldeira_21bar",
+      "to": "cana.rota.turbina_contrapressao",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "O salto entálpico curto do vapor a 21 bar só comporta turbina de contrapressão dimensionada para o autoconsumo.",
+      "params": [],
+      "fontes": ["cgee_bioetanol"]
+    },
+    {
+      "id": "rota.caldeira_21bar__copr.cinzas",
+      "from": "cana.rota.caldeira_21bar",
+      "to": "cana.copr.cinzas",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "3-8 kg/t cana",
+      "explicacao": "Toda queima de bagaço deixa cinza de grelha e fuligem no lavador de gases.",
+      "params": ["bagaco_rpr"],
+      "fontes": ["atlas2020_p66"]
+    },
+    {
+      "id": "res.bagaco__rota.caldeira_alta_pressao",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.caldeira_alta_pressao",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "arranjo dominante em SP",
+      "explicacao": "O mesmo bagaço da moenda alimenta a caldeira de 67 a 100 bar que sustenta a exportação de bioeletricidade.",
+      "params": ["bagaco_rpr", "cana_moida_sp", "incluir_bagaco"],
+      "fontes": ["unica2024"]
+    },
+    {
+      "id": "res.palha__rota.caldeira_alta_pressao",
+      "from": "cana.res.palha",
+      "to": "cana.rota.caldeira_alta_pressao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A palha recolhida complementa o bagaço na fornalha e estende a geração para além da safra.",
+      "params": ["palha_recolhivel", "perda_estocagem_palha"],
+      "fontes": ["atlas2020_p61", "hassuani2005"]
+    },
+    {
+      "id": "rota.caldeira_alta_pressao__rota.turbina_contrapressao",
+      "from": "cana.rota.caldeira_alta_pressao",
+      "to": "cana.rota.turbina_contrapressao",
+      "kind": "energia",
+      "estado": "real",
+      "rotulo": "67-100 bar",
+      "explicacao": "O vapor de alta pressão entra na turbina de contrapressão e sai a 2,5 bar para a fábrica.",
+      "params": [],
+      "fontes": ["unica2024"]
+    },
+    {
+      "id": "rota.caldeira_alta_pressao__rota.turbina_condensacao",
+      "from": "cana.rota.caldeira_alta_pressao",
+      "to": "cana.rota.turbina_condensacao",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "O vapor que excede a demanda térmica segue para o estágio de condensação e vira eletricidade exportável.",
+      "params": ["bagaco_excedente", "eficiencia_eletrica"],
+      "fontes": ["unica2024"]
+    },
+    {
+      "id": "rota.caldeira_alta_pressao__copr.cinzas",
+      "from": "cana.rota.caldeira_alta_pressao",
+      "to": "cana.copr.cinzas",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A combustão concentra a fração inorgânica do bagaço em cinza e fuligem.",
+      "params": ["bagaco_rpr"],
+      "fontes": ["atlas2020_p66"]
+    },
+    {
+      "id": "rota.caldeira_alta_pressao__res.gases_caldeira",
+      "from": "cana.rota.caldeira_alta_pressao",
+      "to": "cana.res.gases_caldeira",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "CO2 a 12-14%",
+      "explicacao": "A chaminé lança CO2 biogênico diluído, hoje inteiramente ventilado.",
+      "params": [],
+      "fontes": ["ipcc2019"]
+    },
+    {
+      "id": "rota.turbina_contrapressao__prod.eletricidade",
+      "from": "cana.rota.turbina_contrapressao",
+      "to": "cana.prod.eletricidade",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "A geração acompanha a demanda de vapor do processo: eletricidade como subproduto do calor.",
+      "params": ["eficiencia_eletrica"],
+      "fontes": ["unica2024"]
+    },
+    {
+      "id": "rota.turbina_contrapressao__prod.vapor_processo",
+      "from": "cana.rota.turbina_contrapressao",
+      "to": "cana.prod.vapor_processo",
+      "kind": "energia",
+      "estado": "real",
+      "rotulo": "escape a 2,5 bar",
+      "explicacao": "Todo o vapor expandido é descarregado no processo, sem condensador.",
+      "params": [],
+      "fontes": ["cgee_bioetanol"]
+    },
+    {
+      "id": "rota.turbina_condensacao__prod.eletricidade",
+      "from": "cana.rota.turbina_condensacao",
+      "to": "cana.prod.eletricidade",
+      "kind": "energia",
+      "estado": "real",
+      "rotulo": "21.218 GWh/ano em SP",
+      "explicacao": "Condensar o vapor excedente desacopla a geração da demanda térmica e permite exportar energia.",
+      "params": ["eficiencia_eletrica", "bagaco_excedente"],
+      "fontes": ["unica2024"]
+    },
+    {
+      "id": "rota.turbina_condensacao__prod.vapor_processo",
+      "from": "cana.rota.turbina_condensacao",
+      "to": "cana.prod.vapor_processo",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "A extração intermediária entrega ao processo o vapor de 2,5 bar antes da condensação do restante.",
+      "params": [],
+      "fontes": ["cgee_bioetanol"]
+    },
+    {
+      "id": "prod.vapor_processo__dest.autoconsumo_usina",
+      "from": "cana.prod.vapor_processo",
+      "to": "cana.dest.autoconsumo_usina",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "O vapor de escape move moenda, evaporação, cozimento e destilação sem sair da usina.",
+      "params": [],
+      "fontes": ["rein2017"]
+    },
+    {
+      "id": "prod.eletricidade__dest.autoconsumo_usina",
+      "from": "cana.prod.eletricidade",
+      "to": "cana.dest.autoconsumo_usina",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "A usina consome primeiro a energia que gera; só o excedente chega ao mercado.",
+      "params": [],
+      "fontes": ["unica2024"]
+    },
+    {
+      "id": "prod.eletricidade__dest.rede_eletrica",
+      "from": "cana.prod.eletricidade",
+      "to": "cana.dest.rede_eletrica",
+      "kind": "energia",
+      "estado": "real",
+      "rotulo": "21.218 GWh/ano",
+      "explicacao": "O excedente é injetado no sistema elétrico pelo ponto de conexão da usina.",
+      "params": ["preco_eletricidade"],
+      "fontes": ["unica2024"]
+    },
+    {
+      "id": "prod.eletricidade__dest.acl",
+      "from": "cana.prod.eletricidade",
+      "to": "cana.dest.acl",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "A bioeletricidade é vendida em contrato bilateral a consumidor livre.",
+      "params": ["preco_eletricidade"],
+      "fontes": ["ccee2024"]
+    },
+    {
+      "id": "prod.eletricidade__dest.leilao_energia",
+      "from": "cana.prod.eletricidade",
+      "to": "cana.dest.leilao_energia",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "O leilão regulado dá contrato longo e é o que viabiliza o retrofit da caldeira.",
+      "params": ["preco_eletricidade"],
+      "fontes": ["aneel_leiloes"]
+    },
+    {
+      "id": "prod.eletricidade__dest.irec",
+      "from": "cana.prod.eletricidade",
+      "to": "cana.dest.irec",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "O atributo renovável do MWh é destacado e certificado separadamente da energia física.",
+      "params": [],
+      "fontes": ["irec_standard"]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.caldeira_biogas",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.caldeira_biogas",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "50-65% CH4",
+      "explicacao": "O biogás dessulfurizado é queimado em queimador dedicado na própria caldeira de bagaço.",
+      "params": ["fracao_ch4_biogas", "pci_ch4"],
+      "fontes": ["fapesp_biogas"]
+    },
+    {
+      "id": "rota.caldeira_biogas__prod.vapor_processo",
+      "from": "cana.rota.caldeira_biogas",
+      "to": "cana.prod.vapor_processo",
+      "kind": "energia",
+      "estado": "potencial",
+      "rotulo": "85-90% de rendimento",
+      "explicacao": "O uso térmico direto é o de maior rendimento de primeira lei para o biogás.",
+      "params": ["pci_ch4", "fracao_ch4_biogas"],
+      "fontes": ["fapesp_biogas"]
+    },
+    {
+      "id": "rota.caldeira_biogas__rota.turbina_condensacao",
+      "from": "cana.rota.caldeira_biogas",
+      "to": "cana.rota.turbina_condensacao",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "Cada metro cúbico de metano queimado poupa bagaço, que é liberado para a turbina de condensação.",
+      "params": ["bagaco_excedente", "pci_ch4"],
+      "fontes": ["fapesp_biogas"]
+    },
+    {
+      "id": "res.palha__rota.combustao_direta",
+      "from": "cana.res.palha",
+      "to": "cana.rota.combustao_direta",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "~R$ 65/t recolhida",
+      "explicacao": "O fardo de palha vai à fornalha junto com o bagaço, em proporção limitada por cloro e potássio.",
+      "params": ["palha_recolhivel", "perda_estocagem_palha"],
+      "fontes": ["hassuani2005", "atlas2020_p61"]
+    },
+    {
+      "id": "rota.combustao_direta__prod.vapor_processo",
+      "from": "cana.rota.combustao_direta",
+      "to": "cana.prod.vapor_processo",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "A palha seca tem poder calorífico maior que o bagaço úmido e amplia a produção de vapor.",
+      "params": ["palha_recolhivel"],
+      "fontes": ["hassuani2005"]
+    },
+    {
+      "id": "rota.combustao_direta__rota.turbina_condensacao",
+      "from": "cana.rota.combustao_direta",
+      "to": "cana.rota.turbina_condensacao",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "Queimar palha estocada na entressafra é o que mantém a turbina de condensação gerando fora da safra.",
+      "params": ["palha_recolhivel", "eficiencia_eletrica"],
+      "fontes": ["atlas2020_p61"]
+    },
+    {
+      "id": "rota.combustao_direta__copr.cinzas",
+      "from": "cana.rota.combustao_direta",
+      "to": "cana.copr.cinzas",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "alto teor de K e Cl",
+      "explicacao": "A palha traz mais inorgânicos que o bagaço e agrava a incrustação e o volume de cinza.",
+      "params": ["palha_recolhivel"],
+      "fontes": ["hassuani2005"]
+    },
+    {
+      "id": "res.bagaco__rota.gaseificacao",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.gaseificacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O bagaço é oxidado parcialmente a 800-1000 °C em vez de queimado por completo.",
+      "params": ["bagaco_excedente", "incluir_bagaco"],
+      "fontes": ["cgee_bioetanol"]
+    },
+    {
+      "id": "res.palha__rota.gaseificacao",
+      "from": "cana.res.palha",
+      "to": "cana.rota.gaseificacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A palha seca é uma alimentação melhor que o bagaço úmido para o gaseificador.",
+      "params": ["palha_recolhivel"],
+      "fontes": ["cgee_bioetanol"]
+    },
+    {
+      "id": "rota.gaseificacao__prod.syngas",
+      "from": "cana.rota.gaseificacao",
+      "to": "cana.prod.syngas",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "CO + H2",
+      "explicacao": "Com oxigênio abaixo do estequiométrico o carbono sai como CO e H2, não como CO2.",
+      "params": [],
+      "fontes": ["cgee_bioetanol", "iea_bioenergy_t33"]
+    },
+    {
+      "id": "rota.gaseificacao__copr.cinzas",
+      "from": "cana.rota.gaseificacao",
+      "to": "cana.copr.cinzas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O leito do gaseificador descarta cinza e carbono não convertido.",
+      "params": [],
+      "fontes": ["iea_bioenergy_t33"]
+    },
+    {
+      "id": "prod.syngas__rota.bigcc",
+      "from": "cana.prod.syngas",
+      "to": "cana.rota.bigcc",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "O gás de síntese limpo é o combustível da turbina a gás do ciclo combinado.",
+      "params": [],
+      "fontes": ["cgee_bioetanol"]
+    },
+    {
+      "id": "prod.syngas__rota.sintese_ft",
+      "from": "cana.prod.syngas",
+      "to": "cana.rota.sintese_ft",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "CO e H2 são a matéria-prima direta do reator Fischer-Tropsch.",
+      "params": [],
+      "fontes": ["iea_bioenergy_t33"]
+    },
+    {
+      "id": "prod.syngas__dest.industria_terceiros",
+      "from": "cana.prod.syngas",
+      "to": "cana.dest.industria_terceiros",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "Como gás de baixo poder calorífico, o syngas substitui óleo e lenha em forno de cerâmica e de alimentos vizinhos.",
+      "params": [],
+      "fontes": ["iea_bioenergy_t33"]
+    },
+    {
+      "id": "rota.gaseificacao__rota.bigcc",
+      "from": "cana.rota.gaseificacao",
+      "to": "cana.rota.bigcc",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "O BIGCC é o arranjo de potência construído em torno do gaseificador de biomassa.",
+      "params": [],
+      "fontes": ["cgee_bioetanol"]
+    },
+    {
+      "id": "rota.bigcc__prod.eletricidade",
+      "from": "cana.rota.bigcc",
+      "to": "cana.prod.eletricidade",
+      "kind": "energia",
+      "estado": "potencial",
+      "rotulo": "35-40% elétrico",
+      "explicacao": "Turbina a gás mais caldeira de recuperação quase dobram o rendimento elétrico do ciclo a vapor.",
+      "params": ["eficiencia_eletrica", "preco_eletricidade"],
+      "fontes": ["cgee_bioetanol"]
+    },
+    {
+      "id": "rota.bigcc__prod.vapor_processo",
+      "from": "cana.rota.bigcc",
+      "to": "cana.prod.vapor_processo",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "A caldeira de recuperação aproveita o escape da turbina a gás e ainda entrega vapor ao processo.",
+      "params": [],
+      "fontes": ["cgee_bioetanol"]
+    },
+    {
+      "id": "rota.sintese_ft__prod.combustivel_sintetico",
+      "from": "cana.rota.sintese_ft",
+      "to": "cana.prod.combustivel_sintetico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O encadeamento catalítico do syngas entrega diesel e querosene sem enxofre nem aromáticos.",
+      "params": [],
+      "fontes": ["iea_bioenergy_t33"]
+    },
+    {
+      "id": "rota.sintese_ft__prod.saf",
+      "from": "cana.rota.sintese_ft",
+      "to": "cana.prod.saf",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "FT-SPK, até 50% na mistura",
+      "explicacao": "A fração querosene do FT é uma das vias de SAF já certificadas por norma internacional.",
+      "params": [],
+      "fontes": ["astm_d7566"]
+    },
+    {
+      "id": "rota.sintese_ft__prod.nafta_renovavel",
+      "from": "cana.rota.sintese_ft",
+      "to": "cana.prod.nafta_renovavel",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O hidrocraqueamento da cera FT gera nafta e diesel como coprodutos inevitáveis do querosene.",
+      "params": [],
+      "fontes": ["iea_bioenergy_t33"]
+    },
+    {
+      "id": "prod.combustivel_sintetico__dest.combustivel_futuro",
+      "from": "cana.prod.combustivel_sintetico",
+      "to": "cana.dest.combustivel_futuro",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "O mandato de SAF criado pela Lei do Combustível do Futuro transforma o produto sintético em demanda obrigatória.",
+      "params": [],
+      "fontes": ["lei_14993_2024"]
+    },
+    {
+      "id": "prod.combustivel_sintetico__dest.mercado_aviacao",
+      "from": "cana.prod.combustivel_sintetico",
+      "to": "cana.dest.mercado_aviacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O querosene sintético é entregue às companhias aéreas obrigadas a reduzir emissões a partir de 2027.",
+      "params": [],
+      "fontes": ["lei_14993_2024"]
+    },
+    {
+      "id": "res.palha__rota.pirolise_rapida",
+      "from": "cana.res.palha",
+      "to": "cana.rota.pirolise_rapida",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A palha seca e moída é a alimentação típica do leito fluidizado de pirólise rápida.",
+      "params": ["palha_recolhivel", "perda_estocagem_palha"],
+      "fontes": ["iea_bioenergy_t34"]
+    },
+    {
+      "id": "res.bagaco__rota.pirolise_rapida",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.pirolise_rapida",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O bagaço excedente também serve de alimentação, desde que secado antes do reator.",
+      "params": ["bagaco_excedente", "incluir_bagaco"],
+      "fontes": ["iea_bioenergy_t34"]
+    },
+    {
+      "id": "rota.pirolise_rapida__prod.bio_oleo",
+      "from": "cana.rota.pirolise_rapida",
+      "to": "cana.prod.bio_oleo",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "60-75% da massa",
+      "explicacao": "Condensar os vapores em segundos maximiza o rendimento líquido e transforma biomassa volumosa em combustível transportável.",
+      "params": [],
+      "fontes": ["iea_bioenergy_t34"]
+    },
+    {
+      "id": "rota.pirolise_rapida__prod.biochar",
+      "from": "cana.rota.pirolise_rapida",
+      "to": "cana.prod.biochar",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "10-15% da massa",
+      "explicacao": "Mesmo na pirólise rápida sobra uma fração sólida carbonosa.",
+      "params": [],
+      "fontes": ["iea_bioenergy_t34"]
+    },
+    {
+      "id": "rota.pirolise_rapida__prod.syngas",
+      "from": "cana.rota.pirolise_rapida",
+      "to": "cana.prod.syngas",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "Os gases não condensáveis são reciclados como combustível do próprio reator.",
+      "params": [],
+      "fontes": ["iea_bioenergy_t34"]
+    },
+    {
+      "id": "prod.bio_oleo__dest.industria_terceiros",
+      "from": "cana.prod.bio_oleo",
+      "to": "cana.dest.industria_terceiros",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O bio-óleo ácido e viscoso substitui óleo combustível em caldeira industrial, não em motor.",
+      "params": [],
+      "fontes": ["iea_bioenergy_t34"]
+    },
+    {
+      "id": "prod.bio_oleo__dest.autoconsumo_usina",
+      "from": "cana.prod.bio_oleo",
+      "to": "cana.dest.autoconsumo_usina",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "Queimado na própria caldeira, o bio-óleo é uma forma densa de estocar energia da palha para a entressafra.",
+      "params": [],
+      "fontes": ["iea_bioenergy_t34"]
+    },
+    {
+      "id": "res.torta__rota.pirolise_lenta",
+      "from": "cana.res.torta",
+      "to": "cana.rota.pirolise_lenta",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A torta seca é o substrato que dá biochar mais rico em fósforo e cálcio.",
+      "params": ["torta_disponivel", "torta_gerada"],
+      "fontes": ["embrapa_biochar"]
+    },
+    {
+      "id": "res.palha__rota.pirolise_lenta",
+      "from": "cana.res.palha",
+      "to": "cana.rota.pirolise_lenta",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Pirolisar a palha em vez de deixá-la se decompor no campo estabiliza parte do carbono por séculos.",
+      "params": ["palha_recolhivel"],
+      "fontes": ["embrapa_biochar"]
+    },
+    {
+      "id": "res.bagaco__rota.pirolise_lenta",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.pirolise_lenta",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O bagaço excedente pode ir ao forno de pirólise em vez da fornalha.",
+      "params": ["bagaco_excedente", "incluir_bagaco"],
+      "fontes": ["embrapa_biochar"]
+    },
+    {
+      "id": "rota.pirolise_lenta__prod.biochar",
+      "from": "cana.rota.pirolise_lenta",
+      "to": "cana.prod.biochar",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "30-40% da massa",
+      "explicacao": "O aquecimento lento consolida a estrutura carbonácea em vez de volatilizá-la.",
+      "params": [],
+      "fontes": ["embrapa_biochar", "ipcc2019"]
+    },
+    {
+      "id": "rota.pirolise_lenta__rota.biochar_solo",
+      "from": "cana.rota.pirolise_lenta",
+      "to": "cana.rota.biochar_solo",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A pirólise lenta é a rota térmica que alimenta a aplicação agrícola de biochar.",
+      "params": [],
+      "fontes": ["embrapa_biochar"]
+    },
+    {
+      "id": "rota.pirolise_lenta__prod.syngas",
+      "from": "cana.rota.pirolise_lenta",
+      "to": "cana.prod.syngas",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "Os gases de pirólise alimentam a própria fornalha e tornam o processo autotérmico.",
+      "params": [],
+      "fontes": ["embrapa_biochar"]
+    },
+    {
+      "id": "prod.biochar__rota.biochar_solo",
+      "from": "cana.prod.biochar",
+      "to": "cana.rota.biochar_solo",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O sólido pirolisado só vira remoção contabilizável quando é incorporado ao solo.",
+      "params": [],
+      "fontes": ["ipcc2019"]
+    },
+    {
+      "id": "prod.biochar__dest.credito_carbono_solo",
+      "from": "cana.prod.biochar",
+      "to": "cana.dest.credito_carbono_solo",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Carbono aromático estável por séculos é a base metodológica do crédito de remoção por biochar.",
+      "params": ["preco_carbono"],
+      "fontes": ["puro_earth"]
+    },
+    {
+      "id": "prod.biochar__rota.lignina_carvao_ativado",
+      "from": "cana.prod.biochar",
+      "to": "cana.rota.lignina_carvao_ativado",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O biochar já carbonizado é o precursor que basta ativar para virar adsorvente.",
+      "params": [],
+      "fontes": ["marsh_rodriguez"]
+    },
+    {
+      "id": "res.torta__rota.htl",
+      "from": "cana.res.torta",
+      "to": "cana.rota.htl",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "75% de umidade",
+      "explicacao": "A HTL é a única rota termoquímica que aceita a torta úmida sem secagem prévia.",
+      "params": ["torta_disponivel"],
+      "fontes": ["elliott2015"]
+    },
+    {
+      "id": "prod.vinhaca_concentrada__rota.htl",
+      "from": "cana.prod.vinhaca_concentrada",
+      "to": "cana.rota.htl",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A vinhaça concentrada reúne carga orgânica suficiente para alimentar a liquefação hidrotérmica.",
+      "params": ["vinhaca_disponivel"],
+      "fontes": ["elliott2015"]
+    },
+    {
+      "id": "rota.htl__prod.biocrude",
+      "from": "cana.rota.htl",
+      "to": "cana.prod.biocrude",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "300 °C, 200 bar",
+      "explicacao": "A água próxima do ponto crítico quebra as macromoléculas em uma fase oleosa menos oxigenada que o bio-óleo.",
+      "params": [],
+      "fontes": ["elliott2015"]
+    },
+    {
+      "id": "rota.htl__rota.biodigestao_vinhaca",
+      "from": "cana.rota.htl",
+      "to": "cana.rota.biodigestao_vinhaca",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A fase aquosa da liquefação carrega orgânicos solúveis e pode retornar ao digestor em vez de virar efluente.",
+      "params": [],
+      "fontes": ["elliott2015"]
+    },
+    {
+      "id": "prod.biocrude__dest.industria_terceiros",
+      "from": "cana.prod.biocrude",
+      "to": "cana.dest.industria_terceiros",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Sem hidrotratamento, o biocrude serve como óleo combustível industrial de origem renovável.",
+      "params": [],
+      "fontes": ["elliott2015"]
+    },
+    {
+      "id": "res.torta__rota.htc",
+      "from": "cana.res.torta",
+      "to": "cana.rota.htc",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "180-250 °C",
+      "explicacao": "A torta a 75% de umidade entra direto na carbonização hidrotérmica, sem custo de secagem.",
+      "params": ["torta_disponivel", "torta_gerada"],
+      "fontes": ["funke_ziegler"]
+    },
+    {
+      "id": "prod.vinhaca_concentrada__rota.htc",
+      "from": "cana.prod.vinhaca_concentrada",
+      "to": "cana.rota.htc",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A vinhaça concentrada fornece carbono dissolvido que se incorpora ao hidrochar.",
+      "params": ["vinhaca_disponivel"],
+      "fontes": ["funke_ziegler"]
+    },
+    {
+      "id": "rota.htc__prod.hidrochar",
+      "from": "cana.rota.htc",
+      "to": "cana.prod.hidrochar",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Desidratação e descarboxilação em água pressurizada concentram o carbono num sólido tipo lignita.",
+      "params": [],
+      "fontes": ["funke_ziegler"]
+    },
+    {
+      "id": "rota.hidrochar__prod.hidrochar",
+      "from": "cana.rota.hidrochar",
+      "to": "cana.prod.hidrochar",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A rota entrega o sólido escuro que serve como combustível ou como condicionador de solo.",
+      "params": [],
+      "fontes": ["funke_ziegler"]
+    },
+    {
+      "id": "prod.hidrochar__dest.solo_canavial",
+      "from": "cana.prod.hidrochar",
+      "to": "cana.dest.solo_canavial",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Aplicado ao solo, o hidrochar devolve carbono mais estável que a matéria-prima úmida de origem.",
+      "params": [],
+      "fontes": ["funke_ziegler"]
+    },
+    {
+      "id": "prod.hidrochar__dest.autoconsumo_usina",
+      "from": "cana.prod.hidrochar",
+      "to": "cana.dest.autoconsumo_usina",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "Com poder calorífico próximo ao da lignita, o hidrochar pode ser queimado na própria caldeira.",
+      "params": [],
+      "fontes": ["funke_ziegler"]
+    },
+    {
+      "id": "res.bagaco__rota.torrefacao",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.torrefacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O bagaço torrado ganha densidade energética e deixa de reabsorver água no pátio.",
+      "params": ["bagaco_excedente", "incluir_bagaco"],
+      "fontes": ["bergman2005"]
+    },
+    {
+      "id": "res.palha__rota.torrefacao",
+      "from": "cana.res.palha",
+      "to": "cana.rota.torrefacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Torrar a palha resolve a moagem e a estocagem que o fardo úmido inviabiliza.",
+      "params": ["palha_recolhivel", "perda_estocagem_palha"],
+      "fontes": ["bergman2005"]
+    },
+    {
+      "id": "rota.torrefacao__prod.biomassa_torrada",
+      "from": "cana.rota.torrefacao",
+      "to": "cana.prod.biomassa_torrada",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "70% da massa, 90% da energia",
+      "explicacao": "A decomposição da hemicelulose entre 250 e 300 °C deixa um sólido moível e hidrofóbico.",
+      "params": [],
+      "fontes": ["bergman2005"]
+    },
+    {
+      "id": "prod.biomassa_torrada__rota.peletizacao",
+      "from": "cana.prod.biomassa_torrada",
+      "to": "cana.rota.peletizacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Torrar antes de peletizar reduz o consumo da matriz e dá um pellet estável à chuva.",
+      "params": [],
+      "fontes": ["bergman2005"]
+    },
+    {
+      "id": "prod.biomassa_torrada__dest.industria_terceiros",
+      "from": "cana.prod.biomassa_torrada",
+      "to": "cana.dest.industria_terceiros",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A biomassa torrada é moída e queimada em caldeira projetada para carvão mineral.",
+      "params": [],
+      "fontes": ["bergman2005"]
+    },
+    {
+      "id": "prod.biomassa_torrada__rota.gaseificacao",
+      "from": "cana.prod.biomassa_torrada",
+      "to": "cana.rota.gaseificacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Alimentação seca e uniforme é o que o gaseificador pressurizado exige e o fardo bruto não entrega.",
+      "params": [],
+      "fontes": ["iea_bioenergy_t33"]
+    },
+    {
+      "id": "res.palha__rota.peletizacao",
+      "from": "cana.res.palha",
+      "to": "cana.rota.peletizacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "densidade 6x maior",
+      "explicacao": "O fardo de palha ocupa volume demais para viajar; densificar é o que cria raio econômico.",
+      "params": ["palha_recolhivel", "perda_estocagem_palha"],
+      "fontes": ["atlas2020_p61"]
+    },
+    {
+      "id": "rota.peletizacao__prod.pellets",
+      "from": "cana.rota.peletizacao",
+      "to": "cana.prod.pellets",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A lignina plastificada pelo atrito aglutina o cilindro sem aditivo.",
+      "params": [],
+      "fontes": ["atlas2020_p61"]
+    },
+    {
+      "id": "prod.pellets__dest.industria_terceiros",
+      "from": "cana.prod.pellets",
+      "to": "cana.dest.industria_terceiros",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O pellet padronizado permite alimentação automática em caldeira de terceiros, o que o fardo não permite.",
+      "params": [],
+      "fontes": ["atlas2020_p61"]
+    },
+    {
+      "id": "prod.pellets__rota.gaseificacao",
+      "from": "cana.prod.pellets",
+      "to": "cana.rota.gaseificacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O pellet entrega ao gaseificador granulometria e umidade controladas.",
+      "params": [],
+      "fontes": ["iea_bioenergy_t33"]
+    },
+    {
+      "id": "res.bagaco__rota.briquetagem",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.briquetagem",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "bagaço a ~12% de umidade",
+      "explicacao": "Pequenas briquetadoras do interior paulista compram bagaço excedente de usina.",
+      "params": ["bagaco_excedente", "incluir_bagaco"],
+      "fontes": ["atlas2020_p61"]
+    },
+    {
+      "id": "res.palha__rota.briquetagem",
+      "from": "cana.res.palha",
+      "to": "cana.rota.briquetagem",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A palha moída pode compor o briquete junto com o bagaço, elevando o poder calorífico do bloco.",
+      "params": ["palha_recolhivel"],
+      "fontes": ["atlas2020_p61"]
+    },
+    {
+      "id": "rota.briquetagem__prod.briquetes",
+      "from": "cana.rota.briquetagem",
+      "to": "cana.prod.briquetes",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A compressão a alta pressão amolece a lignina e mantém o bloco coeso sem aglutinante.",
+      "params": [],
+      "fontes": ["atlas2020_p61"]
+    },
+    {
+      "id": "prod.briquetes__dest.industria_terceiros",
+      "from": "cana.prod.briquetes",
+      "to": "cana.dest.industria_terceiros",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "Padaria, cerâmica e frigorífico trocam lenha e óleo pelo briquete de bagaço.",
+      "params": [],
+      "fontes": ["atlas2020_p61"]
+    },
+    {
+      "id": "prod.lignina__rota.lignina_combustao",
+      "from": "cana.prod.lignina",
+      "to": "cana.rota.lignina_combustao",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "23-27 MJ/kg",
+      "explicacao": "Queimar a lignina residual é o que as plantas 2G paulistas fazem hoje, e a referência que toda rota de maior valor precisa bater.",
+      "params": [],
+      "fontes": ["raizen2G"]
+    },
+    {
+      "id": "rota.lignina_combustao__dest.energia_2g",
+      "from": "cana.rota.lignina_combustao",
+      "to": "cana.dest.energia_2g",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "A queima cobre a demanda de vapor da própria planta de etanol celulósico.",
+      "params": [],
+      "fontes": ["raizen2G"]
+    },
+    {
+      "id": "rota.lignina_combustao__prod.eletricidade",
+      "from": "cana.rota.lignina_combustao",
+      "to": "cana.prod.eletricidade",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "O excedente térmico da lignina vira eletricidade exportada pelo mesmo turbogerador da usina.",
+      "params": ["eficiencia_eletrica", "preco_eletricidade"],
+      "fontes": ["raizen2G"]
+    },
+    {
+      "id": "rota.lignina_combustao__copr.cinzas",
+      "from": "cana.rota.lignina_combustao",
+      "to": "cana.copr.cinzas",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A torta de lignina carrega inorgânicos do pré-tratamento que terminam na cinza.",
+      "params": [],
+      "fontes": ["raizen2G"]
+    },
+    {
+      "id": "prod.lignina__rota.lignina_carvao_ativado",
+      "from": "cana.prod.lignina",
+      "to": "cana.rota.lignina_carvao_ativado",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A lignina é precursor clássico de carbono poroso, com área superficial acima de 1000 m²/g.",
+      "params": [],
+      "fontes": ["marsh_rodriguez"]
+    },
+    {
+      "id": "res.bagaco__rota.lignina_carvao_ativado",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.lignina_carvao_ativado",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O bagaço in natura também serve de precursor, sem passar pela planta 2G.",
+      "params": ["bagaco_excedente", "incluir_bagaco"],
+      "fontes": ["marsh_rodriguez"]
+    },
+    {
+      "id": "prod.lignina__rota.gaseificacao",
+      "from": "cana.prod.lignina",
+      "to": "cana.rota.gaseificacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Gaseificar a lignina em vez de queimá-la abre a porta para combustível líquido e química.",
+      "params": [],
+      "fontes": ["iea_bioenergy_t33"]
+    },
+    {
+      "id": "rota.lignina_carvao_ativado__prod.carvao_ativado",
+      "from": "cana.rota.lignina_carvao_ativado",
+      "to": "cana.prod.carvao_ativado",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "acima de 1000 m²/g",
+      "explicacao": "A ativação com vapor ou KOH abre a rede de microporos que dá a capacidade de adsorção.",
+      "params": [],
+      "fontes": ["marsh_rodriguez"]
+    },
+    {
+      "id": "prod.carvao_ativado__proc.refino",
+      "from": "cana.prod.carvao_ativado",
+      "to": "cana.proc.refino",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A própria refinaria de açúcar descolora o licor com carvão ativado, hoje comprado de fora.",
+      "params": [],
+      "fontes": ["rein2017"]
+    },
+    {
+      "id": "prod.carvao_ativado__rota.dessulfurizacao_quimica",
+      "from": "cana.prod.carvao_ativado",
+      "to": "cana.rota.dessulfurizacao_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O carvão ativado é o meio que pole o H2S residual do biogás até poucas ppm.",
+      "params": [],
+      "fontes": ["fapesp_biogas"]
+    },
+    {
+      "id": "prod.carvao_ativado__dest.industria_terceiros",
+      "from": "cana.prod.carvao_ativado",
+      "to": "cana.dest.industria_terceiros",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Tratamento de água, filtros de ar e recuperação de solvente são o mercado corrente do adsorvente.",
+      "params": [],
+      "fontes": ["marsh_rodriguez"]
+    },
+    {
+      "id": "res.gases_caldeira__rota.beccs",
+      "from": "cana.res.gases_caldeira",
+      "to": "cana.rota.beccs",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "CO2 diluído a 12-14%",
+      "explicacao": "O CO2 da chaminé é biogênico, mas exige captura por aminas antes de qualquer armazenamento.",
+      "params": ["preco_carbono"],
+      "fontes": ["ipcc2019"]
+    },
+    {
+      "id": "res.gases_caldeira__dest.inventario_ghg",
+      "from": "cana.res.gases_caldeira",
+      "to": "cana.dest.inventario_ghg",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "A combustão de biomassa é reportada como emissão biogênica no inventário da usina.",
+      "params": [],
+      "fontes": ["ghg_protocol_brasil"]
+    },
+    {
+      "id": "res.gases_caldeira__rota.co2_microalgas",
+      "from": "cana.res.gases_caldeira",
+      "to": "cana.rota.co2_microalgas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O gás de chaminé pode alimentar o cultivo de algas, ainda que mais diluído e mais sujo que o CO2 da dorna.",
+      "params": [],
+      "fontes": ["fapesp_biogas"]
+    },
+    {
+      "id": "proc.caldeira__rota.turbina_contrapressao",
+      "from": "cana.proc.caldeira",
+      "to": "cana.rota.turbina_contrapressao",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "O vapor de alta pressão gerado na caldeira é o que aciona o turbogerador de contrapressão.",
+      "params": [],
+      "fontes": ["unica2024"]
+    },
+    {
+      "id": "proc.caldeira__rota.turbina_condensacao",
+      "from": "cana.proc.caldeira",
+      "to": "cana.rota.turbina_condensacao",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "O vapor excedente à demanda térmica segue para a turbina de condensação e vira energia exportada.",
+      "params": ["bagaco_excedente"],
+      "fontes": ["unica2024"]
+    },
+    {
+      "id": "proc.caldeira__rota.caldeira_alta_pressao",
+      "from": "cana.proc.caldeira",
+      "to": "cana.rota.caldeira_alta_pressao",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "O retrofit de pressão é a escolha de projeto que define se a cogeração exporta ou apenas se autossustenta.",
+      "params": [],
+      "fontes": ["unica2024"]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.secagem_graos",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.secagem_graos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Queimar o biogás direto no secador dispensa upgrading e substitui lenha, GLP ou óleo.",
+      "params": ["fracao_ch4_biogas", "pci_ch4"],
+      "fontes": ["fapesp_biogas"]
+    },
+    {
+      "id": "rota.secagem_graos__dest.industria_terceiros",
+      "from": "cana.rota.secagem_graos",
+      "to": "cana.dest.industria_terceiros",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "O calor entregue ao secador de terceiros é a forma mais barata de monetizar biogás sem rede de gás.",
+      "params": [],
+      "fontes": ["fapesp_biogas"]
+    },
+    {
+      "id": "prod.biometano__rota.reforma_h2",
+      "from": "cana.prod.biometano",
+      "to": "cana.rota.reforma_h2",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A reforma a vapor quebra o metano em hidrogênio e CO2 biogênico passível de captura.",
+      "params": ["pci_ch4"],
+      "fontes": ["iea_hydrogen"]
+    },
+    {
+      "id": "rota.reforma_h2__prod.hidrogenio",
+      "from": "cana.rota.reforma_h2",
+      "to": "cana.prod.hidrogenio",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O H2 resultante carrega carbono biogênico e atende refino, química e mobilidade pesada.",
+      "params": [],
+      "fontes": ["iea_hydrogen"]
+    },
+    {
+      "id": "rota.reforma_h2__dest.beccs_ccs",
+      "from": "cana.rota.reforma_h2",
+      "to": "cana.dest.beccs_ccs",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "O CO2 concentrado da reforma é capturável e transforma o hidrogênio em vetor de emissão negativa.",
+      "params": ["preco_carbono"],
+      "fontes": ["ipcc2019"]
+    }
+  ],
+  "faltando": [
+    "Nó de rota para hidrotratamento e hidrodesoxigenação de bio-óleo e biocrude — sem ele, cana.prod.bio_oleo e cana.prod.biocrude não chegam a cana.prod.nafta_renovavel nem a cana.prod.saf.",
+    "Nó de rota para reação de deslocamento (water-gas shift) e separação de H2 a partir do gás de síntese — cana.prod.syngas não tem caminho até cana.prod.hidrogenio.",
+    "Nó de rota para metanol e metanol-to-jet a partir de syngas: hoje a única saída de cana.prod.syngas para líquido é Fischer-Tropsch.",
+    "Nó de rota para co-combustão de biomassa torrada em termelétrica a carvão — cana.prod.biomassa_torrada só encontra cana.dest.industria_terceiros como destino genérico.",
+    "Nó de destino para mercado de pellets e briquetes de exportação; hoje tudo cai em cana.dest.industria_terceiros.",
+    "Nó de rota para captura pós-combustão no gás de chaminé (aminas em gás diluído). A ligação cana.res.gases_caldeira → cana.rota.beccs pula essa etapa, que é a mais cara da cadeia.",
+    "Nó de rota para secagem de bagaço e palha com calor residual — pré-condição de pirólise, torrefação e peletização, hoje implícita.",
+    "Duplicidades no grafo que forçaram escolha de destino: cana.rota.htc e cana.rota.hidrochar descrevem a mesma tecnologia; cana.prod.biochar e cana.prod.biochar_agricola idem; cana.copr.vapor e cana.prod.vapor_processo idem; cana.dest.autoconsumo e cana.dest.autoconsumo_usina idem."
+  ],
+  "notas": "Família térmica e termoquímica: caldeiras, ciclos a vapor, cogeração, combustão direta, gaseificação, BIGCC, pirólise, HTL, HTC, torrefação, densificação, Fischer-Tropsch, biochar térmico, bio-óleo, carvão ativado e cinzas. Só marquei 'real' o que opera comercialmente em São Paulo hoje: caldeira 21 bar em unidades legadas, caldeira de alta pressão com turbinas de contrapressão e condensação, combustão direta de palha em rotina restrita, briquetagem de bagaço no interior paulista, queima da lignina nas plantas 2G e a venda da bioeletricidade resultante. Gaseificação, BIGCC, pirólise rápida e lenta, HTL, HTC, torrefação, peletização de palha, Fischer-Tropsch e carvão ativado de lignina são todos 'potencial' — nenhum opera com resíduo de cana em SP. O nó cana.prod.eletricidade estava ilhado apesar de ser o produto que sustenta os 21.218 GWh/ano do setor; liguei-o à rede, ao ACL, ao leilão, ao I-REC e ao autoconsumo. cana.dest.industria_terceiros também estava sem entrada e agora recebe briquete, pellet, biomassa torrada, syngas, bio-óleo, biocrude e carvão ativado. Mantive cana.proc.caldeira como o processo de anel 1 e as caldeiras específicas como escolhas de projeto de anel 3, ligando o processo às rotas de turbina para que a cadeia não dependa de qual dos dois o usuário aloque primeiro. Não usei o parâmetro incluir_bagaco como filtro: ele aparece nas arestas que consomem bagaço para que o modelo saiba onde a exclusão padrão do bagaço deve morder."
+}

@@ -1,0 +1,2005 @@
+{
+  "edges": [
+    {
+      "id": "prod.eletricidade__dest.rede_eletrica",
+      "from": "cana.prod.eletricidade",
+      "to": "cana.dest.rede_eletrica",
+      "kind": "energia",
+      "estado": "real",
+      "rotulo": "21.218 GWh/ano em 2023",
+      "explicacao": "O excedente elétrico da cogeração é exportado ao sistema e é a receita que paga o retrofit da caldeira.",
+      "params": [
+        "eficiencia_eletrica",
+        "preco_eletricidade"
+      ],
+      "fontes": [
+        "unica2024",
+        "epe_ben2024"
+      ]
+    },
+    {
+      "id": "prod.eletricidade__dest.autoconsumo_usina",
+      "from": "cana.prod.eletricidade",
+      "to": "cana.dest.autoconsumo_usina",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "Antes de exportar, a eletricidade gerada aciona moenda, bombas, centrífugas e iluminação da própria usina.",
+      "params": [
+        "eficiencia_eletrica"
+      ],
+      "fontes": [
+        "unica2024"
+      ]
+    },
+    {
+      "id": "prod.eletricidade__dest.autoconsumo",
+      "from": "cana.prod.eletricidade",
+      "to": "cana.dest.autoconsumo",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "A demanda interna da usina é o primeiro credor da bioeletricidade e define quanto sobra para venda.",
+      "params": [
+        "eficiencia_eletrica"
+      ],
+      "fontes": [
+        "unica2024"
+      ]
+    },
+    {
+      "id": "prod.eletricidade__dest.irec",
+      "from": "cana.prod.eletricidade",
+      "to": "cana.dest.irec",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "O atributo renovável do MWh de bagaço é destacado e vendido como certificado a quem precisa zerar o escopo 2.",
+      "params": [],
+      "fontes": [
+        "irec_brasil"
+      ]
+    },
+    {
+      "id": "dest.rede_eletrica__dest.leilao_energia",
+      "from": "cana.dest.rede_eletrica",
+      "to": "cana.dest.leilao_energia",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "Parte da bioeletricidade exportada é contratada em leilão regulado, com contrato de 15 a 20 anos com as distribuidoras.",
+      "params": [
+        "preco_eletricidade"
+      ],
+      "fontes": [
+        "aneel_leiloes",
+        "epe_ben2024"
+      ]
+    },
+    {
+      "id": "dest.rede_eletrica__dest.acl",
+      "from": "cana.dest.rede_eletrica",
+      "to": "cana.dest.acl",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "A outra via de venda é o contrato bilateral no ambiente livre, com preço negociado direto com consumidor ou comercializadora.",
+      "params": [
+        "preco_eletricidade"
+      ],
+      "fontes": [
+        "ccee2024"
+      ]
+    },
+    {
+      "id": "dest.leilao_energia__dest.financiamento_climatico",
+      "from": "cana.dest.leilao_energia",
+      "to": "cana.dest.financiamento_climatico",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "O contrato longo do ambiente regulado é a garantia de receita que sustenta a captação de dívida do projeto.",
+      "params": [],
+      "fontes": [
+        "bndes_bioenergia"
+      ]
+    },
+    {
+      "id": "dest.acl__dest.mercado_carbono",
+      "from": "cana.dest.acl",
+      "to": "cana.dest.mercado_carbono",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "A venda livre permite empacotar energia e atributo ambiental no mesmo contrato, somando receita de carbono ao MWh.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "ccee2024"
+      ]
+    },
+    {
+      "id": "prod.vapor_processo__dest.autoconsumo_usina",
+      "from": "cana.prod.vapor_processo",
+      "to": "cana.dest.autoconsumo_usina",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "Todo o vapor de escape volta ao processo: sem ele não há evaporação, cozimento nem destilação.",
+      "params": [],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "prod.calor_util__dest.autoconsumo_usina",
+      "from": "cana.prod.calor_util",
+      "to": "cana.dest.autoconsumo_usina",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "O calor recuperado do motogerador aquece digestor, higienização e secagem dentro da própria planta.",
+      "params": [],
+      "fontes": [
+        "fnr2016"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__dest.autoconsumo_usina",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.dest.autoconsumo_usina",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "Sem upgrading o biogás só vale perto de casa: alimenta caldeira, secador ou motor da própria usina.",
+      "params": [
+        "fracao_ch4_biogas",
+        "pci_ch4"
+      ],
+      "fontes": [
+        "fnr2016"
+      ]
+    },
+    {
+      "id": "prod.lignina__dest.energia_2g",
+      "from": "cana.prod.lignina",
+      "to": "cana.dest.energia_2g",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "A lignina que sobra da hidrólise é queimada na própria planta 2G e fecha o balanço térmico da unidade.",
+      "params": [],
+      "fontes": [
+        "raizen2023"
+      ]
+    },
+    {
+      "id": "rota.lignina_combustao__dest.energia_2g",
+      "from": "cana.rota.lignina_combustao",
+      "to": "cana.dest.energia_2g",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "A queima da lignina entrega vapor e eletricidade à unidade de segunda geração antes de qualquer exportação.",
+      "params": [],
+      "fontes": [
+        "raizen2023"
+      ]
+    },
+    {
+      "id": "dest.energia_2g__dest.autoconsumo_usina",
+      "from": "cana.dest.energia_2g",
+      "to": "cana.dest.autoconsumo_usina",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "O vapor gerado pela lignina supre a demanda térmica da planta 2G e reduz a compra de energia externa.",
+      "params": [],
+      "fontes": [
+        "raizen2023"
+      ]
+    },
+    {
+      "id": "dest.energia_2g__dest.rede_eletrica",
+      "from": "cana.dest.energia_2g",
+      "to": "cana.dest.rede_eletrica",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "O que sobra do balanço térmico da planta 2G é exportado como bioeletricidade.",
+      "params": [
+        "preco_eletricidade"
+      ],
+      "fontes": [
+        "raizen2023"
+      ]
+    },
+    {
+      "id": "prod.etanol_2g__dest.renovabio_neea",
+      "from": "cana.prod.etanol_2g",
+      "to": "cana.dest.renovabio_neea",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "O etanol de fibra tem intensidade de carbono baixa porque não exige terra nova, e por isso gera mais CBIO por metro cúbico.",
+      "params": [],
+      "fontes": [
+        "renovabio_lei13576",
+        "raizen2023"
+      ]
+    },
+    {
+      "id": "prod.etanol_2g__dest.mistura_gasolina",
+      "from": "cana.prod.etanol_2g",
+      "to": "cana.dest.mistura_gasolina",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O etanol 2G é quimicamente idêntico ao de primeira geração e entra no mesmo tanque de anidro para mistura.",
+      "params": [],
+      "fontes": [
+        "cnpe_res_mistura"
+      ]
+    },
+    {
+      "id": "prod.etanol_2g__dest.certificacao_sustentabilidade",
+      "from": "cana.prod.etanol_2g",
+      "to": "cana.dest.certificacao_sustentabilidade",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "A baixa pegada do 2G é o que abre os mercados certificados por ISCC e Bonsucro.",
+      "params": [],
+      "fontes": [
+        "iscc_eu",
+        "bonsucro"
+      ]
+    },
+    {
+      "id": "prod.etanol_hidratado__dest.certificacao_sustentabilidade",
+      "from": "cana.prod.etanol_hidratado",
+      "to": "cana.dest.certificacao_sustentabilidade",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "O comprador externo exige auditoria socioambiental e número de emissão por litro antes de fechar contrato.",
+      "params": [],
+      "fontes": [
+        "bonsucro",
+        "iscc_eu"
+      ]
+    },
+    {
+      "id": "prod.biometano__dest.anp_biometano",
+      "from": "cana.prod.biometano",
+      "to": "cana.dest.anp_biometano",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "O gás só vira produto vendável depois de certificado contra a especificação da ANP.",
+      "params": [
+        "rendimento_upgrading"
+      ],
+      "obrigatorio": true,
+      "baseLegal": "Resolução ANP 886/2022",
+      "fontes": [
+        "anp_res886"
+      ]
+    },
+    {
+      "id": "rota.condicionamento_anp__dest.anp_biometano",
+      "from": "cana.rota.condicionamento_anp",
+      "to": "cana.dest.anp_biometano",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Odorização, medição fiscal e controle de O2 e ponto de orvalho são o que a autorização da ANP verifica.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Resolução ANP 886/2022",
+      "fontes": [
+        "anp_res886"
+      ]
+    },
+    {
+      "id": "dest.anp_biometano__dest.rede_gas",
+      "from": "cana.dest.anp_biometano",
+      "to": "cana.dest.rede_gas",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "Sem certificado de qualidade não há ponto de entrega: a distribuidora só recebe gás na especificação.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Resolução ANP 886/2022",
+      "fontes": [
+        "anp_res886",
+        "arsesp"
+      ]
+    },
+    {
+      "id": "prod.biometano__dest.rede_gas",
+      "from": "cana.prod.biometano",
+      "to": "cana.dest.rede_gas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A malha da concessionária é o destino de maior capacidade de absorção do biometano paulista.",
+      "params": [
+        "rendimento_upgrading",
+        "preco_biometano"
+      ],
+      "fontes": [
+        "arsesp",
+        "comgas2023"
+      ]
+    },
+    {
+      "id": "rota.injecao_rede__dest.rede_gas",
+      "from": "cana.rota.injecao_rede",
+      "to": "cana.dest.rede_gas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A injeção entrega o gás na malha de distribuição sob regra da ANP e da Arsesp, sem depender de cliente único.",
+      "params": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "arsesp"
+      ]
+    },
+    {
+      "id": "rota.injecao_rede__dest.injecao_rede_gas",
+      "from": "cana.rota.injecao_rede",
+      "to": "cana.dest.injecao_rede_gas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O contrato com a distribuidora define se ela compra o gás ou apenas o movimenta até o consumidor.",
+      "params": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "arsesp",
+        "comgas2023"
+      ]
+    },
+    {
+      "id": "prod.biometano__dest.injecao_rede_gas",
+      "from": "cana.prod.biometano",
+      "to": "cana.dest.injecao_rede_gas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Atendida a especificação, o biometano é entregue no ponto de conexão da distribuidora paulista.",
+      "params": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "comgas2023"
+      ]
+    },
+    {
+      "id": "dest.rede_gas__dest.mercado_livre_gas",
+      "from": "cana.dest.rede_gas",
+      "to": "cana.dest.mercado_livre_gas",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Usando a rede apenas como transporte, o produtor vende direto ao consumidor livre e captura o preço industrial.",
+      "params": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "arsesp",
+        "lei_gas14134"
+      ]
+    },
+    {
+      "id": "dest.rede_gas__dest.tributacao_biometano",
+      "from": "cana.dest.rede_gas",
+      "to": "cana.dest.tributacao_biometano",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "O ICMS estadual e o regime de PIS/Cofins incidem sobre a operação e mudam o preço final mais que a tecnologia.",
+      "params": [],
+      "fontes": [
+        "confaz_convenio",
+        "reforma_tributaria"
+      ]
+    },
+    {
+      "id": "dest.mercado_livre_gas__dest.tributacao_biometano",
+      "from": "cana.dest.mercado_livre_gas",
+      "to": "cana.dest.tributacao_biometano",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "Na venda direta ao consumidor livre o tratamento tributário estadual decide a margem do produtor.",
+      "params": [],
+      "fontes": [
+        "confaz_convenio"
+      ]
+    },
+    {
+      "id": "rota.gnv_frota__dest.frota_propria",
+      "from": "cana.rota.gnv_frota",
+      "to": "cana.dest.frota_propria",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O biometano comprimido substitui o diesel de transbordo, caminhão de cana e transporte de insumo da própria usina.",
+      "params": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "cibiogas2023"
+      ]
+    },
+    {
+      "id": "prod.biometano__dest.frota_propria",
+      "from": "cana.prod.biometano",
+      "to": "cana.dest.frota_propria",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A frota canavieira é o mercado cativo de maior valor por metro cúbico, porque o preço de referência é o do diesel.",
+      "params": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "cibiogas2023"
+      ]
+    },
+    {
+      "id": "rota.substituicao_oleo__dest.industria_terceiros",
+      "from": "cana.rota.substituicao_oleo",
+      "to": "cana.dest.industria_terceiros",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Cerâmica, vidro, alimento e química do interior paulista trocam óleo combustível ou GLP por biometano sem mudar o forno.",
+      "params": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "cibiogas2023"
+      ]
+    },
+    {
+      "id": "prod.biometano__dest.industria_terceiros",
+      "from": "cana.prod.biometano",
+      "to": "cana.dest.industria_terceiros",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A venda a indústria vizinha dá escala ao gás sem depender de rede nem de frota.",
+      "params": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "cibiogas2023"
+      ]
+    },
+    {
+      "id": "prod.bio_gnl__dest.industria_terceiros",
+      "from": "cana.prod.bio_gnl",
+      "to": "cana.dest.industria_terceiros",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Liquefeito, o gás alcança cliente industrial fora da malha de distribuição.",
+      "params": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "cibiogas2023"
+      ]
+    },
+    {
+      "id": "prod.bio_gnl__dest.frota_propria",
+      "from": "cana.prod.bio_gnl",
+      "to": "cana.dest.frota_propria",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A densidade energética do líquido é o que viabiliza caminhão pesado de longo curso na operação da usina.",
+      "params": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "cibiogas2023"
+      ]
+    },
+    {
+      "id": "rota.bio_gnl__dest.industria_terceiros",
+      "from": "cana.rota.bio_gnl",
+      "to": "cana.dest.industria_terceiros",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A liquefação existe justamente para levar o gás a centenas de quilômetros por rodovia, onde não há gasoduto.",
+      "params": [],
+      "fontes": [
+        "cibiogas2023"
+      ]
+    },
+    {
+      "id": "prod.biometano__dest.renovabio_neea",
+      "from": "cana.prod.biometano",
+      "to": "cana.dest.renovabio_neea",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Certificado no RenovaBio, cada metro cúbico vendido gera CBIO na proporção da nota de eficiência da planta.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "renovabio_lei13576",
+        "anp_renovacalc"
+      ]
+    },
+    {
+      "id": "prod.biometano__dest.combustivel_futuro",
+      "from": "cana.prod.biometano",
+      "to": "cana.dest.combustivel_futuro",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "O mandato de biometano na oferta de gás natural transforma oferta voluntária em demanda obrigatória.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Lei 14.993/2024",
+      "fontes": [
+        "lei14993"
+      ]
+    },
+    {
+      "id": "dest.combustivel_futuro__dest.rede_gas",
+      "from": "cana.dest.combustivel_futuro",
+      "to": "cana.dest.rede_gas",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "O percentual obrigatório fixado pelo CNPE cria comprador cativo para o gás injetado na malha.",
+      "params": [],
+      "fontes": [
+        "lei14993"
+      ]
+    },
+    {
+      "id": "prod.saf__dest.mercado_aviacao",
+      "from": "cana.prod.saf",
+      "to": "cana.dest.mercado_aviacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "mistura até 50%",
+      "explicacao": "O bioquerosene de etanol de cana é hoje a única alternativa de descarbonização da aviação de longo curso.",
+      "params": [],
+      "fontes": [
+        "astm_d7566",
+        "lei14993"
+      ]
+    },
+    {
+      "id": "prod.saf__dest.combustivel_futuro",
+      "from": "cana.prod.saf",
+      "to": "cana.dest.combustivel_futuro",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "A meta progressiva de redução de emissão do querosene doméstico é o que dá demanda ao SAF a partir de 2027.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Lei 14.993/2024",
+      "fontes": [
+        "lei14993"
+      ]
+    },
+    {
+      "id": "dest.combustivel_futuro__dest.mercado_aviacao",
+      "from": "cana.dest.combustivel_futuro",
+      "to": "cana.dest.mercado_aviacao",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "A lei impõe às companhias aéreas redução crescente de emissões nos voos domésticos.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Lei 14.993/2024",
+      "fontes": [
+        "lei14993"
+      ]
+    },
+    {
+      "id": "dest.mercado_aviacao__dest.mercado_carbono",
+      "from": "cana.dest.mercado_aviacao",
+      "to": "cana.dest.mercado_carbono",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "O que a companhia não reduz com combustível ela compensa, e o CORSIA transforma isso em demanda por crédito.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "corsia_icao"
+      ]
+    },
+    {
+      "id": "prod.saf__dest.renovabio_neea",
+      "from": "cana.prod.saf",
+      "to": "cana.dest.renovabio_neea",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "O SAF de etanol de cana também é elegível à certificação de intensidade de carbono e à emissão de CBIO.",
+      "params": [],
+      "fontes": [
+        "renovabio_lei13576"
+      ]
+    },
+    {
+      "id": "dest.renovabio__dest.cbio",
+      "from": "cana.dest.renovabio",
+      "to": "cana.dest.cbio",
+      "kind": "regulatorio",
+      "estado": "real",
+      "rotulo": "1 CBIO = 1 tCO2e",
+      "explicacao": "A nota de eficiência da planta e a nota fiscal de venda do biocombustível é que autorizam a emissão do título.",
+      "params": [
+        "preco_carbono"
+      ],
+      "obrigatorio": true,
+      "baseLegal": "Lei 13.576/2017",
+      "fontes": [
+        "renovabio_lei13576"
+      ]
+    },
+    {
+      "id": "dest.renovabio__dest.mercado_carbono",
+      "from": "cana.dest.renovabio",
+      "to": "cana.dest.mercado_carbono",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "O CBIO é receita que não carrega massa: entra no caixa da usina sem litro adicional produzido.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "renovabio_lei13576",
+        "b3_cbio"
+      ]
+    },
+    {
+      "id": "dest.cbio__dest.mercado_carbono",
+      "from": "cana.dest.cbio",
+      "to": "cana.dest.mercado_carbono",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "O título é escriturado e negociado em bolsa, e quem compra são as distribuidoras de combustível fóssil com meta anual.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "b3_cbio",
+        "anp_metas_cbio"
+      ]
+    },
+    {
+      "id": "dest.sbce__dest.mercado_carbono",
+      "from": "cana.dest.sbce",
+      "to": "cana.dest.mercado_carbono",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "O mercado regulado de cotas passa a dar preço de referência ao carbono da indústria da usina.",
+      "params": [
+        "preco_carbono"
+      ],
+      "obrigatorio": true,
+      "baseLegal": "Lei 15.042/2024",
+      "fontes": [
+        "lei15042"
+      ]
+    },
+    {
+      "id": "dest.mercado_carbono__dest.financiamento_climatico",
+      "from": "cana.dest.mercado_carbono",
+      "to": "cana.dest.financiamento_climatico",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Receita de carbono contratada antecipadamente é o que permite estruturar dívida para o CAPEX do biodigestor.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "bndes_bioenergia"
+      ]
+    },
+    {
+      "id": "dest.mercado_voluntario_carbono__dest.financiamento_climatico",
+      "from": "cana.dest.mercado_voluntario_carbono",
+      "to": "cana.dest.financiamento_climatico",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Contrato de compra futura de crédito voluntário funciona como garantia de receita para o financiador.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "vcs_metodologias"
+      ]
+    },
+    {
+      "id": "dest.inventario_ghg__dest.mercado_voluntario_carbono",
+      "from": "cana.dest.inventario_ghg",
+      "to": "cana.dest.mercado_voluntario_carbono",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "Sem linha de base inventariada não há adicionalidade demonstrável nem crédito verificável.",
+      "params": [],
+      "fontes": [
+        "ghg_protocol",
+        "vcs_metodologias"
+      ]
+    },
+    {
+      "id": "dest.pegada_carbono_produto__dest.exportacao_acucar",
+      "from": "cana.dest.pegada_carbono_produto",
+      "to": "cana.dest.exportacao_acucar",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "O comprador internacional exige número de emissão por tonelada antes de fechar contrato.",
+      "params": [],
+      "fontes": [
+        "iso14067",
+        "iscc_eu"
+      ]
+    },
+    {
+      "id": "dest.certificacao_sustentabilidade__dest.exportacao_acucar",
+      "from": "cana.dest.certificacao_sustentabilidade",
+      "to": "cana.dest.exportacao_acucar",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "Bonsucro e ISCC são a condição prática de acesso ao comprador europeu do açúcar paulista.",
+      "params": [],
+      "fontes": [
+        "bonsucro",
+        "iscc_eu"
+      ]
+    },
+    {
+      "id": "prod.co2_capturado__dest.armazenamento_geologico",
+      "from": "cana.prod.co2_capturado",
+      "to": "cana.dest.armazenamento_geologico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A corrente concentrada de CO2 do upgrading, hoje ventilada, é candidata direta à injeção em reservatório.",
+      "params": [],
+      "fontes": [
+        "lei14993_ccs",
+        "ipcc_ccs"
+      ]
+    },
+    {
+      "id": "copr.co2__dest.armazenamento_geologico",
+      "from": "cana.copr.co2",
+      "to": "cana.dest.armazenamento_geologico",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "0,77 kg CO2/L etanol",
+      "explicacao": "O CO2 da dorna sai quase puro, o que faz dele a fonte de captura mais barata do setor.",
+      "params": [],
+      "fontes": [
+        "ipcc_ccs",
+        "cepea_co2"
+      ]
+    },
+    {
+      "id": "rota.beccs__dest.armazenamento_geologico",
+      "from": "cana.rota.beccs",
+      "to": "cana.dest.armazenamento_geologico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Injetar o carbono biogênico em rocha porosa é o que converte emissão evitada em remoção permanente.",
+      "params": [],
+      "fontes": [
+        "ipcc_ccs",
+        "lei_ccs2024"
+      ]
+    },
+    {
+      "id": "rota.beccs__dest.beccs_ccs",
+      "from": "cana.rota.beccs",
+      "to": "cana.dest.beccs_ccs",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "A remoção permanente é contabilizada como crédito de remoção, categoria distinta da emissão evitada.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "lei_ccs2024"
+      ]
+    },
+    {
+      "id": "rota.co2_purificacao__dest.beccs_ccs",
+      "from": "cana.rota.co2_purificacao",
+      "to": "cana.dest.beccs_ccs",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Purificar e liquefazer o gás da dorna é o passo anterior a qualquer contabilização de remoção.",
+      "params": [],
+      "fontes": [
+        "ipcc_ccs"
+      ]
+    },
+    {
+      "id": "dest.armazenamento_geologico__dest.mercado_voluntario_carbono",
+      "from": "cana.dest.armazenamento_geologico",
+      "to": "cana.dest.mercado_voluntario_carbono",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "O crédito de remoção é o produto de maior preço unitário do mercado voluntário.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "vcs_metodologias"
+      ]
+    },
+    {
+      "id": "dest.armazenamento_geologico__dest.art6_paris",
+      "from": "cana.dest.armazenamento_geologico",
+      "to": "cana.dest.art6_paris",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Remoção verificada e autorizada pode ser transferida a outro país com ajuste correspondente no inventário brasileiro.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "acordo_paris_art6"
+      ]
+    },
+    {
+      "id": "dest.beccs_ccs__dest.armazenamento_geologico",
+      "from": "cana.dest.beccs_ccs",
+      "to": "cana.dest.armazenamento_geologico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O arranjo de captura só se fecha quando existe reservatório caracterizado e licenciado para receber o gás.",
+      "params": [],
+      "fontes": [
+        "lei_ccs2024"
+      ]
+    },
+    {
+      "id": "prod.biochar_agricola__dest.mercado_voluntario_carbono",
+      "from": "cana.prod.biochar_agricola",
+      "to": "cana.dest.mercado_voluntario_carbono",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "O biochar tem metodologia de remoção aceita porque a permanência do carbono é longa e mensurável.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "vcs_metodologias",
+        "puro_earth"
+      ]
+    },
+    {
+      "id": "dest.credito_carbono_solo__dest.mercado_voluntario_carbono",
+      "from": "cana.dest.credito_carbono_solo",
+      "to": "cana.dest.mercado_voluntario_carbono",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "O crédito de solo só tem valor se um padrão privado aceitar a medição que comprova a permanência.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "vcs_metodologias"
+      ]
+    },
+    {
+      "id": "dest.art6_paris__dest.financiamento_climatico",
+      "from": "cana.dest.art6_paris",
+      "to": "cana.dest.financiamento_climatico",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "A transferência internacional autorizada é a via que atrai capital estrangeiro para o projeto.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "acordo_paris_art6"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__dest.flare",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.dest.flare",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "GWP 28x menor após queima",
+      "explicacao": "O gás que não encontra uso é queimado: converte metano em CO2 e desperdiça toda a energia.",
+      "params": [
+        "fracao_ch4_biogas"
+      ],
+      "fontes": [
+        "ipcc_ar6",
+        "cetesb_licenciamento"
+      ]
+    },
+    {
+      "id": "rota.armazenamento_gas__dest.flare",
+      "from": "cana.rota.armazenamento_gas",
+      "to": "cana.dest.flare",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "Quando o gasômetro enche, o excedente vai para o flare; é o limite físico do pulmão de 4 a 12 horas.",
+      "params": [],
+      "fontes": [
+        "fnr2016"
+      ]
+    },
+    {
+      "id": "dest.licenciamento_cetesb__dest.flare",
+      "from": "cana.dest.licenciamento_cetesb",
+      "to": "cana.dest.flare",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "O queimador de emergência é exigência de segurança e condição da licença de operação da planta de biogás.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Licença de operação CETESB",
+      "fontes": [
+        "cetesb_licenciamento"
+      ]
+    },
+    {
+      "id": "dest.flare__dest.mercado_voluntario_carbono",
+      "from": "cana.dest.flare",
+      "to": "cana.dest.mercado_voluntario_carbono",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "A destruição documentada do metano que antes escapava é a base do crédito de metano evitado.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "vcs_metodologias"
+      ]
+    },
+    {
+      "id": "dest.licenciamento_cetesb__dest.norma_p4231",
+      "from": "cana.dest.licenciamento_cetesb",
+      "to": "cana.dest.norma_p4231",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "A licença de operação da usina incorpora o Plano de Aplicação de Vinhaça exigido pela norma técnica.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Norma CETESB P4.231",
+      "fontes": [
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "dest.licenciamento_cetesb__dest.inventario_ghg",
+      "from": "cana.dest.licenciamento_cetesb",
+      "to": "cana.dest.inventario_ghg",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "O licenciamento obriga a caracterizar resíduos e emissões, base do inventário corporativo da usina.",
+      "params": [],
+      "fontes": [
+        "cetesb_licenciamento",
+        "ghg_protocol"
+      ]
+    },
+    {
+      "id": "prod.digestato_liquido__dest.canavial",
+      "from": "cana.prod.digestato_liquido",
+      "to": "cana.dest.canavial",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O digestato devolve ao talhão o potássio e o nitrogênio que saíram com a cana.",
+      "params": [
+        "vinhaca_disponivel"
+      ],
+      "fontes": [
+        "cetesb_p4231",
+        "atlas2020"
+      ]
+    },
+    {
+      "id": "prod.enxofre__dest.canavial",
+      "from": "cana.prod.enxofre",
+      "to": "cana.dest.canavial",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O enxofre precipitado na dessulfurização tem destino agronômico direto no próprio canavial.",
+      "params": [],
+      "fontes": [
+        "fnr2016"
+      ]
+    },
+    {
+      "id": "prod.biochar_agricola__dest.canavial",
+      "from": "cana.prod.biochar_agricola",
+      "to": "cana.dest.canavial",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O biochar volta ao talhão como condicionador e estoque de carbono estável.",
+      "params": [],
+      "fontes": [
+        "ipcc_ar6"
+      ]
+    },
+    {
+      "id": "prod.composto_organico__dest.canavial",
+      "from": "cana.prod.composto_organico",
+      "to": "cana.dest.canavial",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O composto de torta, cinza e palha fecha o ciclo de nutrientes dentro da própria fazenda.",
+      "params": [
+        "torta_disponivel"
+      ],
+      "fontes": [
+        "atlas2020"
+      ]
+    },
+    {
+      "id": "dest.canavial__dest.conformidade_p4231",
+      "from": "cana.dest.canavial",
+      "to": "cana.dest.conformidade_p4231",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "Toda aplicação de vinhaça ou digestato no talhão entra no Plano de Aplicação protocolado na CETESB.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Norma CETESB P4.231",
+      "fontes": [
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "dest.canavial__cultura",
+      "from": "cana.dest.canavial",
+      "to": "cana.cultura",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O nutriente devolvido ao talhão sustenta a soqueira da safra seguinte.",
+      "params": [],
+      "fontes": [
+        "atlas2020"
+      ]
+    },
+    {
+      "id": "prod.digestato_liquido__dest.registro_fertilizante_mapa",
+      "from": "cana.prod.digestato_liquido",
+      "to": "cana.dest.registro_fertilizante_mapa",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Para sair da usina como fertilizante comercial, o digestato precisa de registro de produto no MAPA.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Lei 6.894/1980",
+      "fontes": [
+        "lei6894",
+        "mapa_in"
+      ]
+    },
+    {
+      "id": "prod.composto_organico__dest.registro_fertilizante_mapa",
+      "from": "cana.prod.composto_organico",
+      "to": "cana.dest.registro_fertilizante_mapa",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "O composto vendido a terceiros exige registro de estabelecimento e de produto, com laudo por lote.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Lei 6.894/1980",
+      "fontes": [
+        "lei6894"
+      ]
+    },
+    {
+      "id": "prod.organomineral_granulado__dest.registro_fertilizante_mapa",
+      "from": "cana.prod.organomineral_granulado",
+      "to": "cana.dest.registro_fertilizante_mapa",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "O granulado é vendido com garantias declaradas de N, P e K, o que só é possível com registro no MAPA.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Lei 6.894/1980",
+      "fontes": [
+        "lei6894"
+      ]
+    },
+    {
+      "id": "prod.painel_mdf__dest.construcao_civil",
+      "from": "cana.prod.painel_mdf",
+      "to": "cana.dest.construcao_civil",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O painel de partículas de bagaço substitui madeira em móvel e vedação.",
+      "params": [],
+      "fontes": [
+        "ipt_materiais"
+      ]
+    },
+    {
+      "id": "prod.dispersante__dest.construcao_civil",
+      "from": "cana.prod.dispersante",
+      "to": "cana.dest.construcao_civil",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O lignossulfonato atua como aditivo plastificante em concreto e argamassa.",
+      "params": [],
+      "fontes": [
+        "ipt_materiais"
+      ]
+    },
+    {
+      "id": "prod.pvc_verde__dest.construcao_civil",
+      "from": "cana.prod.pvc_verde",
+      "to": "cana.dest.construcao_civil",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O PVC com eteno de etanol vai para tubo, conexão e perfil de construção.",
+      "params": [],
+      "fontes": [
+        "ipt_materiais"
+      ]
+    },
+    {
+      "id": "prod.composito_fibra__dest.construcao_civil",
+      "from": "cana.prod.composito_fibra",
+      "to": "cana.dest.construcao_civil",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O compósito plástico-fibra entra em deck, perfil e forro.",
+      "params": [],
+      "fontes": [
+        "ipt_materiais"
+      ]
+    },
+    {
+      "id": "prod.resina_fenolica__dest.construcao_civil",
+      "from": "cana.prod.resina_fenolica",
+      "to": "cana.dest.construcao_civil",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A resina de lignina substitui o fenol fóssil em adesivo de painel.",
+      "params": [],
+      "fontes": [
+        "ipt_materiais"
+      ]
+    },
+    {
+      "id": "dest.construcao_civil__dest.pegada_carbono_produto",
+      "from": "cana.dest.construcao_civil",
+      "to": "cana.dest.pegada_carbono_produto",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Vida útil longa faz da construção um estoque de carbono biogênico, que aparece na pegada do material.",
+      "params": [],
+      "fontes": [
+        "iso14067"
+      ]
+    },
+    {
+      "id": "prod.polietileno_verde__dest.embalagens",
+      "from": "cana.prod.polietileno_verde",
+      "to": "cana.dest.embalagens",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O PE verde é quimicamente idêntico ao fóssil e entra na mesma linha de extrusão de filme.",
+      "params": [],
+      "fontes": [
+        "braskem2023",
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.pla__dest.embalagens",
+      "from": "cana.prod.pla",
+      "to": "cana.dest.embalagens",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O PLA atende à demanda por descartável biodegradável e compostável.",
+      "params": [],
+      "fontes": [
+        "braskem2023",
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.phb_pha__dest.embalagens",
+      "from": "cana.prod.phb_pha",
+      "to": "cana.dest.embalagens",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O PHB é biodegradável inclusive em meio marinho, nicho que o PE verde não cobre.",
+      "params": [],
+      "fontes": [
+        "braskem2023",
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.embalagem_moldada__dest.embalagens",
+      "from": "cana.prod.embalagem_moldada",
+      "to": "cana.dest.embalagens",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A polpa moldada de bagaço substitui isopor e plástico em bandeja e descartável.",
+      "params": [],
+      "fontes": [
+        "braskem2023",
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.papel_papelao__dest.embalagens",
+      "from": "cana.prod.papel_papelao",
+      "to": "cana.dest.embalagens",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A polpa de bagaço vira papel e papelão sem competir com floresta plantada.",
+      "params": [],
+      "fontes": [
+        "braskem2023",
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.fdca_pef__dest.embalagens",
+      "from": "cana.prod.fdca_pef",
+      "to": "cana.dest.embalagens",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O PEF é barreira melhor que o PET e mira garrafa e filme de alimento.",
+      "params": [],
+      "fontes": [
+        "braskem2023",
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.nanocelulose__dest.embalagens",
+      "from": "cana.prod.nanocelulose",
+      "to": "cana.dest.embalagens",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Os nanocristais entram como revestimento de barreira em embalagem de papel.",
+      "params": [],
+      "fontes": [
+        "braskem2023",
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "dest.embalagens__dest.pegada_carbono_produto",
+      "from": "cana.dest.embalagens",
+      "to": "cana.dest.pegada_carbono_produto",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Metas corporativas de conteúdo renovável são cobradas em número de emissão por embalagem.",
+      "params": [],
+      "fontes": [
+        "iso14067"
+      ]
+    },
+    {
+      "id": "prod.etileno_verde__dest.industria_quimica",
+      "from": "cana.prod.etileno_verde",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O eteno de etanol é o bloco de entrada de toda a cadeia de polímeros renováveis.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.acido_latico__dest.industria_quimica",
+      "from": "cana.prod.acido_latico",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O ácido lático abastece solvente, higiene e a rota do PLA.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.acido_succinico__dest.industria_quimica",
+      "from": "cana.prod.acido_succinico",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O succínico substitui o anidrido maleico fóssil em resina e poliuretano.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.acido_levulinico__dest.industria_quimica",
+      "from": "cana.prod.acido_levulinico",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O levulínico é plataforma para solvente, aditivo e resina.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.acido_itaconico__dest.industria_quimica",
+      "from": "cana.prod.acido_itaconico",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O itacônico entra em resina acrílica e superabsorvente.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.hmf__dest.industria_quimica",
+      "from": "cana.prod.hmf",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O HMF é o intermediário que abre a rota do FDCA e de solventes furânicos.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.furfural__dest.industria_quimica",
+      "from": "cana.prod.furfural",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O furfural é solvente seletivo em refino e precursor de resina.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.alcool_furfurilico__dest.industria_quimica",
+      "from": "cana.prod.alcool_furfurilico",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O álcool furfurílico é matéria-prima de resina de fundição.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.aromaticos_renovaveis__dest.industria_quimica",
+      "from": "cana.prod.aromaticos_renovaveis",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Benzeno, tolueno e fenol de lignina são a alternativa renovável mais direta ao petróleo.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.meg_verde__dest.industria_quimica",
+      "from": "cana.prod.meg_verde",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O MEG verde é insumo direto de PET no polo petroquímico paulista.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.butadieno_verde__dest.industria_quimica",
+      "from": "cana.prod.butadieno_verde",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O butadieno de etanol alimenta a cadeia de borracha sintética.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.butanol__dest.industria_quimica",
+      "from": "cana.prod.butanol",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Butanol e acetona são solventes de mercado consolidado.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.nafta_renovavel__dest.industria_quimica",
+      "from": "cana.prod.nafta_renovavel",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A nafta renovável entra como carga de craqueador sem alteração de processo.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.hidrogenio__dest.industria_quimica",
+      "from": "cana.prod.hidrogenio",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O H2 biogênico serve refino, amônia e química fina a poucas centenas de quilômetros.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.carvao_ativado__dest.industria_quimica",
+      "from": "cana.prod.carvao_ativado",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O carvão ativado de lignina atende tratamento de água e purificação de corrente industrial.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.enzimas__dest.industria_quimica",
+      "from": "cana.prod.enzimas",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "As enzimas produzidas em fermentação sólida abastecem a própria indústria de processo.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.oleo_microbiano__dest.industria_quimica",
+      "from": "cana.prod.oleo_microbiano",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O óleo microbiano substitui óleo vegetal em oleoquímica e lubrificante.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.lignina__dest.industria_quimica",
+      "from": "cana.prod.lignina",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A lignina técnica que sai da usina é insumo de resina, dispersante e aromático.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.mfc__dest.industria_quimica",
+      "from": "cana.prod.mfc",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A celulose microfibrilada entra como reforço e modificador reológico.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.celulose_bacteriana__dest.industria_quimica",
+      "from": "cana.prod.celulose_bacteriana",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A celulose bacteriana atende nichos de alto valor em cosmético e biomédico.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.farneseno__dest.industria_quimica",
+      "from": "cana.prod.farneseno",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Farneseno e esqualano abastecem cosmético e lubrificante especial.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.fibra_carbono__dest.industria_quimica",
+      "from": "cana.prod.fibra_carbono",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A fibra de carbono de lignina mira compósito estrutural de custo menor.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.combustivel_sintetico__dest.industria_quimica",
+      "from": "cana.prod.combustivel_sintetico",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O combustível sintético de gás de síntese entra na cadeia de refino.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "prod.syngas__dest.industria_quimica",
+      "from": "cana.prod.syngas",
+      "to": "cana.dest.industria_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O gás de síntese é a carga das rotas Fischer-Tropsch e de metanol.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos",
+        "abiquim2023"
+      ]
+    },
+    {
+      "id": "dest.industria_quimica__dest.pegada_carbono_produto",
+      "from": "cana.dest.industria_quimica",
+      "to": "cana.dest.pegada_carbono_produto",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "O comprador químico paga o prêmio renovável contra número de emissão verificado, não contra origem declarada.",
+      "params": [],
+      "fontes": [
+        "iso14067"
+      ]
+    },
+    {
+      "id": "prod.xilitol__dest.industria_alimenticia",
+      "from": "cana.prod.xilitol",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O xilitol é adoçante de baixo índice glicêmico feito da pentose do bagaço.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.fos__dest.industria_alimenticia",
+      "from": "cana.prod.fos",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Os FOS são prebióticos obtidos direto da sacarose.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.xos__dest.industria_alimenticia",
+      "from": "cana.prod.xos",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Os XOS vêm da xilana do bagaço e têm dose funcional menor que a dos FOS.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.extrato_levedura__dest.industria_alimenticia",
+      "from": "cana.prod.extrato_levedura",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O extrato de levedura é realçador de sabor e base de meio de cultura.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.acido_citrico__dest.industria_alimenticia",
+      "from": "cana.prod.acido_citrico",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O ácido cítrico é o acidulante de maior volume da indústria de alimentos.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.cogumelos__dest.industria_alimenticia",
+      "from": "cana.prod.cogumelos",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O bagaço serve de substrato para cogumelo comestível de ciclo curto.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.acucar_liquido__dest.industria_alimenticia",
+      "from": "cana.prod.acucar_liquido",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O açúcar líquido e os especiais atendem bebida e panificação sem etapa de dissolução.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.aminoacidos__dest.industria_alimenticia",
+      "from": "cana.prod.aminoacidos",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Lisina e glutamato de sacarose atendem alimento e nutrição.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.betaglucana_mos__dest.industria_alimenticia",
+      "from": "cana.prod.betaglucana_mos",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Beta-glucanas e MOS da parede da levedura são ingredientes funcionais.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.co2_alimenticio__dest.industria_bebidas",
+      "from": "cana.prod.co2_alimenticio",
+      "to": "cana.dest.industria_bebidas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A carbonatação de refrigerante e cerveja é o maior consumo de CO2 grau alimentício do estado.",
+      "params": [],
+      "fontes": [
+        "cepea_co2"
+      ]
+    },
+    {
+      "id": "rota.co2_purificacao__dest.industria_bebidas",
+      "from": "cana.rota.co2_purificacao",
+      "to": "cana.dest.industria_bebidas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Lavado, seco e liquefeito, o gás da dorna atende à especificação alimentícia sem separação adicional.",
+      "params": [],
+      "fontes": [
+        "cepea_co2"
+      ]
+    },
+    {
+      "id": "prod.co2_alimenticio__dest.industria_alimenticia",
+      "from": "cana.prod.co2_alimenticio",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Gelo seco e atmosfera modificada consomem CO2 alimentício fora da bebida.",
+      "params": [],
+      "fontes": [
+        "cepea_co2"
+      ]
+    },
+    {
+      "id": "dest.industria_bebidas__dest.pegada_carbono_produto",
+      "from": "cana.dest.industria_bebidas",
+      "to": "cana.dest.pegada_carbono_produto",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Trocar CO2 fóssil por fermentativo reduz a emissão contábil declarada da bebida.",
+      "params": [],
+      "fontes": [
+        "ghg_protocol"
+      ]
+    },
+    {
+      "id": "prod.acucar_liquido__dest.industria_bebidas",
+      "from": "cana.prod.acucar_liquido",
+      "to": "cana.dest.industria_bebidas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O xarope invertido é entregue pronto para uso à linha de bebida.",
+      "params": [],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "prod.acucar_cristal__dest.industria_bebidas",
+      "from": "cana.prod.acucar_cristal",
+      "to": "cana.dest.industria_bebidas",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "Bebida e cerveja são consumidores diretos do cristal produzido no estado.",
+      "params": [],
+      "fontes": [
+        "unica2024"
+      ]
+    },
+    {
+      "id": "prod.levedura_racao__dest.nutricao_animal",
+      "from": "cana.prod.levedura_racao",
+      "to": "cana.dest.nutricao_animal",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A levedura seca é a proteína de cana já consolidada em ração de aves e suínos.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.proteina_unicelular__dest.nutricao_animal",
+      "from": "cana.prod.proteina_unicelular",
+      "to": "cana.dest.nutricao_animal",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A proteína unicelular disputa espaço com o farelo de soja importado.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.betaglucana_mos__dest.nutricao_animal",
+      "from": "cana.prod.betaglucana_mos",
+      "to": "cana.dest.nutricao_animal",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "MOS e beta-glucanas atuam como aditivo imunomodulador em granja.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.aminoacidos__dest.nutricao_animal",
+      "from": "cana.prod.aminoacidos",
+      "to": "cana.dest.nutricao_animal",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Lisina e metionina de fermentação equilibram a ração sem proteína excedente.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.oleo_microbiano__dest.nutricao_animal",
+      "from": "cana.prod.oleo_microbiano",
+      "to": "cana.dest.nutricao_animal",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O óleo microbiano é fonte lipídica em ração de aquicultura.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "prod.extrato_levedura__dest.nutricao_animal",
+      "from": "cana.prod.extrato_levedura",
+      "to": "cana.dest.nutricao_animal",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O extrato de levedura entra como palatabilizante em ração.",
+      "params": [],
+      "fontes": [
+        "embrapa_bioprodutos"
+      ]
+    },
+    {
+      "id": "dest.nutricao_animal__dest.pegada_carbono_produto",
+      "from": "cana.dest.nutricao_animal",
+      "to": "cana.dest.pegada_carbono_produto",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Substituir farelo importado por proteína local reduz o escopo 3 declarado pelo integrador.",
+      "params": [],
+      "fontes": [
+        "ghg_protocol"
+      ]
+    },
+    {
+      "id": "prod.briquetes__dest.industria_terceiros",
+      "from": "cana.prod.briquetes",
+      "to": "cana.dest.industria_terceiros",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "acima de 200 km o frete come a margem",
+      "explicacao": "O briquete de bagaço substitui lenha e óleo em caldeira de pequeno porte.",
+      "params": [
+        "bagaco_excedente",
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "ipt_materiais"
+      ]
+    },
+    {
+      "id": "prod.pellets__dest.industria_terceiros",
+      "from": "cana.prod.pellets",
+      "to": "cana.dest.industria_terceiros",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "acima de 200 km o frete come a margem",
+      "explicacao": "O pellet de palha tem densidade que suporta frete rodoviário de média distância.",
+      "params": [
+        "bagaco_excedente",
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "ipt_materiais"
+      ]
+    },
+    {
+      "id": "prod.bio_oleo__dest.industria_terceiros",
+      "from": "cana.prod.bio_oleo",
+      "to": "cana.dest.industria_terceiros",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "acima de 200 km o frete come a margem",
+      "explicacao": "O bio-óleo da pirólise queima em forno industrial no lugar de óleo combustível.",
+      "params": [
+        "bagaco_excedente",
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "ipt_materiais"
+      ]
+    },
+    {
+      "id": "prod.biomassa_torrada__dest.industria_terceiros",
+      "from": "cana.prod.biomassa_torrada",
+      "to": "cana.dest.industria_terceiros",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "acima de 200 km o frete come a margem",
+      "explicacao": "A biomassa torrada é hidrofóbica e moível, o que permite cocombustão em planta de terceiro.",
+      "params": [
+        "bagaco_excedente",
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "ipt_materiais"
+      ]
+    },
+    {
+      "id": "dest.industria_terceiros__dest.mercado_carbono",
+      "from": "cana.dest.industria_terceiros",
+      "to": "cana.dest.mercado_carbono",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Trocar combustível fóssil por biomassa no cliente gera emissão evitada contabilizável.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "vcs_metodologias"
+      ]
+    },
+    {
+      "id": "dest.industria_terceiros__dest.tributacao_biometano",
+      "from": "cana.dest.industria_terceiros",
+      "to": "cana.dest.tributacao_biometano",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "A venda a consumidor industrial fora da rede depende do regime tributário estadual do biometano.",
+      "params": [],
+      "fontes": [
+        "confaz_convenio"
+      ]
+    },
+    {
+      "id": "dest.frota_propria__dest.renovabio_neea",
+      "from": "cana.dest.frota_propria",
+      "to": "cana.dest.renovabio_neea",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "O biometano consumido na própria frota também é elegível a certificação e emissão de CBIO.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "renovabio_lei13576"
+      ]
+    },
+    {
+      "id": "dest.frota_propria__dest.autoconsumo_usina",
+      "from": "cana.dest.frota_propria",
+      "to": "cana.dest.autoconsumo_usina",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "O gás usado na frota é avaliado pelo diesel evitado, e não pelo preço de atacado do combustível.",
+      "params": [
+        "preco_biometano"
+      ],
+      "fontes": [
+        "cibiogas2023"
+      ]
+    },
+    {
+      "id": "dest.autoconsumo_usina__dest.inventario_ghg",
+      "from": "cana.dest.autoconsumo_usina",
+      "to": "cana.dest.inventario_ghg",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "O que a usina queima e consome internamente é a base do escopo 1 do inventário.",
+      "params": [],
+      "fontes": [
+        "ghg_protocol"
+      ]
+    },
+    {
+      "id": "dest.irec__dest.inventario_ghg",
+      "from": "cana.dest.irec",
+      "to": "cana.dest.inventario_ghg",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "O certificado é o que permite ao comprador declarar consumo renovável no escopo 2.",
+      "params": [],
+      "fontes": [
+        "ghg_protocol",
+        "irec_brasil"
+      ]
+    }
+  ],
+  "faltando": [
+    "Nó para 'diesel evitado' na frota canavieira: hoje a economia aparece só como rótulo, sem destino próprio.",
+    "Nó para CORSIA (esquema internacional de compensação da aviação), hoje absorvido em cana.dest.mercado_aviacao.",
+    "Nó para 'CBIO por biometano' distinto do CBIO do etanol: a nota de eficiência e o comprador são os mesmos, mas o lastro é outro.",
+    "Nó para exportação de biometano ou de bio-GNL fora de São Paulo.",
+    "Nó para mercado de CO2 industrial não alimentício (solda, tratamento de água, extração supercrítica).",
+    "Nó para ARSESP como regulador estadual do gás canalizado, hoje só citado no texto de cana.dest.rede_gas.",
+    "Nó para mercado têxtil e de cosmético, destino de farneseno, nanocelulose e celulose bacteriana."
+  ],
+  "notas": "Duplicatas detectadas no grafo, ligadas em paralelo para não deixar nenhuma versão ilhada: cana.dest.autoconsumo e cana.dest.autoconsumo_usina; cana.dest.industria_alimentar (açúcar) e cana.dest.industria_alimenticia (bioprodutos); cana.dest.renovabio e cana.dest.renovabio_neea; cana.dest.rede_gas e cana.dest.injecao_rede_gas; cana.dest.canavial e cana.dest.solo_canavial; cana.dest.mercado_carbono, cana.dest.cbio e cana.dest.mercado_voluntario_carbono. Recomenda-se consolidar antes da publicação. Critério de estado: marcado 'real' apenas o que opera comercialmente em São Paulo hoje — venda de bioeletricidade em ACR e ACL, I-REC de bagaço, CBIO do etanol, exportação de açúcar certificado, queima em flare, licenciamento CETESB, registro MAPA de composto e organomineral, e a queima de lignina na planta 2G da Raízen. Todo o mercado de biometano (rede, frota, indústria), o SAF, o BECCS, o SBCE e os bioprodutos foram marcados 'potencial'."
+}

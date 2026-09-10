@@ -1,0 +1,981 @@
+{
+  "edges": [
+    {
+      "id": "rota.biodigestao_vinhaca__prod.digestato",
+      "from": "cana.rota.biodigestao_vinhaca",
+      "to": "cana.prod.digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "~100% do K de entrada",
+      "explicacao": "O que sai do digestor não é resíduo novo: é a mesma vinhaça sem o carbono que virou metano, com o potássio intacto.",
+      "params": [
+        "vinhaca_disponivel"
+      ],
+      "fontes": [
+        "atlas2020_p67",
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "prod.digestato__rota.separacao_digestato",
+      "from": "cana.prod.digestato",
+      "to": "cana.rota.separacao_digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Prensar o digestato divide um efluente único em duas logísticas distintas: sólido transportável e líquido bombeável.",
+      "params": [],
+      "fontes": [
+        "fnr_digestat"
+      ]
+    },
+    {
+      "id": "prod.digestato__rota.separacao_solido_liquido",
+      "from": "cana.prod.digestato",
+      "to": "cana.rota.separacao_solido_liquido",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Antes de decidir o destino, o digestato é dividido em duas correntes de logística oposta.",
+      "params": [],
+      "fontes": [
+        "fnr_digestat"
+      ]
+    },
+    {
+      "id": "prod.digestato__rota.fertirrigacao_digestato",
+      "from": "cana.prod.digestato",
+      "to": "cana.rota.fertirrigacao_digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O caminho mais curto do digestato é o mesmo canal que já leva a vinhaça ao canavial.",
+      "params": [
+        "vinhaca_disponivel"
+      ],
+      "fontes": [
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "prod.digestato__rota.estruvita_digestato",
+      "from": "cana.prod.digestato",
+      "to": "cana.rota.estruvita_digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A digestão mineraliza o fósforo e o nitrogênio, e só então eles podem ser precipitados como cristal.",
+      "params": [],
+      "fontes": [
+        "fnr_digestat"
+      ]
+    },
+    {
+      "id": "prod.digestato__rota.stripping_amonia",
+      "from": "cana.prod.digestato",
+      "to": "cana.rota.stripping_amonia",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O N orgânico da vinhaça vira N amoniacal na digestão, e apenas a forma amoniacal pode ser arrastada.",
+      "params": [],
+      "fontes": [
+        "fnr_digestat"
+      ]
+    },
+    {
+      "id": "prod.digestato__rota.gotejamento_digestato",
+      "from": "cana.prod.digestato",
+      "to": "cana.rota.gotejamento_digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O digestato carrega menos sólido em suspensão que a vinhaça bruta, o que o torna candidato ao gotejador.",
+      "params": [],
+      "fontes": [
+        "unica_fertirrigacao"
+      ]
+    },
+    {
+      "id": "prod.digestato__dest.registro_fertilizante_mapa",
+      "from": "cana.prod.digestato",
+      "to": "cana.dest.registro_fertilizante_mapa",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Vender digestato como fertilizante exige registro do produto e do estabelecimento no MAPA.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Lei 6.894/1980 e IN MAPA 61/2020",
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "prod.digestato__dest.norma_p4231",
+      "from": "cana.prod.digestato",
+      "to": "cana.dest.norma_p4231",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Aplicado no campo, o digestato entra no mesmo Plano de Aplicação de Vinhaça e no mesmo limite de potássio.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Norma CETESB P4.231",
+      "fontes": [
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "prod.digestato_liquido__rota.fertirrigacao_digestato",
+      "from": "cana.prod.digestato_liquido",
+      "to": "cana.rota.fertirrigacao_digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "~2 kg K₂O/m³",
+      "explicacao": "A fase líquida concentra o potássio e o N amoniacal, exatamente o que a fertirrigação entrega ao canavial.",
+      "params": [
+        "vinhaca_disponivel"
+      ],
+      "fontes": [
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "prod.digestato_liquido__rota.gotejamento_digestato",
+      "from": "cana.prod.digestato_liquido",
+      "to": "cana.rota.gotejamento_digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Só a fase líquida filtrada atravessa um gotejador sem entupi-lo.",
+      "params": [],
+      "fontes": [
+        "unica_fertirrigacao"
+      ]
+    },
+    {
+      "id": "prod.digestato_liquido__rota.estruvita_digestato",
+      "from": "cana.prod.digestato_liquido",
+      "to": "cana.rota.estruvita_digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "É do líquido, e não do sólido, que se precipita a estruvita com magnésio e ajuste de pH.",
+      "params": [],
+      "fontes": [
+        "fnr_digestat"
+      ]
+    },
+    {
+      "id": "prod.digestato_liquido__rota.stripping_amonia",
+      "from": "cana.prod.digestato_liquido",
+      "to": "cana.rota.stripping_amonia",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O stripping trabalha sobre a amônia dissolvida na fase líquida do digestato.",
+      "params": [],
+      "fontes": [
+        "fnr_digestat"
+      ]
+    },
+    {
+      "id": "prod.digestato_liquido__rota.polimento_microalgas",
+      "from": "cana.prod.digestato_liquido",
+      "to": "cana.rota.polimento_microalgas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Diluído, o digestato líquido é meio de cultivo: as algas consomem o N e o P que sobraram.",
+      "params": [],
+      "fontes": [
+        "embrapa_microalgas"
+      ]
+    },
+    {
+      "id": "prod.digestato_liquido__rota.membranas_vinhaca",
+      "from": "cana.prod.digestato_liquido",
+      "to": "cana.rota.membranas_vinhaca",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Com menos DQO que a vinhaça bruta, o digestato incrusta menos a membrana e libera água com mais facilidade.",
+      "params": [],
+      "fontes": [
+        "membranas_efluentes"
+      ]
+    },
+    {
+      "id": "prod.digestato_liquido__dest.norma_p4231",
+      "from": "cana.prod.digestato_liquido",
+      "to": "cana.dest.norma_p4231",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "A dose de digestato líquido continua limitada pelo potássio do solo, como a da vinhaça in natura.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Norma CETESB P4.231",
+      "fontes": [
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "rota.separacao_solido_liquido__prod.digestato_solido",
+      "from": "cana.rota.separacao_solido_liquido",
+      "to": "cana.prod.digestato_solido",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A prensa entrega a fração sólida rica em fósforo, transportável para fora do raio da usina.",
+      "params": [],
+      "fontes": [
+        "fnr_digestat"
+      ]
+    },
+    {
+      "id": "rota.separacao_solido_liquido__prod.digestato_liquido",
+      "from": "cana.rota.separacao_solido_liquido",
+      "to": "cana.prod.digestato_liquido",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O líquido separado concentra potássio e N amoniacal e segue direto para a fertirrigação.",
+      "params": [],
+      "fontes": [
+        "fnr_digestat"
+      ]
+    },
+    {
+      "id": "prod.digestato_solido__rota.compostagem_torta",
+      "from": "cana.prod.digestato_solido",
+      "to": "cana.rota.compostagem_torta",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A fração sólida entra na leira como matéria orgânica já parcialmente estabilizada.",
+      "params": [],
+      "fontes": [
+        "fnr_digestat"
+      ]
+    },
+    {
+      "id": "prod.digestato_solido__rota.organomineral",
+      "from": "cana.prod.digestato_solido",
+      "to": "cana.rota.organomineral",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O sólido prensado é a matriz seca de que a granulação precisa para incorporar NPK mineral.",
+      "params": [],
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "prod.digestato_solido__dest.registro_fertilizante_mapa",
+      "from": "cana.prod.digestato_solido",
+      "to": "cana.dest.registro_fertilizante_mapa",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Como fertilizante orgânico embalado, o digestato sólido depende de registro no MAPA para ser vendido.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Lei 6.894/1980 e IN MAPA 61/2020",
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "prod.digestato_solido__dest.mercado_fertilizantes",
+      "from": "cana.prod.digestato_solido",
+      "to": "cana.dest.mercado_fertilizantes",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Sem água para transportar, o sólido alcança comprador fora do raio de fertirrigação da usina.",
+      "params": [],
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "prod.composto_organico__rota.organomineral",
+      "from": "cana.prod.composto_organico",
+      "to": "cana.rota.organomineral",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A granulação parte do composto já curado: é ele que dá corpo orgânico ao grânulo.",
+      "params": [
+        "torta_disponivel"
+      ],
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "prod.composto_organico__rota.vermicompostagem",
+      "from": "cana.prod.composto_organico",
+      "to": "cana.rota.vermicompostagem",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A minhoca não aceita torta crua: o composto pré-curado é o material que ela consegue processar.",
+      "params": [],
+      "fontes": [
+        "embrapa_vermicompostagem"
+      ]
+    },
+    {
+      "id": "prod.composto_organico__rota.substancias_humicas",
+      "from": "cana.prod.composto_organico",
+      "to": "cana.rota.substancias_humicas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "É na matéria orgânica humificada do composto que há ácido húmico em concentração extraível.",
+      "params": [],
+      "fontes": [
+        "substancias_humicas_solo"
+      ]
+    },
+    {
+      "id": "prod.composto_organico__rota.substrato_mpb",
+      "from": "cana.prod.composto_organico",
+      "to": "cana.rota.substrato_mpb",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O substrato da muda pré-brotada é composto de torta curado, misturado a fibra e a vermiculita.",
+      "params": [
+        "torta_disponivel"
+      ],
+      "fontes": [
+        "iac_mpb"
+      ]
+    },
+    {
+      "id": "prod.composto_organico__dest.registro_fertilizante_mapa",
+      "from": "cana.prod.composto_organico",
+      "to": "cana.dest.registro_fertilizante_mapa",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "Composto vendido fora da usina é fertilizante orgânico registrado, com garantias declaradas.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Lei 6.894/1980 e IN MAPA 61/2020",
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "rota.compostagem_torta__dest.materia_organica_solo",
+      "from": "cana.rota.compostagem_torta",
+      "to": "cana.dest.materia_organica_solo",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A leira converte carbono lábil em húmus: o que chega ao solo já é matéria orgânica estável.",
+      "params": [
+        "torta_disponivel"
+      ],
+      "fontes": [
+        "iac_torta"
+      ]
+    },
+    {
+      "id": "prod.vermicomposto__dest.materia_organica_solo",
+      "from": "cana.prod.vermicomposto",
+      "to": "cana.dest.materia_organica_solo",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O húmus de minhoca é carbono já estabilizado: entra no solo e permanece.",
+      "params": [],
+      "fontes": [
+        "embrapa_vermicompostagem"
+      ]
+    },
+    {
+      "id": "prod.vermicomposto__rota.substrato_mpb",
+      "from": "cana.prod.vermicomposto",
+      "to": "cana.rota.substrato_mpb",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O húmus dá atividade biológica e retenção de água ao substrato da muda pré-brotada.",
+      "params": [],
+      "fontes": [
+        "iac_mpb"
+      ]
+    },
+    {
+      "id": "prod.vermicomposto__dest.registro_fertilizante_mapa",
+      "from": "cana.prod.vermicomposto",
+      "to": "cana.dest.registro_fertilizante_mapa",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Vermicomposto comercializado é fertilizante orgânico e precisa de registro no MAPA.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Lei 6.894/1980 e IN MAPA 61/2020",
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "prod.acidos_humicos__dest.solo_canavial",
+      "from": "cana.prod.acidos_humicos",
+      "to": "cana.dest.solo_canavial",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Aplicado via foliar ou no sulco, o extrato húmico age sobre a raiz em dose de poucos litros por hectare.",
+      "params": [],
+      "fontes": [
+        "substancias_humicas_solo"
+      ]
+    },
+    {
+      "id": "prod.estruvita__dest.subst_fertilizante",
+      "from": "cana.prod.estruvita",
+      "to": "cana.dest.subst_fertilizante",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Cada quilo de P recuperado como estruvita é fosfato importado que a usina deixa de comprar.",
+      "params": [],
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "prod.estruvita__dest.registro_fertilizante_mapa",
+      "from": "cana.prod.estruvita",
+      "to": "cana.dest.registro_fertilizante_mapa",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "A estruvita só circula como fertilizante mineral se registrada, com teores de N, P e Mg garantidos.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Lei 6.894/1980 e IN MAPA 61/2020",
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "prod.sulfato_amonio__dest.registro_fertilizante_mapa",
+      "from": "cana.prod.sulfato_amonio",
+      "to": "cana.dest.registro_fertilizante_mapa",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "O sal nitrogenado recuperado do digestato entra no mercado como fertilizante mineral registrado.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Lei 6.894/1980 e IN MAPA 61/2020",
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "prod.sulfato_amonio__dest.solo_canavial",
+      "from": "cana.prod.sulfato_amonio",
+      "to": "cana.dest.solo_canavial",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O N que sairia do sistema como amônia volta ao canavial em forma sólida e dosável.",
+      "params": [],
+      "fontes": [
+        "fnr_digestat"
+      ]
+    },
+    {
+      "id": "prod.organomineral_granulado__dest.registro_fertilizante_mapa",
+      "from": "cana.prod.organomineral_granulado",
+      "to": "cana.dest.registro_fertilizante_mapa",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Organomineral é categoria própria no MAPA, com teor mínimo de carbono orgânico a comprovar.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Lei 6.894/1980 e IN MAPA 61/2020",
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "prod.organomineral_granulado__dest.materia_organica_solo",
+      "from": "cana.prod.organomineral_granulado",
+      "to": "cana.dest.materia_organica_solo",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O grânulo entrega adubo mineral e carbono orgânico na mesma passada da adubadora.",
+      "params": [],
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "prod.biofertilizante_algal__dest.mercado_fertilizantes",
+      "from": "cana.prod.biofertilizante_algal",
+      "to": "cana.dest.mercado_fertilizantes",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "A biomassa algal rica em N e P é bioestimulante de valor por tonelada muito acima do composto.",
+      "params": [],
+      "fontes": [
+        "embrapa_microalgas"
+      ]
+    },
+    {
+      "id": "prod.vinhaca_concentrada__rota.fertirrigacao_vinhaca",
+      "from": "cana.prod.vinhaca_concentrada",
+      "to": "cana.rota.fertirrigacao_vinhaca",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "1/4 do volume, mesmo K",
+      "explicacao": "Concentrada, a vinhaça alcança talhões distantes pelo mesmo caminhão-tanque que hoje só serve o raio próximo.",
+      "params": [
+        "vinhaca_disponivel"
+      ],
+      "fontes": [
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "prod.vinhaca_concentrada__dest.subst_fertilizante",
+      "from": "cana.prod.vinhaca_concentrada",
+      "to": "cana.dest.subst_fertilizante",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Transportável, o potássio da vinhaça passa a competir de fato com o cloreto de potássio importado.",
+      "params": [],
+      "fontes": [
+        "unica_fertirrigacao"
+      ]
+    },
+    {
+      "id": "prod.vinhaca_concentrada__dest.salinizacao",
+      "from": "cana.prod.vinhaca_concentrada",
+      "to": "cana.dest.salinizacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Concentrar o potássio concentra também o risco: dose mal calculada saliniza mais rápido que a vinhaça diluída.",
+      "params": [],
+      "fontes": [
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "rota.concentracao_vinhaca__dest.circuito_hidrico",
+      "from": "cana.rota.concentracao_vinhaca",
+      "to": "cana.dest.circuito_hidrico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Três quartos do volume da vinhaça saem como condensado e voltam ao processo em vez de ir ao campo.",
+      "params": [
+        "vinhaca_disponivel"
+      ],
+      "fontes": [
+        "unica_agua"
+      ]
+    },
+    {
+      "id": "copr.condensado__rota.reuso_agua",
+      "from": "cana.copr.condensado",
+      "to": "cana.rota.reuso_agua",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O condensado dos evaporadores é a maior fonte de água limpa da usina e já retorna ao processo.",
+      "params": [],
+      "fontes": [
+        "unica_agua"
+      ]
+    },
+    {
+      "id": "res.agua_lavagem__rota.reuso_agua",
+      "from": "cana.res.agua_lavagem",
+      "to": "cana.rota.reuso_agua",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A água de lavagem circula em circuito fechado com decantador desde que a captação passou a ser cobrada.",
+      "params": [],
+      "fontes": [
+        "unica_agua"
+      ]
+    },
+    {
+      "id": "res.flegmaca__rota.reuso_agua",
+      "from": "cana.res.flegmaca",
+      "to": "cana.rota.reuso_agua",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Com carga orgânica bem menor que a vinhaça, a flegmaça é a corrente mais fácil de tratar e reaproveitar.",
+      "params": [],
+      "fontes": [
+        "unica_agua"
+      ]
+    },
+    {
+      "id": "rota.reuso_agua__dest.circuito_hidrico",
+      "from": "cana.rota.reuso_agua",
+      "to": "cana.dest.circuito_hidrico",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "<1 m³/t cana",
+      "explicacao": "Recircular condensado e água de lavagem derrubou a captação de 5 para menos de 1 m³ por tonelada de cana.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "unica_agua"
+      ]
+    },
+    {
+      "id": "rota.membranas_vinhaca__dest.circuito_hidrico",
+      "from": "cana.rota.membranas_vinhaca",
+      "to": "cana.dest.circuito_hidrico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O permeado da osmose é água de qualidade industrial, devolvida ao processo em vez de ao solo.",
+      "params": [],
+      "fontes": [
+        "membranas_efluentes"
+      ]
+    },
+    {
+      "id": "rota.polimento_microalgas__dest.circuito_hidrico",
+      "from": "cana.rota.polimento_microalgas",
+      "to": "cana.dest.circuito_hidrico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Depois do polimento algal, o efluente tem N e P baixos o bastante para o reuso interno.",
+      "params": [],
+      "fontes": [
+        "embrapa_microalgas"
+      ]
+    },
+    {
+      "id": "prod.agua_reuso__proc.moagem",
+      "from": "cana.prod.agua_reuso",
+      "to": "cana.proc.moagem",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A água de reuso volta como embebição nos ternos, o maior consumo de água da moenda.",
+      "params": [],
+      "fontes": [
+        "unica_agua"
+      ]
+    },
+    {
+      "id": "rota.pirolise_lenta__prod.biochar",
+      "from": "cana.rota.pirolise_lenta",
+      "to": "cana.prod.biochar",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A pirólise lenta é a rota que privilegia o sólido: cerca de um terço da massa seca sai como biochar.",
+      "params": [
+        "palha_recolhivel",
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "ipcc_biochar"
+      ]
+    },
+    {
+      "id": "prod.biochar__rota.biochar_solo",
+      "from": "cana.prod.biochar",
+      "to": "cana.rota.biochar_solo",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O carvão só vira ativo agronômico quando incorporado ao solo, não quando estocado.",
+      "params": [],
+      "fontes": [
+        "ipcc_biochar"
+      ]
+    },
+    {
+      "id": "prod.biochar__dest.credito_carbono_solo",
+      "from": "cana.prod.biochar",
+      "to": "cana.dest.credito_carbono_solo",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "O biochar tem permanência mensurável por séculos, o que o torna elegível a crédito de remoção.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "ipcc_biochar"
+      ]
+    },
+    {
+      "id": "res.torta__rota.htc",
+      "from": "cana.res.torta",
+      "to": "cana.rota.htc",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Com cerca de 70% de umidade, a torta é o substrato ideal da via hidrotérmica, que dispensa secagem.",
+      "params": [
+        "torta_disponivel"
+      ],
+      "fontes": [
+        "htc_biomassa"
+      ]
+    },
+    {
+      "id": "res.vinhaca__rota.htc",
+      "from": "cana.res.vinhaca",
+      "to": "cana.rota.htc",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A vinhaça entra como fase aquosa do processo e evita gastar água limpa na carbonização.",
+      "params": [
+        "vinhaca_disponivel"
+      ],
+      "fontes": [
+        "htc_biomassa"
+      ]
+    },
+    {
+      "id": "rota.htc__prod.hidrochar",
+      "from": "cana.rota.htc",
+      "to": "cana.prod.hidrochar",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A 200 °C sob pressão, a matéria orgânica úmida condensa em um sólido carbonoso e filtrável.",
+      "params": [],
+      "fontes": [
+        "htc_biomassa"
+      ]
+    },
+    {
+      "id": "rota.hidrochar__prod.hidrochar",
+      "from": "cana.rota.hidrochar",
+      "to": "cana.prod.hidrochar",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A carbonização hidrotérmica de torta e vinhaça entrega o hidrochar como produto sólido.",
+      "params": [
+        "torta_disponivel"
+      ],
+      "fontes": [
+        "htc_biomassa"
+      ]
+    },
+    {
+      "id": "prod.hidrochar__dest.solo_canavial",
+      "from": "cana.prod.hidrochar",
+      "to": "cana.dest.solo_canavial",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Aplicado ao solo, o hidrochar retém água e cátions, ainda que com menos permanência que o biochar.",
+      "params": [],
+      "fontes": [
+        "htc_biomassa"
+      ]
+    },
+    {
+      "id": "prod.hidrochar__dest.materia_organica_solo",
+      "from": "cana.prod.hidrochar",
+      "to": "cana.dest.materia_organica_solo",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O carbono do hidrochar é mais lábil que o do biochar, mas ainda assim alimenta o estoque orgânico.",
+      "params": [],
+      "fontes": [
+        "htc_biomassa"
+      ]
+    },
+    {
+      "id": "rota.k_das_cinzas__dest.solo_canavial",
+      "from": "cana.rota.k_das_cinzas",
+      "to": "cana.dest.solo_canavial",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O sal de potássio lixiviado da cinza volta ao canavial em forma solúvel e dosável.",
+      "params": [],
+      "fontes": [
+        "cinzas_caldeira"
+      ]
+    },
+    {
+      "id": "prod.corretivo_cinzas__dest.mercado_fertilizantes",
+      "from": "cana.prod.corretivo_cinzas",
+      "to": "cana.dest.mercado_fertilizantes",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Cinza peneirada com teor garantido de K e Si tem comprador fora da usina, não só dentro.",
+      "params": [],
+      "fontes": [
+        "cinzas_caldeira"
+      ]
+    },
+    {
+      "id": "prod.corretivo_cinzas__dest.materia_organica_solo",
+      "from": "cana.prod.corretivo_cinzas",
+      "to": "cana.dest.materia_organica_solo",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A fuligem carrega carbono não queimado, a única fração orgânica que a cinza devolve ao solo.",
+      "params": [],
+      "fontes": [
+        "cinzas_caldeira"
+      ]
+    },
+    {
+      "id": "rota.palha_cobertura__dest.solo_canavial",
+      "from": "cana.rota.palha_cobertura",
+      "to": "cana.dest.solo_canavial",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "7-10 t MS/ha",
+      "explicacao": "Metade da palha permanece deitada no talhão: é o maior aporte anual de biomassa ao solo paulista.",
+      "params": [
+        "palha_gerada",
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "ctc_palha"
+      ]
+    },
+    {
+      "id": "res.palha__dest.materia_organica_solo",
+      "from": "cana.res.palha",
+      "to": "cana.dest.materia_organica_solo",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O que não é recolhido nem queimado se decompõe no próprio talhão e alimenta o estoque de carbono.",
+      "params": [
+        "palha_gerada",
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "ctc_palha"
+      ]
+    },
+    {
+      "id": "rota.torta_adubo_direto__dest.replantio_canavial",
+      "from": "cana.rota.torta_adubo_direto",
+      "to": "cana.dest.replantio_canavial",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "As 20 a 30 t/ha de torta vão exatamente no sulco de plantio, no momento da reforma do canavial.",
+      "params": [
+        "torta_disponivel"
+      ],
+      "fontes": [
+        "iac_torta"
+      ]
+    },
+    {
+      "id": "dest.replantio_canavial__proc.plantio",
+      "from": "cana.dest.replantio_canavial",
+      "to": "cana.proc.plantio",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A muda formada com substrato de torta é o que entra na operação de plantio da safra seguinte.",
+      "params": [],
+      "fontes": [
+        "iac_mpb"
+      ]
+    },
+    {
+      "id": "prod.substrato_mudas__dest.solo_canavial",
+      "from": "cana.prod.substrato_mudas",
+      "to": "cana.dest.solo_canavial",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O substrato vai ao campo junto com a muda e se incorpora ao solo na cova.",
+      "params": [],
+      "fontes": [
+        "iac_mpb"
+      ]
+    },
+    {
+      "id": "res.vinhaca__rota.bioinsumos_substrato",
+      "from": "cana.res.vinhaca",
+      "to": "cana.rota.bioinsumos_substrato",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A vinhaça serve de meio líquido de cultura nas biofábricas de fungos e parasitoides da própria usina.",
+      "params": [
+        "vinhaca_disponivel"
+      ],
+      "fontes": [
+        "biofabricas_usina"
+      ]
+    },
+    {
+      "id": "dest.norma_p4231__rota.fertirrigacao_vinhaca",
+      "from": "cana.dest.norma_p4231",
+      "to": "cana.rota.fertirrigacao_vinhaca",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "A norma define a dose máxima por hectare a partir do potássio do solo e obriga o plano anual.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Norma CETESB P4.231",
+      "fontes": [
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "dest.norma_p4231__rota.fertirrigacao_digestato",
+      "from": "cana.dest.norma_p4231",
+      "to": "cana.rota.fertirrigacao_digestato",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Digerida ou não, a vinhaça aplicada no solo responde ao mesmo limite de potássio.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Norma CETESB P4.231",
+      "fontes": [
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "rota.fertirrigacao_digestato__dest.subst_fertilizante",
+      "from": "cana.rota.fertirrigacao_digestato",
+      "to": "cana.dest.subst_fertilizante",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Digerir não consome o potássio: o adubo mineral evitado é o mesmo da vinhaça in natura.",
+      "params": [],
+      "fontes": [
+        "unica_fertirrigacao"
+      ]
+    },
+    {
+      "id": "rota.fertirrigacao_digestato__dest.agua_no_solo",
+      "from": "cana.rota.fertirrigacao_digestato",
+      "to": "cana.dest.agua_no_solo",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O digestato leva água ao canavial como qualquer fertirrigação, e praticamente no mesmo volume.",
+      "params": [],
+      "fontes": [
+        "unica_fertirrigacao"
+      ]
+    },
+    {
+      "id": "rota.fertirrigacao_digestato__dest.salinizacao",
+      "from": "cana.rota.fertirrigacao_digestato",
+      "to": "cana.dest.salinizacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O K não desaparece na digestão: o risco de salinização por sobredose permanece integral.",
+      "params": [],
+      "fontes": [
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "rota.gotejamento_digestato__dest.subst_fertilizante",
+      "from": "cana.rota.gotejamento_digestato",
+      "to": "cana.dest.subst_fertilizante",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Entregue na zona da raiz, o mesmo potássio substitui mais fertilizante mineral por quilo aplicado.",
+      "params": [],
+      "fontes": [
+        "unica_fertirrigacao"
+      ]
+    },
+    {
+      "id": "rota.gotejamento_digestato__dest.emissoes_solo",
+      "from": "cana.rota.gotejamento_digestato",
+      "to": "cana.dest.emissoes_solo",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Dose fracionada e localizada reduz o pulso de N₂O típico da aplicação em área total.",
+      "params": [],
+      "fontes": [
+        "ipcc_n2o"
+      ]
+    }
+  ],
+  "faltando": [
+    "Não existe nó de produto para o sal de potássio lixiviado da cinza (saída natural de cana.rota.k_das_cinzas); a rota só consegue ligar a destinos.",
+    "Falta nó para o percolado das leiras de compostagem, que na prática retorna ao processo ou à fertirrigação.",
+    "Não há nó de produto para a água condensada da concentração de vinhaça distinta de cana.prod.agua_reuso; liguei a rota diretamente ao destino circuito hídrico.",
+    "cana.prod.biochar e cana.prod.biochar_agricola são praticamente duplicatas; liguei os dois, mas convém consolidar.",
+    "cana.rota.hidrochar e cana.rota.htc descrevem o mesmo processo com nomes diferentes; ambos apontam para cana.prod.hidrochar.",
+    "cana.rota.separacao_digestato e cana.rota.separacao_solido_liquido também se sobrepõem; mantive as duas ligadas ao digestato.",
+    "Falta destino para redução de compactação e tráfego controlado, consequência agronômica citada nos textos de palha e de torta."
+  ],
+  "notas": "Família nutrientes, solo e água. Marquei como real apenas o que opera comercialmente em São Paulo hoje: fertirrigação com vinhaça in natura sob a P4.231, torta no sulco de plantio, palha como cobertura, compostagem de torta com cinza, substrato de muda pré-brotada e o circuito hídrico fechado da usina. Tudo que depende de digestato — fertirrigação, separação de fases, estruvita, stripping de amônia, gotejamento — ficou como potencial, porque depende de biodigestão em escala que ainda não existe no estado. O nó cana.prod.digestato estava completamente ilhado e era a peça que faltava: sem ele, a biodigestão ligava direto nas rotas de destino e o usuário nunca via o produto intermediário. Acrescentei também as entradas corretas para rotas que só fazem sentido a partir do digestato (estruvita, stripping, gotejamento, polimento com microalgas), que hoje recebiam apenas vinhaça bruta; não removi as arestas existentes. As arestas regulatórias para cana.dest.registro_fertilizante_mapa marcam o gargalo real de todo bioproduto sólido: sem registro no MAPA, o material só pode voltar ao próprio canavial, nunca ser vendido."
+}

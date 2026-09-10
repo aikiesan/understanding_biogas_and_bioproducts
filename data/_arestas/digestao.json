@@ -1,0 +1,2658 @@
+{
+  "edges": [
+    {
+      "id": "res.vinhaca__rota.biodigestao_vinhaca",
+      "from": "cana.res.vinhaca",
+      "to": "cana.rota.biodigestao_vinhaca",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "114 m³ biogás/m³ etanol",
+      "explicacao": "A vinhaça é o substrato líquido mais abundante da usina e o único já digerido comercialmente em São Paulo.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p67",
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "res.vinhaca__rota.uasb",
+      "from": "cana.res.vinhaca",
+      "to": "cana.rota.uasb",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "TRH 6-12 h",
+      "explicacao": "A vinhaça diluída e quente atravessa a manta de lodo granular em 6 a 12 h de retenção hidráulica.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p67",
+        "vanhaandel2007"
+      ]
+    },
+    {
+      "id": "res.vinhaca__rota.lagoa_coberta",
+      "from": "cana.res.vinhaca",
+      "to": "cana.rota.lagoa_coberta",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "menor CAPEX",
+      "explicacao": "Cobrir com geomembrana a lagoa de vinhaça que já existe é o caminho de menor CAPEX para capturar o metano.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p70"
+      ]
+    },
+    {
+      "id": "res.vinhaca__rota.egsb_ic",
+      "from": "cana.res.vinhaca",
+      "to": "cana.rota.egsb_ic",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "20-30 kgDQO/m³·d",
+      "explicacao": "O leito granular expandido aceita cargas acima de 20 kgDQO/m³·dia da vinhaça no mesmo volume de reator.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "lettinga1995"
+      ]
+    },
+    {
+      "id": "res.vinhaca__rota.anmbr",
+      "from": "cana.res.vinhaca",
+      "to": "cana.rota.anmbr",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A membrana retém a biomassa e permite digerir vinhaça concentrada sem perder lodo no efluente.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "dereli2012"
+      ]
+    },
+    {
+      "id": "res.vinhaca__rota.abr",
+      "from": "cana.res.vinhaca",
+      "to": "cana.rota.abr",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "As câmaras em série separam acidogênese e metanogênese ao longo do reator, sem peça móvel nem energia de mistura.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "barber1999"
+      ]
+    },
+    {
+      "id": "res.vinhaca__rota.leito_fixo",
+      "from": "cana.res.vinhaca",
+      "to": "cana.rota.leito_fixo",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O biofilme preso ao suporte plástico resiste ao choque de carga orgânica da abertura de safra.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "show2020"
+      ]
+    },
+    {
+      "id": "res.vinhaca__rota.fluxo_pistao",
+      "from": "cana.res.vinhaca",
+      "to": "cana.rota.fluxo_pistao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A vinhaça pode ser espessada e conduzida em fluxo pistão quando misturada a sólidos da usina.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p70"
+      ]
+    },
+    {
+      "id": "res.vinhaca__rota.dois_estagios",
+      "from": "cana.res.vinhaca",
+      "to": "cana.rota.dois_estagios",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Separar a acidificação da vinhaça da metanogênese estabiliza o pH e absorve a variação de carga da safra.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "demirel2008"
+      ]
+    },
+    {
+      "id": "res.vinhaca__rota.codigestao",
+      "from": "cana.res.vinhaca",
+      "to": "cana.rota.codigestao",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "veículo líquido",
+      "explicacao": "A vinhaça entra na co-digestão como fase líquida e fonte de nitrogênio para equilibrar a relação C/N da palha.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca",
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "atlas2020_p72"
+      ]
+    },
+    {
+      "id": "res.vinhaca__rota.separacao_solido_liquido",
+      "from": "cana.res.vinhaca",
+      "to": "cana.rota.separacao_solido_liquido",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Retirar o bagacilho e o sólido suspenso da vinhaça antes do reator evita colmatação da manta de lodo.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "vanhaandel2007"
+      ]
+    },
+    {
+      "id": "res.vinhaca__rota.h2_fermentativo",
+      "from": "cana.res.vinhaca",
+      "to": "cana.rota.h2_fermentativo",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Sob pH baixo e retenção curta, a vinhaça libera hidrogênio antes de qualquer metanogênese.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "fuess2018"
+      ]
+    },
+    {
+      "id": "res.torta__rota.cstr",
+      "from": "cana.res.torta",
+      "to": "cana.rota.cstr",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "melhor BMP da cana",
+      "explicacao": "O tanque agitado é o reator que aceita a torta pastosa, de 6 a 10% de sólidos após diluição.",
+      "params": [
+        "torta_disponivel",
+        "bmp_torta",
+        "sv_torta"
+      ],
+      "fontes": [
+        "atlas2020_p68"
+      ]
+    },
+    {
+      "id": "res.torta__rota.digestao_seca",
+      "from": "cana.res.torta",
+      "to": "cana.rota.digestao_seca",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "acima de 20% ST",
+      "explicacao": "A torta chega com 70-75% de umidade e pode ser digerida sem diluir tudo em água.",
+      "params": [
+        "torta_disponivel",
+        "bmp_torta",
+        "sv_torta"
+      ],
+      "fontes": [
+        "atlas2020_p68"
+      ]
+    },
+    {
+      "id": "res.torta__rota.batelada",
+      "from": "cana.res.torta",
+      "to": "cana.rota.batelada",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A célula tipo garagem é carregada com pá e dispensa bombeamento da torta.",
+      "params": [
+        "torta_disponivel",
+        "bmp_torta",
+        "sv_torta"
+      ],
+      "fontes": [
+        "atlas2020_p71"
+      ]
+    },
+    {
+      "id": "res.torta__rota.fluxo_pistao",
+      "from": "cana.res.torta",
+      "to": "cana.rota.fluxo_pistao",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "10-15% ST",
+      "explicacao": "A torta com 10 a 15% de sólidos avança pelo tubo horizontal sem retromistura.",
+      "params": [
+        "torta_disponivel",
+        "bmp_torta",
+        "sv_torta"
+      ],
+      "fontes": [
+        "atlas2020_p71"
+      ]
+    },
+    {
+      "id": "res.torta__rota.codigestao",
+      "from": "cana.res.torta",
+      "to": "cana.rota.codigestao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A torta entra na mistura como fonte de fósforo e de matéria orgânica prontamente degradável.",
+      "params": [
+        "torta_disponivel",
+        "bmp_torta",
+        "sv_torta"
+      ],
+      "fontes": [
+        "atlas2020_p72"
+      ]
+    },
+    {
+      "id": "res.torta__rota.hidrolise_termica",
+      "from": "cana.res.torta",
+      "to": "cana.rota.hidrolise_termica",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "+20-40% de CH4",
+      "explicacao": "Cozinhar a torta a 160 °C sob pressão desestrutura a fibra e eleva o BMP antes do digestor.",
+      "params": [
+        "torta_disponivel",
+        "bmp_torta",
+        "sv_torta"
+      ],
+      "fontes": [
+        "barber2016"
+      ]
+    },
+    {
+      "id": "res.torta__rota.higienizacao",
+      "from": "cana.res.torta",
+      "to": "cana.rota.higienizacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "70 °C por 1 h",
+      "explicacao": "Uma hora a 70 °C elimina patógeno e semente de daninha da torta antes de ela virar digestato vendável.",
+      "params": [
+        "torta_disponivel",
+        "bmp_torta",
+        "sv_torta"
+      ],
+      "obrigatorio": true,
+      "baseLegal": "IN MAPA 61/2020",
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "res.torta__rota.separacao_solido_liquido",
+      "from": "cana.res.torta",
+      "to": "cana.rota.separacao_solido_liquido",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A prensagem da torta define a fração rápida líquida e a fração fibrosa lenta que seguem para reatores distintos.",
+      "params": [
+        "torta_disponivel",
+        "bmp_torta",
+        "sv_torta"
+      ],
+      "fontes": [
+        "atlas2020_p68"
+      ]
+    },
+    {
+      "id": "res.palha__rota.digestao_seca",
+      "from": "cana.res.palha",
+      "to": "cana.rota.digestao_seca",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "250 Nm³ CH4/tSV",
+      "explicacao": "A palha com 15% de umidade só entra em digestor se for por via seca, acima de 20% de sólidos totais.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "atlas2020_p69",
+        "perda_estocagem"
+      ]
+    },
+    {
+      "id": "res.palha__rota.batelada",
+      "from": "cana.res.palha",
+      "to": "cana.rota.batelada",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O fardo de palha é empilhado na célula e regado com percolado, sem trituração fina nem bomba de sólidos.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha",
+        "perda_estocagem_palha"
+      ],
+      "fontes": [
+        "atlas2020_p71"
+      ]
+    },
+    {
+      "id": "res.palha__rota.codigestao",
+      "from": "cana.res.palha",
+      "to": "cana.rota.codigestao",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "C/N 80:1",
+      "explicacao": "A palha entra como fonte de carbono para corrigir a relação C/N baixa da vinhaça e da torta.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "atlas2020_p72"
+      ]
+    },
+    {
+      "id": "res.palha__rota.explosao_vapor",
+      "from": "cana.res.palha",
+      "to": "cana.rota.explosao_vapor",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Vapor a 180-210 °C e descompressão súbita arrebentam a parede celular e liberam a celulose da palha.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "res.palha__rota.pretrat_alcalino",
+      "from": "cana.res.palha",
+      "to": "cana.rota.pretrat_alcalino",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Soda ou cal a quente arrancam a lignina da palha e preservam os açúcares da fibra.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "kim2016"
+      ]
+    },
+    {
+      "id": "res.palha__rota.pretrat_acido_diluido",
+      "from": "cana.res.palha",
+      "to": "cana.rota.pretrat_acido_diluido",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Ácido sulfúrico a 1% dissolve a hemicelulose da palha e libera o licor de xilose.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "res.palha__rota.moagem_fina",
+      "from": "cana.res.palha",
+      "to": "cana.rota.moagem_fina",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Reduzir a partícula da palha abre superfície para enzima e para bactéria, ao custo de energia elétrica.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "barakat2014"
+      ]
+    },
+    {
+      "id": "res.palha__rota.extrusao",
+      "from": "cana.res.palha",
+      "to": "cana.rota.extrusao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A rosca sem-fim cisalha a palha em fluxo contínuo, sem água e sem reagente.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "duque2017"
+      ]
+    },
+    {
+      "id": "res.palha__rota.pretrat_organosolv",
+      "from": "cana.res.palha",
+      "to": "cana.rota.pretrat_organosolv",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Etanol quente separa a palha em celulose, hemicelulose e lignina limpa em uma só etapa.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "zhao2009"
+      ]
+    },
+    {
+      "id": "res.palha__rota.organosolv",
+      "from": "cana.res.palha",
+      "to": "cana.rota.organosolv",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O solvente orgânico fraciona a palha em três correntes aproveitáveis separadamente.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "zhao2009"
+      ]
+    },
+    {
+      "id": "res.palha__rota.pretrat_biologico",
+      "from": "cana.res.palha",
+      "to": "cana.rota.pretrat_biologico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Fungos de podridão branca consomem a lignina da palha sem reagente e sem calor, em semanas.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "wan2012"
+      ]
+    },
+    {
+      "id": "res.palha__rota.pretrat_fungico",
+      "from": "cana.res.palha",
+      "to": "cana.rota.pretrat_fungico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O fungo delignifica a palha estocada no próprio pátio, trocando tempo por energia.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "wan2012"
+      ]
+    },
+    {
+      "id": "res.palha__rota.pretrat_afex",
+      "from": "cana.res.palha",
+      "to": "cana.rota.pretrat_afex",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Amônia sob pressão descristaliza a fibra da palha e deixa nitrogênio útil no material.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "balan2009"
+      ]
+    },
+    {
+      "id": "res.palha__rota.pretrat_liquidos_ionicos",
+      "from": "cana.res.palha",
+      "to": "cana.rota.pretrat_liquidos_ionicos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O sal líquido dissolve a celulose inteira da palha em condições brandas, mas ainda custa caro.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "brandt2013"
+      ]
+    },
+    {
+      "id": "res.palha__rota.liquido_ionico",
+      "from": "cana.res.palha",
+      "to": "cana.rota.liquido_ionico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O líquido iônico dissolve a fibra a baixa temperatura e permite reprecipitar celulose amorfa.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "brandt2013"
+      ]
+    },
+    {
+      "id": "res.palha__rota.ultrassom",
+      "from": "cana.res.palha",
+      "to": "cana.rota.ultrassom",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A cavitação rompe a estrutura da palha em segundos, com gasto elétrico que costuma comer o ganho.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "bundhoo2018"
+      ]
+    },
+    {
+      "id": "res.palha__rota.hidrolise_termica",
+      "from": "cana.res.palha",
+      "to": "cana.rota.hidrolise_termica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O tratamento térmico sob pressão solubiliza a hemicelulose da palha antes do digestor.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "barber2016"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.pretrat_explosao_vapor",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.pretrat_explosao_vapor",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "190 °C",
+      "explicacao": "A explosão a vapor é o pré-tratamento do bagaço já operado em escala comercial na planta 2G paulista.",
+      "params": [
+        "incluir_bagaco",
+        "bagaco_excedente",
+        "bmp_bagaco",
+        "sv_bagaco"
+      ],
+      "fontes": [
+        "raizen2G",
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.pretrat_acido",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.pretrat_acido",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O ácido sulfúrico diluído a quente hidrolisa a hemicelulose do bagaço e libera açúcar C5.",
+      "params": [
+        "incluir_bagaco",
+        "bagaco_excedente",
+        "bmp_bagaco",
+        "sv_bagaco"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.pretrat_alcalino",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.pretrat_alcalino",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O tratamento alcalino remove lignina do bagaço e eleva a conversão da celulose.",
+      "params": [
+        "incluir_bagaco",
+        "bagaco_excedente",
+        "bmp_bagaco",
+        "sv_bagaco"
+      ],
+      "fontes": [
+        "kim2016"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.moagem_fina",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.moagem_fina",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A moagem fina do bagaço reduz a cristalinidade e o tamanho de partícula antes da enzima.",
+      "params": [
+        "incluir_bagaco",
+        "bagaco_excedente",
+        "bmp_bagaco",
+        "sv_bagaco"
+      ],
+      "fontes": [
+        "barakat2014"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.digestao_seca",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.digestao_seca",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "BMP baixo",
+      "explicacao": "O bagaço excedente, se houver, é digerível por via seca — mas seu BMP é o pior da cana pela lignina.",
+      "params": [
+        "incluir_bagaco",
+        "bagaco_excedente",
+        "bmp_bagaco",
+        "sv_bagaco"
+      ],
+      "fontes": [
+        "atlas2020_p66"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.codigestao",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.codigestao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O bagaço entra na mistura só como ajuste de carbono; hoje ele já é queimado na caldeira.",
+      "params": [
+        "incluir_bagaco",
+        "bagaco_excedente",
+        "bmp_bagaco",
+        "sv_bagaco"
+      ],
+      "fontes": [
+        "atlas2020_p66"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.pretrat_liquidos_ionicos",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.pretrat_liquidos_ionicos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O líquido iônico dissolve a celulose do bagaço sem a severidade térmica da explosão a vapor.",
+      "params": [
+        "incluir_bagaco",
+        "bagaco_excedente",
+        "bmp_bagaco",
+        "sv_bagaco"
+      ],
+      "fontes": [
+        "brandt2013"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.pretrat_organosolv",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.pretrat_organosolv",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O organosolv entrega, além da polpa, uma lignina de bagaço limpa e sem enxofre.",
+      "params": [
+        "incluir_bagaco",
+        "bagaco_excedente",
+        "bmp_bagaco",
+        "sv_bagaco"
+      ],
+      "fontes": [
+        "zhao2009"
+      ]
+    },
+    {
+      "id": "res.lodo__rota.hidrolise_termica",
+      "from": "cana.res.lodo",
+      "to": "cana.rota.hidrolise_termica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O lodo do decantador é o resíduo mais indicado para a hidrólise térmica, que solubiliza sua matéria orgânica.",
+      "params": [],
+      "fontes": [
+        "barber2016"
+      ]
+    },
+    {
+      "id": "res.lodo__rota.cstr",
+      "from": "cana.res.lodo",
+      "to": "cana.rota.cstr",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O lodo de decantação pode ser digerido junto com a torta no mesmo tanque agitado.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p68"
+      ]
+    },
+    {
+      "id": "res.flegmaca__rota.uasb",
+      "from": "cana.res.flegmaca",
+      "to": "cana.rota.uasb",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A flegmaça tem menos volume e menos carga que a vinhaça, e é digerível na mesma manta de lodo.",
+      "params": [],
+      "fontes": [
+        "fuess2017"
+      ]
+    },
+    {
+      "id": "copr.levedura__rota.codigestao",
+      "from": "cana.copr.levedura",
+      "to": "cana.rota.codigestao",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "alta C/N corrigida",
+      "explicacao": "A purga de levedura é a corrente mais rica em nitrogênio da usina e corrige a C/N da palha.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p72"
+      ]
+    },
+    {
+      "id": "res.agua_lavagem__rota.separacao_solido_liquido",
+      "from": "cana.res.agua_lavagem",
+      "to": "cana.rota.separacao_solido_liquido",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O palhiço e a terra da limpeza precisam ser separados antes que a água entre em qualquer reator.",
+      "params": [],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "rota.pretrat_explosao_vapor__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_explosao_vapor",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O sólido que sai da explosão a vapor é a polpa de celulose e lignina que a enzima ataca.",
+      "params": [
+        "incluir_bagaco",
+        "bagaco_excedente",
+        "bmp_bagaco",
+        "sv_bagaco"
+      ],
+      "fontes": [
+        "raizen2G"
+      ]
+    },
+    {
+      "id": "rota.pretrat_explosao_vapor__copr.hidrolisado_c5",
+      "from": "cana.rota.pretrat_explosao_vapor",
+      "to": "cana.copr.hidrolisado_c5",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "~25% da fibra",
+      "explicacao": "A hemicelulose solubilizada pelo vapor sai no licor como xilose.",
+      "params": [
+        "incluir_bagaco",
+        "bagaco_excedente",
+        "bmp_bagaco",
+        "sv_bagaco"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.explosao_vapor__copr.polpa_celulosica",
+      "from": "cana.rota.explosao_vapor",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A palha explodida entrega a mesma polpa acessível à celulase que o bagaço.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.explosao_vapor__copr.hidrolisado_c5",
+      "from": "cana.rota.explosao_vapor",
+      "to": "cana.copr.hidrolisado_c5",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O licor da explosão carrega a xilose da hemicelulose da palha.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.explosao_vapor__rota.digestao_seca",
+      "from": "cana.rota.explosao_vapor",
+      "to": "cana.rota.digestao_seca",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "+30-50% de CH4",
+      "explicacao": "A palha explodida chega ao digestor com a fibra aberta e eleva o rendimento de metano.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha",
+        "bmp_palha"
+      ],
+      "fontes": [
+        "bauer2009"
+      ]
+    },
+    {
+      "id": "rota.explosao_vapor__rota.cstr",
+      "from": "cana.rota.explosao_vapor",
+      "to": "cana.rota.cstr",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Depois da explosão a vapor a palha bombeia e mistura, o que permite usar o tanque agitado.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "bauer2009"
+      ]
+    },
+    {
+      "id": "rota.pretrat_acido__copr.hidrolisado_c5",
+      "from": "cana.rota.pretrat_acido",
+      "to": "cana.copr.hidrolisado_c5",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O ácido diluído despeja a hemicelulose no licor de pentoses.",
+      "params": [
+        "incluir_bagaco",
+        "bagaco_excedente",
+        "bmp_bagaco",
+        "sv_bagaco"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.pretrat_acido__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_acido",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Removida a hemicelulose, resta uma polpa de celulose e lignina pronta para a hidrólise.",
+      "params": [
+        "incluir_bagaco",
+        "bagaco_excedente",
+        "bmp_bagaco",
+        "sv_bagaco"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.pretrat_acido_diluido__copr.hidrolisado_c5",
+      "from": "cana.rota.pretrat_acido_diluido",
+      "to": "cana.copr.hidrolisado_c5",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O licor rico em xilose é o produto principal da hidrólise ácida diluída.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.pretrat_acido_diluido__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_acido_diluido",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O sólido remanescente concentra celulose e lignina.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.pretrat_alcalino__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_alcalino",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Retirada a lignina, sobra uma polpa de alta digestibilidade enzimática.",
+      "params": [],
+      "fontes": [
+        "kim2016"
+      ]
+    },
+    {
+      "id": "rota.pretrat_alcalino__prod.lignina",
+      "from": "cana.rota.pretrat_alcalino",
+      "to": "cana.prod.lignina",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A lignina dissolvida no licor alcalino é recuperada por acidificação.",
+      "params": [],
+      "fontes": [
+        "kim2016"
+      ]
+    },
+    {
+      "id": "rota.pretrat_alcalino__rota.digestao_seca",
+      "from": "cana.rota.pretrat_alcalino",
+      "to": "cana.rota.digestao_seca",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A palha deslignificada é o substrato lignocelulósico com melhor conversão a metano.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha",
+        "bmp_palha"
+      ],
+      "fontes": [
+        "zheng2014"
+      ]
+    },
+    {
+      "id": "rota.pretrat_organosolv__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_organosolv",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O organosolv devolve a fração celulósica limpa e altamente reativa.",
+      "params": [],
+      "fontes": [
+        "zhao2009"
+      ]
+    },
+    {
+      "id": "rota.pretrat_organosolv__prod.lignina",
+      "from": "cana.rota.pretrat_organosolv",
+      "to": "cana.prod.lignina",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "lignina sem enxofre",
+      "explicacao": "A lignina organosolv sai sem enxofre e com massa molar baixa, a mais valiosa das ligninas técnicas.",
+      "params": [],
+      "fontes": [
+        "zhao2009"
+      ]
+    },
+    {
+      "id": "rota.pretrat_organosolv__copr.hidrolisado_c5",
+      "from": "cana.rota.pretrat_organosolv",
+      "to": "cana.copr.hidrolisado_c5",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A hemicelulose segue no licor aquoso do organosolv como pentoses.",
+      "params": [],
+      "fontes": [
+        "zhao2009"
+      ]
+    },
+    {
+      "id": "rota.organosolv__copr.polpa_celulosica",
+      "from": "cana.rota.organosolv",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A corrente de celulose é a fração de maior massa que sai do fracionamento por solvente.",
+      "params": [],
+      "fontes": [
+        "zhao2009"
+      ]
+    },
+    {
+      "id": "rota.organosolv__prod.lignina",
+      "from": "cana.rota.organosolv",
+      "to": "cana.prod.lignina",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A lignina precipitada do solvente é a terceira corrente do organosolv.",
+      "params": [],
+      "fontes": [
+        "zhao2009"
+      ]
+    },
+    {
+      "id": "rota.organosolv__copr.hidrolisado_c5",
+      "from": "cana.rota.organosolv",
+      "to": "cana.copr.hidrolisado_c5",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A hemicelulose despolimerizada fica no licor como pentoses.",
+      "params": [],
+      "fontes": [
+        "zhao2009"
+      ]
+    },
+    {
+      "id": "rota.pretrat_liquidos_ionicos__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_liquidos_ionicos",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "celulose amorfa",
+      "explicacao": "A celulose reprecipitada do líquido iônico é amorfa e quase totalmente acessível à enzima.",
+      "params": [],
+      "fontes": [
+        "brandt2013"
+      ]
+    },
+    {
+      "id": "rota.pretrat_liquidos_ionicos__prod.lignina",
+      "from": "cana.rota.pretrat_liquidos_ionicos",
+      "to": "cana.prod.lignina",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O sal líquido separa a lignina da fibra sem degradá-la termicamente.",
+      "params": [],
+      "fontes": [
+        "brandt2013"
+      ]
+    },
+    {
+      "id": "rota.liquido_ionico__copr.polpa_celulosica",
+      "from": "cana.rota.liquido_ionico",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Dissolver e reprecipitar a celulose destrói a cristalinidade que trava a hidrólise.",
+      "params": [],
+      "fontes": [
+        "brandt2013"
+      ]
+    },
+    {
+      "id": "rota.liquido_ionico__prod.lignina",
+      "from": "cana.rota.liquido_ionico",
+      "to": "cana.prod.lignina",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A lignina fica no solvente e é recuperada com antissolvente.",
+      "params": [],
+      "fontes": [
+        "brandt2013"
+      ]
+    },
+    {
+      "id": "rota.pretrat_biologico__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_biologico",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O que sobra do ataque fúngico é uma fibra deslignificada, sem inibidor químico.",
+      "params": [],
+      "fontes": [
+        "wan2012"
+      ]
+    },
+    {
+      "id": "rota.pretrat_biologico__rota.digestao_seca",
+      "from": "cana.rota.pretrat_biologico",
+      "to": "cana.rota.digestao_seca",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A palha pré-digerida por fungo entra no digestor sem carregar furfural nem ácido residual.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha",
+        "bmp_palha"
+      ],
+      "fontes": [
+        "wan2012"
+      ]
+    },
+    {
+      "id": "rota.pretrat_fungico__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_fungico",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Semanas de fungo entregam a mesma fibra aberta que minutos de vapor, sem consumir energia.",
+      "params": [],
+      "fontes": [
+        "wan2012"
+      ]
+    },
+    {
+      "id": "rota.pretrat_fungico__rota.codigestao",
+      "from": "cana.rota.pretrat_fungico",
+      "to": "cana.rota.codigestao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A palha delignificada por fungo é a fração de carbono mais degradável da mistura.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "wan2012"
+      ]
+    },
+    {
+      "id": "rota.pretrat_afex__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_afex",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "sem licor separado",
+      "explicacao": "O AFEX não gera licor separado: toda a fibra sai como sólido pré-tratado e nitrogenado.",
+      "params": [],
+      "fontes": [
+        "balan2009"
+      ]
+    },
+    {
+      "id": "rota.pretrat_afex__rota.codigestao",
+      "from": "cana.rota.pretrat_afex",
+      "to": "cana.rota.codigestao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A amônia residual do AFEX corrige a relação C/N da mistura e dispensa fonte externa de nitrogênio.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "balan2009"
+      ]
+    },
+    {
+      "id": "rota.moagem_fina__rota.hidrolise_enzimatica",
+      "from": "cana.rota.moagem_fina",
+      "to": "cana.rota.hidrolise_enzimatica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A partícula fina expõe superfície de celulose e reduz a carga de enzima necessária.",
+      "params": [],
+      "fontes": [
+        "barakat2014"
+      ]
+    },
+    {
+      "id": "rota.moagem_fina__rota.digestao_seca",
+      "from": "cana.rota.moagem_fina",
+      "to": "cana.rota.digestao_seca",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Cortar a partícula acelera a hidrólise, que é a etapa limitante da digestão do lignocelulósico.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha",
+        "bmp_palha"
+      ],
+      "fontes": [
+        "bundhoo2018"
+      ]
+    },
+    {
+      "id": "rota.moagem_fina__rota.cstr",
+      "from": "cana.rota.moagem_fina",
+      "to": "cana.rota.cstr",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Abaixo de 2 mm a fibra deixa de formar crosta e o tanque agitado passa a aceitá-la.",
+      "params": [],
+      "fontes": [
+        "bundhoo2018"
+      ]
+    },
+    {
+      "id": "rota.extrusao__copr.polpa_celulosica",
+      "from": "cana.rota.extrusao",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A extrusora entrega fibra desfibrilada em fluxo contínuo, sem efluente líquido.",
+      "params": [],
+      "fontes": [
+        "duque2017"
+      ]
+    },
+    {
+      "id": "rota.extrusao__rota.digestao_seca",
+      "from": "cana.rota.extrusao",
+      "to": "cana.rota.digestao_seca",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A palha extrudada tem densidade e homogeneidade adequadas ao carregamento do digestor seco.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha",
+        "bmp_palha"
+      ],
+      "fontes": [
+        "duque2017"
+      ]
+    },
+    {
+      "id": "rota.ultrassom__rota.cstr",
+      "from": "cana.rota.ultrassom",
+      "to": "cana.rota.cstr",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A cavitação rompe células e libera matéria orgânica solúvel logo antes do reator.",
+      "params": [],
+      "fontes": [
+        "bundhoo2018"
+      ]
+    },
+    {
+      "id": "rota.ultrassom__rota.hidrolise_enzimatica",
+      "from": "cana.rota.ultrassom",
+      "to": "cana.rota.hidrolise_enzimatica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O ultrassom desagrega a polpa e melhora o contato entre enzima e substrato.",
+      "params": [],
+      "fontes": [
+        "bundhoo2018"
+      ]
+    },
+    {
+      "id": "rota.hidrolise_termica__rota.cstr",
+      "from": "cana.rota.hidrolise_termica",
+      "to": "cana.rota.cstr",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "+20-40% de CH4",
+      "explicacao": "O substrato hidrolisado entra no digestor já solubilizado, com menor tempo de retenção.",
+      "params": [
+        "torta_disponivel",
+        "bmp_torta",
+        "sv_torta",
+        "bmp_torta"
+      ],
+      "fontes": [
+        "barber2016"
+      ]
+    },
+    {
+      "id": "rota.hidrolise_termica__rota.digestao_seca",
+      "from": "cana.rota.hidrolise_termica",
+      "to": "cana.rota.digestao_seca",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O choque térmico abre a fibra e compensa a lentidão típica da via seca.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "barber2016"
+      ]
+    },
+    {
+      "id": "rota.hidrolise_termica__rota.higienizacao",
+      "from": "cana.rota.hidrolise_termica",
+      "to": "cana.rota.higienizacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O tratamento a 160 °C já cumpre e supera a exigência térmica de higienização do substrato.",
+      "params": [],
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "rota.higienizacao__rota.cstr",
+      "from": "cana.rota.higienizacao",
+      "to": "cana.rota.cstr",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O substrato higienizado entra no digestor sem carga patogênica que o processo mesofílico não elimina.",
+      "params": [],
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "rota.higienizacao__rota.batelada",
+      "from": "cana.rota.higienizacao",
+      "to": "cana.rota.batelada",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Na batelada, a higienização precede o carregamento porque o processo não tem retenção mínima garantida.",
+      "params": [],
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "rota.higienizacao__dest.registro_fertilizante_mapa",
+      "from": "cana.rota.higienizacao",
+      "to": "cana.dest.registro_fertilizante_mapa",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "rotulo": "70 °C / 1 h",
+      "explicacao": "Sem comprovar 70 °C por uma hora, o digestato não obtém registro como fertilizante orgânico.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "IN MAPA 61/2020",
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "rota.separacao_solido_liquido__rota.uasb",
+      "from": "cana.rota.separacao_solido_liquido",
+      "to": "cana.rota.uasb",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "fração rápida",
+      "explicacao": "A fase líquida clarificada é a que serve ao reator de alta taxa, que não tolera sólido suspenso.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "vanhaandel2007"
+      ]
+    },
+    {
+      "id": "rota.separacao_solido_liquido__rota.digestao_seca",
+      "from": "cana.rota.separacao_solido_liquido",
+      "to": "cana.rota.digestao_seca",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "fração lenta",
+      "explicacao": "A fase sólida retida na prensa segue para o digestor de alta concentração de sólidos.",
+      "params": [
+        "torta_disponivel",
+        "bmp_torta",
+        "sv_torta"
+      ],
+      "fontes": [
+        "atlas2020_p68"
+      ]
+    },
+    {
+      "id": "rota.separacao_solido_liquido__prod.digestato_liquido",
+      "from": "cana.rota.separacao_solido_liquido",
+      "to": "cana.prod.digestato_liquido",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A prensagem do digerido entrega o líquido rico em potássio e nitrogênio amoniacal.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "rota.separacao_solido_liquido__prod.digestato_solido",
+      "from": "cana.rota.separacao_solido_liquido",
+      "to": "cana.prod.digestato_solido",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O sólido prensado concentra fósforo e matéria orgânica em massa transportável.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "copr.vapor__rota.pretrat_explosao_vapor",
+      "from": "cana.copr.vapor",
+      "to": "cana.rota.pretrat_explosao_vapor",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "O vapor de escape da usina é o próprio reagente da explosão a vapor.",
+      "params": [],
+      "fontes": [
+        "raizen2G"
+      ]
+    },
+    {
+      "id": "copr.vapor__rota.explosao_vapor",
+      "from": "cana.copr.vapor",
+      "to": "cana.rota.explosao_vapor",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "A integração com a caldeira da usina é o que torna o pré-tratamento térmico da palha viável.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "copr.vapor__rota.hidrolise_termica",
+      "from": "cana.copr.vapor",
+      "to": "cana.rota.hidrolise_termica",
+      "kind": "energia",
+      "estado": "potencial",
+      "rotulo": "160 °C",
+      "explicacao": "O reator de hidrólise térmica opera com vapor de baixa pressão já disponível na usina.",
+      "params": [],
+      "fontes": [
+        "barber2016"
+      ]
+    },
+    {
+      "id": "copr.vapor__rota.higienizacao",
+      "from": "cana.copr.vapor",
+      "to": "cana.rota.higienizacao",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "Uma hora a 70 °C é calor de baixa qualidade, o mais barato que a usina tem.",
+      "params": [],
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "prod.calor_util__rota.cstr",
+      "from": "cana.prod.calor_util",
+      "to": "cana.rota.cstr",
+      "kind": "energia",
+      "estado": "potencial",
+      "rotulo": "37 °C",
+      "explicacao": "O calor recuperado do motogerador basta para manter o digestor na faixa mesofílica de 37 °C.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p70"
+      ]
+    },
+    {
+      "id": "prod.calor_util__rota.higienizacao",
+      "from": "cana.prod.calor_util",
+      "to": "cana.rota.higienizacao",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "A água quente do motor leva o substrato aos 70 °C exigidos, sem queimar combustível adicional.",
+      "params": [],
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "prod.calor_util__rota.digestao_seca",
+      "from": "cana.prod.calor_util",
+      "to": "cana.rota.digestao_seca",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "A digestão seca é aquecida pelo próprio calor residual do aproveitamento do biogás.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p71"
+      ]
+    },
+    {
+      "id": "rota.biodigestao_vinhaca__prod.biogas_bruto",
+      "from": "cana.rota.biodigestao_vinhaca",
+      "to": "cana.prod.biogas_bruto",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "50-65% CH4",
+      "explicacao": "A biodigestão da vinhaça é a única rota de biogás da cana já em operação comercial em São Paulo.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p67"
+      ]
+    },
+    {
+      "id": "rota.uasb__prod.biogas_bruto",
+      "from": "cana.rota.uasb",
+      "to": "cana.prod.biogas_bruto",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "50-65% CH4",
+      "explicacao": "A manta de lodo granular converte a DQO da vinhaça em metano em poucas horas de retenção.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p67"
+      ]
+    },
+    {
+      "id": "rota.lagoa_coberta__prod.biogas_bruto",
+      "from": "cana.rota.lagoa_coberta",
+      "to": "cana.prod.biogas_bruto",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "50-65% CH4",
+      "explicacao": "A geomembrana coleta o metano que a lagoa aberta emitia para a atmosfera.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p67"
+      ]
+    },
+    {
+      "id": "rota.egsb_ic__prod.biogas_bruto",
+      "from": "cana.rota.egsb_ic",
+      "to": "cana.prod.biogas_bruto",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "50-65% CH4",
+      "explicacao": "O leito expandido entrega mais metano por metro cúbico de reator que o UASB convencional.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p67"
+      ]
+    },
+    {
+      "id": "rota.cstr__prod.biogas_bruto",
+      "from": "cana.rota.cstr",
+      "to": "cana.prod.biogas_bruto",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "50-65% CH4",
+      "explicacao": "O tanque agitado converte a matéria orgânica pastosa em biogás com 55 a 65% de metano.",
+      "params": [
+        "torta_disponivel",
+        "bmp_torta",
+        "sv_torta"
+      ],
+      "fontes": [
+        "atlas2020_p67"
+      ]
+    },
+    {
+      "id": "rota.anmbr__prod.biogas_bruto",
+      "from": "cana.rota.anmbr",
+      "to": "cana.prod.biogas_bruto",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "50-65% CH4",
+      "explicacao": "A retenção total de biomassa pela membrana eleva a conversão a metano mesmo com carga variável.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p67"
+      ]
+    },
+    {
+      "id": "rota.abr__prod.biogas_bruto",
+      "from": "cana.rota.abr",
+      "to": "cana.prod.biogas_bruto",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "50-65% CH4",
+      "explicacao": "As câmaras em série entregam biogás estável sem consumo de energia de mistura.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p67"
+      ]
+    },
+    {
+      "id": "rota.leito_fixo__prod.biogas_bruto",
+      "from": "cana.rota.leito_fixo",
+      "to": "cana.prod.biogas_bruto",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "50-65% CH4",
+      "explicacao": "O biofilme aderido mantém a produção de metano durante o choque de carga da safra.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p67"
+      ]
+    },
+    {
+      "id": "rota.fluxo_pistao__prod.biogas_bruto",
+      "from": "cana.rota.fluxo_pistao",
+      "to": "cana.prod.biogas_bruto",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "50-65% CH4",
+      "explicacao": "O avanço sem retromistura garante conversão completa ao longo do tubo.",
+      "params": [
+        "torta_disponivel",
+        "bmp_torta",
+        "sv_torta"
+      ],
+      "fontes": [
+        "atlas2020_p67"
+      ]
+    },
+    {
+      "id": "rota.batelada__prod.biogas_bruto",
+      "from": "cana.rota.batelada",
+      "to": "cana.prod.biogas_bruto",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "50-65% CH4",
+      "explicacao": "A célula fechada libera o biogás em curva de pico, o que exige gasômetro para amortecer.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "atlas2020_p67"
+      ]
+    },
+    {
+      "id": "rota.digestao_seca__prod.biogas_bruto",
+      "from": "cana.rota.digestao_seca",
+      "to": "cana.prod.biogas_bruto",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "50-65% CH4",
+      "explicacao": "A via seca converte palha e torta a metano sem diluir a usina em água.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "atlas2020_p67"
+      ]
+    },
+    {
+      "id": "rota.dois_estagios__prod.biogas_bruto",
+      "from": "cana.rota.dois_estagios",
+      "to": "cana.prod.biogas_bruto",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "50-65% CH4",
+      "explicacao": "Separar as fases eleva o rendimento de metano e estabiliza o reator metanogênico.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p67"
+      ]
+    },
+    {
+      "id": "rota.codigestao__prod.biogas_bruto",
+      "from": "cana.rota.codigestao",
+      "to": "cana.prod.biogas_bruto",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "50-65% CH4",
+      "explicacao": "A mistura equilibrada de C/N entrega mais metano que a soma dos substratos digeridos separadamente.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca",
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "atlas2020_p67"
+      ]
+    },
+    {
+      "id": "rota.biodigestao_vinhaca__prod.digestato",
+      "from": "cana.rota.biodigestao_vinhaca",
+      "to": "cana.prod.digestato",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "K, N e P preservados",
+      "explicacao": "O reator não consome nutriente: todo o potássio, o fósforo e o nitrogênio do substrato saem no digestato.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "rota.uasb__prod.digestato",
+      "from": "cana.rota.uasb",
+      "to": "cana.prod.digestato",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "K, N e P preservados",
+      "explicacao": "O reator não consome nutriente: todo o potássio, o fósforo e o nitrogênio do substrato saem no digestato.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "rota.lagoa_coberta__prod.digestato",
+      "from": "cana.rota.lagoa_coberta",
+      "to": "cana.prod.digestato",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "K, N e P preservados",
+      "explicacao": "O reator não consome nutriente: todo o potássio, o fósforo e o nitrogênio do substrato saem no digestato.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "rota.egsb_ic__prod.digestato",
+      "from": "cana.rota.egsb_ic",
+      "to": "cana.prod.digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "K, N e P preservados",
+      "explicacao": "O reator não consome nutriente: todo o potássio, o fósforo e o nitrogênio do substrato saem no digestato.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "rota.cstr__prod.digestato",
+      "from": "cana.rota.cstr",
+      "to": "cana.prod.digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "K, N e P preservados",
+      "explicacao": "O reator não consome nutriente: todo o potássio, o fósforo e o nitrogênio do substrato saem no digestato.",
+      "params": [
+        "torta_disponivel",
+        "bmp_torta",
+        "sv_torta"
+      ],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "rota.anmbr__prod.digestato",
+      "from": "cana.rota.anmbr",
+      "to": "cana.prod.digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "K, N e P preservados",
+      "explicacao": "O reator não consome nutriente: todo o potássio, o fósforo e o nitrogênio do substrato saem no digestato.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "rota.abr__prod.digestato",
+      "from": "cana.rota.abr",
+      "to": "cana.prod.digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "K, N e P preservados",
+      "explicacao": "O reator não consome nutriente: todo o potássio, o fósforo e o nitrogênio do substrato saem no digestato.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "rota.leito_fixo__prod.digestato",
+      "from": "cana.rota.leito_fixo",
+      "to": "cana.prod.digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "K, N e P preservados",
+      "explicacao": "O reator não consome nutriente: todo o potássio, o fósforo e o nitrogênio do substrato saem no digestato.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "rota.fluxo_pistao__prod.digestato",
+      "from": "cana.rota.fluxo_pistao",
+      "to": "cana.prod.digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "K, N e P preservados",
+      "explicacao": "O reator não consome nutriente: todo o potássio, o fósforo e o nitrogênio do substrato saem no digestato.",
+      "params": [
+        "torta_disponivel",
+        "bmp_torta",
+        "sv_torta"
+      ],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "rota.batelada__prod.digestato",
+      "from": "cana.rota.batelada",
+      "to": "cana.prod.digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "K, N e P preservados",
+      "explicacao": "O reator não consome nutriente: todo o potássio, o fósforo e o nitrogênio do substrato saem no digestato.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "rota.digestao_seca__prod.digestato",
+      "from": "cana.rota.digestao_seca",
+      "to": "cana.prod.digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "K, N e P preservados",
+      "explicacao": "O reator não consome nutriente: todo o potássio, o fósforo e o nitrogênio do substrato saem no digestato.",
+      "params": [
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "rota.dois_estagios__prod.digestato",
+      "from": "cana.rota.dois_estagios",
+      "to": "cana.prod.digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "K, N e P preservados",
+      "explicacao": "O reator não consome nutriente: todo o potássio, o fósforo e o nitrogênio do substrato saem no digestato.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca"
+      ],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "rota.codigestao__prod.digestato",
+      "from": "cana.rota.codigestao",
+      "to": "cana.prod.digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "K, N e P preservados",
+      "explicacao": "O reator não consome nutriente: todo o potássio, o fósforo e o nitrogênio do substrato saem no digestato.",
+      "params": [
+        "vinhaca_disponivel",
+        "vinhaca_biogas",
+        "ch4_vinhaca",
+        "palha_recolhivel",
+        "bmp_palha",
+        "sv_palha"
+      ],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "rota.anmbr__prod.agua_reuso",
+      "from": "cana.rota.anmbr",
+      "to": "cana.prod.agua_reuso",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O permeado da membrana sai clarificado e pode voltar ao processo em vez de ir ao campo.",
+      "params": [],
+      "fontes": [
+        "dereli2012"
+      ]
+    },
+    {
+      "id": "rota.dois_estagios__prod.hidrogenio",
+      "from": "cana.rota.dois_estagios",
+      "to": "cana.prod.hidrogenio",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "hitano: H2 + CH4",
+      "explicacao": "O primeiro estágio acidogênico libera hidrogênio antes de o metano se formar no segundo.",
+      "params": [],
+      "fontes": [
+        "fuess2018"
+      ]
+    },
+    {
+      "id": "rota.h2_fermentativo__rota.uasb",
+      "from": "cana.rota.h2_fermentativo",
+      "to": "cana.rota.uasb",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O efluente da fermentação escura, cheio de ácidos voláteis, é o substrato ideal do reator metanogênico.",
+      "params": [],
+      "fontes": [
+        "fuess2018"
+      ]
+    },
+    {
+      "id": "rota.codigestao__dest.registro_fertilizante_mapa",
+      "from": "cana.rota.codigestao",
+      "to": "cana.dest.registro_fertilizante_mapa",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "O digestato de mistura só pode ser vendido como fertilizante se a formulação for registrada.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "IN MAPA 61/2020",
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "rota.biodigestao_vinhaca__dest.licenciamento_cetesb",
+      "from": "cana.rota.biodigestao_vinhaca",
+      "to": "cana.dest.licenciamento_cetesb",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "O biodigestor é unidade licenciável: sem LP, LI e LO da CETESB, a planta não opera.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Lei Estadual 997/1976 e Decreto 8.468/1976",
+      "fontes": [
+        "cetesb_licenciamento"
+      ]
+    },
+    {
+      "id": "rota.biodigestao_vinhaca__dest.renovabio_neea",
+      "from": "cana.rota.biodigestao_vinhaca",
+      "to": "cana.dest.renovabio_neea",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "Substituir a vinhaça in natura pela vinhaça digerida melhora a nota de intensidade de carbono do etanol.",
+      "params": [],
+      "fontes": [
+        "renovabio_neea"
+      ]
+    },
+    {
+      "id": "rota.biodigestao_vinhaca__dest.financiamento_climatico",
+      "from": "cana.rota.biodigestao_vinhaca",
+      "to": "cana.dest.financiamento_climatico",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "O CAPEX do biodigestor é o principal item financiado por CRA verde e linha climática do BNDES.",
+      "params": [],
+      "fontes": [
+        "bndes_clima"
+      ]
+    },
+    {
+      "id": "prod.digestato__rota.separacao_digestato",
+      "from": "cana.prod.digestato",
+      "to": "cana.rota.separacao_digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Prensar o digestato divide o fósforo sólido do potássio líquido e resolve o custo de transporte.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "prod.digestato__rota.separacao_solido_liquido",
+      "from": "cana.prod.digestato",
+      "to": "cana.rota.separacao_solido_liquido",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A separação de fases é a primeira operação do pós-tratamento de qualquer digestato.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "prod.digestato__rota.fertirrigacao_digestato",
+      "from": "cana.prod.digestato",
+      "to": "cana.rota.fertirrigacao_digestato",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "~2 kg K2O/m³",
+      "explicacao": "O digestato volta ao canavial pelo mesmo canal e caminhão-tanque que já levam a vinhaça.",
+      "params": [],
+      "fontes": [
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "prod.digestato__rota.estruvita_digestato",
+      "from": "cana.prod.digestato",
+      "to": "cana.rota.estruvita_digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O amônio liberado na digestão é o que torna possível precipitar estruvita.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p74"
+      ]
+    },
+    {
+      "id": "prod.digestato__rota.stripping_amonia",
+      "from": "cana.prod.digestato",
+      "to": "cana.rota.stripping_amonia",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A digestão mineraliza o nitrogênio orgânico em amônio, a forma que o stripping consegue arrastar.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p74"
+      ]
+    },
+    {
+      "id": "prod.digestato__rota.polimento_microalgas",
+      "from": "cana.prod.digestato",
+      "to": "cana.rota.polimento_microalgas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O digestato diluído fornece o nitrogênio e o fósforo que a alga consome.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p74"
+      ]
+    },
+    {
+      "id": "prod.digestato__rota.gotejamento_digestato",
+      "from": "cana.prod.digestato",
+      "to": "cana.rota.gotejamento_digestato",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Filtrado, o digestato entope menos gotejador que a vinhaça bruta.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p73"
+      ]
+    },
+    {
+      "id": "prod.digestato__rota.membranas_vinhaca",
+      "from": "cana.prod.digestato",
+      "to": "cana.rota.membranas_vinhaca",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A ultrafiltração do digestato separa água reutilizável de um concentrado de potássio.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p74"
+      ]
+    },
+    {
+      "id": "prod.digestato__dest.registro_fertilizante_mapa",
+      "from": "cana.prod.digestato",
+      "to": "cana.dest.registro_fertilizante_mapa",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Vender o digestato fora da própria usina exige registro do produto no MAPA.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "IN MAPA 61/2020",
+      "fontes": [
+        "in61_mapa"
+      ]
+    },
+    {
+      "id": "prod.digestato__dest.norma_p4231",
+      "from": "cana.prod.digestato",
+      "to": "cana.dest.norma_p4231",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "A dose de digestato aplicada ao canavial obedece ao mesmo critério de potássio da vinhaça.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Norma CETESB P4.231",
+      "fontes": [
+        "cetesb_p4231"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.dessulfurizacao_biologica",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.dessulfurizacao_biologica",
+      "kind": "massa",
+      "estado": "real",
+      "rotulo": "H2S de 3000 para 300 ppm",
+      "explicacao": "Um sopro de ar no topo do digestor derruba o H2S de milhares para centenas de ppm, sem reagente.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p75"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.dessulfurizacao_quimica",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.dessulfurizacao_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "< 10 ppm",
+      "explicacao": "Óxido de ferro ou carvão ativado polem o H2S residual até poucas ppm, onde o uso final exige.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p75"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.secagem_biogas",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.secagem_biogas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O gás sai do reator saturado de vapor de água, que condensa e corrói a tubulação.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p75"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.armazenamento_gas",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.armazenamento_gas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O gasômetro absorve o descompasso entre a produção contínua do reator e o consumo intermitente.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p75"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__dest.flare",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.dest.flare",
+      "kind": "energia",
+      "estado": "real",
+      "rotulo": "destino real hoje",
+      "explicacao": "Queimar em flare é hoje o destino de boa parte do biogás: não gera receita, só evita emitir metano.",
+      "params": [
+        "fracao_ch4_biogas"
+      ],
+      "fontes": [
+        "atlas2020_p75"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.motogerador",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.motogerador",
+      "kind": "energia",
+      "estado": "real",
+      "rotulo": "~38% elétrico",
+      "explicacao": "O motor de ciclo Otto converte cerca de 38% da energia do metano em eletricidade.",
+      "params": [
+        "fracao_ch4_biogas",
+        "pci_ch4",
+        "eficiencia_eletrica"
+      ],
+      "fontes": [
+        "atlas2020_p76"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.caldeira_biogas",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.caldeira_biogas",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "Queimar o biogás na caldeira libera bagaço equivalente para virar eletricidade exportada.",
+      "params": [
+        "fracao_ch4_biogas",
+        "pci_ch4"
+      ],
+      "fontes": [
+        "atlas2020_p76"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.microturbina",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.microturbina",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "A microturbina tolera gás sujo e é a saída para vazões pequenas, ao custo de menor rendimento elétrico.",
+      "params": [
+        "fracao_ch4_biogas",
+        "pci_ch4",
+        "eficiencia_eletrica"
+      ],
+      "fontes": [
+        "atlas2020_p76"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.secagem_graos",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.secagem_graos",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "A queima direta no secador dispensa qualquer purificação além da retirada de água.",
+      "params": [
+        "fracao_ch4_biogas",
+        "pci_ch4"
+      ],
+      "fontes": [
+        "atlas2020_p76"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.upgrading_membrana",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.upgrading_membrana",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A fibra polimérica deixa o CO2 passar e retém o metano acima de 96%.",
+      "params": [
+        "fracao_ch4_biogas",
+        "rendimento_upgrading"
+      ],
+      "fontes": [
+        "atlas2020_p77"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.upgrading_psa",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.upgrading_psa",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A peneira molecular adsorve o CO2 sob pressão e o libera na despressurização.",
+      "params": [
+        "fracao_ch4_biogas",
+        "rendimento_upgrading"
+      ],
+      "fontes": [
+        "atlas2020_p77"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.lavagem_agua",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.lavagem_agua",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "CO2 e H2S dissolvem juntos na água sob pressão, no mais simples dos upgradings.",
+      "params": [
+        "fracao_ch4_biogas",
+        "rendimento_upgrading"
+      ],
+      "fontes": [
+        "atlas2020_p77"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.lavagem_aminas",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.lavagem_aminas",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "perda de CH4 < 0,1%",
+      "explicacao": "A amina captura o CO2 quimicamente e o devolve com calor, com perda mínima de metano.",
+      "params": [
+        "fracao_ch4_biogas",
+        "rendimento_upgrading"
+      ],
+      "fontes": [
+        "atlas2020_p77"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.lavagem_organica",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.lavagem_organica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O solvente orgânico absorve CO2 e H2S na mesma coluna, com muito menos água que o scrubber.",
+      "params": [
+        "fracao_ch4_biogas",
+        "rendimento_upgrading"
+      ],
+      "fontes": [
+        "atlas2020_p77"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.upgrading_criogenico",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.upgrading_criogenico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Resfriar até liquefazer o CO2 é o caminho que já entrega o gás pronto para virar bio-GNL.",
+      "params": [
+        "fracao_ch4_biogas",
+        "rendimento_upgrading"
+      ],
+      "fontes": [
+        "atlas2020_p77"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.celula_combustivel",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.celula_combustivel",
+      "kind": "energia",
+      "estado": "potencial",
+      "rotulo": "> 50% elétrico",
+      "explicacao": "A célula converte o metano reformado em eletricidade sem chama, acima de 50% de rendimento.",
+      "params": [
+        "fracao_ch4_biogas",
+        "pci_ch4",
+        "eficiencia_eletrica"
+      ],
+      "fontes": [
+        "atlas2020_p76"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.eletrometanogenese",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.eletrometanogenese",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O CO2 que acompanha o metano no biogás bruto é o substrato da célula eletromicrobiana.",
+      "params": [],
+      "fontes": [
+        "cheng2009"
+      ]
+    },
+    {
+      "id": "prod.biogas_bruto__rota.metanacao_co2",
+      "from": "cana.prod.biogas_bruto",
+      "to": "cana.rota.metanacao_co2",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "+35% de CH4",
+      "explicacao": "Em vez de descartar o CO2 do biogás, o hidrogênio o converte em mais metano.",
+      "params": [
+        "fracao_ch4_biogas"
+      ],
+      "fontes": [
+        "atlas2020_p78"
+      ]
+    },
+    {
+      "id": "rota.dessulfurizacao_biologica__prod.enxofre",
+      "from": "cana.rota.dessulfurizacao_biologica",
+      "to": "cana.prod.enxofre",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A bactéria oxida o H2S até enxofre elementar, um sólido amarelo que decanta e volta ao solo.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p75"
+      ]
+    },
+    {
+      "id": "rota.dessulfurizacao_biologica__rota.secagem_biogas",
+      "from": "cana.rota.dessulfurizacao_biologica",
+      "to": "cana.rota.secagem_biogas",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O ar injetado na dessulfurização carrega umidade que precisa ser condensada em seguida.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p75"
+      ]
+    },
+    {
+      "id": "rota.dessulfurizacao_biologica__rota.motogerador",
+      "from": "cana.rota.dessulfurizacao_biologica",
+      "to": "cana.rota.motogerador",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "Abaixo de algumas centenas de ppm de H2S o motor deixa de acidificar o óleo lubrificante.",
+      "params": [
+        "fracao_ch4_biogas",
+        "pci_ch4",
+        "eficiencia_eletrica"
+      ],
+      "obrigatorio": true,
+      "baseLegal": "limite de H2S do fabricante do motor",
+      "fontes": [
+        "atlas2020_p76"
+      ]
+    },
+    {
+      "id": "rota.dessulfurizacao_biologica__rota.dessulfurizacao_quimica",
+      "from": "cana.rota.dessulfurizacao_biologica",
+      "to": "cana.rota.dessulfurizacao_quimica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A etapa biológica derruba a maior parte do H2S e a química apenas pole o residual, o que corta o consumo de reagente.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p75"
+      ]
+    },
+    {
+      "id": "rota.dessulfurizacao_biologica__rota.caldeira_biogas",
+      "from": "cana.rota.dessulfurizacao_biologica",
+      "to": "cana.rota.caldeira_biogas",
+      "kind": "energia",
+      "estado": "potencial",
+      "explicacao": "Mesmo na caldeira, o H2S precisa cair para evitar corrosão por ácido sulfúrico no lado frio.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p76"
+      ]
+    },
+    {
+      "id": "rota.dessulfurizacao_quimica__rota.upgrading_membrana",
+      "from": "cana.rota.dessulfurizacao_quimica",
+      "to": "cana.rota.upgrading_membrana",
+      "kind": "massa",
+      "estado": "potencial",
+      "rotulo": "< 10 ppm",
+      "explicacao": "A membrana polimérica é degradada pelo H2S: a remoção prévia é condição de operação.",
+      "params": [
+        "fracao_ch4_biogas",
+        "rendimento_upgrading"
+      ],
+      "obrigatorio": true,
+      "baseLegal": "especificação do fabricante da membrana",
+      "fontes": [
+        "atlas2020_p77"
+      ]
+    },
+    {
+      "id": "rota.dessulfurizacao_quimica__rota.upgrading_psa",
+      "from": "cana.rota.dessulfurizacao_quimica",
+      "to": "cana.rota.upgrading_psa",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O H2S adsorve irreversivelmente na peneira molecular e precisa ser retirado antes.",
+      "params": [
+        "fracao_ch4_biogas",
+        "rendimento_upgrading"
+      ],
+      "obrigatorio": true,
+      "baseLegal": "especificação do adsorvente",
+      "fontes": [
+        "atlas2020_p77"
+      ]
+    },
+    {
+      "id": "rota.dessulfurizacao_quimica__rota.celula_combustivel",
+      "from": "cana.rota.dessulfurizacao_quimica",
+      "to": "cana.rota.celula_combustivel",
+      "kind": "energia",
+      "estado": "potencial",
+      "rotulo": "< 1 ppb",
+      "explicacao": "A célula a combustível exige enxofre em nível de ppb, o mais rigoroso de todos os usos.",
+      "params": [
+        "fracao_ch4_biogas",
+        "pci_ch4",
+        "eficiencia_eletrica"
+      ],
+      "obrigatorio": true,
+      "baseLegal": "especificação do catalisador",
+      "fontes": [
+        "atlas2020_p76"
+      ]
+    },
+    {
+      "id": "rota.dessulfurizacao_quimica__rota.secagem_biogas",
+      "from": "cana.rota.dessulfurizacao_quimica",
+      "to": "cana.rota.secagem_biogas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Retirado o enxofre, resta condensar a água antes da compressão.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p75"
+      ]
+    },
+    {
+      "id": "rota.dessulfurizacao_quimica__dest.anp_biometano",
+      "from": "cana.rota.dessulfurizacao_quimica",
+      "to": "cana.dest.anp_biometano",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "rotulo": "limite de enxofre total",
+      "explicacao": "A resolução da ANP fixa teto de enxofre total no biometano, e é a dessulfurização que o cumpre.",
+      "params": [],
+      "obrigatorio": true,
+      "baseLegal": "Resolução ANP 886/2022",
+      "fontes": [
+        "anp_res_886"
+      ]
+    },
+    {
+      "id": "prod.enxofre__dest.solo_canavial",
+      "from": "cana.prod.enxofre",
+      "to": "cana.dest.solo_canavial",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O enxofre recuperado volta ao canavial como fonte do nutriente que o solo paulista costuma faltar.",
+      "params": [],
+      "fontes": [
+        "atlas2020_p75"
+      ]
+    },
+    {
+      "id": "prod.enxofre__dest.mercado_fertilizantes",
+      "from": "cana.prod.enxofre",
+      "to": "cana.dest.mercado_fertilizantes",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "O enxofre elementar tem mercado próprio como fertilizante e como matéria-prima de ácido sulfúrico.",
+      "params": [],
+      "fontes": [
+        "plano_nacional_fertilizantes"
+      ]
+    }
+  ],
+  "faltando": [
+    "Nó de ácidos graxos voláteis (AGV) — corrente intermediária entre acidogênese e metanogênese; sem ele a digestão em dois estágios e a fermentação escura não têm produto explícito.",
+    "Nó de inóculo (lodo anaeróbio granular) — insumo de partida de todo reator de alta taxa e gargalo real na abertura de safra.",
+    "Nó de biogás dessulfurizado/seco distinto do biogás bruto — hoje toda a cadeia de condicionamento aponta para o mesmo nó de saída.",
+    "Nó de perda fugitiva de metano (slip) — passivo ambiental do biodigestor e do upgrading, sem representação no grafo.",
+    "Nó de sobrenadante/percolado da batelada, recirculado como inóculo líquido."
+  ],
+  "notas": "Família: digestão anaeróbia, pré-tratamentos, biogás bruto e dessulfurização. Marcados como 'real' apenas a biodigestão de vinhaça em suas configurações já operadas em São Paulo (UASB e lagoa coberta), o flare, o motogerador acoplado a essas plantas, a dessulfurização biológica interna e a explosão a vapor do bagaço na planta 2G comercial. Todo o resto, inclusive a digestão de palha, torta e bagaço e todos os pré-tratamentos de palha, é potencial. Os pré-tratamentos aparecem com dupla saída, porque servem tanto à rota 2G (polpa celulósica, licor C5, lignina) quanto ao aumento de BMP antes do digestor. Reatores foram ligados em bloco ao biogás bruto e ao digestato para garantir entrada e saída a cada um. Arestas para rotas de upgrading e de uso energético foram escritas a partir do biogás bruto mesmo correndo risco de sobreposição com outra família: preferiu-se redundância a nó inalcançável."
+}

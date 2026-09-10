@@ -1,0 +1,3106 @@
+{
+  "edges": [
+    {
+      "id": "res.bagaco__rota.pretrat_explosao_vapor",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.pretrat_explosao_vapor",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O bagaco cozido a vapor e descomprimido e a entrada da unica rota 2G comercial de Sao Paulo.",
+      "params": [
+        "bagaco_excedente",
+        "incluir_bagaco"
+      ],
+      "fontes": [
+        "raizen_costa_pinto",
+        "cgee2017"
+      ],
+      "rotulo": "180-210 C"
+    },
+    {
+      "id": "rota.pretrat_explosao_vapor__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_explosao_vapor",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A fibra estourada sai como celulignina, com a celulose ja acessivel a enzima.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.pretrat_explosao_vapor__copr.hidrolisado_c5",
+      "from": "cana.rota.pretrat_explosao_vapor",
+      "to": "cana.copr.hidrolisado_c5",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A hemicelulose se dissolve durante o cozimento e sai no licor de pentoses.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ],
+      "rotulo": "~25% da massa seca"
+    },
+    {
+      "id": "res.palha__rota.explosao_vapor",
+      "from": "cana.res.palha",
+      "to": "cana.rota.explosao_vapor",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A palha enfardada e o segundo estoque de fibra da usina e responde ao mesmo pre-tratamento.",
+      "params": [
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.explosao_vapor__copr.polpa_celulosica",
+      "from": "cana.rota.explosao_vapor",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A descompressao subita desmonta a parede celular e entrega celulose acessivel.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.explosao_vapor__copr.hidrolisado_c5",
+      "from": "cana.rota.explosao_vapor",
+      "to": "cana.copr.hidrolisado_c5",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A hemicelulose da palha e solubilizada e sai como licor de xilose.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.pretrat_acido_diluido",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.pretrat_acido_diluido",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Bagaco tratado com acido sulfurico a 1% e a base das primeiras plantas-piloto de 2G no Brasil.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.pretrat_acido_diluido__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_acido_diluido",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A celulose cristalina resiste ao acido e permanece no solido junto com a lignina.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.pretrat_acido_diluido__copr.hidrolisado_c5",
+      "from": "cana.rota.pretrat_acido_diluido",
+      "to": "cana.copr.hidrolisado_c5",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O acido hidrolisa a hemicelulose e a dissolve como xilose e arabinose.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "res.palha__rota.pretrat_acido",
+      "from": "cana.res.palha",
+      "to": "cana.rota.pretrat_acido",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Palha a 0,5-2% de acido entre 120 e 180 C solubiliza quase toda a hemicelulose.",
+      "params": [
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.pretrat_acido",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.pretrat_acido",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O mesmo reator de acido diluido aceita bagaco no lugar da palha.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.pretrat_acido__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_acido",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Celulose e lignina ficam no solido poroso, pronto para enzima ou digestao.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.pretrat_acido__copr.hidrolisado_c5",
+      "from": "cana.rota.pretrat_acido",
+      "to": "cana.copr.hidrolisado_c5",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "As pentoses solubilizadas formam o licor C5 que sai do reator.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "res.palha__rota.pretrat_alcalino",
+      "from": "cana.res.palha",
+      "to": "cana.rota.pretrat_alcalino",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Soda ou cal a quente atacam a ligacao entre lignina e hemicelulose da palha.",
+      "params": [
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.pretrat_alcalino",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.pretrat_alcalino",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O bagaco alcalinizado perde lignina e fica muito mais acessivel a celulase.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.pretrat_alcalino__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_alcalino",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O solido deslignificado e a polpa que segue para a hidrolise.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.pretrat_alcalino__prod.lignina",
+      "from": "cana.rota.pretrat_alcalino",
+      "to": "cana.prod.lignina",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A lignina arrancada pelo alcali e recuperada do licor negro por acidificacao.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.pretrat_afex",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.pretrat_afex",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A amonia sob pressao reorganiza a fibra do bagaco sem remover hemicelulose.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "balan_afex"
+      ]
+    },
+    {
+      "id": "res.palha__rota.pretrat_afex",
+      "from": "cana.res.palha",
+      "to": "cana.rota.pretrat_afex",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A palha tratada com amonia sai enriquecida em nitrogenio, util a fermentacao e a racao.",
+      "params": [
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "balan_afex"
+      ]
+    },
+    {
+      "id": "rota.pretrat_afex__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_afex",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O AFEX nao fraciona: entrega um solido unico com toda a celulose acessivel.",
+      "params": [],
+      "fontes": [
+        "balan_afex"
+      ]
+    },
+    {
+      "id": "res.palha__rota.pretrat_biologico",
+      "from": "cana.res.palha",
+      "to": "cana.rota.pretrat_biologico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Fungos ligninoliticos degradam a lignina da palha sem reagente e sem calor.",
+      "params": [
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.pretrat_biologico__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_biologico",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Depois de semanas de colonizacao sobra um solido pobre em lignina e digerivel.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "res.palha__rota.pretrat_fungico",
+      "from": "cana.res.palha",
+      "to": "cana.rota.pretrat_fungico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A palha umida e inoculada no proprio patio com fungos de podridao branca.",
+      "params": [
+        "palha_recolhivel",
+        "perda_estocagem_palha"
+      ],
+      "fontes": [
+        "cgee2017"
+      ],
+      "rotulo": "15 a 60 dias"
+    },
+    {
+      "id": "rota.pretrat_fungico__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_fungico",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O material colonizado perde lignina seletivamente e vira polpa acessivel.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.pretrat_organosolv",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.pretrat_organosolv",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Etanol da propria usina, quente e sob pressao, dissolve a lignina do bagaco.",
+      "params": [
+        "bagaco_excedente",
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "organosolv_review"
+      ],
+      "rotulo": "160-200 C"
+    },
+    {
+      "id": "rota.pretrat_organosolv__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_organosolv",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A celulose fica retida no solido e sai limpa para a hidrolise.",
+      "params": [],
+      "fontes": [
+        "organosolv_review"
+      ]
+    },
+    {
+      "id": "rota.pretrat_organosolv__copr.hidrolisado_c5",
+      "from": "cana.rota.pretrat_organosolv",
+      "to": "cana.copr.hidrolisado_c5",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A hemicelulose dissolvida no solvente e recuperada como licor de pentoses.",
+      "params": [],
+      "fontes": [
+        "organosolv_review"
+      ]
+    },
+    {
+      "id": "rota.pretrat_organosolv__prod.lignina",
+      "from": "cana.rota.pretrat_organosolv",
+      "to": "cana.prod.lignina",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Ao diluir o solvente em agua a lignina precipita em po, sem enxofre e de baixo peso molecular.",
+      "params": [],
+      "fontes": [
+        "organosolv_review"
+      ],
+      "rotulo": "lignina de alta qualidade"
+    },
+    {
+      "id": "res.palha__rota.organosolv",
+      "from": "cana.res.palha",
+      "to": "cana.rota.organosolv",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O fracionamento com solvente organico aceita palha e a separa em tres correntes.",
+      "params": [
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "organosolv_review"
+      ]
+    },
+    {
+      "id": "rota.organosolv__copr.polpa_celulosica",
+      "from": "cana.rota.organosolv",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A celulose permanece no solido apos a despressurizacao.",
+      "params": [],
+      "fontes": [
+        "organosolv_review"
+      ]
+    },
+    {
+      "id": "rota.organosolv__copr.hidrolisado_c5",
+      "from": "cana.rota.organosolv",
+      "to": "cana.copr.hidrolisado_c5",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Parte da hemicelulose sai dissolvida no solvente como pentoses.",
+      "params": [],
+      "fontes": [
+        "organosolv_review"
+      ]
+    },
+    {
+      "id": "rota.organosolv__prod.lignina",
+      "from": "cana.rota.organosolv",
+      "to": "cana.prod.lignina",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A lignina precipitada e limpa e vendavel, o que muda a conta economica da palha.",
+      "params": [],
+      "fontes": [
+        "organosolv_review"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.pretrat_liquidos_ionicos",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.pretrat_liquidos_ionicos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Sais liquidos dissolvem a parede celular do bagaco em condicoes brandas.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "il_pretreat"
+      ]
+    },
+    {
+      "id": "rota.pretrat_liquidos_ionicos__copr.polpa_celulosica",
+      "from": "cana.rota.pretrat_liquidos_ionicos",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A celulose reprecipitada volta amorfa e converte acima de 90% em bancada.",
+      "params": [],
+      "fontes": [
+        "il_pretreat"
+      ]
+    },
+    {
+      "id": "res.palha__rota.liquido_ionico",
+      "from": "cana.res.palha",
+      "to": "cana.rota.liquido_ionico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O mesmo solvente dissolve a palha quase inteira a temperatura baixa.",
+      "params": [
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "il_pretreat"
+      ]
+    },
+    {
+      "id": "rota.liquido_ionico__copr.polpa_celulosica",
+      "from": "cana.rota.liquido_ionico",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A celulose reprecipitada em forma amorfa e muito mais digerivel pela enzima.",
+      "params": [],
+      "fontes": [
+        "il_pretreat"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.moagem_fina",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.moagem_fina",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Moinho de martelo reduz o bagaco a poucos milimetros e abre superficie para a enzima.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "res.palha__rota.moagem_fina",
+      "from": "cana.res.palha",
+      "to": "cana.rota.moagem_fina",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A palha moida ganha area de contato sem reagente nem calor.",
+      "params": [
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.moagem_fina__copr.polpa_celulosica",
+      "from": "cana.rota.moagem_fina",
+      "to": "cana.copr.polpa_celulosica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O material moido e a polpa mais simples de obter, ao custo de energia eletrica.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.hidrolise_acida_concentrada",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.hidrolise_acida_concentrada",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Acido forte a frio dissolve celulose e hemicelulose do bagaco num unico passo.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.hidrolise_acida_concentrada__copr.hidrolisado_c6",
+      "from": "cana.rota.hidrolise_acida_concentrada",
+      "to": "cana.copr.hidrolisado_c6",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A diluicao posterior completa a hidrolise da celulose ate glicose.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.hidrolise_acida_concentrada__copr.hidrolisado_c5",
+      "from": "cana.rota.hidrolise_acida_concentrada",
+      "to": "cana.copr.hidrolisado_c5",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A hemicelulose dissolvida no mesmo passo aparece como pentoses no licor.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "copr.polpa_celulosica__rota.hidrolise_enzimatica",
+      "from": "cana.copr.polpa_celulosica",
+      "to": "cana.rota.hidrolise_enzimatica",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A polpa pre-tratada e o substrato do coquetel de celulases na planta 2G.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ],
+      "rotulo": "50 C, 24-72 h"
+    },
+    {
+      "id": "rota.hidrolise_enzimatica__copr.hidrolisado_c6",
+      "from": "cana.rota.hidrolise_enzimatica",
+      "to": "cana.copr.hidrolisado_c6",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "As celulases despolimerizam a celulose e entregam um caldo de glicose.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.hidrolise_enzimatica__prod.lignina",
+      "from": "cana.rota.hidrolise_enzimatica",
+      "to": "cana.prod.lignina",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A lignina nao e atacada pela enzima e sobra como residuo solido da hidrolise.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ],
+      "rotulo": "20-25% da massa seca da fibra"
+    },
+    {
+      "id": "prod.enzimas__rota.hidrolise_enzimatica",
+      "from": "cana.prod.enzimas",
+      "to": "cana.rota.hidrolise_enzimatica",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O coquetel enzimatico e o insumo que define o custo da rota 2G.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "copr.hidrolisado_c6__rota.fermentacao_c6",
+      "from": "cana.copr.hidrolisado_c6",
+      "to": "cana.rota.fermentacao_c6",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A glicose do hidrolisado e fermentada pela mesma levedura industrial do caldo.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ],
+      "rotulo": "0,45 kg etanol/kg glicose"
+    },
+    {
+      "id": "rota.fermentacao_c6__prod.etanol_2g",
+      "from": "cana.rota.fermentacao_c6",
+      "to": "cana.prod.etanol_2g",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A hexose fermentada entrega etanol quimicamente identico ao de primeira geracao.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.fermentacao_c6__copr.co2",
+      "from": "cana.rota.fermentacao_c6",
+      "to": "cana.copr.co2",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "Cada quilo de glicose fermentada libera 0,44 kg de gas carbonico biogenico.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ],
+      "rotulo": "0,44 kg CO2/kg glicose"
+    },
+    {
+      "id": "copr.hidrolisado_c5__rota.fermentacao_c5",
+      "from": "cana.copr.hidrolisado_c5",
+      "to": "cana.rota.fermentacao_c5",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O licor de pentoses so vira etanol se houver levedura capaz de fermentar xilose.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ],
+      "rotulo": "um terco dos acucares da fibra"
+    },
+    {
+      "id": "rota.fermentacao_c5__prod.etanol_2g",
+      "from": "cana.rota.fermentacao_c5",
+      "to": "cana.prod.etanol_2g",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A xilose convertida a xilulose segue pela via das pentoses fosfato ate etanol.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "copr.polpa_celulosica__rota.sscf",
+      "from": "cana.copr.polpa_celulosica",
+      "to": "cana.rota.sscf",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A polpa entra inteira no reator onde enzima e levedura trabalham juntas.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ],
+      "rotulo": "~35 C"
+    },
+    {
+      "id": "prod.enzimas__rota.sscf",
+      "from": "cana.prod.enzimas",
+      "to": "cana.rota.sscf",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A celulase e dosada no mesmo tanque da fermentacao, sem reator de hidrolise separado.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.sscf__prod.etanol_2g",
+      "from": "cana.rota.sscf",
+      "to": "cana.prod.etanol_2g",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Sacarificar e fermentar juntos remove a inibicao por glicose e encurta o processo.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "rota.sscf__prod.lignina",
+      "from": "cana.rota.sscf",
+      "to": "cana.prod.lignina",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O residuo solido do reator continua sendo a lignina nao convertida.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "copr.polpa_celulosica__rota.cbp",
+      "from": "cana.copr.polpa_celulosica",
+      "to": "cana.rota.cbp",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A polpa e entregue a um unico micro-organismo que secreta a propria celulase.",
+      "params": [],
+      "fontes": [
+        "lynd_cbp"
+      ]
+    },
+    {
+      "id": "rota.cbp__prod.etanol_2g",
+      "from": "cana.rota.cbp",
+      "to": "cana.prod.etanol_2g",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O celulossomo degrada a fibra e o mesmo organismo fermenta o acucar liberado.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "lynd_cbp"
+      ]
+    },
+    {
+      "id": "copr.hidrolisado_c6__proc.preparo_mosto",
+      "from": "cana.copr.hidrolisado_c6",
+      "to": "cana.proc.preparo_mosto",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O hidrolisado de glicose e quimicamente igual ao caldo e pode entrar nas dornas existentes.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "prod.etanol_2g__prod.etanol_anidro",
+      "from": "cana.prod.etanol_2g",
+      "to": "cana.prod.etanol_anidro",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O etanol 2G e destilado e misturado ao mesmo tanque do etanol de caldo.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "raizen_costa_pinto"
+      ]
+    },
+    {
+      "id": "prod.etanol_2g__dest.renovabio_neea",
+      "from": "cana.prod.etanol_2g",
+      "to": "cana.dest.renovabio_neea",
+      "kind": "regulatorio",
+      "estado": "real",
+      "explicacao": "Por dispensar terra nova, o litro 2G recebe nota de intensidade de carbono mais alta e gera mais CBIO.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "renovabio_neea"
+      ]
+    },
+    {
+      "id": "res.torta__rota.enzimas_fes",
+      "from": "cana.res.torta",
+      "to": "cana.rota.enzimas_fes",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A torta umida e rica em nutrientes e substrato classico de fermentacao em estado solido.",
+      "params": [
+        "torta_disponivel"
+      ],
+      "fontes": [
+        "fes_enzimas"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.enzimas_fes",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.enzimas_fes",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Bagacilho entra na leira como fonte de carbono e estruturante do meio solido.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "fes_enzimas"
+      ]
+    },
+    {
+      "id": "rota.enzimas_fes__prod.enzimas",
+      "from": "cana.rota.enzimas_fes",
+      "to": "cana.prod.enzimas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Aspergillus e Trichoderma secretam celulase, xilanase e lipase sobre o substrato solido.",
+      "params": [],
+      "fontes": [
+        "fes_enzimas"
+      ]
+    },
+    {
+      "id": "prod.enzimas__dest.nutricao_animal",
+      "from": "cana.prod.enzimas",
+      "to": "cana.dest.nutricao_animal",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Fitases e carboidrases produzidas na usina tem mercado direto em fabricas de racao.",
+      "params": [],
+      "fontes": [
+        "fes_enzimas"
+      ]
+    },
+    {
+      "id": "prod.lignina__rota.lignina_combustao",
+      "from": "cana.prod.lignina",
+      "to": "cana.rota.lignina_combustao",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "Quase toda a lignina 2G vai para a caldeira por falta de mercado montado.",
+      "params": [],
+      "fontes": [
+        "cgee2017"
+      ],
+      "rotulo": "23-27 MJ/kg"
+    },
+    {
+      "id": "rota.lignina_combustao__dest.energia_2g",
+      "from": "cana.rota.lignina_combustao",
+      "to": "cana.dest.energia_2g",
+      "kind": "energia",
+      "estado": "real",
+      "explicacao": "A queima da lignina cobre o vapor da planta 2G e ainda exporta eletricidade.",
+      "params": [
+        "eficiencia_eletrica",
+        "preco_eletricidade"
+      ],
+      "fontes": [
+        "cgee2017"
+      ]
+    },
+    {
+      "id": "prod.lignina__rota.lignina_dispersantes",
+      "from": "cana.prod.lignina",
+      "to": "cana.rota.lignina_dispersantes",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Sulfonada, a lignina entra no unico mercado de lignina com escala real hoje.",
+      "params": [],
+      "fontes": [
+        "lignin_market"
+      ]
+    },
+    {
+      "id": "rota.lignina_dispersantes__prod.dispersante",
+      "from": "cana.rota.lignina_dispersantes",
+      "to": "cana.prod.dispersante",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O lignossulfonato e vendido como plastificante de concreto e aglomerante de racao.",
+      "params": [],
+      "fontes": [
+        "lignin_market"
+      ]
+    },
+    {
+      "id": "prod.dispersante__dest.construcao_civil",
+      "from": "cana.prod.dispersante",
+      "to": "cana.dest.construcao_civil",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "A construcao civil ja compra dispersante de concreto e nao precisa de mercado novo.",
+      "params": [],
+      "fontes": [
+        "lignin_market"
+      ]
+    },
+    {
+      "id": "prod.lignina__rota.lignina_resinas",
+      "from": "cana.prod.lignina",
+      "to": "cana.rota.lignina_resinas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A lignina e um polifenol natural e substitui parte do fenol fossil depois de ativada.",
+      "params": [],
+      "fontes": [
+        "lignin_market"
+      ],
+      "rotulo": "30 a 50% do fenol"
+    },
+    {
+      "id": "rota.lignina_resinas__prod.resina_fenolica",
+      "from": "cana.rota.lignina_resinas",
+      "to": "cana.prod.resina_fenolica",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A resina fenol-formaldeido parcialmente vegetal cola compensado, MDF e OSB.",
+      "params": [],
+      "fontes": [
+        "lignin_market"
+      ]
+    },
+    {
+      "id": "prod.resina_fenolica__dest.construcao_civil",
+      "from": "cana.prod.resina_fenolica",
+      "to": "cana.dest.construcao_civil",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Fabricas de painel sao vizinhas da usina e ja compram esse adesivo.",
+      "params": [],
+      "fontes": [
+        "lignin_market"
+      ]
+    },
+    {
+      "id": "prod.resina_fenolica__rota.paineis_mdf",
+      "from": "cana.prod.resina_fenolica",
+      "to": "cana.rota.paineis_mdf",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O mesmo residuo fornece a fibra e a cola do painel.",
+      "params": [],
+      "fontes": [
+        "lignin_market"
+      ]
+    },
+    {
+      "id": "prod.lignina__rota.lignina_aromaticos",
+      "from": "cana.prod.lignina",
+      "to": "cana.rota.lignina_aromaticos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A lignina e o unico polimero natural abundante feito de aneis aromaticos.",
+      "params": [],
+      "fontes": [
+        "lignin_valorization"
+      ]
+    },
+    {
+      "id": "rota.lignina_aromaticos__prod.aromaticos_renovaveis",
+      "from": "cana.rota.lignina_aromaticos",
+      "to": "cana.prod.aromaticos_renovaveis",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A despolimerizacao controlada entrega fenol, BTX, guaiacol e vanilina.",
+      "params": [],
+      "fontes": [
+        "lignin_valorization"
+      ]
+    },
+    {
+      "id": "prod.aromaticos_renovaveis__dest.industria_quimica",
+      "from": "cana.prod.aromaticos_renovaveis",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "O polo petroquimico paulista compra aromaticos hoje derivados de nafta.",
+      "params": [],
+      "fontes": [
+        "lignin_valorization"
+      ]
+    },
+    {
+      "id": "prod.lignina__rota.lignina_carvao_ativado",
+      "from": "cana.prod.lignina",
+      "to": "cana.rota.lignina_carvao_ativado",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Lignina de alto teor de carbono e precursor classico de carvao ativado.",
+      "params": [],
+      "fontes": [
+        "carvao_ativado_bagaco"
+      ],
+      "rotulo": ">1000 m2/g"
+    },
+    {
+      "id": "res.bagaco__rota.lignina_carvao_ativado",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.lignina_carvao_ativado",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O proprio bagaco serve de precursor quando nao ha planta 2G para fornecer lignina.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "carvao_ativado_bagaco"
+      ]
+    },
+    {
+      "id": "rota.lignina_carvao_ativado__prod.carvao_ativado",
+      "from": "cana.rota.lignina_carvao_ativado",
+      "to": "cana.prod.carvao_ativado",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Carbonizacao seguida de ativacao cria a porosidade que adsorve contaminantes.",
+      "params": [],
+      "fontes": [
+        "carvao_ativado_bagaco"
+      ]
+    },
+    {
+      "id": "prod.carvao_ativado__dest.industria_quimica",
+      "from": "cana.prod.carvao_ativado",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Tratamento de agua, filtro de ar e recuperacao de solvente sao os compradores.",
+      "params": [],
+      "fontes": [
+        "carvao_ativado_bagaco"
+      ]
+    },
+    {
+      "id": "prod.carvao_ativado__proc.refino",
+      "from": "cana.prod.carvao_ativado",
+      "to": "cana.proc.refino",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O refino de acucar descolora o licor com carvao ativado que a propria usina poderia fazer.",
+      "params": [],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "prod.lignina__rota.lignina_fibra_carbono",
+      "from": "cana.prod.lignina",
+      "to": "cana.rota.lignina_fibra_carbono",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O precursor responde por metade do custo da fibra de carbono, e a lignina e barata.",
+      "params": [],
+      "fontes": [
+        "lignin_carbon_fiber"
+      ]
+    },
+    {
+      "id": "rota.lignina_fibra_carbono__prod.fibra_carbono",
+      "from": "cana.rota.lignina_fibra_carbono",
+      "to": "cana.prod.fibra_carbono",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Fiada e carbonizada, a lignina chega ao grau automotivo, ainda nao ao aeronautico.",
+      "params": [],
+      "fontes": [
+        "lignin_carbon_fiber"
+      ]
+    },
+    {
+      "id": "prod.fibra_carbono__dest.industria_quimica",
+      "from": "cana.prod.fibra_carbono",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Automotivo e eolica consomem hoje fibra de precursor 100% fossil.",
+      "params": [],
+      "fontes": [
+        "lignin_carbon_fiber"
+      ]
+    },
+    {
+      "id": "copr.hidrolisado_c5__rota.xilitol_hidrogenacao",
+      "from": "cana.copr.hidrolisado_c5",
+      "to": "cana.rota.xilitol_hidrogenacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A xilose do licor C5 e a mesma molecula de partida do xilitol de sabugo de milho.",
+      "params": [],
+      "fontes": [
+        "xilitol_review"
+      ]
+    },
+    {
+      "id": "rota.xilitol_hidrogenacao__prod.xilitol",
+      "from": "cana.rota.xilitol_hidrogenacao",
+      "to": "cana.prod.xilitol",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Hidrogenio sobre niquel reduz a xilose ao adocante de alto valor.",
+      "params": [],
+      "fontes": [
+        "xilitol_review"
+      ]
+    },
+    {
+      "id": "copr.hidrolisado_c5__rota.xilitol_fermentativo",
+      "from": "cana.copr.hidrolisado_c5",
+      "to": "cana.rota.xilitol_fermentativo",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Leveduras Candida aceitam o licor sujo do bagaco sem purificacao rigorosa.",
+      "params": [],
+      "fontes": [
+        "xilitol_review"
+      ]
+    },
+    {
+      "id": "rota.xilitol_fermentativo__prod.xilitol",
+      "from": "cana.rota.xilitol_fermentativo",
+      "to": "cana.prod.xilitol",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A xilose e reduzida a xilitol pelo proprio metabolismo da levedura, sem hidrogenio.",
+      "params": [],
+      "fontes": [
+        "xilitol_review"
+      ]
+    },
+    {
+      "id": "prod.xilitol__dest.industria_alimenticia",
+      "from": "cana.prod.xilitol",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Adocante anticarie e de baixo indice glicemico vendido muito acima do preco do acucar.",
+      "params": [],
+      "fontes": [
+        "xilitol_review"
+      ]
+    },
+    {
+      "id": "copr.hidrolisado_c5__rota.furfural",
+      "from": "cana.copr.hidrolisado_c5",
+      "to": "cana.rota.furfural",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O furfural sai da desidratacao das pentoses, exatamente as que o bagaco tem de sobra.",
+      "params": [],
+      "fontes": [
+        "furfural_review"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.furfural",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.furfural",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A producao mundial de furfural ja usa bagaco direto, sem etapa de 2G antes.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "furfural_review"
+      ]
+    },
+    {
+      "id": "rota.furfural__prod.furfural",
+      "from": "cana.rota.furfural",
+      "to": "cana.prod.furfural",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Acido e calor desidratam a xilose ao unico quimico de plataforma feito so de biomassa.",
+      "params": [],
+      "fontes": [
+        "furfural_review"
+      ]
+    },
+    {
+      "id": "prod.furfural__dest.industria_quimica",
+      "from": "cana.prod.furfural",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "O furfural e solvente seletivo de refinaria e insumo de resinas furanicas.",
+      "params": [],
+      "fontes": [
+        "furfural_review"
+      ]
+    },
+    {
+      "id": "prod.furfural__rota.alcool_furfurilico",
+      "from": "cana.prod.furfural",
+      "to": "cana.rota.alcool_furfurilico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Dois tercos do furfural do mundo seguem para hidrogenacao.",
+      "params": [],
+      "fontes": [
+        "furfural_review"
+      ]
+    },
+    {
+      "id": "rota.alcool_furfurilico__prod.alcool_furfurilico",
+      "from": "cana.rota.alcool_furfurilico",
+      "to": "cana.prod.alcool_furfurilico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A hidrogenacao entrega o alcool que vira resina de molde de fundicao e THF.",
+      "params": [],
+      "fontes": [
+        "furfural_review"
+      ]
+    },
+    {
+      "id": "prod.alcool_furfurilico__dest.industria_quimica",
+      "from": "cana.prod.alcool_furfurilico",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Fundicoes e fabricantes de solvente sao o mercado imediato.",
+      "params": [],
+      "fontes": [
+        "furfural_review"
+      ]
+    },
+    {
+      "id": "copr.hidrolisado_c5__rota.xos",
+      "from": "cana.copr.hidrolisado_c5",
+      "to": "cana.rota.xos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Interromper a hidrolise da xilana antes da xilose entrega oligomeros de dois a sete acucares.",
+      "params": [],
+      "fontes": [
+        "xos_review"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.xos",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.xos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A autohidrolise do bagaco com agua quente e a via mais direta ao XOS.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "xos_review"
+      ]
+    },
+    {
+      "id": "prod.enzimas__rota.xos",
+      "from": "cana.prod.enzimas",
+      "to": "cana.rota.xos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Xilanases cortam a xilana de forma controlada onde o acido passaria do ponto.",
+      "params": [],
+      "fontes": [
+        "xos_review"
+      ]
+    },
+    {
+      "id": "rota.xos__prod.xos",
+      "from": "cana.rota.xos",
+      "to": "cana.prod.xos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Os oligomeros curtos sao separados por membrana dos acucares simples e dos inibidores.",
+      "params": [],
+      "fontes": [
+        "xos_review"
+      ]
+    },
+    {
+      "id": "prod.xos__dest.industria_alimenticia",
+      "from": "cana.prod.xos",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Prebiotico ativo em 1 a 3 g por dia, o que sustenta preco alto por quilo.",
+      "params": [],
+      "fontes": [
+        "xos_review"
+      ]
+    },
+    {
+      "id": "prod.xos__dest.nutricao_animal",
+      "from": "cana.prod.xos",
+      "to": "cana.dest.nutricao_animal",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "A mesma fibra funcional entra em racao como aditivo intestinal.",
+      "params": [],
+      "fontes": [
+        "xos_review"
+      ]
+    },
+    {
+      "id": "copr.melaco__rota.acido_latico",
+      "from": "cana.copr.melaco",
+      "to": "cana.rota.acido_latico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Lactobacillus fermentam a sacarose do melaco com rendimento perto de 0,9 kg/kg.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ],
+      "rotulo": "0,9 kg/kg de acucar"
+    },
+    {
+      "id": "copr.hidrolisado_c6__rota.acido_latico",
+      "from": "cana.copr.hidrolisado_c6",
+      "to": "cana.rota.acido_latico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A glicose do hidrolisado serve a mesma fermentacao sem competir com alimento.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "rota.acido_latico__prod.acido_latico",
+      "from": "cana.rota.acido_latico",
+      "to": "cana.prod.acido_latico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A fermentacao industrial mais eficiente depois da alcoolica entrega o monomero do PLA.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "prod.acido_latico__dest.industria_alimenticia",
+      "from": "cana.prod.acido_latico",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Como acidulante, o acido latico tem mercado alimentar ja formado.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "prod.acido_latico__rota.pla",
+      "from": "cana.prod.acido_latico",
+      "to": "cana.rota.pla",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O acido latico e desidratado a lactideo, o intermediario da polimerizacao.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "rota.pla__prod.pla",
+      "from": "cana.rota.pla",
+      "to": "cana.prod.pla",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A abertura de anel do lactideo gera o bioplastico compostavel de maior volume no mundo.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "prod.pla__dest.embalagens",
+      "from": "cana.prod.pla",
+      "to": "cana.dest.embalagens",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Embalagem, copo, fibra textil e filamento de impressao 3D absorvem o PLA.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "copr.melaco__rota.phb_sacarose",
+      "from": "cana.copr.melaco",
+      "to": "cana.rota.phb_sacarose",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Cupriavidus necator acumula bioplastico usando o acucar barato do melaco.",
+      "params": [],
+      "fontes": [
+        "phb_industrial"
+      ],
+      "rotulo": "ate 80% do peso seco da celula"
+    },
+    {
+      "id": "copr.caldo_clarificado__rota.phb_sacarose",
+      "from": "cana.copr.caldo_clarificado",
+      "to": "cana.rota.phb_sacarose",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Caldo clarificado tambem serve de fonte de carbono na fermentacao do PHB.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "phb_industrial"
+      ]
+    },
+    {
+      "id": "rota.phb_sacarose__prod.phb_pha",
+      "from": "cana.rota.phb_sacarose",
+      "to": "cana.prod.phb_pha",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O polimero e acumulado em granulos dentro da celula e extraido depois.",
+      "params": [],
+      "fontes": [
+        "phb_industrial"
+      ]
+    },
+    {
+      "id": "res.vinhaca__rota.pha_culturas_mistas",
+      "from": "cana.res.vinhaca",
+      "to": "cana.rota.pha_culturas_mistas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A vinhaca substitui o acucar de valor como fonte de carbono do bioplastico.",
+      "params": [
+        "vinhaca_disponivel"
+      ],
+      "fontes": [
+        "pha_mixed_cultures"
+      ]
+    },
+    {
+      "id": "copr.hidrolisado_c5__rota.pha_culturas_mistas",
+      "from": "cana.copr.hidrolisado_c5",
+      "to": "cana.rota.pha_culturas_mistas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Hidrolisado sujo, que a fermentacao pura rejeita, alimenta bem o consorcio microbiano.",
+      "params": [],
+      "fontes": [
+        "pha_mixed_cultures"
+      ]
+    },
+    {
+      "id": "rota.pha_culturas_mistas__prod.phb_pha",
+      "from": "cana.rota.pha_culturas_mistas",
+      "to": "cana.prod.phb_pha",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Ciclos de fartura e fome selecionam as bacterias que acumulam PHA.",
+      "params": [],
+      "fontes": [
+        "pha_mixed_cultures"
+      ]
+    },
+    {
+      "id": "prod.phb_pha__dest.embalagens",
+      "from": "cana.prod.phb_pha",
+      "to": "cana.dest.embalagens",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Bioplastico que degrada em solo e em mar, o que o PLA nao faz.",
+      "params": [],
+      "fontes": [
+        "phb_industrial"
+      ]
+    },
+    {
+      "id": "copr.melaco__rota.acido_succinico",
+      "from": "cana.copr.melaco",
+      "to": "cana.rota.acido_succinico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Basfia e Actinobacillus fermentam acucar de cana ate o diacido de plataforma.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "copr.co2__rota.acido_succinico",
+      "from": "cana.copr.co2",
+      "to": "cana.rota.acido_succinico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A fermentacao succinica fixa gas carbonico: cada tonelada de acido incorpora carbono.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "rota.acido_succinico__prod.acido_succinico",
+      "from": "cana.rota.acido_succinico",
+      "to": "cana.prod.acido_succinico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O diacido segue para poliesteres, poliuretanos, solventes e plastificantes.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "prod.acido_succinico__dest.industria_quimica",
+      "from": "cana.prod.acido_succinico",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "A quimica de poliesteres e poliuretanos e o comprador natural do succinico.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "copr.melaco__rota.acido_itaconico",
+      "from": "cana.copr.melaco",
+      "to": "cana.rota.acido_itaconico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Aspergillus terreus fermenta melaco no monomero acrilico renovavel.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "copr.hidrolisado_c6__rota.acido_itaconico",
+      "from": "cana.copr.hidrolisado_c6",
+      "to": "cana.rota.acido_itaconico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Hidrolisado de bagaco serve tao bem quanto a glicose de milho usada hoje na China.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "rota.acido_itaconico__prod.acido_itaconico",
+      "from": "cana.rota.acido_itaconico",
+      "to": "cana.prod.acido_itaconico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A dupla ligacao reativa faz do itaconico substituto direto do acido acrilico.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "prod.acido_itaconico__dest.industria_quimica",
+      "from": "cana.prod.acido_itaconico",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Resinas, tintas e superabsorventes sao os destinos do monomero acrilico.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "copr.polpa_celulosica__rota.acido_levulinico",
+      "from": "cana.copr.polpa_celulosica",
+      "to": "cana.rota.acido_levulinico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A hidrolise acida severa da celulose vai alem do acucar e produz o diacido.",
+      "params": [],
+      "fontes": [
+        "levulinic_review"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.acido_levulinico",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.acido_levulinico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Como a degradacao e o produto desejado, o bagaco entra sem purificacao fina.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "levulinic_review"
+      ]
+    },
+    {
+      "id": "rota.acido_levulinico__prod.acido_levulinico",
+      "from": "cana.rota.acido_levulinico",
+      "to": "cana.prod.acido_levulinico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A glicose reidratada gera acido levulinico e acido formico.",
+      "params": [],
+      "fontes": [
+        "levulinic_review"
+      ]
+    },
+    {
+      "id": "prod.acido_levulinico__dest.industria_quimica",
+      "from": "cana.prod.acido_levulinico",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Solventes, plastificantes, aditivos de combustivel e resinas puxam o levulinico.",
+      "params": [],
+      "fontes": [
+        "levulinic_review"
+      ]
+    },
+    {
+      "id": "copr.melaco__rota.acido_citrico",
+      "from": "cana.copr.melaco",
+      "to": "cana.rota.acido_citrico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Aspergillus niger converte melaco em acido citrico com rendimento acima de 70%.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ],
+      "rotulo": ">70% de rendimento"
+    },
+    {
+      "id": "rota.acido_citrico__prod.acido_citrico",
+      "from": "cana.rota.acido_citrico",
+      "to": "cana.prod.acido_citrico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Processo centenario e maduro, hoje sem elo local apesar do melaco mais barato do mundo.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "prod.acido_citrico__dest.industria_alimenticia",
+      "from": "cana.prod.acido_citrico",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Bebidas e alimentos consomem acidulante que o Brasil hoje importa quase todo.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "copr.melaco__rota.aminoacidos",
+      "from": "cana.copr.melaco",
+      "to": "cana.rota.aminoacidos",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "Corynebacterium glutamicum ja fermenta melaco paulista em lisina e glutamato.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "rota.aminoacidos__prod.aminoacidos",
+      "from": "cana.rota.aminoacidos",
+      "to": "cana.prod.aminoacidos",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "Lisina, glutamato e treonina saem em escala industrial no interior de Sao Paulo.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "prod.aminoacidos__dest.nutricao_animal",
+      "from": "cana.prod.aminoacidos",
+      "to": "cana.dest.nutricao_animal",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "A lisina de cana vai direto para a formulacao de racao de aves e suinos.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "prod.aminoacidos__dest.industria_alimenticia",
+      "from": "cana.prod.aminoacidos",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "O glutamato monossodico abastece a industria de alimentos.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "copr.hidrolisado_c6__rota.hmf",
+      "from": "cana.copr.hidrolisado_c6",
+      "to": "cana.rota.hmf",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A desidratacao de hexoses do hidrolisado gera o equivalente C6 do furfural.",
+      "params": [],
+      "fontes": [
+        "hmf_review"
+      ]
+    },
+    {
+      "id": "copr.melaco__rota.hmf",
+      "from": "cana.copr.melaco",
+      "to": "cana.rota.hmf",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A frutose do melaco desidrata a HMF com menos severidade que a glicose.",
+      "params": [],
+      "fontes": [
+        "hmf_review"
+      ]
+    },
+    {
+      "id": "rota.hmf__prod.hmf",
+      "from": "cana.rota.hmf",
+      "to": "cana.prod.hmf",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O hidroximetilfurfural e o hub da quimica furanica, instavel em meio aquoso.",
+      "params": [],
+      "fontes": [
+        "hmf_review"
+      ]
+    },
+    {
+      "id": "prod.hmf__rota.fdca",
+      "from": "cana.prod.hmf",
+      "to": "cana.rota.fdca",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A oxidacao do HMF e o unico caminho industrialmente estudado ate o FDCA.",
+      "params": [],
+      "fontes": [
+        "hmf_review"
+      ]
+    },
+    {
+      "id": "prod.hmf__dest.industria_quimica",
+      "from": "cana.prod.hmf",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Solventes e combustiveis furanicos sao a outra saida do HMF.",
+      "params": [],
+      "fontes": [
+        "hmf_review"
+      ]
+    },
+    {
+      "id": "rota.fdca__prod.fdca_pef",
+      "from": "cana.rota.fdca",
+      "to": "cana.prod.fdca_pef",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Polimerizado com glicol, o FDCA gera o PEF, poliester com barreira superior ao PET.",
+      "params": [],
+      "fontes": [
+        "hmf_review"
+      ]
+    },
+    {
+      "id": "prod.meg_verde__rota.fdca",
+      "from": "cana.prod.meg_verde",
+      "to": "cana.rota.fdca",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O glicol renovavel e o comonomero que fecha a garrafa 100% vegetal.",
+      "params": [],
+      "fontes": [
+        "hmf_review"
+      ]
+    },
+    {
+      "id": "prod.fdca_pef__dest.embalagens",
+      "from": "cana.prod.fdca_pef",
+      "to": "cana.dest.embalagens",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Garrafa e filme com barreira a gases sao o mercado alvo do PEF.",
+      "params": [],
+      "fontes": [
+        "hmf_review"
+      ]
+    },
+    {
+      "id": "copr.melaco__rota.butanol_abe",
+      "from": "cana.copr.melaco",
+      "to": "cana.rota.butanol_abe",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Clostridium fermenta o acucar do melaco em acetona, butanol e etanol.",
+      "params": [],
+      "fontes": [
+        "abe_review"
+      ],
+      "rotulo": "proporcao 3:6:1"
+    },
+    {
+      "id": "copr.hidrolisado_c6__rota.butanol_abe",
+      "from": "cana.copr.hidrolisado_c6",
+      "to": "cana.rota.butanol_abe",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O hidrolisado celulosico e substrato aceito pela fermentacao ABE.",
+      "params": [],
+      "fontes": [
+        "abe_review"
+      ]
+    },
+    {
+      "id": "rota.butanol_abe__prod.butanol",
+      "from": "cana.rota.butanol_abe",
+      "to": "cana.prod.butanol",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O butanol tem mais energia por litro que o etanol, nao absorve agua e vai por duto.",
+      "params": [],
+      "fontes": [
+        "abe_review"
+      ]
+    },
+    {
+      "id": "prod.butanol__dest.industria_quimica",
+      "from": "cana.prod.butanol",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Acetona e butanol tem demanda estabelecida como solventes industriais.",
+      "params": [],
+      "fontes": [
+        "abe_review"
+      ]
+    },
+    {
+      "id": "copr.caldo_clarificado__rota.farneseno",
+      "from": "cana.copr.caldo_clarificado",
+      "to": "cana.rota.farneseno",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A levedura reprogramada recebe o mesmo caldo que iria para a dorna de etanol.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "amyris_brotas"
+      ]
+    },
+    {
+      "id": "copr.melaco__rota.farneseno",
+      "from": "cana.copr.melaco",
+      "to": "cana.rota.farneseno",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O melaco e a fonte de acucar mais barata para a fermentacao de precisao.",
+      "params": [],
+      "fontes": [
+        "amyris_brotas"
+      ]
+    },
+    {
+      "id": "rota.farneseno__prod.farneseno",
+      "from": "cana.rota.farneseno",
+      "to": "cana.prod.farneseno",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "Sao Paulo abriga uma das poucas plantas do mundo que fermenta acucar em hidrocarboneto.",
+      "params": [],
+      "fontes": [
+        "amyris_brotas"
+      ]
+    },
+    {
+      "id": "prod.farneseno__dest.industria_quimica",
+      "from": "cana.prod.farneseno",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "Cosmeticos, lubrificantes e pneus pagam mais pelo esqualano que a aviacao pelo SAF.",
+      "params": [],
+      "fontes": [
+        "amyris_brotas"
+      ]
+    },
+    {
+      "id": "prod.farneseno__rota.farnesano_saf",
+      "from": "cana.prod.farneseno",
+      "to": "cana.rota.farnesano_saf",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Hidrogenar o farneseno e o passo que o transforma em combustivel de aviacao.",
+      "params": [],
+      "fontes": [
+        "astm_d7566"
+      ]
+    },
+    {
+      "id": "rota.farnesano_saf__prod.saf",
+      "from": "cana.rota.farnesano_saf",
+      "to": "cana.prod.saf",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O farnesano foi o primeiro SAF de cana certificado, aprovado em mistura de ate 10%.",
+      "params": [],
+      "fontes": [
+        "astm_d7566"
+      ],
+      "rotulo": "ate 10% de mistura"
+    },
+    {
+      "id": "prod.etanol_anidro__rota.alcohol_to_jet",
+      "from": "cana.prod.etanol_anidro",
+      "to": "cana.rota.alcohol_to_jet",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O etanol anidro e a materia-prima da rota de SAF mais aderente a base industrial paulista.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "atj_review"
+      ]
+    },
+    {
+      "id": "rota.alcohol_to_jet__prod.saf",
+      "from": "cana.rota.alcohol_to_jet",
+      "to": "cana.prod.saf",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Desidratacao, oligomerizacao, hidrogenacao e fracionamento entregam querosene de aviacao.",
+      "params": [],
+      "fontes": [
+        "atj_review"
+      ]
+    },
+    {
+      "id": "rota.alcohol_to_jet__prod.nafta_renovavel",
+      "from": "cana.rota.alcohol_to_jet",
+      "to": "cana.prod.nafta_renovavel",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O fracionamento separa nafta e diesel renovaveis como coprodutos do querosene.",
+      "params": [],
+      "fontes": [
+        "atj_review"
+      ]
+    },
+    {
+      "id": "prod.nafta_renovavel__dest.industria_quimica",
+      "from": "cana.prod.nafta_renovavel",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "A nafta renovavel entra no craqueador petroquimico no lugar da fossil.",
+      "params": [],
+      "fontes": [
+        "atj_review"
+      ]
+    },
+    {
+      "id": "prod.saf__dest.mercado_aviacao",
+      "from": "cana.prod.saf",
+      "to": "cana.dest.mercado_aviacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Companhias aereas obrigadas a reduzir emissoes a partir de 2027 sao a demanda do SAF.",
+      "params": [],
+      "fontes": [
+        "lei_combustivel_futuro"
+      ]
+    },
+    {
+      "id": "prod.saf__dest.combustivel_futuro",
+      "from": "cana.prod.saf",
+      "to": "cana.dest.combustivel_futuro",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "O mandato de SAF da Lei do Combustivel do Futuro converte oferta voluntaria em demanda obrigatoria.",
+      "params": [],
+      "fontes": [
+        "lei_combustivel_futuro"
+      ],
+      "obrigatorio": true,
+      "baseLegal": "Lei 14.993/2024"
+    },
+    {
+      "id": "prod.etanol_anidro__rota.desidratacao_etanol",
+      "from": "cana.prod.etanol_anidro",
+      "to": "cana.rota.desidratacao_etanol",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Tirar uma molecula de agua do etanol e a porta pela qual a cana entra na petroquimica.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "braskem_pe_verde"
+      ],
+      "rotulo": "0,58 kg eteno/kg etanol"
+    },
+    {
+      "id": "rota.desidratacao_etanol__prod.etileno_verde",
+      "from": "cana.rota.desidratacao_etanol",
+      "to": "cana.prod.etileno_verde",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Sobre alumina a 400 C o etanol vira eteno identico ao de nafta.",
+      "params": [],
+      "fontes": [
+        "braskem_pe_verde"
+      ]
+    },
+    {
+      "id": "prod.etileno_verde__rota.polietileno_verde",
+      "from": "cana.prod.etileno_verde",
+      "to": "cana.rota.polietileno_verde",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O eteno verde e polimerizado nos mesmos reatores do polietileno convencional.",
+      "params": [],
+      "fontes": [
+        "braskem_pe_verde"
+      ]
+    },
+    {
+      "id": "rota.polietileno_verde__prod.polietileno_verde",
+      "from": "cana.rota.polietileno_verde",
+      "to": "cana.prod.polietileno_verde",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A resina sai com propriedades identicas as do PE fossil e certificado de carbono renovavel.",
+      "params": [],
+      "fontes": [
+        "braskem_pe_verde"
+      ]
+    },
+    {
+      "id": "prod.polietileno_verde__dest.embalagens",
+      "from": "cana.prod.polietileno_verde",
+      "to": "cana.dest.embalagens",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Filme e embalagem rigida absorvem o PE verde sem trocar de maquina.",
+      "params": [],
+      "fontes": [
+        "braskem_pe_verde"
+      ]
+    },
+    {
+      "id": "prod.polietileno_verde__rota.compositos",
+      "from": "cana.prod.polietileno_verde",
+      "to": "cana.rota.compositos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O PE verde e a matriz que recebe a fibra de bagaco no compositoo de conteudo 100% renovavel.",
+      "params": [],
+      "fontes": [
+        "compositos_bagaco"
+      ]
+    },
+    {
+      "id": "prod.etileno_verde__rota.pvc_verde",
+      "from": "cana.prod.etileno_verde",
+      "to": "cana.rota.pvc_verde",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Trocar o eteno fossil pelo de etanol torna renovavel a fracao organica da resina.",
+      "params": [],
+      "fontes": [
+        "braskem_pe_verde"
+      ]
+    },
+    {
+      "id": "rota.pvc_verde__prod.pvc_verde",
+      "from": "cana.rota.pvc_verde",
+      "to": "cana.prod.pvc_verde",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O eteno clorado da PVC com metade da massa de carbono vegetal.",
+      "params": [],
+      "fontes": [
+        "braskem_pe_verde"
+      ]
+    },
+    {
+      "id": "prod.pvc_verde__dest.construcao_civil",
+      "from": "cana.prod.pvc_verde",
+      "to": "cana.dest.construcao_civil",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Tubos e perfis da construcao civil sao o destino de quase todo o PVC.",
+      "params": [],
+      "fontes": [
+        "braskem_pe_verde"
+      ]
+    },
+    {
+      "id": "prod.etileno_verde__rota.meg_verde",
+      "from": "cana.prod.etileno_verde",
+      "to": "cana.rota.meg_verde",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A oxidacao do eteno leva ao oxido de eteno e dai ao monoetilenoglicol.",
+      "params": [],
+      "fontes": [
+        "meg_verde"
+      ]
+    },
+    {
+      "id": "rota.meg_verde__prod.meg_verde",
+      "from": "cana.rota.meg_verde",
+      "to": "cana.prod.meg_verde",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O MEG e 30% da massa do PET e ja se produz de cana em escala mundial.",
+      "params": [],
+      "fontes": [
+        "meg_verde"
+      ]
+    },
+    {
+      "id": "prod.meg_verde__dest.industria_quimica",
+      "from": "cana.prod.meg_verde",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Poliester textil, PET e fluido de arrefecimento consomem o glicol.",
+      "params": [],
+      "fontes": [
+        "meg_verde"
+      ]
+    },
+    {
+      "id": "prod.etanol_anidro__rota.butadieno_verde",
+      "from": "cana.prod.etanol_anidro",
+      "to": "cana.rota.butadieno_verde",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O processo Lebedev parte do etanol direto, sem passar por eteno isolado.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "lebedev"
+      ]
+    },
+    {
+      "id": "rota.butadieno_verde__prod.butadieno_verde",
+      "from": "cana.rota.butadieno_verde",
+      "to": "cana.prod.butadieno_verde",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O butadieno e o monomero da borracha sintetica de pneu.",
+      "params": [],
+      "fontes": [
+        "lebedev"
+      ]
+    },
+    {
+      "id": "prod.butadieno_verde__dest.industria_quimica",
+      "from": "cana.prod.butadieno_verde",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "A escassez de butadieno em rotas de gas natural reabre espaco para a via do etanol.",
+      "params": [],
+      "fontes": [
+        "lebedev"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.nanocelulose_cnc",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.nanocelulose_cnc",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O bagaco e uma das fontes mais baratas de celulose para nanocristais.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "nanocelulose_review"
+      ]
+    },
+    {
+      "id": "copr.polpa_celulosica__rota.nanocelulose_cnc",
+      "from": "cana.copr.polpa_celulosica",
+      "to": "cana.rota.nanocelulose_cnc",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A polpa pre-tratada ja vem sem parte da lignina, o que encurta a purificacao.",
+      "params": [],
+      "fontes": [
+        "nanocelulose_review"
+      ]
+    },
+    {
+      "id": "rota.nanocelulose_cnc__prod.nanocelulose",
+      "from": "cana.rota.nanocelulose_cnc",
+      "to": "cana.prod.nanocelulose",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A hidrolise acida controlada dissolve o amorfo e deixa bastoes cristalinos.",
+      "params": [],
+      "fontes": [
+        "nanocelulose_review"
+      ]
+    },
+    {
+      "id": "prod.nanocelulose__dest.industria_quimica",
+      "from": "cana.prod.nanocelulose",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Reforco de polimero, aditivo reologico e filme barreira sao as aplicacoes.",
+      "params": [],
+      "fontes": [
+        "nanocelulose_review"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.mfc_desfibrilacao",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.mfc_desfibrilacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A fibra do bagaco e desfiada mecanicamente, sem reagente quimico.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "nanocelulose_review"
+      ]
+    },
+    {
+      "id": "rota.mfc_desfibrilacao__prod.mfc",
+      "from": "cana.rota.mfc_desfibrilacao",
+      "to": "cana.prod.mfc",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O gel de microfibrilas retem agua, espessa e reforca papel, tinta e adesivo.",
+      "params": [],
+      "fontes": [
+        "nanocelulose_review"
+      ]
+    },
+    {
+      "id": "prod.mfc__rota.polpacao_bagaco",
+      "from": "cana.prod.mfc",
+      "to": "cana.rota.polpacao_bagaco",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Adicionada a massa, a MFC aumenta a resistencia do papel de bagaco.",
+      "params": [],
+      "fontes": [
+        "nanocelulose_review"
+      ]
+    },
+    {
+      "id": "prod.mfc__dest.industria_quimica",
+      "from": "cana.prod.mfc",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Substitui espessantes sinteticos em tinta, adesivo e cosmetico.",
+      "params": [],
+      "fontes": [
+        "nanocelulose_review"
+      ]
+    },
+    {
+      "id": "copr.melaco__rota.celulose_bacteriana",
+      "from": "cana.copr.melaco",
+      "to": "cana.rota.celulose_bacteriana",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Komagataeibacter tece celulose pura em meio acucarado de melaco.",
+      "params": [],
+      "fontes": [
+        "celulose_bacteriana"
+      ]
+    },
+    {
+      "id": "rota.celulose_bacteriana__prod.celulose_bacteriana",
+      "from": "cana.rota.celulose_bacteriana",
+      "to": "cana.prod.celulose_bacteriana",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A pelicula sai sem lignina nem hemicelulose, com pureza que nenhuma fibra vegetal alcanca.",
+      "params": [],
+      "fontes": [
+        "celulose_bacteriana"
+      ]
+    },
+    {
+      "id": "prod.celulose_bacteriana__dest.industria_quimica",
+      "from": "cana.prod.celulose_bacteriana",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Curativo, implante e couro alternativo sao mercados de alto valor por quilo.",
+      "params": [],
+      "fontes": [
+        "celulose_bacteriana"
+      ]
+    },
+    {
+      "id": "prod.celulose_bacteriana__dest.industria_alimenticia",
+      "from": "cana.prod.celulose_bacteriana",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "A mesma pelicula e usada como ingrediente alimentar de textura.",
+      "params": [],
+      "fontes": [
+        "celulose_bacteriana"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.polpacao_bagaco",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.polpacao_bagaco",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Depois de retirada a medula, a fibra do bagaco equivale a fibra curta de eucalipto.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "papel_bagaco"
+      ]
+    },
+    {
+      "id": "rota.polpacao_bagaco__prod.papel_papelao",
+      "from": "cana.rota.polpacao_bagaco",
+      "to": "cana.prod.papel_papelao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A polpa de bagaco vira papel de imprimir e papelao de embalagem.",
+      "params": [],
+      "fontes": [
+        "papel_bagaco"
+      ]
+    },
+    {
+      "id": "rota.polpacao_bagaco__prod.lignina",
+      "from": "cana.rota.polpacao_bagaco",
+      "to": "cana.prod.lignina",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O licor negro da polpacao concentra a lignina removida da fibra.",
+      "params": [],
+      "fontes": [
+        "papel_bagaco"
+      ]
+    },
+    {
+      "id": "prod.papel_papelao__dest.embalagens",
+      "from": "cana.prod.papel_papelao",
+      "to": "cana.dest.embalagens",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "A cadeia de embalagem de papel compra fibra agricola no lugar de fibra de floresta.",
+      "params": [],
+      "fontes": [
+        "papel_bagaco"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.polpa_moldada",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.polpa_moldada",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Bagaco prensado em molde e a base de prato, bandeja e copo compostavel.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "polpa_moldada"
+      ]
+    },
+    {
+      "id": "rota.polpa_moldada__prod.embalagem_moldada",
+      "from": "cana.rota.polpa_moldada",
+      "to": "cana.prod.embalagem_moldada",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O descartavel de bagaco substitui isopor e plastico e e compostavel.",
+      "params": [],
+      "fontes": [
+        "polpa_moldada"
+      ]
+    },
+    {
+      "id": "prod.embalagem_moldada__dest.embalagens",
+      "from": "cana.prod.embalagem_moldada",
+      "to": "cana.dest.embalagens",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Leis que restringem descartavel plastico ja criaram a demanda, hoje atendida por importacao.",
+      "params": [],
+      "fontes": [
+        "polpa_moldada"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.paineis_mdf",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.paineis_mdf",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Particulas de bagaco substituem madeira em painel de fibra e de particula.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "paineis_bagaco"
+      ]
+    },
+    {
+      "id": "rota.paineis_mdf__prod.painel_mdf",
+      "from": "cana.rota.paineis_mdf",
+      "to": "cana.prod.painel_mdf",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Coladas e prensadas, as particulas dao MDF e MDP de desempenho comparavel em uso interno.",
+      "params": [],
+      "fontes": [
+        "paineis_bagaco"
+      ]
+    },
+    {
+      "id": "prod.painel_mdf__dest.construcao_civil",
+      "from": "cana.prod.painel_mdf",
+      "to": "cana.dest.construcao_civil",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Movel e divisoria sao o destino do painel de fibra agricola.",
+      "params": [],
+      "fontes": [
+        "paineis_bagaco"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.compositos",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.compositos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Fibras curtas de bagaco entram como carga de reforco em termoplasticos.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "compositos_bagaco"
+      ]
+    },
+    {
+      "id": "rota.compositos__prod.composito_fibra",
+      "from": "cana.rota.compositos",
+      "to": "cana.prod.composito_fibra",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A carga de fibra reduz resina, peso e custo e permite alegar conteudo renovavel.",
+      "params": [],
+      "fontes": [
+        "compositos_bagaco"
+      ]
+    },
+    {
+      "id": "prod.composito_fibra__dest.construcao_civil",
+      "from": "cana.prod.composito_fibra",
+      "to": "cana.dest.construcao_civil",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Decks, perfis e pecas automotivas sao os usos ja existentes do composito.",
+      "params": [],
+      "fontes": [
+        "compositos_bagaco"
+      ]
+    },
+    {
+      "id": "copr.levedura__rota.levedura_racao",
+      "from": "cana.copr.levedura",
+      "to": "cana.rota.levedura_racao",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O excedente do creme de fermento precisa sair do circuito e e secado.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ],
+      "rotulo": "35 a 45% de proteina"
+    },
+    {
+      "id": "rota.levedura_racao__prod.levedura_racao",
+      "from": "cana.rota.levedura_racao",
+      "to": "cana.prod.levedura_racao",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "Secado em spray dryer ou rolo, o creme vira farelo proteico.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "prod.levedura_racao__dest.nutricao_animal",
+      "from": "cana.prod.levedura_racao",
+      "to": "cana.dest.nutricao_animal",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "E a rota de bioproduto de cana com maior volume real em Sao Paulo depois de acucar e etanol.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "copr.levedura__rota.extrato_levedura",
+      "from": "cana.copr.levedura",
+      "to": "cana.rota.extrato_levedura",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "A mesma purga de levedura, em vez de secada, e submetida a autolise.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "rota.extrato_levedura__prod.extrato_levedura",
+      "from": "cana.rota.extrato_levedura",
+      "to": "cana.prod.extrato_levedura",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O conteudo interno da celula vira extrato rico em peptideos e nucleotideos.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "prod.extrato_levedura__dest.industria_alimenticia",
+      "from": "cana.prod.extrato_levedura",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "Realcador de sabor natural, vale muitas vezes mais que a levedura seca.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "rota.extrato_levedura__rota.betaglucana",
+      "from": "cana.rota.extrato_levedura",
+      "to": "cana.rota.betaglucana",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A parede celular que sobra da autolise e a materia-prima das beta-glucanas.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "copr.levedura__rota.betaglucana",
+      "from": "cana.copr.levedura",
+      "to": "cana.rota.betaglucana",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A parede da levedura concentra beta-glucanas e mananoligossacarideos.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "rota.betaglucana__prod.betaglucana_mos",
+      "from": "cana.rota.betaglucana",
+      "to": "cana.prod.betaglucana_mos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Beta-glucanas modulam a imunidade e os MOS adsorvem patogenos no intestino.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "prod.betaglucana_mos__dest.nutricao_animal",
+      "from": "cana.prod.betaglucana_mos",
+      "to": "cana.dest.nutricao_animal",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "O aditivo substitui antibiotico promotor de crescimento em racao.",
+      "params": [],
+      "fontes": [
+        "bioprodutos_cana"
+      ]
+    },
+    {
+      "id": "copr.hidrolisado_c6__rota.proteina_unicelular",
+      "from": "cana.copr.hidrolisado_c6",
+      "to": "cana.rota.proteina_unicelular",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Hidrolisado de bagaco e substrato barato para micro-organismos proteicos.",
+      "params": [],
+      "fontes": [
+        "scp_review"
+      ],
+      "rotulo": "40 a 60% de proteina no peso seco"
+    },
+    {
+      "id": "res.vinhaca__rota.proteina_unicelular",
+      "from": "cana.res.vinhaca",
+      "to": "cana.rota.proteina_unicelular",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A carga organica da vinhaca sustenta o crescimento microbiano em vez de ir ao campo.",
+      "params": [
+        "vinhaca_disponivel"
+      ],
+      "fontes": [
+        "scp_review"
+      ]
+    },
+    {
+      "id": "copr.melaco__rota.proteina_unicelular",
+      "from": "cana.copr.melaco",
+      "to": "cana.rota.proteina_unicelular",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O melaco e o substrato mais simples de operar para proteina unicelular.",
+      "params": [],
+      "fontes": [
+        "scp_review"
+      ]
+    },
+    {
+      "id": "rota.proteina_unicelular__prod.proteina_unicelular",
+      "from": "cana.rota.proteina_unicelular",
+      "to": "cana.prod.proteina_unicelular",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A biomassa microbiana seca vira farelo proteico para aquicultura, aves e suinos.",
+      "params": [],
+      "fontes": [
+        "scp_review"
+      ]
+    },
+    {
+      "id": "prod.proteina_unicelular__dest.nutricao_animal",
+      "from": "cana.prod.proteina_unicelular",
+      "to": "cana.dest.nutricao_animal",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Cada tonelada de proteina microbiana dispensa area equivalente de soja.",
+      "params": [],
+      "fontes": [
+        "scp_review"
+      ]
+    },
+    {
+      "id": "copr.hidrolisado_c6__rota.lipidios_microbianos",
+      "from": "cana.copr.hidrolisado_c6",
+      "to": "cana.rota.lipidios_microbianos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Leveduras oleaginosas acumulam gordura crescendo no hidrolisado de bagaco.",
+      "params": [],
+      "fontes": [
+        "oleo_microbiano"
+      ],
+      "rotulo": ">50% do peso seco em lipidio"
+    },
+    {
+      "id": "copr.hidrolisado_c5__rota.lipidios_microbianos",
+      "from": "cana.copr.hidrolisado_c5",
+      "to": "cana.rota.lipidios_microbianos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Rhodotorula e Yarrowia consomem pentoses que a levedura alcoolica rejeita.",
+      "params": [],
+      "fontes": [
+        "oleo_microbiano"
+      ]
+    },
+    {
+      "id": "rota.lipidios_microbianos__prod.oleo_microbiano",
+      "from": "cana.rota.lipidios_microbianos",
+      "to": "cana.prod.oleo_microbiano",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O triglicerideo obtido tem perfil proximo ao de oleos vegetais.",
+      "params": [],
+      "fontes": [
+        "oleo_microbiano"
+      ]
+    },
+    {
+      "id": "prod.oleo_microbiano__dest.industria_quimica",
+      "from": "cana.prod.oleo_microbiano",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Biodiesel, HVO e oleoquimica compram o oleo sem exigir area agricola nova.",
+      "params": [],
+      "fontes": [
+        "oleo_microbiano"
+      ]
+    },
+    {
+      "id": "res.bagaco__rota.cogumelos",
+      "from": "cana.res.bagaco",
+      "to": "cana.rota.cogumelos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Cogumelos degradam lignocelulose: comem exatamente o que a usina descarta.",
+      "params": [
+        "bagaco_excedente"
+      ],
+      "fontes": [
+        "cogumelos_bagaco"
+      ]
+    },
+    {
+      "id": "res.palha__rota.cogumelos",
+      "from": "cana.res.palha",
+      "to": "cana.rota.cogumelos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A palha entra no composto do champignon e no substrato de Pleurotus e shiitake.",
+      "params": [
+        "palha_recolhivel"
+      ],
+      "fontes": [
+        "cogumelos_bagaco"
+      ]
+    },
+    {
+      "id": "rota.cogumelos__prod.cogumelos",
+      "from": "cana.rota.cogumelos",
+      "to": "cana.prod.cogumelos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Em semanas a fibra vira alimento proteico de alto valor.",
+      "params": [],
+      "fontes": [
+        "cogumelos_bagaco"
+      ]
+    },
+    {
+      "id": "prod.cogumelos__dest.industria_alimenticia",
+      "from": "cana.prod.cogumelos",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "E a rota que transforma residuo em alimento com menor exigencia tecnologica do atlas.",
+      "params": [],
+      "fontes": [
+        "cogumelos_bagaco"
+      ]
+    },
+    {
+      "id": "rota.cogumelos__rota.compostagem_torta",
+      "from": "cana.rota.cogumelos",
+      "to": "cana.rota.compostagem_torta",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O substrato exausto do cogumelo ainda tem materia organica e volta a leira de compostagem.",
+      "params": [],
+      "fontes": [
+        "cogumelos_bagaco"
+      ]
+    },
+    {
+      "id": "copr.caldo_clarificado__rota.acucares_especiais",
+      "from": "cana.copr.caldo_clarificado",
+      "to": "cana.rota.acucares_especiais",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "Ajustes de processo no proprio caldo entregam xarope invertido, demerara e organico.",
+      "params": [
+        "cana_moida_sp"
+      ],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "prod.acucar_vhp__rota.acucares_especiais",
+      "from": "cana.prod.acucar_vhp",
+      "to": "cana.rota.acucares_especiais",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "O VHP redissolvido e a base dos acucares especiais de maior valor.",
+      "params": [],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "rota.acucares_especiais__prod.acucar_liquido",
+      "from": "cana.rota.acucares_especiais",
+      "to": "cana.prod.acucar_liquido",
+      "kind": "massa",
+      "estado": "real",
+      "explicacao": "Sao Paulo e o maior polo mundial de acucar organico certificado.",
+      "params": [],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "prod.acucar_liquido__dest.industria_alimenticia",
+      "from": "cana.prod.acucar_liquido",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "valor",
+      "estado": "real",
+      "explicacao": "Bebidas e panificacao pagam premio sobre o VHP pelo xarope pronto.",
+      "params": [],
+      "fontes": [
+        "rein2017"
+      ]
+    },
+    {
+      "id": "copr.xarope__rota.fos",
+      "from": "cana.copr.xarope",
+      "to": "cana.rota.fos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A sacarose concentrada do xarope e o unico insumo da conversao enzimatica a FOS.",
+      "params": [],
+      "fontes": [
+        "fos_review"
+      ]
+    },
+    {
+      "id": "prod.acucar_cristal__rota.fos",
+      "from": "cana.prod.acucar_cristal",
+      "to": "cana.rota.fos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Cristal redissolvido tambem serve de substrato, com pureza maior e custo maior.",
+      "params": [],
+      "fontes": [
+        "fos_review"
+      ]
+    },
+    {
+      "id": "rota.fos__prod.fos",
+      "from": "cana.rota.fos",
+      "to": "cana.prod.fos",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A frutosiltransferase monta cadeias de duas a quatro frutoses que o intestino nao digere.",
+      "params": [],
+      "fontes": [
+        "fos_review"
+      ]
+    },
+    {
+      "id": "prod.fos__dest.industria_alimenticia",
+      "from": "cana.prod.fos",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Laticinios e formulas infantis consomem FOS como fibra prebiotica reconhecida.",
+      "params": [],
+      "fontes": [
+        "fos_review"
+      ]
+    },
+    {
+      "id": "prod.fos__dest.nutricao_animal",
+      "from": "cana.prod.fos",
+      "to": "cana.dest.nutricao_animal",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "A nutricao animal usa o mesmo prebiotico como aditivo intestinal.",
+      "params": [],
+      "fontes": [
+        "fos_review"
+      ]
+    },
+    {
+      "id": "copr.co2__rota.co2_purificacao",
+      "from": "cana.copr.co2",
+      "to": "cana.rota.co2_purificacao",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O gas da dorna sai a 99% de pureza e dispensa etapa de separacao.",
+      "params": [
+        "etanol_por_cana"
+      ],
+      "fontes": [
+        "co2_fermentativo"
+      ],
+      "rotulo": "0,76 kg CO2/L de etanol"
+    },
+    {
+      "id": "rota.co2_purificacao__prod.co2_alimenticio",
+      "from": "cana.rota.co2_purificacao",
+      "to": "cana.prod.co2_alimenticio",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Lavagem, secagem e liquefacao entregam CO2 grau alimenticio.",
+      "params": [],
+      "fontes": [
+        "co2_fermentativo"
+      ]
+    },
+    {
+      "id": "prod.co2_alimenticio__dest.industria_bebidas",
+      "from": "cana.prod.co2_alimenticio",
+      "to": "cana.dest.industria_bebidas",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Refrigerante e cerveja compram o gas de carbonatacao hoje de origem fossil.",
+      "params": [],
+      "fontes": [
+        "co2_fermentativo"
+      ]
+    },
+    {
+      "id": "prod.co2_alimenticio__dest.industria_alimenticia",
+      "from": "cana.prod.co2_alimenticio",
+      "to": "cana.dest.industria_alimenticia",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Gelo seco e atmosfera modificada usam o mesmo CO2 purificado.",
+      "params": [],
+      "fontes": [
+        "co2_fermentativo"
+      ]
+    },
+    {
+      "id": "copr.co2__rota.co2_microalgas",
+      "from": "cana.copr.co2",
+      "to": "cana.rota.co2_microalgas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O CO2 concentrado da dorna e borbulhado no cultivo, que fixa carbono por fotossintese.",
+      "params": [],
+      "fontes": [
+        "microalgas_co2"
+      ]
+    },
+    {
+      "id": "res.vinhaca__rota.co2_microalgas",
+      "from": "cana.res.vinhaca",
+      "to": "cana.rota.co2_microalgas",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A vinhaca fornece nitrogenio, fosforo e potassio ao meio de cultivo.",
+      "params": [
+        "vinhaca_disponivel"
+      ],
+      "fontes": [
+        "microalgas_co2"
+      ]
+    },
+    {
+      "id": "rota.co2_microalgas__prod.biomassa_microalgal",
+      "from": "cana.rota.co2_microalgas",
+      "to": "cana.prod.biomassa_microalgal",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A biomassa colhida por floculacao concentra oleo, proteina e pigmentos.",
+      "params": [],
+      "fontes": [
+        "microalgas_co2"
+      ]
+    },
+    {
+      "id": "prod.biomassa_microalgal__dest.nutricao_animal",
+      "from": "cana.prod.biomassa_microalgal",
+      "to": "cana.dest.nutricao_animal",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Farinha de alga e ingrediente de racao e de aquicultura.",
+      "params": [],
+      "fontes": [
+        "microalgas_co2"
+      ]
+    },
+    {
+      "id": "prod.biomassa_microalgal__dest.industria_quimica",
+      "from": "cana.prod.biomassa_microalgal",
+      "to": "cana.dest.industria_quimica",
+      "kind": "valor",
+      "estado": "potencial",
+      "explicacao": "Astaxantina e ficocianina sao os produtos que sustentam a conta da rota.",
+      "params": [],
+      "fontes": [
+        "microalgas_co2"
+      ]
+    },
+    {
+      "id": "copr.co2__rota.beccs",
+      "from": "cana.copr.co2",
+      "to": "cana.rota.beccs",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "Como o carbono veio da atmosfera, guarda-lo no subsolo resulta em remocao liquida.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "beccs_cana"
+      ]
+    },
+    {
+      "id": "rota.co2_purificacao__rota.beccs",
+      "from": "cana.rota.co2_purificacao",
+      "to": "cana.rota.beccs",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O gas purificado e comprimido ao estado supercritico antes da injecao.",
+      "params": [],
+      "fontes": [
+        "beccs_cana"
+      ]
+    },
+    {
+      "id": "res.gases_caldeira__rota.beccs",
+      "from": "cana.res.gases_caldeira",
+      "to": "cana.rota.beccs",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "O CO2 diluido da chamine tambem e biogenico, mas exige captura pos-combustao.",
+      "params": [],
+      "fontes": [
+        "beccs_cana"
+      ],
+      "rotulo": "12-14% de CO2"
+    },
+    {
+      "id": "rota.beccs__dest.armazenamento_geologico",
+      "from": "cana.rota.beccs",
+      "to": "cana.dest.armazenamento_geologico",
+      "kind": "massa",
+      "estado": "potencial",
+      "explicacao": "A injecao acima de 800 metros sob rocha selante e o unico destino de remocao permanente.",
+      "params": [],
+      "fontes": [
+        "beccs_cana"
+      ]
+    },
+    {
+      "id": "rota.beccs__dest.beccs_ccs",
+      "from": "cana.rota.beccs",
+      "to": "cana.dest.beccs_ccs",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "Carbono biogenico estocado gera credito de remocao, nao de emissao evitada.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "beccs_cana"
+      ]
+    },
+    {
+      "id": "dest.armazenamento_geologico__dest.mercado_voluntario_carbono",
+      "from": "cana.dest.armazenamento_geologico",
+      "to": "cana.dest.mercado_voluntario_carbono",
+      "kind": "regulatorio",
+      "estado": "potencial",
+      "explicacao": "So com geologia caracterizada e monitorada o credito de remocao pode ser emitido.",
+      "params": [
+        "preco_carbono"
+      ],
+      "fontes": [
+        "beccs_cana"
+      ]
+    }
+  ]
+}
