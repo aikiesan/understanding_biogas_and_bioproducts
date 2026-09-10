@@ -1,7 +1,8 @@
 import type { AtlasEdge, AtlasNode, CulturaDef } from '@/types/atlas'
-import { semear } from '@/graph/semente'
+import { curar } from '@/graph/curar'
 import bruto from './grafo.json'
-import { ALCANCE, CENTRO, FOCOS, esqueletoDoNucleo } from './nucleo'
+import { comTier } from './hierarquia'
+import { CENTRO, EXCLUIDOS, FOCOS, PROMOVIDOS, VAGAS } from './nucleo'
 
 /**
  * O grafo da cana vem de um JSON gerado e revisado, nao de codigo escrito a mao.
@@ -14,11 +15,9 @@ interface GrafoBruto {
 }
 
 const dados = bruto as GrafoBruto
-
-const nodesValidos = dados.nodes as AtlasNode[]
+const nodesBrutos = dados.nodes as AtlasNode[]
 const edgesBrutas = dados.edges as AtlasEdge[]
-
-const idsValidos = new Set(nodesValidos.map((n) => n.id))
+const idsValidos = new Set(nodesBrutos.map((n) => n.id))
 
 /**
  * Arestas orfas sao descartadas em vez de quebrar o mapa. Se houver alguma,
@@ -32,29 +31,39 @@ export const arestasOrfas = edgesBrutas.filter(
 const edgesValidas = edgesBrutas.filter((e) => idsValidos.has(e.from) && idsValidos.has(e.to))
 
 /**
- * O mapa nao mostra o arquivo inteiro: mostra o nucleo autorado. Quem cresce e
- * `ALCANCE`, em `nucleo.ts`. O recorte acontece AQUI, na carga, e nao no canvas,
- * porque o painel e o motor de calculo tem de somar o mesmo que o mapa desenha
- * — um mapa com 35 nos e um total calculado sobre 341 seria a pior das duas
- * leituras.
+ * A CURADORIA acontece aqui, na carga.
+ *
+ * O esqueleto tem 129 vagas e o corpus tem 341 nos. O recorte tem de ser feito
+ * num lugar so, e tem de ser este: o painel e o motor de calculo precisam somar
+ * exatamente o que o mapa desenha. Um mapa com 129 nos e um total calculado
+ * sobre 341 seria a pior das duas leituras.
  */
-const { nodes, edges, espinha } = semear(nodesValidos, edgesValidas, {
+export const curadoria = curar(nodesBrutos, edgesValidas, {
   centro: CENTRO,
   focos: FOCOS.map((f) => f.id),
-  alcance: ALCANCE,
+  vagas: VAGAS,
+  promovidos: PROMOVIDOS,
+  excluidos: EXCLUIDOS,
 })
 
-/** O esqueleto do desenho, com a espinha que o recorte descobriu. */
-export const ESQUELETO_CANA = esqueletoDoNucleo(espinha)
+const noMapa = new Set<string>([CENTRO, ...curadoria.processos, ...FOCOS.map((f) => f.id), ...curadoria.vagas.map((v) => v.id)])
 
-/** Quanto do corpus o nucleo mostra hoje. */
+const nodes = comTier(
+  nodesBrutos.filter((n) => noMapa.has(n.id)),
+  edgesValidas,
+  CENTRO,
+  FOCOS.map((f) => f.id),
+)
+const edges = edgesValidas.filter((e) => noMapa.has(e.from) && noMapa.has(e.to))
+
+/** Quanto do corpus o esqueleto mostra hoje. */
 export const recorte = {
-  alcance: ALCANCE,
   nosNoMapa: nodes.length,
-  nosNoCorpus: nodesValidos.length,
+  nosNoCorpus: nodesBrutos.length,
   arestasNoMapa: edges.length,
   arestasNoCorpus: edgesValidas.length,
-  nosNaEspinha: espinha.length,
+  vagas: curadoria.vagas.length,
+  preteridos: curadoria.preteridos.length,
 }
 
 export const cana: CulturaDef = {

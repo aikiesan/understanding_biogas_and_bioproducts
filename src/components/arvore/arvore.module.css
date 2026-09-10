@@ -59,6 +59,24 @@
 
 /* A borda do vazio central: o único círculo que sobrou. A série de anéis
    concêntricos saiu porque era ela que fazia o mapa ler como grade polar. */
+/* Os anéis são o eixo de leitura radial: distância ao centro = distância na
+   cadeia. Tracejado fino, porque orientam sem competir com o conteúdo. */
+.anelGuia {
+  stroke: var(--arv-grade);
+  stroke-width: 1;
+  opacity: 0.75;
+}
+
+.rotuloAnel {
+  fill: var(--arv-texto-morto);
+  font-size: 15px;
+  font-weight: var(--weight-bold);
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  opacity: 0.42;
+  pointer-events: none;
+}
+
 .bordaDoVazio {
   stroke: var(--arv-grade);
   stroke-width: 1;
@@ -136,6 +154,13 @@
 
 /* Potencial é tracejado, e continua tracejado mesmo quando aceso: o traço
    diz que a rota não existe em escala, o brilho diz que você a escolheu. */
+/* Travessia: pula camada ou muda de ramo. É caminho legítimo — a alocação
+   anda por ele — mas não é o ramo, e o desenho tem de dizer isso. Tênue e
+   fino, para atravessar o mapa sem competir com a leitura radial. */
+.conexao[data-tipo='cruzada'] .conexaoLinha { stroke-width: 1.1; opacity: 0.42; }
+.conexao[data-tipo='cruzada'] .conexaoHalo { opacity: 0; }
+.conexao[data-tipo='cruzada'][data-estado='alocado'] .conexaoLinha { opacity: 0.9; }
+
 .conexao[data-fluxo='potencial'] .conexaoLinha { stroke-dasharray: 7 6; }
 .conexao[data-especie='regulatorio'] .conexaoLinha { stroke-dasharray: 2 6; }
 .conexao[data-obrigatorio='sim'] .conexaoLinha { stroke-width: 2.4; }
@@ -166,9 +191,20 @@
 
 .disco {
   fill: var(--arv-fundo-no);
-  stroke: var(--arv-borda-morta);
+  /* Bloqueado tem de ser LEGÍVEL, não invisível. O mapa abre com um nó aceso,
+     então quase tudo está bloqueado: se esse estado desaparece no fundo, a
+     pessoa não vê a árvore que veio ver — vê uma tela preta com um ponto. */
+  stroke: var(--arv-cinza);
   stroke-width: 1.6;
+  opacity: 0.55;
 }
+
+.no[data-estado='alocavel'] .disco,
+.no[data-estado='alocado'] .disco { opacity: 1; }
+
+/* Pilares e origem nunca apagam: são a âncora de orientação do mapa. */
+.no[data-tier='keystone'] .disco,
+.no[data-tier='inicio'] .disco { opacity: 0.9; }
 
 .ornamento { color: var(--arv-borda-morta); }
 .ornAnel { stroke: currentColor; stroke-width: 1.4; stroke-dasharray: 5 5; opacity: 0.8; }
@@ -179,6 +215,7 @@
 
 .rotulo {
   fill: var(--arv-texto-morto);
+  opacity: 0.85;
   font-size: 11px;
   font-weight: var(--weight-medium);
   text-anchor: middle;
@@ -222,6 +259,28 @@
 .no[data-estado='alocado'][data-familia='7'] .disco { fill: var(--fam-7); }
 .no[data-estado='alocado'][data-familia='miolo'] .disco { fill: var(--arv-lima); }
 .no[data-estado='alocado'][data-familia='orla'] .disco { fill: var(--arv-lima); }
+
+/* O galho que cai, marcado antes de cair. A faixa de confirmação promete "em
+   vermelho no mapa" — e uma interface que promete e não mostra é pior que uma
+   que não avisa. `--arv-perigo` já existia nos tokens para este uso. */
+.no[data-queda='sim'] .disco {
+  stroke: var(--arv-perigo) !important;
+  fill: color-mix(in srgb, var(--arv-perigo) 26%, var(--arv-fundo-no)) !important;
+  stroke-width: 2.6;
+  stroke-dasharray: none;
+}
+.no[data-queda='sim'] .rotulo { fill: var(--arv-perigo); }
+.no[data-queda='sim'] .ornamento { color: var(--arv-perigo); }
+.no[data-queda='sim'] .icone { color: var(--arv-fundo); opacity: 1; }
+
+.conexao[data-queda='sim'] .conexaoLinha {
+  stroke: var(--arv-perigo) !important;
+  stroke-width: 2.4;
+}
+.conexao[data-queda='sim'] .conexaoHalo {
+  stroke: var(--arv-perigo);
+  opacity: 0.22;
+}
 
 /* A orla é o cinturão dos nós que ainda não têm nenhuma aresta de entrada no
    corpus. Ela fica mais apagada de propósito: o mapa não deve afirmar uma

@@ -1,7 +1,27 @@
 import { useState } from 'react'
 import { ChevronDown, ChevronUp } from './icones'
-import { useAtlas } from '@/state/atlasStore'
 import styles from './Legenda.module.css'
+
+/**
+ * A chave de leitura do mapa.
+ *
+ * Nao tem mais filtros. Tinha tres controles clicaveis — expandir/recolher, o
+ * interruptor de potenciais e sete chips de tema — que nao faziam nada: eram
+ * residuo do modelo anterior, em que o grafo se expandia por vizinhanca. Um
+ * controle que responde ao clique e nao muda o mapa e pior que a ausencia dele,
+ * porque a pessoa conclui que nao entendeu a ferramenta.
+ *
+ * O que sobra ensina o vocabulario, e por isso fica: a FORMA diz o peso do no,
+ * o CONTORNO diz o tipo, e o TRACO diz a natureza do fluxo. Vem recolhida —
+ * 232px opacos sobre o mapa sao caros, e quem precisa da legenda a abre.
+ */
+
+const FORMAS = [
+  { id: 'inicio', rotulo: 'Origem', dica: 'onde a cadeia começa' },
+  { id: 'keystone', rotulo: 'Grande foco', dica: 'os quatro resíduos de biomassa' },
+  { id: 'notavel', rotulo: 'Notável', dica: 'produz um grande foco' },
+  { id: 'passagem', rotulo: 'Passagem', dica: 'a linha de processamento' },
+] as const
 
 const TIPOS = [
   { kind: 'cultura', rotulo: 'Cultura' },
@@ -13,39 +33,76 @@ const TIPOS = [
   { kind: 'destino', rotulo: 'Destino' },
 ] as const
 
-const TAGS = [
-  { id: 'energia', rotulo: 'Energia' },
-  { id: 'fertilizante', rotulo: 'Fertilizante' },
-  { id: 'solo', rotulo: 'Solo' },
-  { id: 'quimica', rotulo: 'Química' },
-  { id: 'alimento', rotulo: 'Alimento' },
-  { id: 'combustivel', rotulo: 'Combustível' },
-  { id: 'regulatorio', rotulo: 'Regulatório' },
-] as const
+/** As mesmas formas do mapa, em miniatura. */
+function Amostra({ forma }: { forma: (typeof FORMAS)[number]['id'] }) {
+  const comum = { className: styles.formaAmostra, 'aria-hidden': true } as const
+  if (forma === 'keystone') {
+    return (
+      <svg width="18" height="18" viewBox="-9 -9 18 18" {...comum}>
+        <polygon points="0,-8 6.93,-4 6.93,4 0,8 -6.93,4 -6.93,-4" />
+      </svg>
+    )
+  }
+  const r = forma === 'inicio' ? 8 : forma === 'notavel' ? 6 : 4
+  return (
+    <svg width="18" height="18" viewBox="-9 -9 18 18" {...comum}>
+      <circle r={r} />
+      {forma === 'notavel' && <circle r="8" fill="none" strokeDasharray="2 2" />}
+      {forma === 'inicio' && <circle r="8.4" fill="none" />}
+    </svg>
+  )
+}
 
 export function Legenda() {
-  const [aberta, setAberta] = useState(true)
-  const mostrarPotenciais = useAtlas((s) => s.mostrarPotenciais)
-  const alternarPotenciais = useAtlas((s) => s.alternarPotenciais)
-  const tagsAtivas = useAtlas((s) => s.tagsAtivas)
-  const alternarTag = useAtlas((s) => s.alternarTag)
-  const expandirTudo = useAtlas((s) => s.expandirTudo)
-  const recolherTudo = useAtlas((s) => s.recolherTudo)
+  const [aberta, setAberta] = useState(false)
 
   return (
-    <aside className={styles.legenda} aria-label="Legenda e filtros">
+    <aside className={styles.legenda} aria-label="Legenda">
       <button
         type="button"
         className={styles.cabecalho}
         onClick={() => setAberta(!aberta)}
         aria-expanded={aberta}
       >
-        <span>Legenda e filtros</span>
+        <span>Como ler o mapa</span>
         {aberta ? <ChevronDown size={15} /> : <ChevronUp size={15} />}
       </button>
 
       {aberta && (
         <div className={styles.corpo}>
+          <div className={styles.bloco}>
+            <h3 className={styles.tituloBloco}>Peso do nó</h3>
+            <ul className={styles.tipos}>
+              {FORMAS.map((f) => (
+                <li key={f.id} className={styles.tipo}>
+                  <Amostra forma={f.id} />
+                  <span>
+                    {f.rotulo}
+                    <em className={styles.dica}>{f.dica}</em>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className={styles.bloco}>
+            <h3 className={styles.tituloBloco}>Estado</h3>
+            <ul className={styles.tipos}>
+              <li className={styles.tipo}>
+                <span className={`${styles.amostra} ${styles.amostra_aceso}`} />
+                Aceso — faz parte da sua rota
+              </li>
+              <li className={styles.tipo}>
+                <span className={`${styles.amostra} ${styles.amostra_disponivel}`} />
+                Disponível — clique para acender
+              </li>
+              <li className={styles.tipo}>
+                <span className={`${styles.amostra} ${styles.amostra_bloqueado}`} />
+                Bloqueado — falta o que o alimenta
+              </li>
+            </ul>
+          </div>
+
           <div className={styles.bloco}>
             <h3 className={styles.tituloBloco}>Tipo de nó</h3>
             <ul className={styles.tipos}>
@@ -80,42 +137,6 @@ export function Legenda() {
                 Crédito ou certificado
               </li>
             </ul>
-          </div>
-
-          <div className={styles.bloco}>
-            <h3 className={styles.tituloBloco}>Filtrar por tema</h3>
-            <div className={styles.chips}>
-              {TAGS.map((t) => (
-                <button
-                  key={t.id}
-                  type="button"
-                  className={tagsAtivas.has(t.id) ? styles.chipAtivo : styles.chip}
-                  aria-pressed={tagsAtivas.has(t.id)}
-                  onClick={() => alternarTag(t.id)}
-                >
-                  {t.rotulo}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.acoes}>
-            <label className={styles.switch}>
-              <input
-                type="checkbox"
-                checked={mostrarPotenciais}
-                onChange={alternarPotenciais}
-              />
-              Mostrar rotas potenciais
-            </label>
-            <div className={styles.botoes}>
-              <button type="button" onClick={expandirTudo}>
-                Expandir tudo
-              </button>
-              <button type="button" onClick={recolherTudo}>
-                Recolher
-              </button>
-            </div>
           </div>
         </div>
       )}

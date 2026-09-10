@@ -1,8 +1,8 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vitest'
-import { cana } from '@/data/culturas/cana'
-import { ESQUELETO_CANA } from '@/data/culturas/cana/esqueleto'
-import { gerarMalha } from '@/graph/layout/gerarMalha'
+import { cana, curadoria } from '@/data/culturas/cana'
+import { ABERTURA, CENTRO, FOCOS, RAIOS, WOBBLE } from '@/data/culturas/cana/nucleo'
+import { gerarEsqueleto } from '@/graph/layout/esqueletoRadial'
 import { aplicarEstados } from '@/components/arvore/aplicarEstados'
 import { indexar } from '@/graph/selectors'
 import { linhaDeBase, raizesDe } from '@/graph/alocacao'
@@ -44,6 +44,7 @@ describe('estado compartilhado entre copias', () => {
       alocados: new Set(['X']),
       alocaveis: new Set(['Y']),
       selecionado: 'X',
+      galhoQueCai: new Set(),
       conexoes: [],
     })
 
@@ -70,6 +71,7 @@ describe('estado compartilhado entre copias', () => {
       alocados: new Set(['A', 'B']),
       alocaveis: new Set(),
       selecionado: null,
+      galhoQueCai: new Set(),
       conexoes: [
         {
           id: 'e1~0',
@@ -102,16 +104,48 @@ describe('estado compartilhado entre copias', () => {
   })
 })
 
+describe('o galho que cai chega a todas as copias', () => {
+  it('data-queda marca cada aparicao do arquetipo', () => {
+    // O aviso antes de apagar promete "em vermelho no mapa". Se a marca so
+    // chegasse a uma das copias, a promessa seria parcial e a pessoa perderia
+    // um no que o mapa nao avisou que ia cair.
+    const palco = palcoCom([
+      { no: 'X', instancia: 'X@f0' },
+      { no: 'X', instancia: 'X@f1' },
+      { no: 'Y', instancia: 'Y@f0' },
+    ])
+
+    aplicarEstados(palco, {
+      alocados: new Set(['X', 'Y']),
+      alocaveis: new Set(),
+      selecionado: null,
+      galhoQueCai: new Set(['X']),
+      conexoes: [],
+    })
+
+    for (const e of palco.querySelectorAll('[data-no="X"]')) {
+      expect(e.getAttribute('data-queda')).toBe('sim')
+    }
+    expect(palco.querySelector('[data-no="Y"]')?.getAttribute('data-queda')).toBeNull()
+  })
+})
+
 describe('a alocacao continua raciocinando em arquetipo', () => {
   it('a linha de base tem estrada desenhada para cada passo que ela anda', () => {
     // O risco da repeticao e o inverso do visivel: um no acender no modelo sem
     // que exista caminho na tela ligando ele ao que o alimenta.
-    const malha = gerarMalha(cana.nodes, cana.edges, ESQUELETO_CANA)
+    const malha = gerarEsqueleto(cana.nodes, cana.edges, curadoria, {
+      centro: CENTRO,
+      focos: FOCOS,
+      raios: RAIOS,
+      abertura: ABERTURA,
+      wobble: WOBBLE,
+    })
     const idx = indexar(cana.nodes, cana.edges)
     const base = linhaDeBase(cana.nodes, idx)
     const raizes = raizesDe(cana.nodes)
 
-    const pares = new Set(malha.conexoes.map((c) => `${c.from}->${c.to}`))
+    const pares = new Set(malha.conexoes.map((c: { from: string; to: string }) => `${c.from}->${c.to}`))
     for (const id of base) {
       if (raizes.has(id)) continue
       const entradasAcesas = (idx.entrando.get(id) ?? []).filter((e) => base.has(e.from))
