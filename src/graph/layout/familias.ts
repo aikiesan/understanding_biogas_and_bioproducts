@@ -33,11 +33,20 @@ export function atribuirFamilias(
     for (const id of s.raizes) raiz.set(id, i)
   })
 
+  // A espinha nao herda familia de ninguem e nao passa familia adiante.
+  const espinha = new Set(esqueleto.espinha ?? [])
+
   const memo = new Map<string, number[]>()
 
   function resolver(id: string, emCurso: Set<string>): number[] {
     const cache = memo.get(id)
     if (cache) return cache
+
+    if (espinha.has(id) && !raiz.has(id)) {
+      const nenhuma: number[] = []
+      memo.set(id, nenhuma)
+      return nenhuma
+    }
 
     const propria = raiz.get(id)
     if (propria !== undefined) {

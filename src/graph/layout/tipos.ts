@@ -164,4 +164,14 @@ export interface EsqueletoSpec {
   /** O no do nucleo. */
   centro: string
   setores: SetorSpec[]
+  /**
+   * Nos que pertencem a espinha, e nao a territorio nenhum.
+   *
+   * Existe porque a topologia de uma usina tem realimentacao: o bagaco alimenta
+   * a caldeira, que faz o vapor, que move a usina inteira. Pela regra de
+   * descendencia, meia usina viraria "territorio do bagaco". A caldeira nao e
+   * territorio do bagaco — e infraestrutura que o produz. A espinha vence o
+   * setor.
+   */
+  espinha?: string[]
 }

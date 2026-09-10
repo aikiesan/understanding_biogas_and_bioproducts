@@ -1,7 +1,7 @@
 # Handoff — árvore de alocação da cana
 
 Estado ao fim da sessão de 2026-09-10. `npm run build` e `npx vitest run`
-(75 testes) passam.
+(85 testes) passam.
 
 ## O que ficou pronto
 
@@ -49,14 +49,44 @@ puros, cada um testável isolado:
 - `src/data/culturas/cana/esqueleto.ts` — o esqueleto autoral, intocado: quais
   famílias existem e em que setor.
 
-**A orla, e por que ela é grande**
-215 dos 341 nós **não têm nenhuma aresta de entrada** no corpus — 127 rotas e
-88 produtos/destinos, todos em anel 3 e 4. Nenhuma família os alcança. Eles vão
-para um cinturão externo agrupado pela primeira tag, desenhado mais apagado.
-Espalhá-los pelas cunhas por afinidade de tag deixaria o mapa mais cheio e
-faria o desenho afirmar uma origem que o dado não tem. **Ligar esses nós no
-corpus é o maior ganho disponível para o mapa hoje** — cada aresta de entrada
-autorada move um nó da orla para o território a que ele pertence.
+**O mapa começa pequeno, de propósito**
+Desenhar os 341 nós de uma vez produziu um mapa enorme e atravessado. E a razão
+não era o layout: **215 dos 341 nós não têm nenhuma aresta de entrada** no
+corpus — 127 rotas e 88 produtos/destinos, todos em anel 3 e 4. A autoria das
+ligações não acompanhou a dos nós, então dois terços do mapa flutuavam sem
+origem. Um mapa que mostra tudo que existe no arquivo não é mais completo; é
+menos legível e igualmente incompleto.
+
+Então a interface mostra um **núcleo autorado**, definido em
+`src/data/culturas/cana/nucleo.ts` e recortado por `src/graph/semente.ts`:
+
+```
+Cana-de-açúcar          o foco central
+  ↓
+Processos               a linha que a usina de fato roda (a espinha, 30 nós)
+  ↓
+Quatro grandes focos    bagaço, palha, vinhaça, torta de filtro
+  ↓
+ALCANCE                 quantos passos depois dos focos entram no mapa
+```
+
+O recorte é derivado, não uma lista solta de ids: os quatro focos, tudo que os
+alimenta até a cultura, e `ALCANCE` passos a jusante. Hoje `ALCANCE = 0` → 35
+nós e 46 arestas.
+
+**Crescer o mapa é mexer em um número.** `ALCANCE = 1` abre +27 nós. Mas a hora
+de incrementar é quando as arestas daquele anel estiverem autoradas, não quando
+os nós existirem — senão a orla volta.
+
+A **orla** continua no motor, para os nós sem aresta de entrada: cinturão
+externo agrupado por tag, desenhado apagado. Com o núcleo atual ela está vazia,
+e o teste em `src/graph/__tests__/semente.test.ts` garante isso. Ela existe para
+o dia em que o `ALCANCE` crescer mais rápido que a autoria.
+
+`src/data/culturas/cana/esqueleto.ts` — os sete setores da usina inteira —
+continua no repositório: é o estado-alvo de quando o corpus estiver ligado, e é
+contra ele que a suíte de geometria roda, sobre os 341 nós. Um mapa de 35 nós
+não estressa nada.
 
 **Render**
 - `src/components/arvore/` — `ArvoreCanvas` mais as camadas (fundo, conexões,

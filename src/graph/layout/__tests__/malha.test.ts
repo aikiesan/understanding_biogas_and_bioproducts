@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { cana } from '@/data/culturas/cana'
+import type { AtlasEdge, AtlasNode } from '@/types/atlas'
+import bruto from '@/data/culturas/cana/grafo.json'
 import { ESQUELETO_CANA } from '@/data/culturas/cana/esqueleto'
 import { gerarMalha } from '@/graph/layout/gerarMalha'
 import { MAX_INSTANCIAS, arquetipoDe } from '@/graph/layout/instanciar'
@@ -10,9 +11,19 @@ import { MAX_INSTANCIAS, arquetipoDe } from '@/graph/layout/instanciar'
  * Sobreposicao e determinismo nao aparecem num teste de render nem num olhar
  * rapido na tela: dois discos a tres pixels de distancia parecem colados, e
  * uma variacao de ordem so se manifesta quando alguem acrescenta um no no meio
- * do arquivo e o mapa inteiro se mexe. Por isso a suite roda contra o corpus
- * real, nao contra fixture.
+ * do arquivo e o mapa inteiro se mexe.
+ *
+ * Roda contra o corpus INTEIRO — 341 nos e os sete setores —, nao contra o
+ * nucleo que a interface mostra hoje. O nucleo tem 35 nos, e num mapa de 35 nos
+ * quase nada se sobrepoe: seria uma suite que passa por falta de carga.
  */
+
+const nodes = bruto.nodes as unknown as AtlasNode[]
+const edges = (bruto.edges as unknown as AtlasEdge[]).filter((e) => {
+  const ids = new Set(nodes.map((n) => n.id))
+  return ids.has(e.from) && ids.has(e.to)
+})
+const cana = { nodes, edges }
 
 const malha = gerarMalha(cana.nodes, cana.edges, ESQUELETO_CANA)
 

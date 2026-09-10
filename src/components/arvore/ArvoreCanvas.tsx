@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { AtlasEdge, AtlasNode } from '@/types/atlas'
 import { gerarMalha } from '@/graph/layout/gerarMalha'
-import { ESQUELETO_CANA } from '@/data/culturas/cana/esqueleto'
+import { ESQUELETO_CANA } from '@/data/culturas/cana'
 import { useCamera } from './useCamera'
 import { Defs } from './Defs'
 import { CamadaFundo } from './CamadaFundo'

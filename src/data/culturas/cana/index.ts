@@ -1,5 +1,7 @@
 import type { AtlasEdge, AtlasNode, CulturaDef } from '@/types/atlas'
+import { semear } from '@/graph/semente'
 import bruto from './grafo.json'
+import { ALCANCE, CENTRO, FOCOS, esqueletoDoNucleo } from './nucleo'
 
 /**
  * O grafo da cana vem de um JSON gerado e revisado, nao de codigo escrito a mao.
@@ -13,10 +15,10 @@ interface GrafoBruto {
 
 const dados = bruto as GrafoBruto
 
-const nodes = dados.nodes as AtlasNode[]
+const nodesValidos = dados.nodes as AtlasNode[]
 const edgesBrutas = dados.edges as AtlasEdge[]
 
-const idsValidos = new Set(nodes.map((n) => n.id))
+const idsValidos = new Set(nodesValidos.map((n) => n.id))
 
 /**
  * Arestas orfas sao descartadas em vez de quebrar o mapa. Se houver alguma,
@@ -27,7 +29,33 @@ export const arestasOrfas = edgesBrutas.filter(
   (e) => !idsValidos.has(e.from) || !idsValidos.has(e.to),
 )
 
-const edges = edgesBrutas.filter((e) => idsValidos.has(e.from) && idsValidos.has(e.to))
+const edgesValidas = edgesBrutas.filter((e) => idsValidos.has(e.from) && idsValidos.has(e.to))
+
+/**
+ * O mapa nao mostra o arquivo inteiro: mostra o nucleo autorado. Quem cresce e
+ * `ALCANCE`, em `nucleo.ts`. O recorte acontece AQUI, na carga, e nao no canvas,
+ * porque o painel e o motor de calculo tem de somar o mesmo que o mapa desenha
+ * — um mapa com 35 nos e um total calculado sobre 341 seria a pior das duas
+ * leituras.
+ */
+const { nodes, edges, espinha } = semear(nodesValidos, edgesValidas, {
+  centro: CENTRO,
+  focos: FOCOS.map((f) => f.id),
+  alcance: ALCANCE,
+})
+
+/** O esqueleto do desenho, com a espinha que o recorte descobriu. */
+export const ESQUELETO_CANA = esqueletoDoNucleo(espinha)
+
+/** Quanto do corpus o nucleo mostra hoje. */
+export const recorte = {
+  alcance: ALCANCE,
+  nosNoMapa: nodes.length,
+  nosNoCorpus: nodesValidos.length,
+  arestasNoMapa: edges.length,
+  arestasNoCorpus: edgesValidas.length,
+  nosNaEspinha: espinha.length,
+}
 
 export const cana: CulturaDef = {
   id: 'cana',

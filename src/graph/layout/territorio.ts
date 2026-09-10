@@ -36,8 +36,10 @@ const GAP_FAIXA = 54
 const FOLGA_CLUSTER = 26
 /** Vazio entre a ultima cunha e a orla. */
 const GAP_ORLA = 150
-/** Empurrao radial alternado. Sempre menor que GAP_FAIXA/3. */
+/** Empurrao radial alternado, para a faixa nao ler como circunferencia. */
 const DESENCONTRO = 26
+/** Deriva radial derivada do hash do id, por cima do desencontro. */
+const DERIVA = 8
 /** Fracao da cunha realmente usada; o resto e respiro nas fronteiras. */
 const USO_DA_CUNHA = 0.92
 /** Demanda minima de um setor, para nenhuma cunha somir. */
@@ -118,33 +120,44 @@ function empacotar(
       const larguraTotal = limite.ate - limite.de
       const util = larguraTotal * USO_DA_CUNHA
       const inicio = limite.de + (larguraTotal - util) / 2
-      let cursor = 0
-      let indice = 0
+
+      // Primeiro decide QUEM entra nesta faixa, e so depois onde cada um fica.
+      // Colocar durante a decisao empacotava todos a partir da borda inicial da
+      // cunha, e uma faixa com folga virava um arco curto num canto — foi o que
+      // deixou a espinha torta na primeira tentativa.
+      const nesta: Array<{ c: Preparado; passo: number }> = []
+      let somaDosPassos = 0
 
       while (fila.length > 0) {
         const c = fila[0]!
-        // Meia-abertura angular que a cobertura do cluster reclama neste raio.
+        // Abertura angular que a cobertura do cluster reclama neste raio.
         const passo = 2 * Math.asin(Math.min(1, (c.cobertura + FOLGA_CLUSTER) / R))
-        if (cursor > 0 && cursor + passo > util) break
-        if (cursor === 0 && passo > util) {
-          // Nao cabe nem sozinho: adia para uma faixa maior, onde o mesmo
-          // cluster ocupa menos angulo.
-          break
-        }
+        if (somaDosPassos + passo > util) break
         fila.shift()
+        nesta.push({ c, passo })
+        somaDosPassos += passo
+      }
+
+      if (nesta.length === 0) return
+
+      // A sobra e repartida igualmente entre os clusters, entao eles se
+      // espalham pela cunha inteira em vez de se amontoarem no comeco dela.
+      const sobra = Math.max(0, util - somaDosPassos) / nesta.length
+      let cursor = 0
+
+      nesta.forEach(({ c, passo }, indice) => {
         const desencontro = (indice % 2 === 0 ? 1 : -1) * DESENCONTRO
-        const deriva = hashBipolar(c.id) * 8
+        const deriva = hashBipolar(c.id) * DERIVA
         colocados.push({
           cluster: c,
-          angulo: inicio + cursor + passo / 2,
+          angulo: inicio + cursor + (passo + sobra) / 2,
           raio: R + desencontro + deriva,
           faixa,
         })
-        cursor += passo
-        indice++
+        cursor += passo + sobra
         maiorAqui = Math.max(maiorAqui, c.cobertura)
         colocouAlgum = true
-      }
+      })
     })
 
     if (colocouAlgum) {
@@ -156,7 +169,11 @@ function empacotar(
       // vazios que faziam o desenho parecer um anel fino.
       const proxima = maiorPendente()
       if (proxima === 0) break
-      R += maiorAqui + proxima + GAP_FAIXA
+      // O desencontro conta duas vezes: um cluster desta faixa pode estar
+      // empurrado para FORA e um da proxima empurrado para DENTRO. Omitir isso
+      // deixou dois clusters da orla se sobrepondo por tres pixels — o tipo de
+      // falha que so um teste de distancia entre pares acha.
+      R += maiorAqui + proxima + GAP_FAIXA + 2 * (DESENCONTRO + DERIVA)
       faixa++
       travas = 0
     } else {
