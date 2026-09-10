@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { BarChart3, RotateCcw, X } from 'lucide-react'
+import { BarChart3, ChevronRight, RotateCcw, X } from 'lucide-react'
 import { useAtlas, paramsEfetivos } from '@/state/atlasStore'
 import { computeFlows } from '@/model/compute'
 import { desviosDoPreset } from '@/model/params'
@@ -48,13 +48,24 @@ export function BarraDeImpacto() {
   const trocarPreset = useAtlas((s) => s.trocarPreset)
   const restaurar = useAtlas((s) => s.restaurar)
   const sobrevoado = useAtlas((s) => s.sobrevoado)
+  const selecionado = useAtlas((s) => s.selecionado)
+  const detalhe = useAtlas((s) => s.detalhe)
+  const detalhar = useAtlas((s) => s.detalhar)
   const nodes = useAtlas((s) => s.nodes)
   const edges = useAtlas((s) => s.edges)
   const alocados = useAtlas((s) => s.alocados)
   const alocaveis = useAtlas((s) => s.alocaveis)
 
   const idxNos = useMemo(() => indexar(nodes, edges), [nodes, edges])
-  const noSobrevoado = sobrevoado ? idxNos.porId.get(sobrevoado) : undefined
+  // Uma vez, na montagem: o tipo de apontador nao muda enquanto se usa a pagina.
+  const temCursor = useMemo(
+    () => typeof window === 'undefined' || window.matchMedia('(hover: hover)').matches,
+    [],
+  )
+  // Mesma queda da arvore: no toque nao ha sobrevoo, e sem ela a barra ficaria
+  // presa no convite para sempre num telefone.
+  const emFoco = sobrevoado ?? selecionado
+  const noSobrevoado = emFoco ? idxNos.porId.get(emFoco) : undefined
 
   const params = useMemo(() => paramsEfetivos(preset, ajustes), [preset, ajustes])
   const r = useMemo(() => computeFlows(params, 'sp_ano'), [params])
@@ -83,6 +94,20 @@ export function BarraDeImpacto() {
           <strong className={styles.nomeDoNo}>{noSobrevoado.nome}</strong>
           <span className={styles.resumoDoNo}>{noSobrevoado.resumo}</span>
         </div>
+        {/* No toque o clique no no NAO abre o painel — a gaveta cobriria a
+            constelacao recem-acesa. Este botao e o pedido explicito. Ele so
+            aparece onde nao ha cursor: no mouse o painel ja abriu no clique. */}
+        {!temCursor && detalhe !== noSobrevoado.id && (
+          <button
+            type="button"
+            className={styles.verDetalhes}
+            onClick={() => detalhar(noSobrevoado.id)}
+          >
+            Detalhes
+            <ChevronRight size={13} aria-hidden="true" />
+          </button>
+        )}
+
         <span className={styles.situacao} data-estado={estado}>
           {estado === 'alocado' && 'Na sua rota'}
           {estado === 'alocavel' && 'Clique para acender'}

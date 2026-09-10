@@ -22,6 +22,7 @@ interface Props {
   raizes: ReadonlySet<string>
   galhoQueCai: ReadonlySet<string>
   onSelecionar: (id: string | null) => void
+  onDetalhar: (id: string | null) => void
   onAlternar: (id: string) => void
   onSobrevoar: (id: string | null) => void
 }
@@ -55,6 +56,7 @@ export function ArvoreCanvas({
   raizes,
   galhoQueCai,
   onSelecionar,
+  onDetalhar,
   onAlternar,
   onSobrevoar,
 }: Props) {
@@ -84,16 +86,27 @@ export function ArvoreCanvas({
   )
 
   /**
-   * A constelacao do hover.
+   * O no EM FOCO: o do cursor, e na falta dele o selecionado.
    *
-   * Memoizada pelo no sob o cursor: sem isso a busca em largura rodaria a cada
+   * A queda para o selecionado e o que faz a constelacao existir no toque. Num
+   * telefone `(hover: hover)` e falso — nao ha cursor, nao ha `mousemove`, e
+   * ligada so ao sobrevoo a rota simplesmente nunca acendia. Com a queda, um
+   * toque faz o que o mouse fazia: seleciona, e a rota acende.
+   *
+   * No desktop tambem melhora, e por isso nao ficou atras de uma media query:
+   * a rota agora PERMANECE acesa enquanto se le o painel, em vez de apagar no
+   * instante em que o cursor sai do no para ir ate o texto.
+   */
+  const emFoco = sobrevoado ?? selecionado
+
+  /**
+   * Memoizada pelo no em foco: sem isso a busca em largura rodaria a cada
    * evento de mousemove, inclusive nos que nao trocam de no — e sao dezenas por
    * segundo atravessando um disco de 52px.
    */
   const rota = useMemo(
-    () =>
-      sobrevoado ? rotaAte(sobrevoado, malha.conexoes, raizes, malha.porArquetipo) : null,
-    [sobrevoado, malha.conexoes, raizes, malha.porArquetipo],
+    () => (emFoco ? rotaAte(emFoco, malha.conexoes, raizes, malha.porArquetipo) : null),
+    [emFoco, malha.conexoes, raizes, malha.porArquetipo],
   )
   const rotaInstancias = useMemo(() => new Set(rota?.instancias ?? []), [rota])
   const rotaConexoes = useMemo(() => new Set(rota?.conexoes ?? []), [rota])
@@ -115,7 +128,7 @@ export function ArvoreCanvas({
       galhoQueCai,
       rotaInstancias,
       rotaConexoes,
-      sobrevoado,
+      sobrevoado: emFoco,
       conexoes: malha.conexoes,
     })
   }, [
@@ -126,7 +139,7 @@ export function ArvoreCanvas({
     galhoQueCai,
     rotaInstancias,
     rotaConexoes,
-    sobrevoado,
+    emFoco,
     malha.conexoes,
   ])
 
@@ -175,11 +188,11 @@ export function ArvoreCanvas({
      * A árvore inteira continua a um clique, no botão "Enquadrar".
      */
     const ate = (malha.raios[2] ?? 520) + 70
-    irPara(
-      { minX: -ate, minY: -ate, maxX: ate, maxY: ate },
-      // O piso impede que uma janela baixa devolva a vista distante de antes.
-      { escalaMinima: 0.36 },
-    )
+    // Sem piso de escala. O piso de 0,36 que estava aqui cortava dois dos
+    // quatro pilares num telefone de 375px: o quadro nao cabia e ele forcava a
+    // aproximacao assim mesmo. Quem garante que a abertura nao volta a vista
+    // distante e a propria caixa, que agora vai so ate os pilares.
+    irPara({ minX: -ate, minY: -ate, maxX: ate, maxY: ate })
   }, [irPara, malha.raios, malha.instancias.length, svgRef, tamanho])
 
   const estadoDe = useCallback(
@@ -205,12 +218,20 @@ export function ArvoreCanvas({
       }
       const id = alvo.getAttribute('data-no')
       if (!id) return
-      // O painel sempre acompanha: clicar para agir e clicar para aprender sao
-      // o mesmo gesto.
       onSelecionar(id)
+      /**
+       * O painel abre no clique — mas so onde ha cursor.
+       *
+       * No mouse, clicar para agir e clicar para aprender sao o mesmo gesto, e
+       * separa-los seria atrito a toa. No toque nao: medi numa tela de
+       * 375x812 que a gaveta ocupa 422px dos 760 e cobre o centro do mapa,
+       * exatamente onde a constelacao que o toque acabou de acender corre. Ali
+       * o toque acende e seleciona, e o painel espera o botao da barra.
+       */
+      if (window.matchMedia('(hover: hover)').matches) onDetalhar(id)
       if (estadoDe(id) !== 'bloqueado') onAlternar(id)
     },
-    [estadoDe, onAlternar, onSelecionar],
+    [estadoDe, onAlternar, onDetalhar, onSelecionar],
   )
 
   /**

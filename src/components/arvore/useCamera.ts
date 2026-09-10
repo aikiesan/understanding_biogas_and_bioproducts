@@ -51,8 +51,20 @@ export function useCamera({ aoEscalar }: Opcoes = {}) {
       .filter((evento: MouseEvent | WheelEvent | TouchEvent) => {
         if (evento.type === 'wheel') return true
         const alvo = evento.target as Element
-        // Clique num no seleciona; arrasto so pega o fundo.
-        return !alvo.closest('[data-no]') && !alvo.closest('[data-interativo]')
+        // Os controles nunca arrastam o mapa, em nenhum apontador.
+        if (alvo.closest('[data-interativo]')) return false
+        /**
+         * No TOQUE, arrastar a partir de um no move o mapa.
+         *
+         * A regra "arrasto so pega o fundo" existe para o mouse, onde clicar
+         * num no e a acao principal e um arrasto acidental seria irritante.
+         * No toque ela vira uma armadilha: com 78 nos numa tela de 375px, boa
+         * parte do mapa e no, e o dedo que cai em cima de um simplesmente nao
+         * consegue mover a vista. O toque distingue sozinho — um toque curto
+         * continua virando clique, um arrasto vira pan.
+         */
+        if (evento.type.startsWith('touch')) return true
+        return !alvo.closest('[data-no]')
       })
       .on('zoom', (evento) => {
         transformRef.current = evento.transform
@@ -98,7 +110,15 @@ export function useCamera({ aoEscalar }: Opcoes = {}) {
       if (!svg || !comportamento) return
       const largura = Math.max(caixa.maxX - caixa.minX, 1)
       const altura = Math.max(caixa.maxY - caixa.minY, 1)
-      const margem = 64
+      /**
+       * A margem encolhe com a tela.
+       *
+       * 64 fixos sao 34% da largura util num telefone de 375px — a moldura
+       * comia mais quadro que o conteudo, e o enquadramento de abertura saia
+       * com dois dos quatro pilares fora da tela. Numa janela larga a mesma
+       * margem e ar; a decisao boa depende do tamanho, entao ela e medida.
+       */
+      const margem = Math.max(12, Math.min(64, Math.min(tamanho.largura, tamanho.altura) * 0.06))
       const cabe = Math.min(
         (tamanho.largura - margem * 2) / largura,
         (tamanho.altura - margem * 2) / altura,

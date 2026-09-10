@@ -58,3 +58,21 @@
   .header { padding: 0 var(--space-4); }
   .subtitulo { display: none; }
 }
+
+/* ── Tela estreita ─────────────────────────────────────────────────────────
+   O cabeçalho é moldura, não conteúdo: num aparelho de 375px ele custava 64px
+   dos 812, e o mapa é o que a pessoa veio ver. O subtítulo sai porque o título
+   já diz o mesmo em menos espaço, e o selo encolhe. */
+@media (max-width: 720px) {
+  .header { height: 52px; padding: 0 var(--space-4); gap: var(--space-3); }
+  .marca { gap: var(--space-3); }
+  .logo { width: 92px; height: auto; }
+  .divisor { height: 22px; }
+  .titulo { font-size: var(--text-base); }
+  .subtitulo { display: none; }
+}
+
+@media (max-width: 420px) {
+  .divisor,
+  .chip { display: none; }
+}

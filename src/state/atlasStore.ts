@@ -11,6 +11,16 @@ interface AtlasState {
 
   selecionado: string | null
   sobrevoado: string | null
+  /**
+   * De quem o painel de detalhe esta aberto.
+   *
+   * Separado de `selecionado` por causa do toque. No mouse os dois andam
+   * juntos: clicar acende, seleciona e abre o painel. Num telefone isso
+   * atrapalha — medi numa tela de 375x812: a gaveta ocupa 422px dos 760 e o
+   * centro do mapa, onde a constelacao corre, fica atras dela. O toque entao
+   * acende e SELECIONA, e o painel espera ser pedido na barra de baixo.
+   */
+  detalhe: string | null
 
   preset: PresetId
   /** Apenas os parametros que o usuario mexeu. O resto vem do preset. */
@@ -34,6 +44,7 @@ interface AtlasState {
 
   carregar: (nodes: AtlasNode[], edges: AtlasEdge[]) => void
   selecionar: (id: string | null) => void
+  detalhar: (id: string | null) => void
   sobrevoar: (id: string | null) => void
   trocarPreset: (p: PresetId) => void
   ajustar: (id: ParamId, valor: number) => void
@@ -49,6 +60,7 @@ export const useAtlas = create<AtlasState>((set, get) => ({
   edges: [],
   selecionado: null,
   sobrevoado: null,
+  detalhe: null,
   preset: 'real',
   ajustes: {},
   alocados: new Set(),
@@ -76,6 +88,7 @@ export const useAtlas = create<AtlasState>((set, get) => ({
       nodes,
       edges,
       selecionado: null,
+      detalhe: null,
       raizes,
       alocados,
       alocaveis: alocaveisAgora(nodes, alocados, idx),
@@ -84,8 +97,11 @@ export const useAtlas = create<AtlasState>((set, get) => ({
     })
   },
 
-  selecionar: (id) => set({ selecionado: id }),
+  // Soltar a selecao fecha o painel junto: um painel sobre um no que nao esta
+  // mais selecionado fala de um assunto que saiu da tela.
+  selecionar: (id) => set(id === null ? { selecionado: null, detalhe: null } : { selecionado: id }),
   sobrevoar: (id) => set({ sobrevoado: id }),
+  detalhar: (id) => set({ detalhe: id }),
 
 
   trocarPreset: (preset) => set({ preset, ajustes: {} }),
@@ -158,6 +174,7 @@ export const useAtlas = create<AtlasState>((set, get) => ({
       alocados,
       alocaveis: alocaveisAgora(nodes, alocados, idx),
       selecionado: null,
+      detalhe: null,
       pendenteDeApagar: null,
       galhoQueCai: new Set(),
     })

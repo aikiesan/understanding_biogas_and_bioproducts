@@ -53,11 +53,21 @@ function Amostra({ forma }: { forma: (typeof FORMAS)[number]['id'] }) {
 }
 
 export function Legenda() {
-  // Aberta por padrao: o vocabulario do mapa — forma, contorno, traco — nao se
-  // adivinha, e quem chega precisa dele justamente antes do primeiro clique.
-  // Vinha recolhida para poupar 232px sobre o mapa; com o painel de detalhe
-  // fora do caminho, esse espaco existe.
-  const [aberta, setAberta] = useState(true)
+  /**
+   * Aberta por padrao — menos onde ela cobriria o mapa.
+   *
+   * O vocabulario do mapa (forma, contorno, traco) nao se adivinha, e quem
+   * chega precisa dele antes do primeiro clique. Mas medi num telefone de
+   * 375px: aberta, a legenda ocupa 51% da area do mapa. Uma chave de leitura
+   * que tapa metade do que se quer ler nao ajuda ninguem. Abaixo de 760px ela
+   * comeca recolhida, e o botao continua ali.
+   *
+   * A consulta e feita uma vez, na montagem: a legenda nao deve abrir sozinha
+   * so porque a pessoa girou o telefone.
+   */
+  const [aberta, setAberta] = useState(
+    () => typeof window === 'undefined' || window.innerWidth >= 760,
+  )
 
   return (
     <aside className={styles.legenda} aria-label="Legenda">

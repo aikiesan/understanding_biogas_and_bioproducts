@@ -332,9 +332,15 @@
    mapa inteiro, e o mapa e o que a pessoa veio ver. */
 @media (max-width: 900px) {
   .painel {
+    /* A gaveta fica ACIMA da barra de baixo, que continua dizendo qual no e. */
     inset-block: auto 0;
     inline-size: 100%;
-    max-block-size: 62vh;
+    /* 62vh tapava a rota que o toque acabara de acender. Em 52 o mapa continua
+       mostrando a cana e o anel — que e onde a constelacao corre. */
+    max-block-size: 52vh;
+    inset-block-end: 0;
+    border-start-start-radius: var(--radius-xl, 16px);
+    border-start-end-radius: var(--radius-xl, 16px);
     border-inline-start: none;
     border-block-start: 1px solid var(--border-default);
     animation-name: entrarDeBaixo;

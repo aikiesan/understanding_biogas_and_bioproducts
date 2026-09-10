@@ -59,6 +59,34 @@ describe('hierarquia visual', () => {
   })
 })
 
+describe('selecao e painel sao coisas separadas', () => {
+  beforeEach(() => useAtlas.getState().carregar(cana.nodes, cana.edges))
+
+  /**
+   * A separacao existe por causa do toque: num telefone o clique acende e
+   * seleciona, e o painel — 422px dos 760 medidos numa tela de 375x812 —
+   * espera ser pedido, porque abrir sozinho cobriria a constelacao que o
+   * toque acabou de acender.
+   */
+  it('detalhar nao mexe na selecao, e vice-versa', () => {
+    const { selecionar, detalhar } = useAtlas.getState()
+    selecionar('cana.proc.plantio')
+    expect(useAtlas.getState().detalhe).toBeNull()
+    detalhar('cana.proc.plantio')
+    expect(useAtlas.getState().selecionado).toBe('cana.proc.plantio')
+  })
+
+  it('soltar a selecao fecha o painel', () => {
+    // Um painel aberto sobre um no que nao esta mais selecionado fala de um
+    // assunto que saiu da tela — mapa e texto contando historias diferentes.
+    const { selecionar, detalhar } = useAtlas.getState()
+    selecionar('cana.proc.plantio')
+    detalhar('cana.proc.plantio')
+    selecionar(null)
+    expect(useAtlas.getState().detalhe).toBeNull()
+  })
+})
+
 describe('o mapa abre com algo para desbloquear', () => {
   beforeEach(() => useAtlas.getState().carregar(cana.nodes, cana.edges))
 
