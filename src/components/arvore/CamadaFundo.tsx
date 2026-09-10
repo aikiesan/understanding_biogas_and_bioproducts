@@ -1,9 +1,15 @@
-import type { SetorResolvido } from '@/graph/layout/tipos'
+import { memo } from 'react'
+import type { ClusterPosicionado, EstradaTracada, SetorResolvido } from '@/graph/layout/tipos'
 import styles from './arvore.module.css'
 
 interface Props {
   setores: SetorResolvido[]
-  raios: number[]
+  clusters: ClusterPosicionado[]
+  estradas: EstradaTracada[]
+  raioDosPortais: number
+  /** Onde os sete territorios terminam. */
+  raioDasCunhas: number
+  externo: number
 }
 
 function ponto(a: number, r: number): string {
@@ -16,13 +22,26 @@ function cunha(de: number, ate: number, r: number): string {
 }
 
 /**
- * O fundo carrega dois significados, nao e decoracao: os ANEIS dizem em que
- * etapa do ciclo o no esta, e as CUNHAS dizem de qual material aquela familia
- * de rotas descende.
+ * O fundo carrega significado, nao e decoracao — mas o significado mudou.
+ *
+ * Na versao concentrica, os aneis diziam a etapa do ciclo, e era essa serie de
+ * circunferencias perfeitas que produzia o aspecto de grade polar. Aqui o que
+ * o fundo mostra e TERRITORIO e CIRCULACAO: as cunhas dizem de qual material a
+ * regiao descende, os discos fracos dizem onde ha um cluster, e as estradas
+ * dizem por onde se anda entre eles. A etapa do ciclo continua legivel no
+ * icone e no painel, onde ela nao custa a leitura do mapa.
+ *
+ * Sobra um unico circulo: a borda do vazio central, no raio dos portais. Ele
+ * fica porque marca uma fronteira real do desenho.
  */
-export function CamadaFundo({ setores, raios }: Props) {
-  const externo = (raios[raios.length - 1] ?? 400) + 220
-
+export const CamadaFundo = memo(function CamadaFundo({
+  setores,
+  clusters,
+  estradas,
+  raioDosPortais,
+  raioDasCunhas,
+  externo,
+}: Props) {
   return (
     <g className={styles.fundoArvore} aria-hidden="true">
       {setores.map((s) => (
@@ -30,7 +49,7 @@ export function CamadaFundo({ setores, raios }: Props) {
           key={`cunha-${s.indice}`}
           className={styles.cunha}
           data-familia={s.indice % 8}
-          d={cunha(s.de, s.ate, externo)}
+          d={cunha(s.de, s.ate, raioDasCunhas)}
         />
       ))}
 
@@ -40,20 +59,46 @@ export function CamadaFundo({ setores, raios }: Props) {
           className={styles.divisor}
           x1={0}
           y1={0}
-          x2={Math.cos(s.de) * externo}
-          y2={Math.sin(s.de) * externo}
+          x2={Math.cos(s.de) * raioDasCunhas}
+          y2={Math.sin(s.de) * raioDasCunhas}
         />
       ))}
 
-      {raios.map((r, i) =>
-        r === 0 ? null : (
-          <circle key={`anel-${i}`} className={styles.anelGuia} r={r} cx={0} cy={0} fill="none" />
-        ),
+      <circle className={styles.bordaDoVazio} r={raioDosPortais} cx={0} cy={0} fill="none" />
+      {/* A orla nao pertence a nenhum territorio: um anel proprio, sem cor de
+          familia, diz isso melhor que qualquer legenda. */}
+      {externo > raioDasCunhas + 1 && (
+        <circle className={styles.bordaDaOrla} r={raioDasCunhas} cx={0} cy={0} fill="none" />
       )}
+
+      {clusters.map((c) => (
+        <circle
+          key={`cl-${c.id}`}
+          className={styles.discoDeCluster}
+          data-familia={c.setor >= 0 ? c.setor % 8 : 'miolo'}
+          data-motivo={c.motivo}
+          cx={c.cx}
+          cy={c.cy}
+          r={c.cobertura}
+        />
+      ))}
+
+      {estradas.map((e) => (
+        <path
+          key={e.id}
+          className={styles.estrada}
+          data-tipo={e.tipo}
+          data-familia={e.setor >= 0 ? e.setor % 8 : 'miolo'}
+          d={e.d}
+          fill="none"
+        />
+      ))}
 
       {setores.map((s) => {
         const meio = (s.de + s.ate) / 2
-        const r = externo - 96
+        // Perto da borda externa do territorio: no raio dos portais, sete
+        // rotulos se acumulam no pouco perimetro que existe la e se sobrepoem.
+        const r = raioDasCunhas * 0.9
         return (
           <text
             key={`rot-${s.indice}`}
@@ -69,4 +114,4 @@ export function CamadaFundo({ setores, raios }: Props) {
       })}
     </g>
   )
-}
+})

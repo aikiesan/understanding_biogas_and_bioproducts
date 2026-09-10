@@ -42,7 +42,7 @@
   pointer-events: none;
 }
 
-/* ── Fundo: cunhas de família e anéis de etapa ───────────────────────── */
+/* ── Fundo: territórios, clusters e circulação ──────────────────────── */
 
 .cunha { opacity: 0.05; stroke: none; }
 
@@ -57,12 +57,49 @@
 
 .divisor { stroke: var(--arv-grade); stroke-width: 1; opacity: 0.6; }
 
-.anelGuia {
+/* A borda do vazio central: o único círculo que sobrou. A série de anéis
+   concêntricos saiu porque era ela que fazia o mapa ler como grade polar. */
+.bordaDoVazio {
   stroke: var(--arv-grade);
   stroke-width: 1;
   stroke-dasharray: 2 10;
   opacity: 0.7;
 }
+
+/* O disco de cobertura de cada cluster. Quase invisível de perto e legível de
+   longe: é o que faz a malha ler como modular em vez de nuvem de pontos. */
+.bordaDaOrla {
+  stroke: var(--arv-grade);
+  stroke-width: 1;
+  stroke-dasharray: 1 14;
+  opacity: 0.5;
+}
+
+.discoDeCluster {
+  fill: var(--arv-grade);
+  opacity: 0.055;
+  stroke: none;
+}
+
+.discoDeCluster[data-familia='0'] { fill: var(--fam-0); }
+.discoDeCluster[data-familia='1'] { fill: var(--fam-1); }
+.discoDeCluster[data-familia='2'] { fill: var(--fam-2); }
+.discoDeCluster[data-familia='3'] { fill: var(--fam-3); }
+.discoDeCluster[data-familia='4'] { fill: var(--fam-4); }
+.discoDeCluster[data-familia='5'] { fill: var(--fam-5); }
+.discoDeCluster[data-familia='6'] { fill: var(--fam-6); }
+.discoDeCluster[data-familia='7'] { fill: var(--fam-7); }
+
+/* As estradas não têm estado de alocação: são o desenho do território, não um
+   caminho que se acende. Por isso ficam finas e frias. */
+.estrada {
+  stroke: var(--arv-grade);
+  stroke-width: 1.4;
+  opacity: 0.34;
+  stroke-linecap: round;
+}
+
+.estrada[data-tipo='tangencial'] { stroke-dasharray: 5 9; opacity: 0.22; }
 
 .rotuloSetor {
   font-size: 34px;
@@ -184,6 +221,18 @@
 .no[data-estado='alocado'][data-familia='6'] .disco { fill: var(--fam-6); }
 .no[data-estado='alocado'][data-familia='7'] .disco { fill: var(--fam-7); }
 .no[data-estado='alocado'][data-familia='miolo'] .disco { fill: var(--arv-lima); }
+.no[data-estado='alocado'][data-familia='orla'] .disco { fill: var(--arv-lima); }
+
+/* A orla é o cinturão dos nós que ainda não têm nenhuma aresta de entrada no
+   corpus. Ela fica mais apagada de propósito: o mapa não deve afirmar uma
+   origem que o dado não tem. */
+.no[data-familia='orla'] { opacity: 0.62; }
+.no[data-familia='orla'][data-estado='alocado'],
+.no[data-familia='orla'][data-selecionado='sim'] { opacity: 1; }
+
+/* Eco: uma cópia do mesmo conceito em outro território. O anel tracejado diz
+   "você já viu isto em outro lugar", sem sugerir que seja outra coisa. */
+.no[data-eco='sim'] .disco { stroke-dasharray: 3 3; }
 
 .no:hover .disco { stroke: var(--arv-lima); }
 .no[data-selecionado='sim'] .disco {
@@ -207,14 +256,35 @@
 .svg[data-lod='constelacao'] .icone,
 .svg[data-lod='constelacao'] .ornamento { display: none; }
 .svg[data-lod='constelacao'] .no[data-tier='inicio'] .rotulo { display: block; }
-.svg[data-lod='constelacao'] .anelGuia { display: none; }
+.svg[data-lod='constelacao'] .estrada { opacity: 0.5; stroke-width: 2.6; }
+.svg[data-lod='constelacao'] .bordaDaOrla {
+  stroke: var(--arv-grade);
+  stroke-width: 1;
+  stroke-dasharray: 1 14;
+  opacity: 0.5;
+}
+
+.discoDeCluster { opacity: 0.1; }
+.svg[data-lod='detalhe'] .bordaDaOrla {
+  stroke: var(--arv-grade);
+  stroke-width: 1;
+  stroke-dasharray: 1 14;
+  opacity: 0.5;
+}
+
+.discoDeCluster { opacity: 0.03; }
 
 .svg[data-lod='regioes'] .no[data-tier='notavel'] .rotulo,
 .svg[data-lod='regioes'] .no[data-tier='passagem'] .rotulo,
 .svg[data-lod='regioes'] .no[data-tier='modificador'] .rotulo { display: none; }
 .svg[data-lod='regioes'] .no[data-tier='modificador'] .icone { display: none; }
 
-.svg[data-lod='leitura'] .no[data-tier='modificador'] .rotulo { display: none; }
+/* Longe, cada cluster fala por UM rótulo: o do seu notável. Sem isso os nomes
+   dos membros se empilham — os discos ficam separados e o texto, ilegível, que
+   é a colisão mais fácil de não notar ao olhar o mapa de longe. */
+.svg[data-lod='regioes'] .no[data-notavel='sim'] .rotulo { display: block; }
+.svg[data-lod='leitura'] .no .rotulo { display: none; }
+.svg[data-lod='leitura'] .no[data-notavel='sim'] .rotulo { display: block; }
 .svg[data-lod='leitura'] .rotuloSetor { opacity: 0.16; }
 
 .svg[data-lod='detalhe'] .rotuloSetor { opacity: 0.1; }

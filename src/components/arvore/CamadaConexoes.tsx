@@ -25,7 +25,10 @@ export const CamadaConexoes = memo(function CamadaConexoes({ conexoes, edges }: 
   return (
     <g className={styles.camadaConexoes}>
       {conexoes.map((c) => {
-        const e = porId.get(c.id)
+        // `arestaId`, nao `c.id`: o id do caminho e unico por tracado, porque
+        // uma aresta pode render mais de um quando as pontas se repetem. Buscar
+        // por `c.id` aqui nao daria erro — daria um mapa sem conexao nenhuma.
+        const e = porId.get(c.arestaId)
         if (!e) return null
         return (
           <g
