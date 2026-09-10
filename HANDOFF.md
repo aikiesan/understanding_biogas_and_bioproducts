@@ -1,7 +1,7 @@
 # Handoff — árvore de alocação da cana
 
 Estado ao fim da sessão de 2026-09-10. `npm run build` e `npx vitest run`
-(85 testes) passam.
+(50 testes) passam.
 
 ## O que ficou pronto
 
@@ -22,71 +22,47 @@ Estado ao fim da sessão de 2026-09-10. `npm run build` e `npx vitest run`
   alimenta já está aceso. `quedaAoApagar` derruba o galho órfão, mantendo o
   invariante "alocação = cadeia conectada".
 
-**Layout — malha modular**
-A versão concêntrica (`gerarArvore.ts`, removida) usava raio = etapa do ciclo e
-ângulo = família. Lia-se sem legenda, mas desenhava uma estrela: sete raios
-retos e grandes vazios entre eles. Foi substituída por um pipeline de módulos
-puros, cada um testável isolado:
-
-- `metrica.ts` — quanto cada nó ocupa. Uma única resposta para a pergunta, que
-  três módulos consultam.
-- `familias.ts` — a que território cada nó pertence. Devolve **todas** as
-  famílias que o alimentam, não só a de menor índice: é dessa lista que nasce a
-  repetição.
-- `instanciar.ts` — arquétipos → **instâncias**. Um nó alimentado por três
-  materiais aparece nos três territórios. Teto de 4, que é a aridade máxima
-  observada no corpus. Instâncias compartilham dado e alocação.
-- `clusterizar.ts` — instâncias → clusters, por vizinhança no grafo (uma âncora
-  de peso mais o que pende dela a até dois passos), com o motivo escolhido pela
-  topologia.
-- `motivos.ts` — geometria local: linha, bifurcação, ferradura, roda. O passo
-  entre membros sai do disco **e** da largura do rótulo.
-- `territorio.ts` — o empacotamento: núcleo, espinha, vazio central, sete
-  cunhas, orla. Não sobreposição por construção.
-- `estradas.ts` — as duas escalas: conexões (arestas do corpus, com estado) e
-  estradas (a rede de circulação entre clusters, sem estado).
-- `gerarMalha.ts` — orquestra. Mesma assinatura de antes.
-- `src/data/culturas/cana/esqueleto.ts` — o esqueleto autoral, intocado: quais
-  famílias existem e em que setor.
-
-**O mapa começa pequeno, de propósito**
-Desenhar os 341 nós de uma vez produziu um mapa enorme e atravessado. E a razão
-não era o layout: **215 dos 341 nós não têm nenhuma aresta de entrada** no
-corpus — 127 rotas e 88 produtos/destinos, todos em anel 3 e 4. A autoria das
-ligações não acompanhou a dos nós, então dois terços do mapa flutuavam sem
-origem. Um mapa que mostra tudo que existe no arquivo não é mais completo; é
-menos legível e igualmente incompleto.
-
-Então a interface mostra um **núcleo autorado**, definido em
-`src/data/culturas/cana/nucleo.ts` e recortado por `src/graph/semente.ts`:
+**Layout — esqueleto radial autorado**
+A geometria e uma DECISAO, nao uma consequencia do corpus. Duas reescritas
+anteriores computavam posicoes a partir da topologia (arvore concentrica, depois
+malha modular de clusters) e as duas herdaram a bagunca do dado: um grafo com
+realimentacao nao tem desenho radial limpo, em geometria nenhuma. Nesta versao o
+desenho manda e o conteudo se acomoda em vagas.
 
 ```
-Cana-de-açúcar          o foco central
-  ↓
-Processos               a linha que a usina de fato roda (a espinha, 30 nós)
-  ↓
-Quatro grandes focos    bagaço, palha, vinhaça, torta de filtro
-  ↓
-ALCANCE                 quantos passos depois dos focos entram no mapa
+0  ORIGEM          a cana                                 1
+1  PROCESSOS       a linha da usina, em ordem de cadeia   20
+2  PILARES         Bagaço · Palha · Vinhaça · Torta        4
+3  ABERTURA        9 vagas por ramo
+4  ESPECIALIZAÇÃO  9 vagas por ramo
+5  ÁPICES          5 vagas por ramo — os destinos
 ```
 
-O recorte é derivado, não uma lista solta de ids: os quatro focos, tudo que os
-alimenta até a cultura, e `ALCANCE` passos a jusante. Hoje `ALCANCE = 0` → 35
-nós e 46 arestas.
+- `src/data/culturas/cana/nucleo.ts` — o esqueleto autorado: raios, vagas,
+  aberturas angulares, wobble, e as listas `PROMOVIDOS` / `EXCLUIDOS`.
+- `src/graph/curar.ts` — quem ocupa cada vaga. Ordem: proximidade ao residuo,
+  depois maturidade (TRL), e processo por ultimo. Apices sao os destinos.
+  **A camada e a distancia**, nunca a ordem da fila — e um no so entra se algum
+  pai dele entrou na camada de dentro. As duas regras vem de um teste que pegou
+  o contrario: sem elas a alocacao acendia nos por caminhos que o desenho nao
+  mostrava.
+- `src/graph/layout/esqueletoRadial.ts` — geometria pura, deliberadamente burra.
+  Recebe as vagas e as coloca.
+- `src/data/culturas/cana/hierarquia.ts` — o `tier` derivado do esqueleto.
 
-**Crescer o mapa é mexer em um número.** `ALCANCE = 1` abre +27 nós. Mas a hora
-de incrementar é quando as arestas daquele anel estiverem autoradas, não quando
-os nós existirem — senão a orla volta.
+**Sao tres camadas de leque, nao quatro.** Medi: o corpus tem conteudo para tres
+passos a jusante de cada residuo, e vinhaca e torta quase nao tem nada a tres
+passos. Uma quarta camada ficaria vazia.
 
-A **orla** continua no motor, para os nós sem aresta de entrada: cinturão
-externo agrupado por tag, desenhado apagado. Com o núcleo atual ela está vazia,
-e o teste em `src/graph/__tests__/semente.test.ts` garante isso. Ela existe para
-o dia em que o `ALCANCE` crescer mais rápido que a autoria.
+**A curadoria e revisavel, nao uma opiniao escondida num `sort`.**
+`npm run curadoria` escreve `data/_curadoria/fora-do-mapa.md` com os 87 nos que
+perderam vaga, na ordem em que perderam — os primeiros de cada lista chegaram
+mais perto de entrar. Quem conhece o dominio corrige em `PROMOVIDOS` /
+`EXCLUIDOS`. **E o maior ganho disponivel para o mapa hoje.**
 
-`src/data/culturas/cana/esqueleto.ts` — os sete setores da usina inteira —
-continua no repositório: é o estado-alvo de quando o corpus estiver ligado, e é
-contra ele que a suíte de geometria roda, sobre os 341 nós. Um mapa de 35 nós
-não estressa nada.
+**Nenhuma aresta e suprimida.** Uma versao esconde as que pulavam camada, para o
+mapa ficar limpo; um teste cobrou o preco. `processo → rota` pula duas camadas e
+e caminho legitimo. Elas ficam, marcadas como travessia no CSS.
 
 **Render**
 - `src/components/arvore/` — `ArvoreCanvas` mais as camadas (fundo, conexões,
@@ -161,15 +137,24 @@ não estressa nada.
    sair sem substituto.
 6. **Bundle em 652 kB.** Ainda sem code-splitting.
 
-7. **A rodada seguinte da malha.** Ficaram de fora, com os pontos de extensão
-   já prontos: **pontes híbridas** entre territórios vizinhos (o campo
-   `ClusterPosicionado.portas` existe para isso), **grandes junções**
-   intermediárias, e as **árvores-satélite de ápice** — ilhas com entrada única
-   e poucos caminhos, a topologia de ascendência. Nada disso deve virar mais um
-   anel: a regra é ocupar espaço ainda não usado mantendo ligação clara com uma
-   estrada principal.
+7. **Revisar a curadoria.** `data/_curadoria/fora-do-mapa.md` lista os 87 nós
+   que perderam vaga, na ordem em que perderam. Corrigir em `PROMOVIDOS` /
+   `EXCLUIDOS` é o maior ganho disponível para o mapa hoje — a heurística
+   acerta na maioria e erra em algum lugar, e o arquivo existe para o erro ser
+   visível.
 
-8. **`tier` continua derivado.** Nenhum nó do corpus declara `tier`; todos os
-   341 vêm de `tierDoNo()`. O tier decide tamanho, ornamento e quem é o notável
-   do cluster, então autorá-lo é o segundo maior ganho para o desenho depois de
-   ligar a orla. O gerador avisa no console.
+8. **Os números não respondem à alocação.** `computeFlows` roda sobre preset e
+   parâmetros, nunca sobre `alocados`, então a barra mostra o potencial do
+   cenário e não o da rota desenhada. Com o mapa abrindo vazio isso fica
+   visível. Escopar o cálculo pela alocação precisa do campo `stream` dos nós,
+   que hoje só cinco nós trazem.
+
+9. **`tier` é derivado do esqueleto, não autorado.** `hierarquia.ts` deriva de
+   `nucleo.ts`: a cana é `inicio`, os quatro focos são `keystone`, quem produz
+   um foco é `notavel`. Funciona e é determinístico, mas autorar `tier` no
+   corpus daria controle fino sobre o peso visual de cada nó.
+
+10. **`data/_arestas/` e `scripts/grafo/` ficaram para trás.** O corpus ainda
+    vem de `grafo.json`, mas 215 dos 341 nós não têm aresta de entrada, e é
+    isso que limita o mapa: cada aresta autorada é um nó que passa a ter lugar
+    na cadeia em vez de depender da curadoria para aparecer.

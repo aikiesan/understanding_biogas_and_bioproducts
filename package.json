@@ -11,7 +11,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "vitest --passWithNoTests",
-    "etl": "node scripts/etl/run.mjs"
+    "etl": "node scripts/etl/run.mjs",
+    "curadoria": "vite-node scripts/curadoria/gerar.ts"
   },
   "dependencies": {
     "@types/d3-transition": "^3.0.9",

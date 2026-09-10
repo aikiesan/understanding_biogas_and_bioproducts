@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { AtlasEdge, AtlasNode } from '@/types/atlas'
-import { gerarMalha } from '@/graph/layout/gerarMalha'
-import { ESQUELETO_CANA } from '@/data/culturas/cana'
+import { gerarEsqueleto } from '@/graph/layout/esqueletoRadial'
+import { curadoria } from '@/data/culturas/cana'
+import { ABERTURA, CENTRO, FOCOS, RAIOS, WOBBLE } from '@/data/culturas/cana/nucleo'
 import { indexar } from '@/graph/selectors'
 import { useCamera } from './useCamera'
 import { Defs } from './Defs'
@@ -57,7 +58,17 @@ export function ArvoreCanvas({
 
   const { svgRef, palcoRef, tamanho, irPara, aproximar, paraTela } = useCamera({ aoEscalar })
 
-  const malha = useMemo(() => gerarMalha(nodes, edges, ESQUELETO_CANA), [nodes, edges])
+  const malha = useMemo(
+    () =>
+      gerarEsqueleto(nodes, edges, curadoria, {
+        centro: CENTRO,
+        focos: FOCOS,
+        raios: RAIOS,
+        abertura: ABERTURA,
+        wobble: WOBBLE,
+      }),
+    [nodes, edges],
+  )
   const idx = useMemo(() => indexar(nodes, edges), [nodes, edges])
 
   useEffect(() => {
@@ -178,14 +189,7 @@ export function ArvoreCanvas({
         <rect className={styles.fundo} width="100%" height="100%" />
 
         <g ref={palcoRef}>
-          <CamadaFundo
-            setores={malha.setores}
-            clusters={malha.clusters}
-            estradas={malha.estradas}
-            raioDosPortais={malha.raios[0] ?? 0}
-            raioDasCunhas={malha.raios[1] ?? 0}
-            externo={externoDe(malha.instancias)}
-          />
+          <CamadaFundo setores={malha.setores} raios={malha.raios} />
           <CamadaConexoes conexoes={malha.conexoes} edges={edges} />
           <CamadaNos nodes={nodes} instancias={malha.instancias} />
         </g>
@@ -219,9 +223,4 @@ export function ArvoreCanvas({
       </div>
     </div>
   )
-}
-
-/** Raio que cobre o desenho inteiro, para as cunhas do fundo. */
-function externoDe(instancias: { raio: number; r: number }[]): number {
-  return instancias.reduce((m, i) => Math.max(m, i.raio + i.r), 0) + 120
 }
