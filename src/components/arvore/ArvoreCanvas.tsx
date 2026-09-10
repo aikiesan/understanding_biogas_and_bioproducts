@@ -136,11 +136,51 @@ export function ArvoreCanvas({
     if (jaEnquadrou.current) return
     if (malha.instancias.length === 0) return
     const svg = svgRef.current
-    if (!svg || svg.getBoundingClientRect().width === 0) return
+    if (!svg) return
+    const caixa = svg.getBoundingClientRect()
+    if (caixa.width === 0) return
+
+    /**
+     * Espera `tamanho` refletir a medida REAL antes de enquadrar.
+     *
+     * `irPara` calcula o quadro a partir de `tamanho`, que comeca no palpite
+     * 1200x800 do hook e so vira a medida verdadeira quando o ResizeObserver
+     * dispara. Enquadrar antes disso monta um quadro para uma janela que nao
+     * existe: medido numa area de 1280x656, a escala saia 0,569 em vez de
+     * 0,447 e a cana parava em 61% da altura, nao no meio. O efeito ja
+     * dependia de `tamanho`, entao basta desistir desta passada — a proxima
+     * chega com a medida boa.
+     */
+    if (
+      Math.abs(caixa.width - tamanho.largura) > 1 ||
+      Math.abs(caixa.height - tamanho.altura) > 1
+    ) {
+      return
+    }
     jaEnquadrou.current = true
-    // Abre mostrando a árvore inteira: o primeiro impacto é a escala do mapa.
-    irPara(malha.extensao, { escalaMinima: 0.14 })
-  }, [irPara, malha.extensao, malha.instancias.length, svgRef, tamanho])
+
+    /**
+     * Abre CENTRADO NA CANA, enquadrando até o anel de pilares.
+     *
+     * Antes abria com a árvore inteira, e o argumento era que o primeiro
+     * impacto devia ser a escala do mapa. O preço, medido: escala 0,26 —
+     * abaixo do corte de LOD que nomeia a linha da usina, então o mapa abria
+     * mudo, com 78 discos sem legenda e nenhum ponto de entrada óbvio. Um mapa
+     * que abre ilegível não comunica escala, comunica ruído.
+     *
+     * O quadro sai dos RAIOS, não de um número solto: mexer na silhueta em
+     * `nucleo.ts` traz a abertura junto. A margem de 70 é para o rótulo dos
+     * pilares não encostar na borda.
+     *
+     * A árvore inteira continua a um clique, no botão "Enquadrar".
+     */
+    const ate = (malha.raios[2] ?? 520) + 70
+    irPara(
+      { minX: -ate, minY: -ate, maxX: ate, maxY: ate },
+      // O piso impede que uma janela baixa devolva a vista distante de antes.
+      { escalaMinima: 0.36 },
+    )
+  }, [irPara, malha.raios, malha.instancias.length, svgRef, tamanho])
 
   const estadoDe = useCallback(
     (id: string): 'alocado' | 'alocavel' | 'bloqueado' =>
@@ -192,6 +232,17 @@ export function ArvoreCanvas({
 
   const sair = useCallback(() => onSobrevoar(null), [onSobrevoar])
 
+  /**
+   * O guia some no primeiro gesto de navegacao.
+   *
+   * Instrucao que fica para sempre e instrucao que nao funcionou — a mesma
+   * regra que ja governava a dica de clique. Some no primeiro arrasto OU na
+   * primeira rolagem, porque quem ja fez um dos dois nao precisa que lhe
+   * digam o outro.
+   */
+  const [jaNavegou, setJaNavegou] = useState(false)
+  const navegou = useCallback(() => setJaNavegou(true), [])
+
   return (
     <div className={styles.wrapper}>
       <svg
@@ -204,6 +255,8 @@ export function ArvoreCanvas({
         onClick={aoClicar}
         onMouseMove={aoMover}
         onMouseLeave={sair}
+        onWheel={navegou}
+        onMouseDown={navegou}
       >
         <Defs />
         <rect className={styles.fundo} width="100%" height="100%" />
@@ -215,12 +268,18 @@ export function ArvoreCanvas({
         </g>
       </svg>
 
-      {/* A instrução desaparece depois da primeira alocação: instrução que fica
-          para sempre é instrução que não funcionou. */}
-      {alocados.size <= 1 && (
-        <p id="arvore-instrucoes" className={styles.instrucoes}>
-          Clique num nó <strong>disponível</strong> para acendê-lo. Passe o mouse para ver o que
-          ele é.
+      {/* O guia de navegação. Curto de propósito: são os dois gestos que o mapa
+          não anuncia sozinho. O que fazer com um nó já é dito pela barra de
+          baixo, e repetir aqui era ocupar o topo com o que a pessoa já lia. */}
+      {!jaNavegou && (
+        <p id="arvore-instrucoes" className={styles.guia}>
+          <span>
+            <kbd className={styles.tecla}>arraste</kbd> move
+          </span>
+          <span aria-hidden="true">·</span>
+          <span>
+            <kbd className={styles.tecla}>role</kbd> aproxima
+          </span>
         </p>
       )}
 
