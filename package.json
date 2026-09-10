@@ -1,0 +1,45 @@
+{
+  "name": "understanding-biogas-and-bioproducts",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Atlas exploratorio de rotas tecnologicas de biogas e bioprodutos — modulo educativo do PILAR-2b (CP2B / NIPE-Unicamp)",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest --passWithNoTests",
+    "etl": "node scripts/etl/run.mjs"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "d3-force": "^3.0.0",
+    "d3-interpolate": "^3.0.1",
+    "d3-selection": "^3.0.0",
+    "d3-shape": "^3.2.0",
+    "d3-zoom": "^3.0.0",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.1.0",
+    "@types/d3-force": "^3.0.10",
+    "@types/d3-interpolate": "^3.0.4",
+    "@types/d3-selection": "^3.0.11",
+    "@types/d3-shape": "^3.1.7",
+    "@types/d3-zoom": "^3.0.8",
+    "@types/node": "^22.20.2",
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "jsdom": "^25.0.1",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5",
+    "vitest": "^2.1.8",
+    "yaml": "^2.6.1"
+  }
+}

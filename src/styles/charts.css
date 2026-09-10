@@ -1,0 +1,35 @@
+:root{
+/* Cenarios da metodologia publicada (frontend/src/data/scenarioFactors.ts) */
+--cenario-real:#0F766E;
+--cenario-ideal:#7C3AED;
+
+/* Cascata metodologica FC -> FCo -> FS -> FL (animations/cascata-correcao-scene.jsx) */
+--fator-fc:#DD6B20;
+--fator-fco:#D69E2E;
+--fator-fs:#319795;
+--fator-fl:#3182CE;
+
+/* Tipos de no do grafo */
+--no-cultura:#5CA032;
+--no-processo:#1E3E4C;
+--no-coproduto:#4E9F3D;
+--no-residuo:#8B6914;
+--no-rota:#4682B4;
+--no-produto:#D37402;
+--no-destino:#5F6368;
+
+/* Estado do fluxo */
+--fluxo-real:#00573A;
+--fluxo-potencial:#9AA0A6;
+}
+:root.dark{
+--no-cultura:#6BC454;
+--no-processo:#7FA8B8;
+--no-coproduto:#5DBF68;
+--no-residuo:#C9A227;
+--no-rota:#7FB3E0;
+--no-produto:#FFB74D;
+--no-destino:#94A3B8;
+--fluxo-real:#3D9948;
+--fluxo-potencial:#64748B;
+}

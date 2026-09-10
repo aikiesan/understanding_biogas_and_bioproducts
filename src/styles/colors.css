@@ -1,0 +1,61 @@
+:root{
+/* Brand palette — from MANUAL_IDENTIDADE_CP2B (Jul 2025) */
+--cp2b-azul-petroleo:#1E3E4C;
+--cp2b-verde-escuro:#00573A;
+--cp2b-verde:#5CA032;
+--cp2b-lima:#B6E03B;
+--cp2b-ambar:#D37402;
+--cp2b-preto:#000000;
+--cp2b-branco:#FFFFFF;
+/* Biomass sector colors (from app codebase) */
+--biomass-agricola:#4CAF50;
+--biomass-pecuaria:#FF9800;
+--biomass-urbano:#2196F3;
+/* Semantic status */
+--color-success:#34A853;
+--color-warning:#FBBC04;
+--color-error:#EA4335;
+--color-info:#2563EB;
+/* Neutral scale (light) */
+--gray-50:#F8F9FA;
+--gray-100:#F1F3F4;
+--gray-200:#E8EAED;
+--gray-300:#DADCE0;
+--gray-400:#BDC1C6;
+--gray-500:#9AA0A6;
+--gray-600:#5F6368;
+--gray-700:#3C4043;
+--gray-800:#28292A;
+--gray-900:#202124;
+/* Semantic aliases — light mode */
+--bg-page:var(--gray-50);
+--bg-surface:var(--cp2b-branco);
+--bg-surface-raised:var(--cp2b-branco);
+--bg-surface-muted:var(--gray-50);
+--text-primary:var(--gray-900);
+--text-secondary:#616161;
+--text-disabled:#9E9E9E;
+--text-on-brand:var(--cp2b-branco);
+--border-default:#E2E8F0;
+--border-divider:#EEEEEE;
+--focus-ring:0 0 0 3px rgba(182,224,59,.4);
+--brand-primary:var(--cp2b-verde-escuro);
+--brand-primary-hover:#1B5E20;
+--brand-secondary:var(--cp2b-verde);
+--brand-accent:var(--cp2b-lima);
+--brand-highlight:var(--cp2b-ambar);
+--brand-dark:var(--cp2b-azul-petroleo);
+}
+:root.dark{
+--bg-page:#0F172A;
+--bg-surface:#1E293B;
+--bg-surface-raised:#1E293B;
+--bg-surface-muted:#0F172A;
+--text-primary:#F8FAFC;
+--text-secondary:#CBD5E1;
+--text-disabled:#94A3B8;
+--border-default:#334155;
+--border-divider:#475569;
+--brand-primary:#2A7A3E;
+--brand-primary-hover:#3D9948;
+}

@@ -1,0 +1,17 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--space-6);
+  border-top: 1px solid var(--border-default);
+  background: var(--bg-surface);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.fonte { font-weight: var(--weight-medium); }
+
+.link { color: var(--brand-secondary); text-decoration: none; }
+.link:hover { text-decoration: underline; }

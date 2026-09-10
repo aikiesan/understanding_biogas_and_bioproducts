@@ -1,0 +1,28 @@
+:root{
+--font-sans:'Neulis Sans','Verdana',system-ui,sans-serif;
+--font-display:'Neulis Neue','Neulis Sans','Verdana',system-ui,sans-serif;
+--font-mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+--text-xs:.75rem;
+--text-sm:.875rem;
+--text-base:1rem;
+--text-lg:1.125rem;
+--text-xl:1.25rem;
+--text-2xl:1.5rem;
+--text-3xl:1.875rem;
+--text-4xl:2.25rem;
+--text-5xl:3rem;
+--text-6xl:3.75rem;
+--leading-tight:1.15;
+--leading-snug:1.35;
+--leading-normal:1.55;
+--tracking-tight:-.01em;
+--tracking-wide:.06em;
+--weight-thin:100;
+--weight-light:300;
+--weight-regular:400;
+--weight-medium:500;
+--weight-semibold:600;
+--weight-bold:700;
+--weight-extrabold:800;
+--weight-black:900;
+}
