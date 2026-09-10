@@ -44,6 +44,7 @@ describe('estado compartilhado entre copias', () => {
       alocados: new Set(['X']),
       alocaveis: new Set(['Y']),
       selecionado: 'X',
+      galhoQueCai: new Set(),
       conexoes: [],
     })
 
@@ -70,6 +71,7 @@ describe('estado compartilhado entre copias', () => {
       alocados: new Set(['A', 'B']),
       alocaveis: new Set(),
       selecionado: null,
+      galhoQueCai: new Set(),
       conexoes: [
         {
           id: 'e1~0',
@@ -99,6 +101,32 @@ describe('estado compartilhado entre copias', () => {
     for (const e of palco.querySelectorAll('[data-conexao]')) {
       expect(e.getAttribute('data-estado')).toBe('alocado')
     }
+  })
+})
+
+describe('o galho que cai chega a todas as copias', () => {
+  it('data-queda marca cada aparicao do arquetipo', () => {
+    // O aviso antes de apagar promete "em vermelho no mapa". Se a marca so
+    // chegasse a uma das copias, a promessa seria parcial e a pessoa perderia
+    // um no que o mapa nao avisou que ia cair.
+    const palco = palcoCom([
+      { no: 'X', instancia: 'X@f0' },
+      { no: 'X', instancia: 'X@f1' },
+      { no: 'Y', instancia: 'Y@f0' },
+    ])
+
+    aplicarEstados(palco, {
+      alocados: new Set(['X', 'Y']),
+      alocaveis: new Set(),
+      selecionado: null,
+      galhoQueCai: new Set(['X']),
+      conexoes: [],
+    })
+
+    for (const e of palco.querySelectorAll('[data-no="X"]')) {
+      expect(e.getAttribute('data-queda')).toBe('sim')
+    }
+    expect(palco.querySelector('[data-no="Y"]')?.getAttribute('data-queda')).toBeNull()
   })
 })
 

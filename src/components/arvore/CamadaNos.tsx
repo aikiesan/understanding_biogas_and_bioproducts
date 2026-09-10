@@ -14,6 +14,34 @@ const ORNAMENTO: Partial<Record<Tier, string>> = {
   notavel: '#orn-notavel',
 }
 
+/** Vertices de um poligono regular inscrito no raio, com uma ponta no topo. */
+function poligono(lados: number, r: number): string {
+  return Array.from({ length: lados }, (_, i) => {
+    const a = (i / lados) * Math.PI * 2 - Math.PI / 2
+    return `${(Math.cos(a) * r).toFixed(2)},${(Math.sin(a) * r).toFixed(2)}`
+  }).join(' ')
+}
+
+/**
+ * A FORMA do no, escolhida pelo tier.
+ *
+ * Antes todo no era um circulo e a hierarquia vivia so no raio e num ornamento
+ * discreto — de longe, 26 dos 35 nos eram o mesmo ponto. Forma se distingue
+ * antes de tamanho e antes de cor, e sobrevive ao zoom baixo, onde rotulo e
+ * icone desaparecem: e o hexagono no horizonte que diz "ali tem um grande foco".
+ *
+ * Seja qual for a forma, ela carrega a classe `disco`. Todo o CSS de estado
+ * (bloqueado vazado, disponivel tracejado, aceso preenchido pela cor da
+ * familia) seleciona por `.disco`, e esse CSS ja estava certo — o que faltava
+ * era a hierarquia, nao o estado.
+ */
+function forma(tier: Tier, r: number, className: string | undefined) {
+  // Hexagono: os quatro grandes focos. Losango: modificadores.
+  if (tier === 'keystone') return <polygon className={className} points={poligono(6, r * 1.12)} />
+  if (tier === 'modificador') return <polygon className={className} points={poligono(4, r * 1.3)} />
+  return <circle className={className} r={r} />
+}
+
 /** Quebra o rotulo em ate duas linhas sem cortar palavra. */
 function quebrar(texto: string, max = 18): string[] {
   if (texto.length <= max) return [texto]
@@ -73,7 +101,7 @@ export const CamadaNos = memo(function CamadaNos({ nodes, instancias }: Props) {
           >
             <circle className={styles.alvo} r={p.r + 10} />
             {ornamento && <use className={styles.ornamento} href={ornamento} />}
-            <circle className={styles.disco} r={p.r} />
+            {forma(p.tier, p.r, styles.disco)}
             {mostraIcone && (
               <use
                 className={styles.icone}

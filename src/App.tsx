@@ -1,9 +1,10 @@
-import { useCallback, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Header } from '@/components/layout/Header'
 import { ArvoreCanvas } from '@/components/arvore/ArvoreCanvas'
 import { Legenda } from '@/components/arvore/Legenda'
 import { DetailPanel } from '@/components/panel/DetailPanel'
 import { BarraDeImpacto } from '@/components/controls/BarraDeImpacto'
+import { ConfirmarQueda } from '@/components/arvore/ConfirmarQueda'
 import { cana } from '@/data/culturas/cana'
 import { useAtlas } from '@/state/atlasStore'
 import styles from './App.module.css'
@@ -18,17 +19,11 @@ export default function App() {
   const selecionar = useAtlas((s) => s.selecionar)
   const sobrevoar = useAtlas((s) => s.sobrevoar)
   const alternar = useAtlas((s) => s.alternar)
+  const galhoQueCai = useAtlas((s) => s.galhoQueCai)
 
   useEffect(() => {
     carregar(cana.nodes, cana.edges)
   }, [carregar])
-
-  // A arvore reporta a posicao na tela junto do hover, para o tooltip. O store
-  // guarda so o id; a posicao e efemera e ainda nao tem consumidor.
-  const aoSobrevoar = useCallback(
-    (id: string | null, _pos: { x: number; y: number } | null) => sobrevoar(id),
-    [sobrevoar],
-  )
 
   return (
     <div className={styles.app}>
@@ -44,9 +39,11 @@ export default function App() {
             selecionado={selecionado}
             onSelecionar={selecionar}
             onAlternar={alternar}
-            onSobrevoar={aoSobrevoar}
+            onSobrevoar={sobrevoar}
+            galhoQueCai={galhoQueCai}
           />
           <Legenda />
+          <ConfirmarQueda />
           <BarraDeImpacto />
         </main>
 

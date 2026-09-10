@@ -4,6 +4,8 @@ interface Estado {
   alocados: ReadonlySet<string>
   alocaveis: ReadonlySet<string>
   selecionado: string | null
+  /** O galho que cairia se a remocao pendente fosse confirmada. */
+  galhoQueCai: ReadonlySet<string>
   conexoes: ConexaoTracada[]
 }
 
@@ -16,7 +18,7 @@ interface Estado {
  * mora no CSS, em regras `[data-estado="..."]`; aqui so se troca o atributo.
  */
 export function aplicarEstados(palco: SVGGElement, estado: Estado): void {
-  const { alocados, alocaveis, selecionado, conexoes } = estado
+  const { alocados, alocaveis, selecionado, galhoQueCai, conexoes } = estado
 
   for (const el of palco.querySelectorAll<SVGGElement>('[data-no]')) {
     const id = el.getAttribute('data-no')
@@ -27,6 +29,12 @@ export function aplicarEstados(palco: SVGGElement, estado: Estado): void {
     const selecao = id === selecionado ? 'sim' : null
     if (selecao) el.setAttribute('data-selecionado', 'sim')
     else el.removeAttribute('data-selecionado')
+
+    // O galho que cai marcado ANTES de cair. Um clique em "Plantio" derruba 34
+    // dos 35 nos; ver o prejuizo no mapa e o que torna a confirmacao uma
+    // decisao em vez de um susto.
+    if (galhoQueCai.has(id)) el.setAttribute('data-queda', 'sim')
+    else el.removeAttribute('data-queda')
   }
 
   // Uma conexao acende quando as duas pontas estao acesas — e o caminho que
@@ -44,5 +52,9 @@ export function aplicarEstados(palco: SVGGElement, estado: Estado): void {
     const meia = alocados.has(c.from) && alocaveis.has(c.to)
     const novo = ambas ? 'alocado' : meia ? 'alocavel' : 'bloqueado'
     if (el.getAttribute('data-estado') !== novo) el.setAttribute('data-estado', novo)
+
+    const cai = galhoQueCai.has(c.from) || galhoQueCai.has(c.to)
+    if (cai && ambas) el.setAttribute('data-queda', 'sim')
+    else el.removeAttribute('data-queda')
   }
 }

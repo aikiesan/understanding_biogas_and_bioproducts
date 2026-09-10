@@ -2,11 +2,13 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { AtlasEdge, AtlasNode } from '@/types/atlas'
 import { gerarMalha } from '@/graph/layout/gerarMalha'
 import { ESQUELETO_CANA } from '@/data/culturas/cana'
+import { indexar } from '@/graph/selectors'
 import { useCamera } from './useCamera'
 import { Defs } from './Defs'
 import { CamadaFundo } from './CamadaFundo'
 import { CamadaConexoes } from './CamadaConexoes'
 import { CamadaNos } from './CamadaNos'
+import { Tooltip, type DadosDoTooltip } from './Tooltip'
 import { aplicarEstados } from './aplicarEstados'
 import styles from './arvore.module.css'
 
@@ -16,9 +18,10 @@ interface Props {
   alocados: ReadonlySet<string>
   alocaveis: ReadonlySet<string>
   selecionado: string | null
+  galhoQueCai: ReadonlySet<string>
   onSelecionar: (id: string | null) => void
   onAlternar: (id: string) => void
-  onSobrevoar: (id: string | null, pos: { x: number; y: number } | null) => void
+  onSobrevoar: (id: string | null) => void
 }
 
 /** Baldes de nível de detalhe. Trocam raramente, então quase não escrevem no DOM. */
@@ -35,12 +38,14 @@ export function ArvoreCanvas({
   alocados,
   alocaveis,
   selecionado,
+  galhoQueCai,
   onSelecionar,
   onAlternar,
   onSobrevoar,
 }: Props) {
   const [lod, setLod] = useState<ReturnType<typeof baldeDeLod>>('regioes')
   const lodRef = useRef(lod)
+  const [tooltip, setTooltip] = useState<DadosDoTooltip | null>(null)
 
   const aoEscalar = useCallback((k: number) => {
     const balde = baldeDeLod(k)
@@ -53,6 +58,7 @@ export function ArvoreCanvas({
   const { svgRef, palcoRef, tamanho, irPara, aproximar, paraTela } = useCamera({ aoEscalar })
 
   const malha = useMemo(() => gerarMalha(nodes, edges, ESQUELETO_CANA), [nodes, edges])
+  const idx = useMemo(() => indexar(nodes, edges), [nodes, edges])
 
   useEffect(() => {
     for (const aviso of malha.avisos) console.warn(`[árvore] ${aviso}`)
@@ -60,12 +66,18 @@ export function ArvoreCanvas({
 
   // ── Estados: escrita imperativa, sem re-render ──────────────────────────
   // Trocar um nó de bloqueado para alocado muda uma classe em meia dúzia de
-  // elementos. Passar isso por React re-renderizaria 341 nós e 400 conexões.
+  // elementos. Passar isso por React re-renderizaria todos os nós e conexões.
   const palcoNode = palcoRef.current
   useEffect(() => {
     if (!palcoNode) return
-    aplicarEstados(palcoNode, { alocados, alocaveis, selecionado, conexoes: malha.conexoes })
-  }, [palcoNode, alocados, alocaveis, selecionado, malha.conexoes])
+    aplicarEstados(palcoNode, {
+      alocados,
+      alocaveis,
+      selecionado,
+      galhoQueCai,
+      conexoes: malha.conexoes,
+    })
+  }, [palcoNode, alocados, alocaveis, selecionado, galhoQueCai, malha.conexoes])
 
   // ── Enquadra na primeira medição válida ─────────────────────────────────
   const jaEnquadrou = useRef(false)
@@ -79,13 +91,20 @@ export function ArvoreCanvas({
     irPara(malha.extensao, { escalaMinima: 0.14 })
   }, [irPara, malha.extensao, malha.instancias.length, svgRef, tamanho])
 
-  // Raio que cobre o desenho inteiro, para as cunhas do fundo.
-  const externo = useMemo(
-    () =>
-      malha.instancias.reduce((m, i) => Math.max(m, i.raio + i.r), 0) + 120,
-    [malha.instancias],
+  const estadoDe = useCallback(
+    (id: string): 'alocado' | 'alocavel' | 'bloqueado' =>
+      alocados.has(id) ? 'alocado' : alocaveis.has(id) ? 'alocavel' : 'bloqueado',
+    [alocados, alocaveis],
   )
 
+  /**
+   * Clique simples faz a acao principal.
+   *
+   * Antes, acender exigia Ctrl+clique, e a unica pista era uma tarja de texto no
+   * topo. Ninguem descobre um atalho de teclado num mapa; a convencao de arvore
+   * de habilidades e o clique direto, e a tarja existir era o sintoma de que a
+   * interacao nao se explicava sozinha.
+   */
   const aoClicar = useCallback(
     (evento: React.MouseEvent<SVGSVGElement>) => {
       const alvo = (evento.target as Element).closest('[data-no]')
@@ -95,11 +114,12 @@ export function ArvoreCanvas({
       }
       const id = alvo.getAttribute('data-no')
       if (!id) return
-      // Clique seleciona; clique com Ctrl/Cmd aloca direto.
-      if (evento.ctrlKey || evento.metaKey) onAlternar(id)
-      else onSelecionar(id)
+      // O painel sempre acompanha: clicar para agir e clicar para aprender sao
+      // o mesmo gesto.
+      onSelecionar(id)
+      if (estadoDe(id) !== 'bloqueado') onAlternar(id)
     },
-    [onAlternar, onSelecionar],
+    [estadoDe, onAlternar, onSelecionar],
   )
 
   const aoMover = useCallback(
@@ -107,19 +127,39 @@ export function ArvoreCanvas({
       const alvo = (evento.target as Element).closest('[data-no]')
       const id = alvo?.getAttribute('data-no') ?? null
       if (!id) {
-        onSobrevoar(null, null)
+        onSobrevoar(null)
+        setTooltip(null)
         return
       }
-      // O tooltip precisa da COPIA sob o cursor, nao do arquetipo: com a
-      // repeticao, `data-no` e um-para-muitos e ancorar por ele poria o
-      // tooltip numa copia arbitraria do outro lado do mapa.
+      // O tooltip ancora na CÓPIA sob o cursor: com a repetição, `data-no` é
+      // um-para-muitos, e ancorar por ele poria o balão noutro canto do mapa.
       const p = malha.porInstancia.get(alvo?.getAttribute('data-instancia') ?? '')
-      if (!p) return
+      const no = idx.porId.get(id)
+      if (!p || !no) return
       const [tx, ty] = paraTela(p.x, p.y - p.r)
-      onSobrevoar(id, { x: tx, y: ty })
+      const estado = estadoDe(id)
+      onSobrevoar(id)
+      setTooltip({
+        no,
+        x: tx,
+        y: ty,
+        estado,
+        falta:
+          estado === 'bloqueado'
+            ? (idx.entrando.get(id) ?? [])
+                .filter((e) => !alocados.has(e.from))
+                .map((e) => idx.porId.get(e.from)?.nome ?? e.from)
+            : [],
+        copias: malha.porArquetipo.get(id)?.length ?? 1,
+      })
     },
-    [malha.porInstancia, onSobrevoar, paraTela],
+    [alocados, estadoDe, idx, malha.porArquetipo, malha.porInstancia, onSobrevoar, paraTela],
   )
+
+  const sair = useCallback(() => {
+    onSobrevoar(null)
+    setTooltip(null)
+  }, [onSobrevoar])
 
   return (
     <div className={styles.wrapper}>
@@ -132,7 +172,7 @@ export function ArvoreCanvas({
         aria-describedby="arvore-instrucoes"
         onClick={aoClicar}
         onMouseMove={aoMover}
-        onMouseLeave={() => onSobrevoar(null, null)}
+        onMouseLeave={sair}
       >
         <Defs />
         <rect className={styles.fundo} width="100%" height="100%" />
@@ -144,16 +184,23 @@ export function ArvoreCanvas({
             estradas={malha.estradas}
             raioDosPortais={malha.raios[0] ?? 0}
             raioDasCunhas={malha.raios[1] ?? 0}
-            externo={externo}
+            externo={externoDe(malha.instancias)}
           />
           <CamadaConexoes conexoes={malha.conexoes} edges={edges} />
           <CamadaNos nodes={nodes} instancias={malha.instancias} />
         </g>
       </svg>
 
-      <p id="arvore-instrucoes" className={styles.instrucoes}>
-        Clique num nó para ver o que ele é. Ctrl+clique acende ou apaga.
-      </p>
+      <Tooltip dados={tooltip} largura={tamanho.largura} />
+
+      {/* A instrução desaparece depois da primeira alocação: instrução que fica
+          para sempre é instrução que não funcionou. */}
+      {alocados.size <= 1 && (
+        <p id="arvore-instrucoes" className={styles.instrucoes}>
+          Clique num nó <strong>disponível</strong> para acendê-lo. Passe o mouse para ver o que
+          ele é.
+        </p>
+      )}
 
       <div className={styles.controles} data-interativo>
         <button type="button" onClick={() => aproximar(1.35)} aria-label="Aproximar">
@@ -172,4 +219,9 @@ export function ArvoreCanvas({
       </div>
     </div>
   )
+}
+
+/** Raio que cobre o desenho inteiro, para as cunhas do fundo. */
+function externoDe(instancias: { raio: number; r: number }[]): number {
+  return instancias.reduce((m, i) => Math.max(m, i.raio + i.r), 0) + 120
 }

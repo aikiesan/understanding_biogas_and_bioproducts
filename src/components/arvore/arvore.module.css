@@ -223,6 +223,28 @@
 .no[data-estado='alocado'][data-familia='miolo'] .disco { fill: var(--arv-lima); }
 .no[data-estado='alocado'][data-familia='orla'] .disco { fill: var(--arv-lima); }
 
+/* O galho que cai, marcado antes de cair. A faixa de confirmação promete "em
+   vermelho no mapa" — e uma interface que promete e não mostra é pior que uma
+   que não avisa. `--arv-perigo` já existia nos tokens para este uso. */
+.no[data-queda='sim'] .disco {
+  stroke: var(--arv-perigo) !important;
+  fill: color-mix(in srgb, var(--arv-perigo) 26%, var(--arv-fundo-no)) !important;
+  stroke-width: 2.6;
+  stroke-dasharray: none;
+}
+.no[data-queda='sim'] .rotulo { fill: var(--arv-perigo); }
+.no[data-queda='sim'] .ornamento { color: var(--arv-perigo); }
+.no[data-queda='sim'] .icone { color: var(--arv-fundo); opacity: 1; }
+
+.conexao[data-queda='sim'] .conexaoLinha {
+  stroke: var(--arv-perigo) !important;
+  stroke-width: 2.4;
+}
+.conexao[data-queda='sim'] .conexaoHalo {
+  stroke: var(--arv-perigo);
+  opacity: 0.22;
+}
+
 /* A orla é o cinturão dos nós que ainda não têm nenhuma aresta de entrada no
    corpus. Ela fica mais apagada de propósito: o mapa não deve afirmar uma
    origem que o dado não tem. */

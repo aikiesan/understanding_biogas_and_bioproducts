@@ -85,18 +85,31 @@
 .linhaPotencial { stroke: var(--fluxo-potencial); stroke-width: 2; stroke-dasharray: 5 4; }
 .linhaRegulatoria { stroke: var(--cp2b-ambar); stroke-width: 2; stroke-dasharray: 1.5 4; }
 
-.chips { display: flex; flex-wrap: wrap; gap: var(--space-1); }
-
-.chip,
-.chipAtivo {
-  padding: 3px var(--space-2);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-full);
-  background: transparent;
-  color: var(--text-secondary);
-  font-size: 11px;
-  cursor: pointer;
+/* As formas do mapa em miniatura, no mesmo desenho: a amostra tem de ser a
+   coisa, nao uma aproximacao dela. */
+.formaAmostra {
+  flex-shrink: 0;
+  fill: var(--text-primary);
+  stroke: var(--text-primary);
+  stroke-width: 1.2;
 }
+
+.dica {
+  display: block;
+  font-style: normal;
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+/* Estado: a diferenca nunca e so de cor — vazado, tracejado, preenchido. */
+.amostra_aceso { background: var(--cp2b-lima); border-color: var(--cp2b-lima); }
+.amostra_disponivel {
+  background: transparent;
+  border-color: var(--cp2b-lima);
+  border-style: dashed;
+}
+.amostra_bloqueado { background: transparent; border-color: var(--border-default); }
+
 
 .chip:hover { border-color: var(--cp2b-lima); }
 
@@ -107,38 +120,6 @@
   font-weight: var(--weight-semibold);
 }
 
-.acoes {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  padding-block-start: var(--space-3);
-  border-block-start: 1px solid var(--border-divider);
-}
-
-.switch {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-size: var(--text-xs);
-  cursor: pointer;
-}
-
-.switch input { accent-color: var(--brand-secondary); }
-
-.botoes { display: flex; gap: var(--space-2); }
-
-.botoes button {
-  flex: 1;
-  padding: var(--space-2);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-md);
-  background: transparent;
-  color: var(--text-primary);
-  font-size: 11px;
-  cursor: pointer;
-}
-
-.botoes button:hover { background: var(--bg-surface-muted); }
 
 @media (max-width: 900px) {
   .legenda { inline-size: 200px; }
