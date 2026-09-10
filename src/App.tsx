@@ -20,6 +20,8 @@ export default function App() {
   const sobrevoar = useAtlas((s) => s.sobrevoar)
   const alternar = useAtlas((s) => s.alternar)
   const galhoQueCai = useAtlas((s) => s.galhoQueCai)
+  const sobrevoado = useAtlas((s) => s.sobrevoado)
+  const raizes = useAtlas((s) => s.raizes)
 
   useEffect(() => {
     carregar(cana.nodes, cana.edges)
@@ -37,6 +39,8 @@ export default function App() {
             alocados={alocados}
             alocaveis={alocaveis}
             selecionado={selecionado}
+            sobrevoado={sobrevoado}
+            raizes={raizes}
             onSelecionar={selecionar}
             onAlternar={alternar}
             onSobrevoar={sobrevoar}
@@ -45,9 +49,10 @@ export default function App() {
           <Legenda />
           <ConfirmarQueda />
           <BarraDeImpacto />
+          {/* Dentro do <main>: a sobreposicao ancora no mapa, nao na janela, e
+              o mapa nao encolhe quando ela abre. */}
+          <DetailPanel />
         </main>
-
-        <DetailPanel />
       </div>
     </div>
   )

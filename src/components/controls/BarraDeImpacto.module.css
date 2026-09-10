@@ -89,3 +89,124 @@
   .barra { max-inline-size: calc(100% - var(--space-8)); gap: var(--space-3); }
   .metricas { gap: var(--space-3); }
 }
+
+/* ── O modo "nó sob o cursor" ─────────────────────────────────────────────
+   A barra troca de conteúdo, não de posição: se ela saltasse, o olho perderia
+   o lugar justamente enquanto o cursor está ocupado percorrendo o mapa. */
+
+.barra[data-modo='no'] {
+  gap: var(--space-4);
+  max-inline-size: min(620px, calc(100% - 80px));
+}
+
+.kind {
+  flex-shrink: 0;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  background: var(--bg-surface-muted);
+  font-size: 10px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.doNo {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-inline-size: 0;
+}
+
+.nomeDoNo {
+  font-size: var(--text-base);
+  line-height: var(--leading-snug);
+  color: var(--text-primary);
+}
+
+/* Uma linha só. O resumo de alguns nós tem três frases, e a barra é uma
+   etiqueta de passagem — quem quer o texto inteiro clica e abre o painel. */
+.resumoDoNo {
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.situacao {
+  flex-shrink: 0;
+  /* O que falta acender pode ser dois ou três nomes; deixar quebrar em duas
+     linhas é melhor que cortar justamente a parte que ensina. */
+  max-inline-size: 210px;
+  font-size: var(--text-xs);
+  line-height: var(--leading-snug);
+  color: var(--text-disabled);
+  text-align: end;
+}
+
+.situacao[data-estado='alocado'] {
+  color: var(--brand-primary);
+  font-weight: var(--weight-semibold);
+}
+
+.situacao[data-estado='alocavel'] { color: var(--text-secondary); }
+.situacao[data-estado='bloqueado'] strong { color: var(--text-secondary); }
+
+/* ── Repouso: o convite, e os números a um clique ─────────────────────────── */
+
+.barra[data-modo='repouso'] {
+  gap: var(--space-3);
+  padding-block: var(--space-2);
+  padding-inline: var(--space-4) var(--space-2);
+}
+
+.convite {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  color: var(--text-secondary);
+}
+
+.abrirNumeros {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  background: var(--bg-surface-muted);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.abrirNumeros:hover {
+  color: var(--text-primary);
+  border-color: var(--brand-primary);
+}
+
+.fecharNumeros {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  inline-size: 26px;
+  block-size: 26px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-disabled);
+  cursor: pointer;
+}
+
+.fecharNumeros:hover { color: var(--text-primary); background: var(--bg-surface-muted); }
+
+/* No estreito o convite some: a faixa não cabe as duas coisas, e o botão é o
+   que leva a algum lugar. */
+@media (max-width: 620px) {
+  .barra[data-modo='repouso'] .convite { display: none; }
+}

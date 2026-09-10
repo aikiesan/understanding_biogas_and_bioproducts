@@ -1,35 +1,53 @@
-.painel,
-.painelVazio {
-  inline-size: 400px;
-  flex-shrink: 0;
+/*
+ * SOBREPOSICAO, nao coluna.
+ *
+ * Antes o painel era uma coluna fixa de 400px que existia mesmo sem nada
+ * selecionado, mostrando um convite a clicar. Isso custava um quarto da tela
+ * permanentemente para dizer "clique num no" — e o mapa e a ferramenta. Agora
+ * ele entra sobre o mapa quando ha selecao e sai quando nao ha; o mapa nunca
+ * encolhe, so fica parcialmente coberto, entao a camera nao precisa
+ * reenquadrar a cada abre-e-fecha.
+ */
+.painel {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  inline-size: min(400px, 100%);
+  z-index: 3;
   display: flex;
   flex-direction: column;
   border-inline-start: 1px solid var(--border-default);
-  background: var(--bg-surface);
+  background: color-mix(in srgb, var(--bg-surface) 97%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-lg);
   overflow: hidden;
+  animation: entrar 160ms ease-out;
 }
 
-.painelVazio {
-  justify-content: center;
-  gap: var(--space-3);
-  padding: var(--space-8);
+@keyframes entrar {
+  from { transform: translateX(12px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
-.dica {
-  margin: 0;
-  font-size: var(--text-base);
-  color: var(--text-secondary);
-  line-height: var(--leading-snug);
+/* Quem prefere menos movimento nao perde nada: a informacao e a mesma. */
+@media (prefers-reduced-motion: reduce) {
+  .painel { animation: none; }
 }
 
-.dicaSecundaria { margin: 0; font-size: var(--text-sm); color: var(--text-disabled); }
-
+/* O cabeçalho e as abas ficam FIXOS.
+   Rolavam junto com o texto, e o nome do nó saía da tela no primeiro parágrafo
+   — num painel cujo conteúdo é sempre "sobre este nó", perder o nome é perder
+   o assunto. */
 .cabecalho {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-3);
   padding: var(--space-5) var(--space-5) var(--space-4);
+  background: inherit;
 }
 
 .kind {
@@ -50,7 +68,15 @@
 .kind_rota { background: #DBEAFE; color: #1E40AF; }
 .kind_produto { background: #FFEDD5; color: #9A3412; }
 
-.titulo { font-size: var(--text-2xl); font-weight: var(--weight-extrabold); }
+.titulo {
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-extrabold);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.01em;
+  /* Era 2xl. Nomes como "Concentração de vinhaça por evaporação" quebravam em
+     três linhas e empurravam o resumo para fora da primeira tela. */
+}
 
 .resumo {
   margin: var(--space-2) 0 0;
@@ -65,17 +91,19 @@
   block-size: 30px;
   display: grid;
   place-items: center;
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-md);
+  border: none;
+  border-radius: var(--radius-full);
   background: transparent;
-  color: var(--text-secondary);
+  color: var(--text-disabled);
   cursor: pointer;
+  transition: color 120ms ease, background 120ms ease;
 }
 
-.fechar:hover { background: var(--bg-surface-muted); }
+.fechar:hover { background: var(--bg-surface-muted); color: var(--text-primary); }
 
 .faixaRota {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-2);
   padding: 0 var(--space-5) var(--space-4);
 }
@@ -95,10 +123,14 @@
 .status_inexistente { background: var(--gray-100); color: var(--gray-600); }
 
 .abas {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
   display: flex;
   gap: 0;
   padding: 0 var(--space-5);
   border-block-end: 1px solid var(--border-default);
+  background: inherit;
 }
 
 .aba,
@@ -122,21 +154,37 @@
 .conteudo {
   flex: 1;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: var(--space-5);
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-4);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-default) transparent;
 }
 
+.conteudo::-webkit-scrollbar { inline-size: 8px; }
+.conteudo::-webkit-scrollbar-thumb {
+  border-radius: var(--radius-full);
+  background: var(--border-default);
+}
+
+/* Cada seção abre com uma régua. Antes o título tinha 10px e a mesma folga do
+   corpo, então "Como funciona" e o parágrafo anterior liam como um bloco só. */
 .subtitulo {
-  margin: var(--space-3) 0 0;
+  margin: var(--space-2) 0 0;
+  padding-block-start: var(--space-4);
+  border-block-start: 1px solid var(--border-subtle, var(--border-default));
   font-family: var(--font-sans);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   color: var(--text-secondary);
 }
+
+/* A primeira seção não leva régua: não há o que separar acima dela. */
+.conteudo > .subtitulo:first-child { padding-block-start: 0; border-block-start: none; }
 
 .paragrafo {
   margin: 0;
@@ -158,23 +206,34 @@
 
 .numeros { display: flex; flex-direction: column; gap: var(--space-2); }
 
-.dl { margin: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+/* Um CARTÃO só, com divisórias — não três pastilhas soltas. Os números são uma
+   tabela: alinhá-los numa borda comum é o que deixa comparar de relance, e era
+   isso que as pastilhas separadas impediam. */
+.dl {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface-muted);
+  overflow: hidden;
+}
 
 .dl > div {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: var(--space-3);
-  padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-md);
-  background: var(--bg-surface-muted);
+  padding: var(--space-3) var(--space-4);
 }
+
+.dl > div + div { border-block-start: 1px solid var(--border-default); }
 
 .dl dt { font-size: var(--text-xs); color: var(--text-secondary); }
 
 .dl dd {
   margin: 0;
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   font-weight: var(--weight-bold);
   font-variant-numeric: tabular-nums;
   color: var(--brand-primary);
@@ -269,12 +328,19 @@
 
 .rodapeFonte { margin: 0; font-size: 11px; color: var(--text-disabled); }
 
+/* No estreito o painel vira gaveta de baixo: 400px numa tela de 380 cobriria o
+   mapa inteiro, e o mapa e o que a pessoa veio ver. */
 @media (max-width: 900px) {
-  .painel,
-  .painelVazio {
+  .painel {
+    inset-block: auto 0;
     inline-size: 100%;
-    max-block-size: 46vh;
+    max-block-size: 62vh;
     border-inline-start: none;
     border-block-start: 1px solid var(--border-default);
+    animation-name: entrarDeBaixo;
+  }
+  @keyframes entrarDeBaixo {
+    from { transform: translateY(16px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
   }
 }

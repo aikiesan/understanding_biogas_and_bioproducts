@@ -1,21 +1,60 @@
-import { useMemo } from 'react'
-import { RotateCcw } from 'lucide-react'
+import { useMemo, useState } from 'react'
+import { BarChart3, RotateCcw, X } from 'lucide-react'
 import { useAtlas, paramsEfetivos } from '@/state/atlasStore'
 import { computeFlows } from '@/model/compute'
 import { desviosDoPreset } from '@/model/params'
+import { indexar } from '@/graph/selectors'
 import { energia, numero, volumeGas } from '@/lib/format'
 import type { PresetId } from '@/model/tipos'
 import styles from './BarraDeImpacto.module.css'
 
+const ROTULO_KIND: Record<string, string> = {
+  cultura: 'Cultura',
+  processo: 'Processo',
+  residuo: 'Resíduo',
+  coproduto: 'Coproduto',
+  rota: 'Rota',
+  produto: 'Produto',
+  destino: 'Destino',
+}
+
 /**
- * O retorno imediato do modelo. Fica sempre visivel: e o que faz mexer num
- * controle valer a pena — voce ve o efeito sem precisar procurar.
+ * A barra de baixo pertence ao NO SOB O CURSOR. Os numeros sao visita.
+ *
+ * Ela mostrava sempre os quatro totais do cenario — metano, eletricidade,
+ * receita, CO2 evitado — e eles ocupavam a faixa inteira enquanto a pessoa
+ * percorria o mapa. Sao numeros de CENARIO: nao respondem ao no sobrevoado nem
+ * a rota desenhada, entao ficavam parados enquanto tudo ao redor mudava. Um
+ * painel que nao reage ao que se faz vira moldura, e moldura no meio da tela
+ * custa a leitura do que reage.
+ *
+ * Agora eles moram atras de um botao. Continuam a um clique, e o lugar de honra
+ * fica com o que muda a cada movimento do cursor.
+ *
+ * E o UNICO lugar onde o hover fala. Antes havia tambem um balao ancorado no
+ * proprio no, e ele cobria justamente a constelacao que o hover acabara de
+ * acender — a informacao tapava a resposta. Ficar longe do cursor nao e
+ * concessao: e o que deixa o caminho inteiro a vista enquanto se le sobre a
+ * ponta dele.
+ *
+ * A linha que mais importa e a do no BLOQUEADO. Dizer pelo nome o que falta
+ * acender antes e o que transforma um clique recusado em licao; recusar em
+ * silencio ensina a pessoa a desistir.
  */
 export function BarraDeImpacto() {
+  const [numerosAbertos, setNumerosAbertos] = useState(false)
   const preset = useAtlas((s) => s.preset)
   const ajustes = useAtlas((s) => s.ajustes)
   const trocarPreset = useAtlas((s) => s.trocarPreset)
   const restaurar = useAtlas((s) => s.restaurar)
+  const sobrevoado = useAtlas((s) => s.sobrevoado)
+  const nodes = useAtlas((s) => s.nodes)
+  const edges = useAtlas((s) => s.edges)
+  const alocados = useAtlas((s) => s.alocados)
+  const alocaveis = useAtlas((s) => s.alocaveis)
+
+  const idxNos = useMemo(() => indexar(nodes, edges), [nodes, edges])
+  const noSobrevoado = sobrevoado ? idxNos.porId.get(sobrevoado) : undefined
 
   const params = useMemo(() => paramsEfetivos(preset, ajustes), [preset, ajustes])
   const r = useMemo(() => computeFlows(params, 'sp_ano'), [params])
@@ -24,8 +63,66 @@ export function BarraDeImpacto() {
   const ch4 = volumeGas(r.totais.ch4)
   const eletrica = energia(r.totais.energiaEletrica)
 
+  if (noSobrevoado) {
+    const estado = alocados.has(noSobrevoado.id)
+      ? 'alocado'
+      : alocaveis.has(noSobrevoado.id)
+        ? 'alocavel'
+        : 'bloqueado'
+    const falta =
+      estado === 'bloqueado'
+        ? (idxNos.entrando.get(noSobrevoado.id) ?? [])
+            .filter((e) => !alocados.has(e.from))
+            .map((e) => idxNos.porId.get(e.from)?.nome ?? e.from)
+        : []
+
+    return (
+      <div className={styles.barra} data-modo="no">
+        <span className={styles.kind}>{ROTULO_KIND[noSobrevoado.kind] ?? noSobrevoado.kind}</span>
+        <div className={styles.doNo}>
+          <strong className={styles.nomeDoNo}>{noSobrevoado.nome}</strong>
+          <span className={styles.resumoDoNo}>{noSobrevoado.resumo}</span>
+        </div>
+        <span className={styles.situacao} data-estado={estado}>
+          {estado === 'alocado' && 'Na sua rota'}
+          {estado === 'alocavel' && 'Clique para acender'}
+          {estado === 'bloqueado' &&
+            (falta.length > 0 ? (
+              <>
+                Falta acender: <strong>{falta.join(', ')}</strong>
+              </>
+            ) : (
+              'Nada no mapa alimenta este nó ainda'
+            ))}
+        </span>
+      </div>
+    )
+  }
+
+  // O hover manda: enquanto o cursor esta num no, os numeros nao disputam a
+  // faixa nem quando o painel esta aberto.
+  if (!numerosAbertos) {
+    return (
+      <div className={styles.barra} data-modo="repouso">
+        <p className={styles.convite}>
+          Passe o mouse sobre um nó para ver o que ele é. Clique para acender e abrir os
+          detalhes.
+        </p>
+        <button
+          type="button"
+          className={styles.abrirNumeros}
+          onClick={() => setNumerosAbertos(true)}
+          aria-expanded={false}
+        >
+          <BarChart3 size={14} aria-hidden="true" />
+          Números do cenário
+        </button>
+      </div>
+    )
+  }
+
   return (
-    <div className={styles.barra}>
+    <div className={styles.barra} data-modo="numeros">
       <div className={styles.presets} role="group" aria-label="Cenário">
         {(['real', 'ideal'] as const).map((p) => (
           <button
@@ -66,6 +163,15 @@ export function BarraDeImpacto() {
           {desvios.length} {desvios.length === 1 ? 'ajuste' : 'ajustes'} · voltar ao padrão
         </button>
       )}
+
+      <button
+        type="button"
+        className={styles.fecharNumeros}
+        onClick={() => setNumerosAbertos(false)}
+        aria-label="Esconder os números do cenário"
+      >
+        <X size={14} aria-hidden="true" />
+      </button>
     </div>
   )
 }
