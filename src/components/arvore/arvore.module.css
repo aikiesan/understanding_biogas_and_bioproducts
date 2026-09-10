@@ -342,8 +342,14 @@
    dos membros se empilham — os discos ficam separados e o texto, ilegível, que
    é a colisão mais fácil de não notar ao olhar o mapa de longe. */
 .svg[data-lod='regioes'] .no[data-notavel='sim'] .rotulo { display: block; }
-.svg[data-lod='leitura'] .no .rotulo { display: none; }
-.svg[data-lod='leitura'] .no[data-notavel='sim'] .rotulo { display: block; }
+/* `leitura` ACRESCENTA os rótulos do anel de processos. Antes esta regra era
+   `.no .rotulo { display: none }` seguida de uma exceção para os notáveis — o
+   efeito era que aproximar de `regioes` para `leitura` REMOVIA o rótulo dos
+   quatro pilares em vez de acrescentar os das etapas. A escada andava para trás
+   no degrau do meio, e ninguém percebe isso lendo o CSS: cada regra, sozinha,
+   parece razoável. Só os modificadores (os elos) seguem calados aqui — eles são
+   o material passando, e nomeá-los a esta escala enche a espinha de texto. */
+.svg[data-lod='leitura'] .no[data-tier='modificador'] .rotulo { display: none; }
 .svg[data-lod='leitura'] .rotuloSetor { opacity: 0.16; }
 
 .svg[data-lod='detalhe'] .rotuloSetor { opacity: 0.1; }
@@ -392,3 +398,51 @@
 @media (prefers-reduced-motion: reduce) {
   .no, .conexao, .disco { transition: none !important; animation: none !important; }
 }
+
+/* ── A constelação do hover ────────────────────────────────────────────────
+   O caminho do resíduo até o nó sob o cursor. Compõe com `data-estado` em vez
+   de substituí-lo: a rota tem de acender por cima do bloqueado, porque é ali
+   que ela ensina — mostra o que ainda falta para chegar naquele destino.
+
+   Sem filtro SVG. O brilho é o halo que a conexão já tem, com opacidade e
+   largura maiores; um `filter: drop-shadow` na camada transformada é o jeito
+   mais garantido de derrubar o fps no zoom, e este efeito roda a cada
+   movimento do mouse. */
+
+.conexao[data-rota='sim'] .conexaoLinha {
+  stroke: var(--arv-lima);
+  stroke-width: 2.6;
+  opacity: 1;
+  stroke-dasharray: none;
+}
+
+.conexao[data-rota='sim'] .conexaoHalo {
+  stroke: var(--arv-lima);
+  stroke-width: 11;
+  opacity: 0.26;
+}
+
+.no[data-rota='sim'] .disco {
+  opacity: 1;
+  stroke: var(--arv-lima);
+  stroke-width: 2;
+}
+
+.no[data-rota='sim'] .rotulo {
+  fill: var(--arv-texto);
+  font-weight: var(--weight-semibold);
+  opacity: 1;
+}
+
+.no[data-rota='sim'] .icone { opacity: 1; }
+.no[data-rota='sim'] .ornamento { color: var(--arv-lima); }
+
+/* O alvo do hover é o fim da constelação e ganha um anel a mais, para a pessoa
+   distinguir "o nó que estou olhando" de "os que o alimentam". */
+.no[data-rota='sim'][data-sobrevoado='sim'] .disco {
+  stroke-width: 3.5;
+}
+
+/* Enquanto a rota está acesa, o resto do mapa recua. Sem isso a constelação
+   compete com 78 nós e ~118 linhas e não se lê como um caminho. */
+.camadaConexoes[data-rota-ativa='sim'] .conexao:not([data-rota='sim']) { opacity: 0.18; }

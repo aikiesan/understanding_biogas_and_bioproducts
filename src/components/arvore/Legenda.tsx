@@ -12,8 +12,7 @@ import styles from './Legenda.module.css'
  * porque a pessoa conclui que nao entendeu a ferramenta.
  *
  * O que sobra ensina o vocabulario, e por isso fica: a FORMA diz o peso do no,
- * o CONTORNO diz o tipo, e o TRACO diz a natureza do fluxo. Vem recolhida —
- * 232px opacos sobre o mapa sao caros, e quem precisa da legenda a abre.
+ * o CONTORNO diz o tipo, e o TRACO diz a natureza do fluxo.
  */
 
 const FORMAS = [
@@ -54,7 +53,11 @@ function Amostra({ forma }: { forma: (typeof FORMAS)[number]['id'] }) {
 }
 
 export function Legenda() {
-  const [aberta, setAberta] = useState(false)
+  // Aberta por padrao: o vocabulario do mapa — forma, contorno, traco — nao se
+  // adivinha, e quem chega precisa dele justamente antes do primeiro clique.
+  // Vinha recolhida para poupar 232px sobre o mapa; com o painel de detalhe
+  // fora do caminho, esse espaco existe.
+  const [aberta, setAberta] = useState(true)
 
   return (
     <aside className={styles.legenda} aria-label="Legenda">
