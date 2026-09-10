@@ -1,14 +1,14 @@
-import { memo } from 'react'
-import type { AtlasNode } from '@/types/atlas'
-import type { NoPosicionado } from '@/graph/layout/tipos'
+import { memo, useMemo } from 'react'
+import type { AtlasNode, Tier } from '@/types/atlas'
+import type { InstanciaPosicionada } from '@/graph/layout/tipos'
 import styles from './arvore.module.css'
 
 interface Props {
   nodes: AtlasNode[]
-  posicoes: Map<string, NoPosicionado>
+  instancias: InstanciaPosicionada[]
 }
 
-const ORNAMENTO: Partial<Record<NoPosicionado['tier'], string>> = {
+const ORNAMENTO: Partial<Record<Tier, string>> = {
   inicio: '#orn-inicio',
   keystone: '#orn-keystone',
   notavel: '#orn-notavel',
@@ -35,13 +35,23 @@ function quebrar(texto: string, max = 18): string[] {
 /**
  * Os nos tambem sao geometria estatica. Nenhuma prop de alocacao entra aqui:
  * o estado vira `data-estado` escrito depois, e toda a aparencia sai do CSS.
+ *
+ * A camada itera INSTANCIAS, nao nos: um arquetipo alimentado por tres
+ * materiais desenha tres discos. Mas `data-no` continua sendo o id do
+ * ARQUETIPO, e e isso que faz a repeticao funcionar de graca — `aplicarEstados`
+ * varre elementos, entao acender um conceito acende todas as suas copias, que
+ * e o comportamento correto: sao o mesmo conceito visto de territorios
+ * diferentes. `data-instancia` existe para o hover saber em qual copia o cursor
+ * esta.
  */
-export const CamadaNos = memo(function CamadaNos({ nodes, posicoes }: Props) {
+export const CamadaNos = memo(function CamadaNos({ nodes, instancias }: Props) {
+  const porId = useMemo(() => new Map(nodes.map((n) => [n.id, n])), [nodes])
+
   return (
     <g className={styles.camadaNos}>
-      {nodes.map((n) => {
-        const p = posicoes.get(n.id)
-        if (!p) return null
+      {instancias.map((p) => {
+        const n = porId.get(p.noId)
+        if (!n) return null
         const ornamento = ORNAMENTO[p.tier]
         const tamIcone = p.tier === 'inicio' ? 30 : p.tier === 'keystone' ? 22 : 16
         const mostraIcone = p.tier !== 'modificador' && p.tier !== 'passagem'
@@ -49,12 +59,15 @@ export const CamadaNos = memo(function CamadaNos({ nodes, posicoes }: Props) {
 
         return (
           <g
-            key={n.id}
+            key={p.id}
             className={styles.no}
-            data-no={n.id}
+            data-no={p.noId}
+            data-instancia={p.id}
+            data-eco={p.canonica ? undefined : 'sim'}
+            data-notavel={p.notavel ? 'sim' : undefined}
             data-tier={p.tier}
             data-kind={n.kind}
-            data-familia={p.setor >= 0 ? p.setor % 8 : 'miolo'}
+            data-familia={p.setor >= 0 ? p.setor % 8 : p.territorio.startsWith('orla') ? 'orla' : 'miolo'}
             data-estado="bloqueado"
             transform={`translate(${p.x},${p.y})`}
           >
