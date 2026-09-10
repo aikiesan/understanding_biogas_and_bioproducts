@@ -3,7 +3,7 @@
 <!-- GERADO por `npm run curadoria`. Não edite à mão: as correções vão para
      `PROMOVIDOS` e `EXCLUIDOS` em src/data/culturas/cana/nucleo.ts. -->
 
-O esqueleto tem **9 vagas na camada 3, 9 vagas na camada 4, 5 vagas na camada 5** por ramo, e o corpus oferece mais rotas que isso. Hoje o mapa mostra **68 dos 341 nós** do corpus.
+O esqueleto tem **9 vagas na camada 3, 9 vagas na camada 4, 5 vagas na camada 5** por ramo, e o corpus oferece mais rotas que isso. Hoje o mapa mostra **78 dos 341 nós** do corpus.
 
 A ordem abaixo é a ordem em que cada nó perdeu a vaga: os primeiros de cada
 lista chegaram mais perto de entrar. `posição 999` significa que o nó nunca
@@ -37,7 +37,7 @@ No mapa: 13 vagas ocupadas (Abertura 3/9 · Especialização 5/9 · Ápices 5/5)
 | 6 | 3 | rota | 8 | Organomineral granulado _(já está no mapa por outro ramo)_ | `cana.rota.organomineral` |
 | 7 | 3 | rota | 4 | Extração de potássio da cinza | `cana.rota.k_das_cinzas` |
 | — | 1 | processo | — | Filtração do lodo _(já está no mapa por outro ramo)_ | `cana.proc.filtracao` |
-| — | 2 | coproduto | — | Caldo clarificado | `cana.copr.caldo_clarificado` |
+| — | 2 | coproduto | — | Caldo clarificado _(já está no mapa por outro ramo)_ | `cana.copr.caldo_clarificado` |
 | — | 3 | processo | — | Cozimento e cristalização _(já está no mapa por outro ramo)_ | `cana.proc.cozimento` |
 | — | 3 | processo | — | Destilação _(já está no mapa por outro ramo)_ | `cana.proc.destilacao` |
 | — | 3 | processo | — | Evaporação _(já está no mapa por outro ramo)_ | `cana.proc.evaporacao` |
@@ -45,13 +45,13 @@ No mapa: 13 vagas ocupadas (Abertura 3/9 · Especialização 5/9 · Ápices 5/5)
 | — | 3 | processo | — | Preparo do mosto _(já está no mapa por outro ramo)_ | `cana.proc.preparo_mosto` |
 | — | 4 | produto | — | Corretivo de cinzas | `cana.prod.corretivo_cinzas` |
 | — | 4 | produto | — | Organomineral granulado _(já está no mapa por outro ramo)_ | `cana.prod.organomineral_granulado` |
-| — | 4 | coproduto | — | Condensado vegetal | `cana.copr.condensado` |
-| — | 4 | coproduto | — | Massa cozida | `cana.copr.massa_cozida` |
+| — | 4 | coproduto | — | Condensado vegetal _(já está no mapa por outro ramo)_ | `cana.copr.condensado` |
+| — | 4 | coproduto | — | Massa cozida _(já está no mapa por outro ramo)_ | `cana.copr.massa_cozida` |
 | — | 4 | coproduto | — | Óleo fúsel | `cana.copr.oleo_fusel` |
 | — | 4 | processo | — | Desidratação do etanol _(já está no mapa por outro ramo)_ | `cana.proc.desidratacao` |
 | — | 4 | produto | — | Etanol hidratado | `cana.prod.etanol_hidratado` |
 | — | 4 | residuo | — | Flegmaça | `cana.res.flegmaca` |
-| — | 4 | coproduto | — | Xarope | `cana.copr.xarope` |
+| — | 4 | coproduto | — | Xarope _(já está no mapa por outro ramo)_ | `cana.copr.xarope` |
 | — | 4 | processo | — | Decantação _(já está no mapa por outro ramo)_ | `cana.proc.decantacao` |
 | — | 4 | processo | — | Fermentação Melle-Boinot _(já está no mapa por outro ramo)_ | `cana.proc.fermentacao` |
 | — | 4 | destino | — | Certificação RenovaBio _(já está no mapa por outro ramo)_ | `cana.dest.renovabio_neea` |
@@ -59,9 +59,9 @@ No mapa: 13 vagas ocupadas (Abertura 3/9 · Especialização 5/9 · Ápices 5/5)
 | — | 5 | produto | — | Etanol anidro | `cana.prod.etanol_anidro` |
 | — | 5 | destino | — | Frota flex | `cana.dest.frota_flex` |
 | — | 5 | destino | — | RenovaBio (CBIO) | `cana.dest.renovabio` |
-| — | 5 | residuo | — | Lodo da decantação | `cana.res.lodo` |
+| — | 5 | residuo | — | Lodo da decantação _(já está no mapa por outro ramo)_ | `cana.res.lodo` |
 | — | 5 | coproduto | — | CO2 fermentativo | `cana.copr.co2` |
-| — | 5 | coproduto | — | Vinho fermentado | `cana.copr.vinho` |
+| — | 5 | coproduto | — | Vinho fermentado _(já está no mapa por outro ramo)_ | `cana.copr.vinho` |
 | — | 5 | destino | — | CBIO | `cana.dest.cbio` |
 
 ## Palha
@@ -93,21 +93,21 @@ No mapa: 15 vagas ocupadas (Abertura 5/9 · Especialização 5/9 · Ápices 5/5)
 | — | 4 | destino | — | Financiamento climático | `cana.dest.financiamento_climatico` |
 | — | 4 | produto | — | Corretivo de cinzas | `cana.prod.corretivo_cinzas` |
 | — | 4 | produto | — | Organomineral granulado _(já está no mapa por outro ramo)_ | `cana.prod.organomineral_granulado` |
-| — | 4 | coproduto | — | Condensado vegetal | `cana.copr.condensado` |
-| — | 4 | coproduto | — | Massa cozida | `cana.copr.massa_cozida` |
+| — | 4 | coproduto | — | Condensado vegetal _(já está no mapa por outro ramo)_ | `cana.copr.condensado` |
+| — | 4 | coproduto | — | Massa cozida _(já está no mapa por outro ramo)_ | `cana.copr.massa_cozida` |
 | — | 4 | coproduto | — | Óleo fúsel | `cana.copr.oleo_fusel` |
 | — | 4 | processo | — | Desidratação do etanol _(já está no mapa por outro ramo)_ | `cana.proc.desidratacao` |
 | — | 4 | produto | — | Etanol hidratado | `cana.prod.etanol_hidratado` |
 | — | 4 | residuo | — | Flegmaça | `cana.res.flegmaca` |
-| — | 4 | coproduto | — | Xarope | `cana.copr.xarope` |
+| — | 4 | coproduto | — | Xarope _(já está no mapa por outro ramo)_ | `cana.copr.xarope` |
 | — | 4 | processo | — | Decantação _(já está no mapa por outro ramo)_ | `cana.proc.decantacao` |
 | — | 5 | processo | — | Centrifugação do açúcar _(já está no mapa por outro ramo)_ | `cana.proc.centrifugacao` |
 | — | 5 | produto | — | Etanol anidro | `cana.prod.etanol_anidro` |
 | — | 5 | destino | — | Frota flex | `cana.dest.frota_flex` |
 | — | 5 | destino | — | RenovaBio (CBIO) | `cana.dest.renovabio` |
 | — | 5 | processo | — | Preparo do mosto _(já está no mapa por outro ramo)_ | `cana.proc.preparo_mosto` |
-| — | 5 | coproduto | — | Caldo clarificado | `cana.copr.caldo_clarificado` |
-| — | 5 | residuo | — | Lodo da decantação | `cana.res.lodo` |
+| — | 5 | coproduto | — | Caldo clarificado _(já está no mapa por outro ramo)_ | `cana.copr.caldo_clarificado` |
+| — | 5 | residuo | — | Lodo da decantação _(já está no mapa por outro ramo)_ | `cana.res.lodo` |
 
 ## Vinhaça
 
