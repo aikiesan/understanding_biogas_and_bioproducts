@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react'
-import { BarChart3, ChevronRight, RotateCcw, X } from 'lucide-react'
+import { BarChart3, ChevronRight, RotateCcw, Sparkles, X } from 'lucide-react'
 import { useAtlas, paramsEfetivos } from '@/state/atlasStore'
 import { computeFlows } from '@/model/compute'
 import { desviosDoPreset } from '@/model/params'
 import { indexar } from '@/graph/selectors'
+import { acenderCaminho } from '@/graph/alocacao'
 import { energia, numero, volumeGas } from '@/lib/format'
 import type { PresetId } from '@/model/tipos'
 import styles from './BarraDeImpacto.module.css'
@@ -51,6 +52,8 @@ export function BarraDeImpacto() {
   const selecionado = useAtlas((s) => s.selecionado)
   const detalhe = useAtlas((s) => s.detalhe)
   const detalhar = useAtlas((s) => s.detalhar)
+  const rotaEmFoco = useAtlas((s) => s.rotaEmFoco)
+  const acenderRota = useAtlas((s) => s.acenderRota)
   const nodes = useAtlas((s) => s.nodes)
   const edges = useAtlas((s) => s.edges)
   const alocados = useAtlas((s) => s.alocados)
@@ -80,12 +83,20 @@ export function BarraDeImpacto() {
       : alocaveis.has(noSobrevoado.id)
         ? 'alocavel'
         : 'bloqueado'
-    const falta =
-      estado === 'bloqueado'
-        ? (idxNos.entrando.get(noSobrevoado.id) ?? [])
-            .filter((e) => !alocados.has(e.from))
-            .map((e) => idxNos.porId.get(e.from)?.nome ?? e.from)
-        : []
+    /**
+     * O que a rota custa, e se ela e possivel.
+     *
+     * Ensaio a seco com a MESMA funcao que o clique usa. Contar os nos apagados
+     * da rota daria o numero certo quase sempre e mentiria justamente no caso
+     * interessante: uma rota que atravessa um no com `exclui` e impossivel, e
+     * anunciar "acender 6" para depois nao acender nada seria pior que o
+     * silencio de antes.
+     */
+    const ensaio = acenderCaminho(rotaEmFoco, alocados, idxNos)
+    const faltam = ensaio.acesos.length
+    const bloqueio = ensaio.parouEm
+      ? (idxNos.porId.get(ensaio.parouEm)?.nome ?? ensaio.parouEm)
+      : null
 
     return (
       <div className={styles.barra} data-modo="no">
@@ -108,17 +119,35 @@ export function BarraDeImpacto() {
           </button>
         )}
 
+        {/* No toque nao houve previa antes do primeiro toque, entao acender e um
+            pedido explicito. No mouse o hover ja mostrou a rota e o clique no
+            proprio no confirma — um botao aqui seria um segundo caminho para a
+            mesma coisa. */}
+        {!temCursor && estado !== 'alocado' && faltam > 0 && (
+          <button
+            type="button"
+            className={styles.acenderRota}
+            onClick={() => acenderRota(rotaEmFoco)}
+          >
+            <Sparkles size={13} aria-hidden="true" />
+            Acender {faltam}
+          </button>
+        )}
+
         <span className={styles.situacao} data-estado={estado}>
           {estado === 'alocado' && 'Na sua rota'}
-          {estado === 'alocavel' && 'Clique para acender'}
-          {estado === 'bloqueado' &&
-            (falta.length > 0 ? (
-              <>
-                Falta acender: <strong>{falta.join(', ')}</strong>
-              </>
-            ) : (
-              'Nada no mapa alimenta este nó ainda'
-            ))}
+          {bloqueio ? (
+            <>
+              Conflita com <strong>{bloqueio}</strong>
+            </>
+          ) : (
+            estado !== 'alocado' &&
+            (faltam === 1
+              ? temCursor
+                ? 'Clique para acender'
+                : 'Um nó para acender'
+              : `${faltam} nós até aqui`)
+          )}
         </span>
       </div>
     )

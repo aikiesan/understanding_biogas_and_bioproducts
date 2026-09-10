@@ -18,6 +18,8 @@ export default function App() {
   const selecionado = useAtlas((s) => s.selecionado)
   const selecionar = useAtlas((s) => s.selecionar)
   const detalhar = useAtlas((s) => s.detalhar)
+  const definirRota = useAtlas((s) => s.definirRota)
+  const acenderRota = useAtlas((s) => s.acenderRota)
   const sobrevoar = useAtlas((s) => s.sobrevoar)
   const alternar = useAtlas((s) => s.alternar)
   const galhoQueCai = useAtlas((s) => s.galhoQueCai)
@@ -44,6 +46,8 @@ export default function App() {
             raizes={raizes}
             onSelecionar={selecionar}
             onDetalhar={detalhar}
+            onRota={definirRota}
+            onAcenderRota={acenderRota}
             onAlternar={alternar}
             onSobrevoar={sobrevoar}
             galhoQueCai={galhoQueCai}
