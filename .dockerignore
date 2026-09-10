@@ -1,0 +1,7 @@
+node_modules
+dist
+*.log
+# .git e data/_curadoria ficam DE FORA desta lista de proposito: o alvo
+# `verificar` roda `npm run curadoria && git diff --exit-code`, e sem o
+# historico nem o arquivo commitado essa checagem passaria por nao ter com o
+# que comparar — um verde que nao verifica nada e pior que um vermelho.

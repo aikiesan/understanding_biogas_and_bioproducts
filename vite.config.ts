@@ -11,6 +11,20 @@ export default defineConfig(({ command, isPreview }) => ({
   // sem isso o preview serviria na raiz e nao pegaria erro de subpath.
   base: command === 'build' || isPreview ? SUBPATH : '/',
   plugins: [react()],
+  server: {
+    // Dentro do container o vite precisa escutar fora do loopback, e o watcher
+    // precisa de polling: bind mount de volume Windows nao emite inotify, e sem
+    // isso o HMR fica mudo — a edicao funciona e a tela nao mexe, que e o modo
+    // de falha mais confuso possivel. Ambos ficam atras de VITE_POLLING para o
+    // `npm run dev` nativo no host continuar com watcher de evento, sem custo
+    // de CPU. Descartei por-em-tudo-sempre justamente por esse custo.
+    // Espalhado, e nao `? x : undefined`: `server.watch` tipa como
+    // `WatchOptions | null` e recusa undefined — o `npm run build` do alvo
+    // `verificar` pegou isso antes de virar commit.
+    ...(process.env.VITE_POLLING
+      ? { host: true, watch: { usePolling: true, interval: 300 } }
+      : {}),
+  },
   resolve: {
     alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
   },
